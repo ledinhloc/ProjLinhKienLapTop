@@ -8,3 +8,16 @@ D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.Genera
 D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.CoreCompileInputs.cache
 D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.exe
 D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.pdb
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.AssemblyReference.cache
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.fAdmin.resources
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.Form1.resources
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.fTaoDonHang.resources
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.Properties.Resources.resources
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.GenerateResource.cache
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.CoreCompileInputs.cache
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.exe
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.pdb
+D:\Workspace\ProjLinhKienLapTop\bin\Debug\ProCuaHangLinhKienLaptop.exe.config
+D:\Workspace\ProjLinhKienLapTop\bin\Debug\ProCuaHangLinhKienLaptop.exe
+D:\Workspace\ProjLinhKienLapTop\bin\Debug\ProCuaHangLinhKienLaptop.pdb
+D:\Workspace\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.LinhKienUC.resources
