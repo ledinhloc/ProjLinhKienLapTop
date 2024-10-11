@@ -97,7 +97,6 @@ namespace ProCuaHangLinhKienLaptop
                 while (reader.Read())
                 {
                     LinhKienUC userControl = new LinhKienUC((int)reader["MaLinhKien"], reader["TenLinhKien"].ToString(), (decimal)reader["GiaBan"]);
-                    userControl.Height = 100; // Cài đặt chiều cao cho UserControl
                     flowLayoutPanel.Controls.Add(userControl);
                 }
             }
