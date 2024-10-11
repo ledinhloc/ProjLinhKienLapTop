@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\H\u1EC7 CSDL\\ProjLinhKienLapTop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|d:\\h\u1EC7 csdl\\projlinhkienlaptop\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|d:\\h\u1EC7 csdl\\projlinhkienlaptop\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|D:\\H\u1EC7 CSDL\\ProjLinhKienLapTop\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|D:\\H\u1EC7 CSDL\\ProjLinhKienLapTop\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF8D09A8-002D-428D-996A-8B11A098EAA2}|ProCuaHangLinhKienLaptop.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,27 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.cs",
               "DocumentMoniker": "D:\\H\u1EC7 CSDL\\ProjLinhKienLapTop\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\H\u1EC7 CSDL\\ProjLinhKienLapTop\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAqwBgAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-11T01:08:16.38Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\H\u1EC7 CSDL\\ProjLinhKienLapTop\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "D:\\H\u1EC7 CSDL\\ProjLinhKienLapTop\\Form1.cs [Design]",
               "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-11T01:02:05.654Z"
+              "WhenOpened": "2024-10-11T01:02:05.654Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
