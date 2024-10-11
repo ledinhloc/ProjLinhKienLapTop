@@ -1,0 +1,10 @@
+D:\Hệ CSDL\ProjLinhKienLapTop\bin\Debug\ProCuaHangLinhKienLaptop.exe.config
+D:\Hệ CSDL\ProjLinhKienLapTop\bin\Debug\ProCuaHangLinhKienLaptop.exe
+D:\Hệ CSDL\ProjLinhKienLapTop\bin\Debug\ProCuaHangLinhKienLaptop.pdb
+D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.AssemblyReference.cache
+D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.Form1.resources
+D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.Properties.Resources.resources
+D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.GenerateResource.cache
+D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.csproj.CoreCompileInputs.cache
+D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.exe
+D:\Hệ CSDL\ProjLinhKienLapTop\obj\Debug\ProCuaHangLinhKienLaptop.pdb
