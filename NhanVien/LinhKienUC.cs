@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProCuaHangLinhKienLaptop
+namespace ProCuaHangLinhKienLaptop.NhanVien
 {
     public partial class LinhKienUC : UserControl
     {
@@ -32,17 +32,30 @@ namespace ProCuaHangLinhKienLaptop
             GiaBan = giaBan;
             GiaNhap = giaNhap;
             SoLuongTonKho = soLuongTonKho;
-            lblProductName.Text = TenLinhKien;
-            lblProductPrice.Text = GiaBan.ToString() + "VND";
+            this.Click += (s, e) => OnLinhKienClicked();
         }
+        // TEST
         public LinhKienUC(int maLinhKien, string tenLinhKien, decimal giaBan)
         {
             InitializeComponent();
             MaLinhKien = maLinhKien;
             TenLinhKien = tenLinhKien;
             GiaBan = giaBan;
-            lblProductName.Text = TenLinhKien;
-            lblProductPrice.Text = GiaBan.ToString() + "VND";
+            lblTenLinhKien.Text = TenLinhKien;
+            lblGiaBan.Text = GiaBan.ToString("N0") + "VND";
+            this.Click += (s, e) => OnLinhKienClicked();
+        }
+
+        public event EventHandler LinhKienClicked;
+
+        public void OnLinhKienClicked()
+        {
+            LinhKienClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void LinhKienUC_Click(object sender, EventArgs e)
+        {
+            OnLinhKienClicked();
         }
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DB\DataProvider.cs" />
     <Compile Include="fAdmin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,16 +65,16 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="fTaoDonHang.cs">
+    <Compile Include="NhanVien\fTaoDonHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fTaoDonHang.Designer.cs">
+    <Compile Include="NhanVien\fTaoDonHang.Designer.cs">
       <DependentUpon>fTaoDonHang.cs</DependentUpon>
     </Compile>
-    <Compile Include="LinhKienUC.cs">
+    <Compile Include="NhanVien\LinhKienUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LinhKienUC.Designer.cs">
+    <Compile Include="NhanVien\LinhKienUC.Designer.cs">
       <DependentUpon>LinhKienUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -84,10 +85,10 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="fTaoDonHang.resx">
+    <EmbeddedResource Include="NhanVien\fTaoDonHang.resx">
       <DependentUpon>fTaoDonHang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LinhKienUC.resx">
+    <EmbeddedResource Include="NhanVien\LinhKienUC.resx">
       <DependentUpon>LinhKienUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -98,6 +99,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -111,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CARD.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
