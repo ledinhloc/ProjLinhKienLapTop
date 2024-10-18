@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProCuaHangLinhKienLaptop.QuanLy
 {
-    public partial class QLLinhKien : Form
+    public partial class qlLinhKien : Form
     {
-        public QLLinhKien()
+        public qlLinhKien()
         {
             InitializeComponent();
         }
