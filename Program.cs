@@ -1,4 +1,5 @@
 ﻿using ProCuaHangLinhKienLaptop.NhanVien;
+using ProCuaHangLinhKienLaptop.Quanly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace ProCuaHangLinhKienLaptop
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fTaoDonHang());
+            Application.Run(new fQuanLyNhanVien());
         }
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();

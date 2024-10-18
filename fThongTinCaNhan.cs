@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProCuaHangLinhKienLaptop.QuanLy
+namespace ProCuaHangLinhKienLaptop
 {
-    public partial class QLLinhKien : Form
+    public partial class fThongTinCaNhan : Form
     {
-        public QLLinhKien()
+        public fThongTinCaNhan()
         {
             InitializeComponent();
         }

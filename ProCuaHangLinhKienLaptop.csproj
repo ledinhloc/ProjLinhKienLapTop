@@ -65,6 +65,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="fThongTinCaNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fThongTinCaNhan.Designer.cs">
+      <DependentUpon>fThongTinCaNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanVien\fTaoDonHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,42 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quanly\fKhuyenMai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fKhuyenMai.Designer.cs">
+      <DependentUpon>fKhuyenMai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\fQuanLyNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fQuanLyNhanVien.Designer.cs">
+      <DependentUpon>fQuanLyNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\fThemKM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fThemKM.Designer.cs">
+      <DependentUpon>fThemKM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\fThemNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fThemNhanVien.Designer.cs">
+      <DependentUpon>fThemNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\UC_GiamGia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Quanly\UC_GiamGia.Designer.cs">
+      <DependentUpon>UC_GiamGia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_ThongTinCaNhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_ThongTinCaNhan.Designer.cs">
+      <DependentUpon>UC_ThongTinCaNhan.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="fAdmin.resx">
       <DependentUpon>fAdmin.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +152,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Quanly\fKhuyenMai.resx">
+      <DependentUpon>fKhuyenMai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fQuanLyNhanVien.resx">
+      <DependentUpon>fQuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fThemKM.resx">
+      <DependentUpon>fThemKM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fThemNhanVien.resx">
+      <DependentUpon>fThemNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\UC_GiamGia.resx">
+      <DependentUpon>UC_GiamGia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_ThongTinCaNhan.resx">
+      <DependentUpon>UC_ThongTinCaNhan.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
