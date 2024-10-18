@@ -117,5 +117,10 @@
   <ItemGroup>
     <None Include="Resources\CARD.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\caitable.sql" />
+    <Content Include="DB\DuLieuTuan7.sql" />
+    <Content Include="DB\Trg_v_func.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
