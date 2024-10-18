@@ -33,7 +33,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void LoadLoaiLinhKien()
         {
-            DataTable loaiLinhKienTable = provider.ExecuteReader("SELECT * FROM vw_ThongTinLoaiLinhKien", CommandType.Text);
+            DataTable loaiLinhKienTable = provider.ExecuteReader( CommandType.Text, "SELECT * FROM vw_ThongTinLoaiLinhKien");
 
             foreach (DataRow row in loaiLinhKienTable.Rows)
             {
@@ -90,7 +90,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 ? new SqlParameter[] { new SqlParameter("@MaLoai", maLoaiLinhKien) }
                 : null;
 
-            DataTable linhKienTable = provider.ExecuteReader(cmdText, CommandType.Text, parameters);
+            DataTable linhKienTable = provider.ExecuteReader(CommandType.Text, cmdText,  parameters);
 
             foreach (DataRow row in linhKienTable.Rows)
             {

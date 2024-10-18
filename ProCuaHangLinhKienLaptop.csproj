@@ -71,6 +71,12 @@
     <Compile Include="NhanVien\fTaoDonHang.Designer.cs">
       <DependentUpon>fTaoDonHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanVien\fThongTinNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhanVien\fThongTinNhanVien.Designer.cs">
+      <DependentUpon>fThongTinNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanVien\LinhKienUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\fTaoDonHang.resx">
       <DependentUpon>fTaoDonHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanVien\fThongTinNhanVien.resx">
+      <DependentUpon>fThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\LinhKienUC.resx">
       <DependentUpon>LinhKienUC.cs</DependentUpon>

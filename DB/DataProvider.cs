@@ -50,7 +50,7 @@ namespace ProCuaHangLinhKienLaptop.DB
             }
         }
 
-        public DataTable ExecuteReader(string cmdText, CommandType cmdType, params SqlParameter[] commandParameters)
+        public DataTable ExecuteReader(CommandType cmdType, string cmdText, params SqlParameter[] commandParameters)
         {
             DataTable dataTable = new DataTable();
 
