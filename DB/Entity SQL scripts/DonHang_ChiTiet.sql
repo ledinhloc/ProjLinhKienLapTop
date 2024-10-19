@@ -1,4 +1,11 @@
 -- Don Hang:
+--- VIEW
+-- Xem Don Hang
+CREATE VIEW vw_DonHangList
+AS SELECT * 
+FROM DonHang
+GO
+
 -- Thủ tục thêm một record vào bảng DonHang
 CREATE PROCEDURE sp_ThemDonHang
     @MaDonHang INT,
@@ -13,7 +20,7 @@ BEGIN
     INSERT INTO DonHang (MaDonHang, NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc)
     VALUES (@MaDonHang, @NgayDatHang, @MaKhachHang, @MaNhanVien, @MaGiamGia, @TongGiaTri, @PhuongThuc);
 END;
-
+GO
 -- Xóa một record trong bảng DonHang
 CREATE PROCEDURE sp_XoaDonHang
     @MaDonHang INT
@@ -22,7 +29,7 @@ BEGIN
     DELETE FROM DonHang
     WHERE MaDonHang = @MaDonHang;
 END;
-
+GO
 -- Sửa một record trong bảng DonHang
 CREATE PROCEDURE sp_SuaDonHang
     @MaDonHang INT,
@@ -43,20 +50,33 @@ BEGIN
         PhuongThuc = @PhuongThuc
     WHERE MaDonHang = @MaDonHang;
 END;
-
--- FUNCTION
-CREATE FUNCTION dbo.GetDonHangDetails (@MaDonHang INT)
-RETURNS TABLE
+GO
+-- Lay Chi TIet Don Hang
+CREATE PROCEDURE sp_ChiTietDonHang
+    @MaDonHang INT
 AS
-RETURN (
+BEGIN
+    SET NOCOUNT ON;
+
     SELECT 
-        MaDonHang,
-        NgayDatHang,
-        MaKhachHang,
-        MaNhanVien,
-        MaGiamGia,
-        TongGiaTri,
-        PhuongThuc
-    FROM DonHang
-    WHERE MaDonHang = @MaDonHang
-);
+        dh.MaDonHang,
+        dh.NgayDatHang,
+        kh.TenKhachHang,
+        nv.TenNhanVien,
+        gg.TenGiamGia,
+        dh.TongGiaTri,
+        dh.PhuongThuc,
+        lk.TenLinhKien,
+        ctdh.SoLuong,
+        ctdh.GiaBan,
+        (ctdh.SoLuong * ctdh.GiaBan) AS ThanhTien
+    FROM 
+        DonHang dh
+    LEFT JOIN KhachHang kh ON dh.MaKhachHang = kh.MaKhachHang
+    LEFT JOIN NhanVien nv ON dh.MaNhanVien = nv.MaNhanVien
+    LEFT JOIN GiamGia gg ON dh.MaGiamGia = gg.MaGiamGia
+    LEFT JOIN ChiTietDonHang ctdh ON dh.MaDonHang = ctdh.MaDonHang
+    LEFT JOIN LinhKien lk ON lk.MaLinhKien = ctdh.MaLinhKien
+    WHERE dh.MaDonHang = @MaDonHang;
+END;
+GO
