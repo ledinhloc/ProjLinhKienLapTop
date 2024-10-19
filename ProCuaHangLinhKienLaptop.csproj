@@ -187,9 +187,20 @@
     <None Include="Resources\CARD.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB\caitable.sql" />
-    <Content Include="DB\DuLieuTuan7.sql" />
-    <Content Include="DB\Trg_v_func.sql" />
+    <Content Include="DB\Entity SQL scripts\CaLamViec_Luong.sql" />
+    <Content Include="DB\Entity SQL scripts\DonHang.sql" />
+    <Content Include="DB\Entity SQL scripts\KhachHang.sql" />
+    <Content Include="DB\Entity SQL scripts\LichLamViec_CoLichLam.sql" />
+    <Content Include="DB\Entity SQL scripts\LinhKienLoaiLinhKien.sql" />
+    <Content Include="DB\Entity SQL scripts\MaGiamGia.sql" />
+    <Content Include="DB\Entity SQL scripts\NhaCungCap.sql" />
+    <Content Include="DB\Entity SQL scripts\NhanVien.sql" />
+    <Content Include="DB\Entity SQL scripts\PhieuNhapHang.sql" />
+    <Content Include="DB\Entity SQL scripts\Trigger\Trigger.sql" />
+    <Content Include="DB\Entity SQL scripts\Trigger\trigger_CheckInStockAndWarming %281%29.sql" />
+    <Content Include="DB\Full Database Scripts\Create table.sql" />
+    <Content Include="DB\Full Database Scripts\Data.sql" />
+    <Content Include="DB\Full Database Scripts\Trg_v_func.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
