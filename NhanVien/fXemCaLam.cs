@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
 
 namespace ProCuaHangLinhKienLaptop.NhanVien
 {
@@ -18,20 +19,50 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         public fXemCaLam()
         {
             InitializeComponent();
+           
+        }
+
+        private void flpCaLam_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void fXemCaLam_Load(object sender, EventArgs e)
         {
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@MaNhanVien", 1)
-            };
-            dataGridView1.DataSource = provider.ExecuteReader(CommandType.Text, "Select * FROM XemCaLamViecCuaNhanVien(@MaNhanVien)", sqlParameters);
+            dtpNgay.Value = DateTime.Parse("2024-01-01");
+            dtpNgay_ValueChanged(sender, e);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dtpNgay_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime ngayDau = dtpNgay.Value;
+            DateTime ngayCuoi = ngayDau.AddDays(4);
+
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("@MaNhanVien", 1),
+                new SqlParameter("@NgayDau", ngayDau.ToString("yyyy-MM-dd")),
+                new SqlParameter("@NgayCuoi", ngayCuoi.ToString("yyyy-MM-dd"))
+
+            };
+            DataTable table = provider.ExecuteReader(CommandType.Text, "Select * FROM fn_XemCaLamViecCuaNhanVien(@MaNhanVien,@NgayDau,@NgayCuoi)", sqlParameters);
+            foreach (DataRow row in table.Rows)
+            {
+                //string ngay = row["NgayLam"].ToString();
+                DateTime ngayLam = Convert.ToDateTime(row["NgayLam"]);
+                string ngayVaThu = ngayLam.ToString("dddd, dd/MM/yy", new System.Globalization.CultureInfo("vi-VN"));
+                string caLam = row["TenCa"].ToString();
+                string trangThai = row["TrangThai"].ToString();
+                string danhGia = row["DanhGia"].ToString();
+                CaLamUC uc = new CaLamUC(ngayVaThu, caLam, trangThai, danhGia);
+
+                flpCaLam.Controls.Add(uc);
+            }
         }
     }
 }

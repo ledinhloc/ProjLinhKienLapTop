@@ -28,37 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dtpNgay = new System.Windows.Forms.DateTimePicker();
+            this.flpCaLam = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dtpNgay
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(34, 31);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(824, 500);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dtpNgay.Location = new System.Drawing.Point(525, 33);
+            this.dtpNgay.Name = "dtpNgay";
+            this.dtpNgay.Size = new System.Drawing.Size(255, 22);
+            this.dtpNgay.TabIndex = 0;
+            this.dtpNgay.ValueChanged += new System.EventHandler(this.dtpNgay_ValueChanged);
+            // 
+            // flpCaLam
+            // 
+            this.flpCaLam.AutoScroll = true;
+            this.flpCaLam.Location = new System.Drawing.Point(31, 90);
+            this.flpCaLam.Name = "flpCaLam";
+            this.flpCaLam.Size = new System.Drawing.Size(769, 411);
+            this.flpCaLam.TabIndex = 1;
+            this.flpCaLam.Paint += new System.Windows.Forms.PaintEventHandler(this.flpCaLam_Paint);
             // 
             // fXemCaLam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(903, 563);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(838, 563);
+            this.Controls.Add(this.flpCaLam);
+            this.Controls.Add(this.dtpNgay);
             this.Name = "fXemCaLam";
             this.Text = "fXemCaLam";
             this.Load += new System.EventHandler(this.fXemCaLam_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DateTimePicker dtpNgay;
+        private System.Windows.Forms.FlowLayoutPanel flpCaLam;
     }
 }

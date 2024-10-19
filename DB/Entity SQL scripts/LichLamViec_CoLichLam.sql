@@ -72,15 +72,17 @@ BEGIN
     WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
 END;
 
+GO
 --Func
-CREATE FUNCTION dbo.XemCaLamViecCuaNhanVien (@MaNhanVien INT)
+CREATE FUNCTION dbo.fn_XemCaLamViecCuaNhanVien (@MaNhanVien INT, @NgayDau DATE, @NgayCuoi DATE)
 RETURNS TABLE
 AS
 RETURN
 (
     SELECT 
-        LLV.MaLichLamViec,
         LLV.NgayLam,
+        CLL.DanhGia,
+        CLL.TrangThai,
         CLV.TenCa,
         CLV.GioBatDau,
         CLV.GioKetThuc
@@ -92,9 +94,36 @@ RETURN
         CaLamViec CLV ON LLV.MaCa = CLV.MaCa
     WHERE 
         CLL.MaNhanVien = @MaNhanVien
+        AND LLV.NgayLam BETWEEN @NgayDau AND @NgayCuoi
 );
+SELECT * FROM dbo.fn_XemCaLamViecCuaNhanVien(1, '2024-01-01', '2024-7-1'); 
+DROP FUNCTION dbo.fn_DemNgayLamNgayNghi
 
-SELECT * FROM dbo.XemCaLamViecCuaNhanVien(1); 
+GO
+--func dem ngay lam, ngay nghi cua nhan vien
+CREATE FUNCTION dbo.fn_DemCaLamCaNghi (@MaNhanVien INT, @NgayDau DATE, @NgayCuoi DATE)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        YEAR(LLV.NgayLam) AS Nam, 
+        MONTH(LLV.NgayLam) AS Thang,
+        SUM(CASE WHEN TrangThai = 'HoanThanh' THEN 1 ELSE 0 END) AS HoanThanh,
+        SUM(CASE WHEN TrangThai = 'Chua' Then 1 ELSE 0 END) AS Chua
+    FROM 
+        CoLichLam CLL
+    JOIN 
+        LichLamViec LLV ON CLL.MaLichLamViec = LLV.MaLichLamViec
+    WHERE 
+        CLL.MaNhanVien = @MaNhanVien
+        AND LLV.NgayLam BETWEEN @NgayDau AND @NgayCuoi
+    GROUP BY YEAR(LLV.NgayLam), MONTH(LLV.NgayLam)
+)
+GO
+SELECT * FROM dbo.fn_DemNgayLamNgayNghi(1, '2024-01-01', '2024-11-1'); 
+
+
 --
 CREATE FUNCTION dbo.fn_XemNhanVienTrongCaLam (@MaCa int, @ngay date)
 RETURNS TABLE

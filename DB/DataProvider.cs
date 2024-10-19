@@ -13,7 +13,7 @@ namespace ProCuaHangLinhKienLaptop.DB
     public class DataProvider
     {
         private SqlConnection connection;
-        private string connectionString = "Data Source=localhost;Initial Catalog=LinhkienLaptop;Integrated Security=True;Connect Timeout=30";
+        private string connectionString = "Data Source=localhost;Initial Catalog=LinhkienLaptop;Integrated Security=True;Connect Timeout=30;";
         public DataProvider() {
             try
             {

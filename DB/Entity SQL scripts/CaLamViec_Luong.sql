@@ -112,7 +112,9 @@ END;
 --Function
 CREATE FUNCTION fn_XemLuongTheoNhanVien
 (
-    @MaNhanVien INT
+    @MaNhanVien INT,
+    @NgayBD DATE,
+    @NgayKT DATE
 )
 RETURNS TABLE
 AS
@@ -128,9 +130,19 @@ RETURN
         Luong
     WHERE 
         MaNhanVien = @MaNhanVien
+        AND ThoiGian BETWEEN @NgayBD AND @NgayKT
 );
 
-SELECT * FROM dbo.fn_XemLuongTheoNhanVien(1);
+
+INSERT INTO Luong (Luong, LuongGio, Thuong, TongNhan, ThoiGian, SoCa, MaNhanVien)
+VALUES
+    (22 * 25000, 25000, 1000000, (22 * 25000) + 1000000, '2024-06-01', 22, 1),
+    (23 * 25000, 25000, 1200000, (23 * 25000) + 1200000, '2024-07-01', 23, 1),
+    (24 * 25000, 25000, 1500000, (24 * 25000) + 1500000, '2024-08-01', 24, 1);
+
+
+DELETE FROM Luong WHERE MaLuong = 15
+SELECT * FROM dbo.fn_XemLuongTheoNhanVien(1,'2024-07-01','2024-12-01');
 
 GO
 --
