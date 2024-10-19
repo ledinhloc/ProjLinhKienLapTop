@@ -1,6 +1,11 @@
+--- VIEW
+CREATE VIEW vw_KhachHangList AS
+SELECT *
+FROM dbo.KhachHang
+GO
+
 
 -- Stored Procedure ----------------------------------------------------
-
 -- Thêm khách hàng:
 CREATE PROCEDURE sp_ThemKhachHang
 	@TenKhachHang NVARCHAR(255),
@@ -45,3 +50,41 @@ BEGIN
     WHERE MaKhachHang = @MaKhachHang;
 END;
 GO
+
+---- STORED PROCEDURE
+CREATE PROCEDURE sp_TimKiemKhachHang
+    @SearchOption NVARCHAR(50), 
+    @SearchText NVARCHAR(255) 
+AS
+BEGIN
+    SET NOCOUNT ON;
+    IF @SearchOption = 'MaKhachHang'
+    BEGIN
+        SELECT * FROM KhachHang
+        WHERE MaKhachHang = TRY_CAST(@SearchText AS INT);
+    END
+    ELSE IF @SearchOption = 'TenKhachHang'
+    BEGIN
+        SELECT * FROM KhachHang
+        WHERE TenKhachHang LIKE '%' + @SearchText + '%';
+    END
+    ELSE IF @SearchOption = 'DiaChi'
+    BEGIN
+        SELECT * FROM KhachHang
+        WHERE DiaChi LIKE '%' + @SearchText + '%';
+    END
+    ELSE IF @SearchOption = 'SDT'
+    BEGIN
+        SELECT * FROM KhachHang
+        WHERE SDT LIKE '%' + @SearchText + '%';
+    END
+    ELSE IF @SearchOption = 'Email'
+    BEGIN
+        SELECT * FROM KhachHang
+        WHERE Email LIKE '%' + @SearchText + '%';
+    END
+    ELSE
+    BEGIN
+        PRINT 'Tiêu chí tìm kiếm không hợp lệ.';
+    END
+END;

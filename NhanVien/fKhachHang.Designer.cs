@@ -49,10 +49,10 @@
             this.txtTim = new System.Windows.Forms.TextBox();
             this.btnXoa = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.cboSort = new System.Windows.Forms.ComboBox();
+            this.cboSearchOptions = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -254,11 +254,12 @@
             // 
             // txtTim
             // 
-            this.txtTim.Location = new System.Drawing.Point(714, 448);
+            this.txtTim.Location = new System.Drawing.Point(677, 457);
             this.txtTim.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTim.Name = "txtTim";
-            this.txtTim.Size = new System.Drawing.Size(218, 26);
+            this.txtTim.Size = new System.Drawing.Size(192, 26);
             this.txtTim.TabIndex = 24;
+            this.txtTim.TextChanged += new System.EventHandler(this.txtTim_TextChanged);
             // 
             // btnXoa
             // 
@@ -274,22 +275,12 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(594, 453);
+            this.label9.Location = new System.Drawing.Point(397, 455);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(71, 20);
             this.label9.TabIndex = 21;
             this.label9.Text = "Tìm kiếm";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(92, 448);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 20);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "Sắp xếp";
             // 
             // groupBox2
             // 
@@ -317,32 +308,44 @@
             this.btnThoat.UseVisualStyleBackColor = true;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
-            // cboSort
+            // cboSearchOptions
             // 
-            this.cboSort.FormattingEnabled = true;
-            this.cboSort.Items.AddRange(new object[] {
-            "ID",
-            "Name",
-            "BirthDate"});
-            this.cboSort.Location = new System.Drawing.Point(180, 443);
-            this.cboSort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cboSort.Name = "cboSort";
-            this.cboSort.Size = new System.Drawing.Size(180, 28);
-            this.cboSort.TabIndex = 23;
+            this.cboSearchOptions.FormattingEnabled = true;
+            this.cboSearchOptions.Items.AddRange(new object[] {
+            "MaKhachHang",
+            "TenKhachHang",
+            "DiaChi",
+            "SDT",
+            "Email"});
+            this.cboSearchOptions.Location = new System.Drawing.Point(476, 455);
+            this.cboSearchOptions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cboSearchOptions.Name = "cboSearchOptions";
+            this.cboSearchOptions.Size = new System.Drawing.Size(180, 28);
+            this.cboSearchOptions.TabIndex = 23;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(890, 451);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(112, 35);
+            this.btnSearch.TabIndex = 10;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // fKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 989);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvKhachHang);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtTim);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.cboSort);
+            this.Controls.Add(this.cboSearchOptions);
             this.Name = "fKhachHang";
             this.Text = "fKhachHang";
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).EndInit();
@@ -377,9 +380,9 @@
         private System.Windows.Forms.TextBox txtTim;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnThoat;
-        private System.Windows.Forms.ComboBox cboSort;
+        private System.Windows.Forms.ComboBox cboSearchOptions;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

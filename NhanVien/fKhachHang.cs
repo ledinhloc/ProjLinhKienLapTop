@@ -18,12 +18,12 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         public fKhachHang()
         {
             InitializeComponent();
-            dgvKhachHang.DataSource = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM KhachHang");
+            updateDgvKhachHang();
+            cboSearchOptions.SelectedIndex = 0;
         }
-        private void updateDgvKhachHang(DataTable dataTable)
+        private void updateDgvKhachHang()
         {
-            dgvKhachHang.Rows.Clear();
-            dgvKhachHang.DataSource = dataTable;
+            dgvKhachHang.DataSource = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM vw_KhachHangList");
         }
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -61,6 +61,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             {
                 if (dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemKhachHang", sqlParameters) > 0)
                 {
+                    updateDgvKhachHang();
                     MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -91,6 +92,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             {
                 if (dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SuaKhachHang", sqlParameters) > 0)
                 {
+                    updateDgvKhachHang();
                     MessageBox.Show("Cập nhật thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -110,7 +112,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
             try
             {
-                if (dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_XoaKhachHang", new SqlParameter[] { new SqlParameter("@ID", txtID.Text) }) > 0)
+                if (dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_XoaKhachHang", new SqlParameter[] { new SqlParameter("@MaKhachHang", txtID.Text) }) > 0)
                 {
                     MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -119,6 +121,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             {
                 MessageBox.Show("Lỗi hệ thống: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            updateDgvKhachHang();
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
@@ -140,6 +143,20 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 txtAddress.Text = row.Cells["DiaChi"].Value.ToString() ?? "";
             }
 
+        }
+
+        private void txtTim_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTim.Text == "")
+            {
+                updateDgvKhachHang();
+                return;
+            }
+
+            dgvKhachHang.DataSource = dataProvider.ExecuteReader(CommandType.StoredProcedure, "sp_TimKiemKhachHang", new SqlParameter[] {
+                    new SqlParameter("@SearchOption", cboSearchOptions.SelectedItem),
+                    new SqlParameter("@SearchText", txtTim.Text)
+            });
         }
     }
 }
