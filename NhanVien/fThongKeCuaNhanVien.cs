@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ProCuaHangLinhKienLaptop.NhanVien
 {
-    public partial class fThongTinNhanVien : Form
+    public partial class fThongKeCuaNhanVien : Form
     {
-        public fThongTinNhanVien()
+        public fThongKeCuaNhanVien()
         {
             InitializeComponent();
-        }
-
-        private void fThongTinNhanVien_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

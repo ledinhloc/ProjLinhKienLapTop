@@ -77,11 +77,23 @@
     <Compile Include="NhanVien\fTaoDonHang.Designer.cs">
       <DependentUpon>fTaoDonHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="NhanVien\fThongKeCuaNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhanVien\fThongKeCuaNhanVien.Designer.cs">
+      <DependentUpon>fThongKeCuaNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="NhanVien\fThongTinNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NhanVien\fThongTinNhanVien.Designer.cs">
       <DependentUpon>fThongTinNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanVien\fXemCaLam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhanVien\fXemCaLam.Designer.cs">
+      <DependentUpon>fXemCaLam.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanVien\LinhKienUC.cs">
       <SubType>UserControl</SubType>
@@ -130,14 +142,23 @@
     <EmbeddedResource Include="fAdmin.resx">
       <DependentUpon>fAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fLogin.resx">
+      <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\fTaoDonHang.resx">
       <DependentUpon>fTaoDonHang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NhanVien\fThongKeCuaNhanVien.resx">
+      <DependentUpon>fThongKeCuaNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\fThongTinNhanVien.resx">
       <DependentUpon>fThongTinNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NhanVien\fXemCaLam.resx">
+      <DependentUpon>fXemCaLam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\LinhKienUC.resx">
       <DependentUpon>LinhKienUC.cs</DependentUpon>

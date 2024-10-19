@@ -1,6 +1,6 @@
-﻿namespace ProCuaHangLinhKienLaptop
+﻿namespace ProCuaHangLinhKienLaptop.NhanVien
 {
-    partial class fLogin
+    partial class fThongKeCuaNhanVien
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // fLogin
+            // fThongKeCuaNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(903, 513);
-            this.Name = "fLogin";
-            this.Text = "fLogin";
+            this.ClientSize = new System.Drawing.Size(838, 474);
+            this.Name = "fThongKeCuaNhanVien";
+            this.Text = "fThongKeCuaNhanVien";
             this.ResumeLayout(false);
 
         }

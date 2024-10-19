@@ -34,9 +34,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1023, 626);
+            this.ClientSize = new System.Drawing.Size(965, 566);
             this.Name = "fThongTinNhanVien";
-            this.Text = "fThongTinNhanVien";
+            this.Text = "Thông tin nhân viên";
+            this.Load += new System.EventHandler(this.fThongTinNhanVien_Load);
             this.ResumeLayout(false);
 
         }
