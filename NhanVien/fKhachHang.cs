@@ -24,6 +24,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         private void updateDgvKhachHang()
         {
             dgvKhachHang.DataSource = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM vw_KhachHangList");
+            lblSoKhachHang.Text = dataProvider.ExecuteScalar(CommandType.Text, "SELECT dbo.fn_TinhTongKhachHang()").ToString();
         }
         private void btnReset_Click(object sender, EventArgs e)
         {

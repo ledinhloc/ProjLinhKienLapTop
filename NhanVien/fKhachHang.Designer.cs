@@ -53,6 +53,8 @@
             this.btnThoat = new System.Windows.Forms.Button();
             this.cboSearchOptions = new System.Windows.Forms.ComboBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblSoKhachHang = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -333,11 +335,35 @@
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(34, 466);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(124, 20);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Số khách hàng: ";
+            // 
+            // lblSoKhachHang
+            // 
+            this.lblSoKhachHang.AutoSize = true;
+            this.lblSoKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSoKhachHang.ForeColor = System.Drawing.Color.Red;
+            this.lblSoKhachHang.Location = new System.Drawing.Point(166, 466);
+            this.lblSoKhachHang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSoKhachHang.Name = "lblSoKhachHang";
+            this.lblSoKhachHang.Size = new System.Drawing.Size(32, 22);
+            this.lblSoKhachHang.TabIndex = 26;
+            this.lblSoKhachHang.Text = "15";
+            // 
             // fKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 989);
+            this.Controls.Add(this.lblSoKhachHang);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvKhachHang);
@@ -384,5 +410,7 @@
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.ComboBox cboSearchOptions;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblSoKhachHang;
     }
 }

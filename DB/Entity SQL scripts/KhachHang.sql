@@ -88,3 +88,17 @@ BEGIN
         PRINT 'Tiêu chí tìm kiếm không hợp lệ.';
     END
 END;
+GO
+------ FUNCTION
+-- Tính tổng số khách hàng
+CREATE FUNCTION fn_TinhTongKhachHang()
+RETURNS INT
+AS
+BEGIN
+    DECLARE @TongKhachHang INT;
+    SELECT @TongKhachHang = COUNT(*)
+    FROM KhachHang;
+
+    RETURN @TongKhachHang;
+END;
+GO
