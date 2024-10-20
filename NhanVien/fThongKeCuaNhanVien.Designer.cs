@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnXem = new System.Windows.Forms.Button();
             this.chartLuongThuong = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartCaLam = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -54,6 +54,9 @@
             this.lblCaNghi = new System.Windows.Forms.Label();
             this.lblTongLuong = new System.Windows.Forms.Label();
             this.lblTongLuongThuong = new System.Windows.Forms.Label();
+            this.btnThangHienTai = new System.Windows.Forms.Button();
+            this.btnNamNay = new System.Windows.Forms.Button();
+            this.btnThangTruoc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chartLuongThuong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartCaLam)).BeginInit();
             this.SuspendLayout();
@@ -70,32 +73,32 @@
             // 
             // chartLuongThuong
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chartLuongThuong.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartLuongThuong.Legends.Add(legend3);
+            chartArea5.Name = "ChartArea1";
+            this.chartLuongThuong.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartLuongThuong.Legends.Add(legend5);
             this.chartLuongThuong.Location = new System.Drawing.Point(44, 101);
             this.chartLuongThuong.Name = "chartLuongThuong";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartLuongThuong.Series.Add(series3);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chartLuongThuong.Series.Add(series5);
             this.chartLuongThuong.Size = new System.Drawing.Size(506, 325);
             this.chartLuongThuong.TabIndex = 2;
             this.chartLuongThuong.Text = "chart1";
             // 
             // chartCaLam
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartCaLam.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartCaLam.Legends.Add(legend4);
+            chartArea6.Name = "ChartArea1";
+            this.chartCaLam.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartCaLam.Legends.Add(legend6);
             this.chartCaLam.Location = new System.Drawing.Point(575, 101);
             this.chartCaLam.Name = "chartCaLam";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartCaLam.Series.Add(series4);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chartCaLam.Series.Add(series6);
             this.chartCaLam.Size = new System.Drawing.Size(477, 325);
             this.chartCaLam.TabIndex = 2;
             this.chartCaLam.Text = "chart1";
@@ -264,6 +267,36 @@
             this.lblTongLuongThuong.TabIndex = 6;
             this.lblTongLuongThuong.Text = "20000";
             // 
+            // btnThangHienTai
+            // 
+            this.btnThangHienTai.Location = new System.Drawing.Point(770, 29);
+            this.btnThangHienTai.Name = "btnThangHienTai";
+            this.btnThangHienTai.Size = new System.Drawing.Size(138, 53);
+            this.btnThangHienTai.TabIndex = 1;
+            this.btnThangHienTai.Text = "Tháng hiện tại";
+            this.btnThangHienTai.UseVisualStyleBackColor = true;
+            this.btnThangHienTai.Click += new System.EventHandler(this.btnThangHienTai_Click);
+            // 
+            // btnNamNay
+            // 
+            this.btnNamNay.Location = new System.Drawing.Point(914, 29);
+            this.btnNamNay.Name = "btnNamNay";
+            this.btnNamNay.Size = new System.Drawing.Size(138, 53);
+            this.btnNamNay.TabIndex = 1;
+            this.btnNamNay.Text = "Năm hiện tại";
+            this.btnNamNay.UseVisualStyleBackColor = true;
+            this.btnNamNay.Click += new System.EventHandler(this.btnNamNay_Click);
+            // 
+            // btnThangTruoc
+            // 
+            this.btnThangTruoc.Location = new System.Drawing.Point(617, 29);
+            this.btnThangTruoc.Name = "btnThangTruoc";
+            this.btnThangTruoc.Size = new System.Drawing.Size(138, 53);
+            this.btnThangTruoc.TabIndex = 1;
+            this.btnThangTruoc.Text = "Tháng trước";
+            this.btnThangTruoc.UseVisualStyleBackColor = true;
+            this.btnThangTruoc.Click += new System.EventHandler(this.btnThangTruoc_Click);
+            // 
             // fThongKeCuaNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -288,6 +321,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chartCaLam);
             this.Controls.Add(this.chartLuongThuong);
+            this.Controls.Add(this.btnNamNay);
+            this.Controls.Add(this.btnThangTruoc);
+            this.Controls.Add(this.btnThangHienTai);
             this.Controls.Add(this.btnXem);
             this.Name = "fThongKeCuaNhanVien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -321,5 +357,8 @@
         private System.Windows.Forms.Label lblCaNghi;
         private System.Windows.Forms.Label lblTongLuong;
         private System.Windows.Forms.Label lblTongLuongThuong;
+        private System.Windows.Forms.Button btnThangHienTai;
+        private System.Windows.Forms.Button btnNamNay;
+        private System.Windows.Forms.Button btnThangTruoc;
     }
 }

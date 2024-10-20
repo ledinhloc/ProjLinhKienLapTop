@@ -32,8 +32,45 @@ BEGIN
     SET TenNhanVien = @TenNhanVien, SDT = @SDT, Email = @Email, NgaySinh = @NgaySinh, DiaChi = @DiaChi
     WHERE MaNhanVien = @MaNhanVien
 END
+
+GO
+
+---sua nhan vien
+CREATE PROCEDURE sp_SuaNhanVien
+    @MaNhanVien INT,
+    @TenNhanVien NVARCHAR(100),
+    @DiaChi NVARCHAR(255),
+    @SDT NVARCHAR(15),
+    @Email NVARCHAR(100),
+    @MatKhau NVARCHAR(100),
+    @NgaySinh DATE
+AS
+BEGIN
+    UPDATE dbo.NhanVien
+    SET TenNhanVien = @TenNhanVien, SDT = @SDT, Email = @Email, NgaySinh = @NgaySinh, DiaChi = @DiaChi, MatKhau = @MatKhau
+    WHERE MaNhanVien = @MaNhanVien
+END
+
+select * from NhanVien
 GO
 -----  Function ----- 
+--tim nhan vien theo MaNhanVien
+CREATE FUNCTION fn_TimNhanVien
+(
+    @MaNhanVien INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT *
+    FROM 
+        NhanVien
+    WHERE 
+        MaNhanVien = @MaNhanVien
+);
+
+GO
 -- Tính tổng
 CREATE FUNCTION fn_GetTotalEmployees()
 RETURNS INT

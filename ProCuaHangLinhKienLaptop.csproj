@@ -60,12 +60,6 @@
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="fThongTinCaNhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,7 +83,7 @@
     </Compile>
     <Compile Include="NhanVien\fThongKeCuaNhanVien.Designer.cs">
       <DependentUpon>fThongKeCuaNhanVien.cs</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="NhanVien\fKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,9 +163,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\CaLamUC.resx">
       <DependentUpon>CaLamUC.cs</DependentUpon>

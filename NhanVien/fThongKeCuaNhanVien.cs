@@ -218,5 +218,56 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             LoadChartLuongThuong(ngayBD, ngayKT);
             LoadChartCaLam(ngayBD,ngayKT);
         }
+
+        private void btnThangTruoc_Click(object sender, EventArgs e)
+        {
+            DateTime thangTruoc = DateTime.Now.AddMonths(-1);
+
+            string thangNam = thangTruoc.ToString("yyyy-MM");
+            DateTime ngayBD = Convert.ToDateTime(thangNam + "-01");
+            DateTime ngayKT = Convert.ToDateTime(thangNam + "-01");
+
+            cboThangBD.SelectedItem = thangTruoc.ToString("MM");
+            cboNamBD.SelectedItem = thangTruoc.ToString("yyyy");
+
+            cboThangKT.SelectedItem = thangTruoc.ToString("MM");
+            cboNamKT.SelectedItem = thangTruoc.ToString("yyyy");
+
+            LoadChartLuongThuong(ngayBD, ngayKT);
+            LoadChartCaLam(ngayBD, ngayKT);
+        }
+
+        private void btnThangHienTai_Click(object sender, EventArgs e)
+        {
+            DateTime homNay = DateTime.Now;
+            string thangNam = homNay.ToString("yyyy-MM");
+            DateTime ngayBD = Convert.ToDateTime(thangNam + "-01");
+            DateTime ngayKT = Convert.ToDateTime(thangNam + "-01");
+
+            cboThangBD.SelectedItem = homNay.ToString("MM");
+            cboNamBD.SelectedItem = homNay.ToString("yyyy");
+
+            cboThangKT.SelectedItem = homNay.ToString("MM");
+            cboNamKT.SelectedItem = homNay.ToString("yyyy");
+
+            LoadChartLuongThuong(ngayBD, ngayKT);
+            LoadChartCaLam(ngayBD, ngayKT);
+        }
+
+        private void btnNamNay_Click(object sender, EventArgs e)
+        {
+            string nam = DateTime.Now.ToString("yyyy");
+            DateTime ngayBD = Convert.ToDateTime(nam + "-01" + "-01");
+            DateTime ngayKT = Convert.ToDateTime(nam + "-12" + "-01");
+
+            cboThangBD.SelectedItem = "01";
+            cboNamBD.SelectedItem = nam;
+
+            cboThangKT.SelectedItem = "12";
+            cboNamKT.SelectedItem = nam;
+
+            LoadChartLuongThuong(ngayBD, ngayKT);
+            LoadChartCaLam(ngayBD, ngayKT);
+        }
     }
 }
