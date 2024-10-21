@@ -109,5 +109,63 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 MessageBox.Show("Vui lòng chọn một khuyến mãi để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnXacNhan_Click(object sender, EventArgs e)
+        {
+            DateTime tu = dtpTu.Value;
+            DateTime den = dtpDen.Value;
+
+            try
+            {
+                string query = "sp_TimKiemMaGiamGiaTheoThoiGian";
+                SqlParameter[] para = new SqlParameter[]
+                {
+                    new SqlParameter("@StartDate",tu),
+                    new SqlParameter("@EndDate",den)
+                };
+                DataTable dataTable = dataProvider.ExecuteReader(CommandType.StoredProcedure, query, para);
+                dGV_GiamGia.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void btnTraCuu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int maGiamGia = int.Parse(txtMaGiamGia.Text);
+                string query = "SELECT dbo.fn_CheckGiamGiaHopLe(@MaGiamGia) AS Result";
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                    new SqlParameter("@MaGiamGia", maGiamGia)
+                };
+                object result = dataProvider.ExecuteScalar(CommandType.Text, query, parameters);
+
+                lblKetQua.Text = result.ToString();
+                if (result.ToString() == "Mã giảm giá hợp lệ")
+                {
+                    string querySelect = "SELECT * FROM GiamGia WHERE MaGiamGia = @MaGiamGia";
+                    DataTable dataTable = dataProvider.ExecuteReader(CommandType.Text, querySelect, parameters);
+                    dGV_GiamGia.DataSource = dataTable;
+                    lblKetQua.ForeColor = Color.Green;
+                }
+                else if (result.ToString() == "Mã giảm giá không tồn tại") {
+                    lblKetQua.ForeColor = Color.Red;
+                }
+                lblKetQua.Text = result.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi kiểm tra mã giảm giá: " + ex.Message);
+            }
+        }
     }
 }

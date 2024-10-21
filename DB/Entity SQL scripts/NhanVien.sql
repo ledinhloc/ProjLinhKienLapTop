@@ -6,7 +6,7 @@ FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
 -- Thêm
-CREATE PROCEDURE sp_AddNhanVien
+CREATE PROCEDURE sp_ThemNhanVien
     @TenNhanVien NVARCHAR(100),
     @SDT NVARCHAR(15),
     @Email NVARCHAR(100),
@@ -18,72 +18,8 @@ BEGIN
     INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau, ChucVu)
     VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau, 'nv')
 END
-GO
---Update
-CREATE PROCEDURE sp_UpdateNhanVien
-    @MaNhanVien INT,
-    @TenNhanVien NVARCHAR(100),
-    @SDT NVARCHAR(15),
-    @Email NVARCHAR(100),
-    @NgaySinh DATE,
-    @DiaChi NVARCHAR(255)
-AS
-BEGIN
-    UPDATE dbo.NhanVien
-    SET TenNhanVien = @TenNhanVien, SDT = @SDT, Email = @Email, NgaySinh = @NgaySinh, DiaChi = @DiaChi
-    WHERE MaNhanVien = @MaNhanVien
-END
 
-GO
-
----sua nhan vien
-CREATE PROCEDURE sp_SuaNhanVien
-    @MaNhanVien INT,
-    @TenNhanVien NVARCHAR(100),
-    @DiaChi NVARCHAR(255),
-    @SDT NVARCHAR(15),
-    @Email NVARCHAR(100),
-    @MatKhau NVARCHAR(100),
-    @NgaySinh DATE
-AS
-BEGIN
-    UPDATE dbo.NhanVien
-    SET TenNhanVien = @TenNhanVien, SDT = @SDT, Email = @Email, NgaySinh = @NgaySinh, DiaChi = @DiaChi, MatKhau = @MatKhau
-    WHERE MaNhanVien = @MaNhanVien
-END
-
-select * from NhanVien
-GO
 -----  Function ----- 
---tim nhan vien theo MaNhanVien
-CREATE FUNCTION fn_TimNhanVien
-(
-    @MaNhanVien INT
-)
-RETURNS TABLE
-AS
-RETURN
-(
-    SELECT *
-    FROM 
-        NhanVien
-    WHERE 
-        MaNhanVien = @MaNhanVien
-);
-
-GO
--- Tính tổng
-CREATE FUNCTION fn_GetTotalEmployees()
-RETURNS INT
-AS
-BEGIN
-    DECLARE @TotalEmployees INT;
-    
-    SELECT @TotalEmployees = COUNT(*)
-    FROM dbo.NhanVien;
-    
-    RETURN @TotalEmployees;
-END
 GO
 -- Name
 CREATE FUNCTION fn_SearchNhanVienByName (@TenNhanVien NVARCHAR(100))
@@ -105,26 +41,7 @@ BEGIN
     RETURN
 END
 GO
--- Date range
-CREATE FUNCTION fn_FilterNhanVienByDateRange (@StartDate DATE, @EndDate DATE)
-RETURNS @NhanVienList TABLE (
-    MaNhanVien INT,
-    TenNhanVien NVARCHAR(100),
-    SDT NVARCHAR(15),
-    Email NVARCHAR(100),
-    NgaySinh DATE,
-    DiaChi NVARCHAR(255)
-)
-AS
-BEGIN
-    INSERT INTO @NhanVienList
-    SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-    FROM dbo.NhanVien
-    WHERE NgaySinh BETWEEN @StartDate AND @EndDate
-    
-    RETURN
-END
-GO
+
 -- Email
 CREATE FUNCTION fn_SearchNhanVienByEmail (@Email NVARCHAR(100))
 RETURNS @NhanVienList TABLE (

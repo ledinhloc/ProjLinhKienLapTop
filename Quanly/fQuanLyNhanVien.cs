@@ -1,5 +1,6 @@
 ﻿using ProCuaHangLinhKienLaptop.DB;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +25,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             dGV_NhanVien.SelectionChanged += dGV_NhanVien_SelectionChanged;
             ucthongtincanhan = new UC_ThongTinCaNhan();
             pn_Chua.Controls.Add(ucthongtincanhan);
+            comboBox1.SelectedIndex = 0;
         }
 
         private void fQuanLyNhanVien_Load(object sender, EventArgs e)
@@ -33,6 +35,14 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 string query = "SELECT * FROM vw_NhanVienList";
                 DataTable dataTable = dataProvider.ExecuteReader(CommandType.Text, query);
                 dGV_NhanVien.DataSource = dataTable;
+                string queri = "SELECT COUNT(*) FROM vw_NhanVienList";
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+
+                };
+                object result = dataProvider.ExecuteScalar(CommandType.Text, queri, parameters);
+
+                lblTongNhanVien.Text = result.ToString();
             }
             catch (Exception ex)
             {
@@ -57,6 +67,14 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 string query = "SELECT * FROM vw_NhanVienList";
                 DataTable dataTable = dataProvider.ExecuteReader(CommandType.Text, query);
                 dGV_NhanVien.DataSource = dataTable;
+                string queri = "SELECT COUNT(*) FROM vw_NhanVienList";
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+
+                };
+                object result = dataProvider.ExecuteScalar(CommandType.Text, queri, parameters);
+
+                lblTongNhanVien.Text = result.ToString();
             }
             catch (Exception ex)
             {
@@ -117,6 +135,33 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
                 ucthongtincanhan.UpdateDiscountInfo(manv, tennv, ngaysinh, sdt, email,diachi);
             }
+        }
+
+        private void txtTenNhanVien_TextChanged(object sender, EventArgs e)
+        {
+            string searchValue = txtTuKhoa.Text.Trim();
+            DataTable datagrid;
+            if (comboBox1.SelectedItem.ToString() == "Tìm theo email")
+            {
+                datagrid = dataProvider.ExecuteReader(CommandType.Text,
+                    "SELECT * FROM dbo.fn_SearchNhanVienByEmail(@Email)",
+                    new SqlParameter("@Email", searchValue));
+            }
+            else if (comboBox1.SelectedItem.ToString() == "Tìm theo tên")
+            {
+                // Gọi hàm tìm kiếm theo Tên
+                datagrid = dataProvider.ExecuteReader(CommandType.Text,
+                    "SELECT * FROM dbo.fn_SearchNhanVienByName(@TenNhanVien)",
+                    new SqlParameter("@TenNhanVien", searchValue));
+            }
+            else
+            {
+                // Nếu không có lựa chọn nào
+                return;
+            }
+
+            // Đưa dữ liệu vào DataGridView
+            dGV_NhanVien.DataSource = datagrid;
         }
     }
 }

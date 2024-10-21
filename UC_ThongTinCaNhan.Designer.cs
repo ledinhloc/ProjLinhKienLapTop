@@ -45,11 +45,12 @@
             // label1
             // 
             this.label1.AutoEllipsis = true;
+            this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(425, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 27);
+            this.label1.Size = new System.Drawing.Size(78, 22);
             this.label1.TabIndex = 13;
             this.label1.Text = "Địa chỉ:";
             // 
@@ -184,7 +185,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UC_ThongTinCaNhan";
-            this.Size = new System.Drawing.Size(885, 359);
+            this.Size = new System.Drawing.Size(885, 303);
             this.ResumeLayout(false);
             this.PerformLayout();
 

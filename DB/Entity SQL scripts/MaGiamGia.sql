@@ -7,7 +7,7 @@ FROM dbo.GiamGia
 GO
 -- Stored Procedure
 -- Tạo
-CREATE PROCEDURE sp_InsertGiamGia
+CREATE PROCEDURE sp_ThemGiamGia
     @TenGiamGia NVARCHAR(100),
     @NgayBatDau DATE,
     @NgayKetThuc DATE,
@@ -19,7 +19,7 @@ BEGIN
 END;
 GO
 -- Update
-CREATE PROCEDURE sp_UpdateGiamGia
+CREATE PROCEDURE sp_SuaGiamGia
     @MaGiamGia INT,
     @TenGiamGia NVARCHAR(100),
     @NgayBatDau DATE,
@@ -36,7 +36,7 @@ BEGIN
 END;
 GO
 -- Lấy mã theo thời gian
-CREATE PROCEDURE sp_GetGiamGiaByDateRange
+CREATE PROCEDURE sp_TimKiemMaGiamGiaTheoThoiGian
     @StartDate DATE,
     @EndDate DATE
 AS
