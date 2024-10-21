@@ -60,11 +60,11 @@
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="fThongTinCaNhan.cs">
+    <Compile Include="fNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fThongTinCaNhan.Designer.cs">
-      <DependentUpon>fThongTinCaNhan.cs</DependentUpon>
+    <Compile Include="fNhanVien.Designer.cs">
+      <DependentUpon>fNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanVien\CaLamUC.cs">
       <SubType>UserControl</SubType>
@@ -206,6 +206,9 @@
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="fNhanVien.resx">
+      <DependentUpon>fNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\CaLamUC.resx">
       <DependentUpon>CaLamUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -303,6 +306,7 @@
     <Content Include="DB\Entity SQL scripts\DonHang_ChiTiet.sql" />
     <Content Include="DB\Entity SQL scripts\KhachHang.sql" />
     <Content Include="DB\Entity SQL scripts\LichLamViec_CoLichLam.sql" />
+    <Content Include="DB\Entity SQL scripts\LinhKien.sql" />
     <Content Include="DB\Entity SQL scripts\LinhKienLoaiLinhKien.sql" />
     <Content Include="DB\Entity SQL scripts\MaGiamGia.sql" />
     <Content Include="DB\Entity SQL scripts\NhaCungCap.sql" />
