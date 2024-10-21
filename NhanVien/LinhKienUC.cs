@@ -18,12 +18,13 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         public decimal GiaBan { get; set; }
         public decimal GiaNhap { get; set; }
         public int SoLuongTonKho { get; set; }
+        public Image HinhLK {  get; set; }
         public LinhKienUC()
         {
             InitializeComponent();
         }
 
-        public LinhKienUC(int maLinhKien, string tenLinhKien, string moTaChiTiet, decimal giaBan, decimal giaNhap, int soLuongTonKho)
+        public LinhKienUC(int maLinhKien, string tenLinhKien, string moTaChiTiet, decimal giaBan, decimal giaNhap, int soLuongTonKho, Image hinhLK)
         {
             InitializeComponent();
             MaLinhKien = maLinhKien;
@@ -32,6 +33,11 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             GiaBan = giaBan;
             GiaNhap = giaNhap;
             SoLuongTonKho = soLuongTonKho;
+            HinhLK = hinhLK;
+            lblTenLinhKien.Text = TenLinhKien;
+            lblGiaBan.Text = GiaBan.ToString("N0") + "VND";
+            lblSoLuong.Text = SoLuongTonKho.ToString();
+            picAnhLK.Image = HinhLK;
             this.Click += (s, e) => OnLinhKienClicked();
         }
         // TEST

@@ -8,17 +8,17 @@ GO
 
 -- Thủ tục thêm một record vào bảng DonHang
 CREATE PROCEDURE sp_ThemDonHang
-    @MaDonHang INT,
     @NgayDatHang DATE,
     @MaKhachHang INT,
     @MaNhanVien INT,
-    @MaGiamGia INT,
+    @MaGiamGia INT = NULL,
     @TongGiaTri DECIMAL(15, 2),
     @PhuongThuc NVARCHAR(100)
 AS
 BEGIN
-    INSERT INTO DonHang (MaDonHang, NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc)
-    VALUES (@MaDonHang, @NgayDatHang, @MaKhachHang, @MaNhanVien, @MaGiamGia, @TongGiaTri, @PhuongThuc);
+    INSERT INTO DonHang (NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc)
+    OUTPUT inserted.MaDonHang 
+    VALUES (@NgayDatHang, @MaKhachHang, @MaNhanVien, @MaGiamGia, @TongGiaTri, @PhuongThuc);
 END;
 GO
 -- Xóa một record trong bảng DonHang
@@ -79,4 +79,19 @@ BEGIN
     LEFT JOIN LinhKien lk ON lk.MaLinhKien = ctdh.MaLinhKien
     WHERE dh.MaDonHang = @MaDonHang;
 END;
+GO
+
+--- CHITIETDONHANG
+-- Them chi tiet don hang
+CREATE PROCEDURE sp_ThemChiTietDonHang
+    @MaDonHang INT,                          
+    @MaLinhKien INT,                        
+    @SoLuong INT,                           
+    @GiaBan DECIMAL(15, 2)                   
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan)
+    VALUES (@MaDonHang, @MaLinhKien, @SoLuong, @GiaBan);
+END
 GO

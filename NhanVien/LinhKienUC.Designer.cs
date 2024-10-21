@@ -36,7 +36,10 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             this.lblTenLinhKien = new System.Windows.Forms.Label();
             this.lblGiaBan = new System.Windows.Forms.Label();
             this.lblSoLuong = new System.Windows.Forms.Label();
+            this.picAnhLK = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnhLK)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -53,7 +56,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             // lblTenLinhKien
             // 
             this.lblTenLinhKien.AutoEllipsis = true;
-            this.lblTenLinhKien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.lblTenLinhKien.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTenLinhKien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblTenLinhKien.Location = new System.Drawing.Point(18, 177);
             this.lblTenLinhKien.Name = "lblTenLinhKien";
@@ -79,19 +82,43 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             this.lblSoLuong.AutoSize = true;
             this.lblSoLuong.BackColor = System.Drawing.Color.Transparent;
             this.lblSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.lblSoLuong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(151)))), ((int)(((byte)(151)))));
-            this.lblSoLuong.Location = new System.Drawing.Point(24, 216);
+            this.lblSoLuong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
+            this.lblSoLuong.Location = new System.Drawing.Point(89, 223);
             this.lblSoLuong.Name = "lblSoLuong";
             this.lblSoLuong.Size = new System.Drawing.Size(51, 20);
             this.lblSoLuong.TabIndex = 3;
             this.lblSoLuong.Text = "label1";
             this.lblSoLuong.Click += new System.EventHandler(this.LinhKienUC_Click);
             // 
+            // picAnhLK
+            // 
+            this.picAnhLK.Location = new System.Drawing.Point(17, 19);
+            this.picAnhLK.Name = "picAnhLK";
+            this.picAnhLK.Size = new System.Drawing.Size(217, 145);
+            this.picAnhLK.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picAnhLK.TabIndex = 4;
+            this.picAnhLK.TabStop = false;
+            this.picAnhLK.Click += new System.EventHandler(this.LinhKienUC_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(151)))), ((int)(((byte)(151)))));
+            this.label1.Location = new System.Drawing.Point(18, 222);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Tồn kho: ";
+            // 
             // LinhKienUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.picAnhLK);
             this.Controls.Add(this.lblSoLuong);
             this.Controls.Add(this.lblGiaBan);
             this.Controls.Add(this.lblTenLinhKien);
@@ -100,6 +127,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             this.Size = new System.Drawing.Size(255, 302);
             this.Click += new System.EventHandler(this.LinhKienUC_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAnhLK)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,5 +139,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         private System.Windows.Forms.Label lblTenLinhKien;
         private System.Windows.Forms.Label lblGiaBan;
         private System.Windows.Forms.Label lblSoLuong;
+        private PictureBox picAnhLK;
+        private System.Windows.Forms.Label label1;
     }
 }

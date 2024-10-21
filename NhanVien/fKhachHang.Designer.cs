@@ -52,7 +52,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnThoat = new System.Windows.Forms.Button();
             this.cboSearchOptions = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.lblSoKhachHang = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKhachHang)).BeginInit();
@@ -325,16 +324,6 @@
             this.cboSearchOptions.Size = new System.Drawing.Size(180, 28);
             this.cboSearchOptions.TabIndex = 23;
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(890, 451);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(112, 35);
-            this.btnSearch.TabIndex = 10;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -364,7 +353,6 @@
             this.ClientSize = new System.Drawing.Size(1049, 989);
             this.Controls.Add(this.lblSoKhachHang);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvKhachHang);
             this.Controls.Add(this.groupBox1);
@@ -409,7 +397,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnThoat;
         private System.Windows.Forms.ComboBox cboSearchOptions;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblSoKhachHang;
     }

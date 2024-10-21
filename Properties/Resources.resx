@@ -118,7 +118,37 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bomach_asus_vivobook" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bomach_asus_vivobook.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bomach_dell_inspiron" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bomach_dell_inspiron.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CARD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CARD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cpu_amd_ryzen_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cpu_amd_ryzen_5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cpu_intel_core_i5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cpu_intel_core_i5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_hp_pavilion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin_hp_pavilion.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pin_lenovo_thinkpad" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pin_lenovo_thinkpad.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ram_16gb_ddr4_corsair" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ram_16gb_ddr4_corsair.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ram_8gb_ddr4_kingston" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ram_8gb_ddr4_kingston.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ssd_256gb_samsung" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ssd_256gb_samsung.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ssd_512gb_wd_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ssd_512gb_wd_black.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

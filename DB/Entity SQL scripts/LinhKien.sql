@@ -5,8 +5,13 @@ join dbo.LoaiLinhKien llk
 on lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
 GO
 
-
-
+CREATE VIEW vw_ThongTinLinhKien AS
+SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
+       llk.TenLoaiLinhKien, ncc.TenNhaCungCap, llk.MaLoaiLinhKien, lk.HinhAnh
+FROM LinhKien lk
+JOIN LoaiLinhKien llk ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
+JOIN NhaCungCap ncc ON lk.MaNhaCungCap = ncc.MaNhaCungCap;
+GO
 -- Xóa linh kiện
 ALTER PROCEDURE [dbo].[sp_XoaLinhKien]
     @MaLinhKien INT
@@ -113,4 +118,15 @@ RETURN(
 	SELECT TenLoaiLinhKien, dbo.fn_HTKTheoLoaiLinhKien(MaLoaiLinhKien) as SoLuong
 	FROM LoaiLinhKien
 )
+GO
 
+CREATE PROCEDURE sp_TimLinhKien
+    @searchText NVARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT * FROM LinhKien
+    WHERE TenLinhKien LIKE '%' + @searchText + '%'
+       OR MoTaChiTiet LIKE '%' + @searchText + '%';
+END
+GO

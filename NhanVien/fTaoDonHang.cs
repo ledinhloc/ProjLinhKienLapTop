@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -90,11 +91,12 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 ? new SqlParameter[] { new SqlParameter("@MaLoai", maLoaiLinhKien) }
                 : null;
 
-            DataTable linhKienTable = provider.ExecuteReader(CommandType.Text, cmdText,  parameters);
+            DataTable linhKienTable = provider.ExecuteReader(CommandType.Text, cmdText, parameters);
 
             foreach (DataRow row in linhKienTable.Rows)
             {
-                LinhKienUC linhKienUC = new LinhKienUC((int)row["MaLinhKien"], row["TenLinhKien"].ToString(), (decimal)row["GiaBan"]);
+                LinhKienUC linhKienUC = new LinhKienUC((int)row["MaLinhKien"], row["TenLinhKien"].ToString(), row["MoTaChiTiet"].ToString(), 
+                    (decimal)row["GiaBan"], (decimal)row["GiaNhap"], (int)row["SoLuongTonKho"], (Image)ImageHelper.GetImageFromResources(row["HinhAnh"].ToString()));
                 linhKienUC.LinhKienClicked += LinhKienUC_Clicked;
                 flowLayoutPanel.Controls.Add(linhKienUC);
             }
@@ -131,6 +133,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             }
             decimal total = donHangItems.Sum(item => item.GiaBan * item.SoLuong);
             lblTotal.Text = total.ToString("N0") + " VND";
+            lblAmountPaid.Text = (total - 0).ToString("N0") + " VND";
         }
 
         private void btnCreateOrder_Click(object sender, EventArgs e)
@@ -140,24 +143,42 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 DateTime ngayDatHang = DateTime.Now; 
                 int maKhachHang = 1; 
                 int maNhanVien = 1;
-                int maGiamGia = 1; 
+                int maGiamGia = -1;
+                if (!string.IsNullOrEmpty(txtMaGiamGia.Text) && lblDiscount.Text != "-0VND")
+                {
+                    maGiamGia = int.Parse(txtMaGiamGia.Text); 
+                }
+
+                string phuongThuc = rbTienMat.Checked ? rbTienMat.Text : rbChuyenKhoan.Text;
                 decimal tongGiaTri = donHangItems.Sum(item => item.GiaBan * item.SoLuong); 
-                string phuongThuc = "Cash"; 
 
                 SqlParameter[] parameters = new SqlParameter[]
                 {
                     new SqlParameter("@NgayDatHang", ngayDatHang),
                     new SqlParameter("@MaKhachHang", maKhachHang),
                     new SqlParameter("@MaNhanVien", maNhanVien),
-                    new SqlParameter("@MaGiamGia", maGiamGia),
+                    // new SqlParameter("@MaGiamGia", maGiamGia == 1),
+                    new SqlParameter("@MaGiamGia", maGiamGia == -1 ? (object)DBNull.Value : maGiamGia),
                     new SqlParameter("@TongGiaTri", tongGiaTri),
                     new SqlParameter("@PhuongThuc", phuongThuc)
                 };
 
-                int rowsAffected = provider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemDonHang", parameters);
+                int maDonHang = (int)provider.ExecuteScalar(CommandType.StoredProcedure, "sp_ThemDonHang", parameters);
 
-                if (rowsAffected > 0)
+                if (maDonHang > 0)
                 {
+                    foreach (var item in donHangItems)
+                    {
+                        SqlParameter[] parameters2 = new SqlParameter[]
+                        {
+                            new SqlParameter("@MaDonHang", maDonHang),
+                            new SqlParameter("@MaLinhKien", item.MaLinhKien),
+                            new SqlParameter("@SoLuong", item.SoLuong),
+                            new SqlParameter("@GiaBan", item.GiaBan)
+                        };
+                        provider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemChiTietDonHang", parameters2);
+                    }
+                        
                     MessageBox.Show("Đơn hàng đã được thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     donHangItems.Clear(); 
                     UpdateDataGridView(); 
@@ -172,6 +193,77 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnKiemTraKhuyenMai_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int maGiamGia;
+                if (int.TryParse(txtMaGiamGia.Text, out maGiamGia))
+                {
+                    string result = (string)provider.ExecuteScalar(CommandType.Text, "SELECT dbo.fn_CheckGiamGiaHopLe(@MaGiamGia)", 
+                            new SqlParameter[] { new SqlParameter("@MaGiamGia", maGiamGia) });
+                    MessageBox.Show(result, "Kết quả kiểm tra", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    if (result == "Mã giảm giá hợp lệ")
+                    {
+                        decimal giaTriDonHang;
+                        if (decimal.TryParse(lblTotal.Text, out giaTriDonHang))
+                        {
+                            SqlParameter[] parameters2 = new SqlParameter[]
+                            {
+                                new SqlParameter("@GiaTriDonHang", giaTriDonHang),
+                                new SqlParameter("@MaGiamGia", maGiamGia)
+                            };
+
+                            decimal finalPrice = (decimal)provider.ExecuteScalar(CommandType.Text, "SELECT dbo.fn_CalculateFinalPrice(@GiaTriDonHang, @MaGiamGia)", parameters2);
+                            lblDiscount.Text = (giaTriDonHang - finalPrice).ToString();
+                            lblAmountPaid.Text = finalPrice.ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Mã giảm giá không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Mã giảm giá không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra: " + ex.Message, "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnKiemTraKhachHang_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable rows = provider.ExecuteReader(CommandType.StoredProcedure, "sp_TimKiemKhachHang", new SqlParameter[] {
+                        new SqlParameter("@SearchOption", "SDT"),
+                        new SqlParameter("@SearchText", txtTimKhachHang.Text)
+                });
+
+                if (rows.Rows.Count > 0)
+                {
+                    lblTenKhachHang.Text = rows.Rows[0]["TenKhachHang"].ToString();
+                    lblSDT.Text = rows.Rows[0]["SDT"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy khách hàng! Vui lòng thêm mới", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lblTenKhachHang.Text = "-";
+                    lblSDT.Text = "-";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
     public class DonHangItem
     {
@@ -180,5 +272,25 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         public decimal GiaBan { get; set; }
         public int SoLuong { get; set; }
     }
+    public static class ImageHelper
+    {
+        public static Image GetImageFromResources(string imageName)
+        {
+            if (imageName.EndsWith(".jpg"))
+            {
+                imageName = imageName.Substring(0, imageName.Length - 4);
+            }
 
+            object imageObject = Properties.Resources.ResourceManager.GetObject(imageName);
+
+            if (imageObject != null && imageObject is Image)
+            {
+                return (Image)imageObject;
+            }
+            else
+            {
+                throw new ArgumentException($"Hình ảnh '{imageName}' không tìm thấy trong resources.");
+            }
+        }
+    }
 }

@@ -63,9 +63,109 @@ namespace ProCuaHangLinhKienLaptop.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bomach_asus_vivobook {
+            get {
+                object obj = ResourceManager.GetObject("bomach_asus_vivobook", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bomach_dell_inspiron {
+            get {
+                object obj = ResourceManager.GetObject("bomach_dell_inspiron", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CARD {
             get {
                 object obj = ResourceManager.GetObject("CARD", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cpu_amd_ryzen_5 {
+            get {
+                object obj = ResourceManager.GetObject("cpu_amd_ryzen_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cpu_intel_core_i5 {
+            get {
+                object obj = ResourceManager.GetObject("cpu_intel_core_i5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_hp_pavilion {
+            get {
+                object obj = ResourceManager.GetObject("pin_hp_pavilion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pin_lenovo_thinkpad {
+            get {
+                object obj = ResourceManager.GetObject("pin_lenovo_thinkpad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ram_16gb_ddr4_corsair {
+            get {
+                object obj = ResourceManager.GetObject("ram_16gb_ddr4_corsair", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ram_8gb_ddr4_kingston {
+            get {
+                object obj = ResourceManager.GetObject("ram_8gb_ddr4_kingston", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ssd_256gb_samsung {
+            get {
+                object obj = ResourceManager.GetObject("ssd_256gb_samsung", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ssd_512gb_wd_black {
+            get {
+                object obj = ResourceManager.GetObject("ssd_512gb_wd_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
