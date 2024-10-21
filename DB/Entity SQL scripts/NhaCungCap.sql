@@ -40,3 +40,12 @@ AS
 BEGIN
 	DELETE FROM NhaCungCap WHERE MaNhaCungCap= @MaNhaCungCap;
 END;
+
+
+CREATE PROCEDURE sp_TimKiemNCCTheoID
+    @MaNCC INT
+AS
+BEGIN
+    SELECT * FROM dbo.NhaCungCap
+    WHERE MaNhaCungCap = @MaNCC;
+END;
