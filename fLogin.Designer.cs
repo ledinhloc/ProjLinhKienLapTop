@@ -31,15 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fLogin));
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.managerRadio = new System.Windows.Forms.RadioButton();
-            this.customerRadio = new System.Windows.Forms.RadioButton();
+            this.rdbQuanLy = new System.Windows.Forms.RadioButton();
+            this.rdbNhanVien = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.txtPass = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnDangNhap = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -65,8 +65,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(239)))), ((int)(((byte)(255)))));
-            this.groupBox1.Controls.Add(this.managerRadio);
-            this.groupBox1.Controls.Add(this.customerRadio);
+            this.groupBox1.Controls.Add(this.rdbQuanLy);
+            this.groupBox1.Controls.Add(this.rdbNhanVien);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             this.groupBox1.Location = new System.Drawing.Point(619, 12);
             this.groupBox1.Name = "groupBox1";
@@ -75,29 +75,30 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Đăng nhập";
             // 
-            // managerRadio
+            // rdbQuanLy
             // 
-            this.managerRadio.AutoSize = true;
-            this.managerRadio.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.managerRadio.Location = new System.Drawing.Point(197, 38);
-            this.managerRadio.Name = "managerRadio";
-            this.managerRadio.Size = new System.Drawing.Size(91, 27);
-            this.managerRadio.TabIndex = 0;
-            this.managerRadio.TabStop = true;
-            this.managerRadio.Text = "Quản lý";
-            this.managerRadio.UseVisualStyleBackColor = true;
+            this.rdbQuanLy.AutoSize = true;
+            this.rdbQuanLy.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbQuanLy.Location = new System.Drawing.Point(197, 38);
+            this.rdbQuanLy.Name = "rdbQuanLy";
+            this.rdbQuanLy.Size = new System.Drawing.Size(91, 27);
+            this.rdbQuanLy.TabIndex = 0;
+            this.rdbQuanLy.Text = "Quản lý";
+            this.rdbQuanLy.UseVisualStyleBackColor = true;
             // 
-            // customerRadio
+            // rdbNhanVien
             // 
-            this.customerRadio.AutoSize = true;
-            this.customerRadio.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerRadio.Location = new System.Drawing.Point(50, 38);
-            this.customerRadio.Name = "customerRadio";
-            this.customerRadio.Size = new System.Drawing.Size(112, 27);
-            this.customerRadio.TabIndex = 0;
-            this.customerRadio.TabStop = true;
-            this.customerRadio.Text = "Nhân Viên";
-            this.customerRadio.UseVisualStyleBackColor = true;
+            this.rdbNhanVien.AutoSize = true;
+            this.rdbNhanVien.Checked = true;
+            this.rdbNhanVien.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbNhanVien.Location = new System.Drawing.Point(50, 38);
+            this.rdbNhanVien.Name = "rdbNhanVien";
+            this.rdbNhanVien.Size = new System.Drawing.Size(112, 27);
+            this.rdbNhanVien.TabIndex = 0;
+            this.rdbNhanVien.TabStop = true;
+            this.rdbNhanVien.Text = "Nhân Viên";
+            this.rdbNhanVien.UseVisualStyleBackColor = true;
+            this.rdbNhanVien.CheckedChanged += new System.EventHandler(this.rdbNhanVien_CheckedChanged);
             // 
             // panel1
             // 
@@ -117,16 +118,6 @@
             this.panel3.Size = new System.Drawing.Size(313, 66);
             this.panel3.TabIndex = 3;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(307, 60);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // txtEmail
             // 
             this.txtEmail.BackColor = System.Drawing.Color.White;
@@ -137,6 +128,17 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(203, 24);
             this.txtEmail.TabIndex = 1;
+            this.txtEmail.Text = "levanhoa@company.com";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(307, 60);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // panel2
             // 
@@ -147,15 +149,6 @@
             this.panel2.Size = new System.Drawing.Size(321, 67);
             this.panel2.TabIndex = 4;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(323, 60);
-            this.pictureBox2.TabIndex = 3;
-            this.pictureBox2.TabStop = false;
-            // 
             // txtPass
             // 
             this.txtPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -165,7 +158,17 @@
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(226, 27);
             this.txtPass.TabIndex = 1;
+            this.txtPass.Text = "matkhau3";
             this.txtPass.UseWaitCursor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(323, 60);
+            this.pictureBox2.TabIndex = 3;
+            this.pictureBox2.TabStop = false;
             // 
             // btnDangNhap
             // 
@@ -205,6 +208,7 @@
             this.Name = "fLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fLogin";
+            this.Load += new System.EventHandler(this.fLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -225,8 +229,8 @@
 
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton managerRadio;
-        private System.Windows.Forms.RadioButton customerRadio;
+        private System.Windows.Forms.RadioButton rdbQuanLy;
+        private System.Windows.Forms.RadioButton rdbNhanVien;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.PictureBox pictureBox1;

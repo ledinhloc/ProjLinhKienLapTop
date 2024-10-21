@@ -60,11 +60,11 @@
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="fThongTinCaNhan.cs">
+    <Compile Include="fNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="fThongTinCaNhan.Designer.cs">
-      <DependentUpon>fThongTinCaNhan.cs</DependentUpon>
+    <Compile Include="fNhanVien.Designer.cs">
+      <DependentUpon>fNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanVien\CaLamUC.cs">
       <SubType>UserControl</SubType>
@@ -205,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fNhanVien.resx">
+      <DependentUpon>fNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NhanVien\CaLamUC.resx">
       <DependentUpon>CaLamUC.cs</DependentUpon>
