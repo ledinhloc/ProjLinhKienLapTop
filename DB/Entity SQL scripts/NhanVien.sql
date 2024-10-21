@@ -15,9 +15,10 @@ CREATE PROCEDURE sp_AddNhanVien
     @MatKhau NVARCHAR(100)
 AS
 BEGIN
-    INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau)
-    VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau)
+    INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau, ChucVu)
+    VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau, 'nv')
 END
+GO
 --Update
 CREATE PROCEDURE sp_UpdateNhanVien
     @MaNhanVien INT,
