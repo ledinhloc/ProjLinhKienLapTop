@@ -303,6 +303,7 @@
     <Content Include="DB\Entity SQL scripts\DonHang_ChiTiet.sql" />
     <Content Include="DB\Entity SQL scripts\KhachHang.sql" />
     <Content Include="DB\Entity SQL scripts\LichLamViec_CoLichLam.sql" />
+    <Content Include="DB\Entity SQL scripts\LinhKien.sql" />
     <Content Include="DB\Entity SQL scripts\LinhKienLoaiLinhKien.sql" />
     <Content Include="DB\Entity SQL scripts\MaGiamGia.sql" />
     <Content Include="DB\Entity SQL scripts\NhaCungCap.sql" />
