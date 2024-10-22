@@ -145,6 +145,12 @@
     <Compile Include="Quanly\fKhuyenMai.Designer.cs">
       <DependentUpon>fKhuyenMai.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quanly\fLichLamViec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fLichLamViec.Designer.cs">
+      <DependentUpon>fLichLamViec.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quanly\fLinhKien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,12 @@
     </Compile>
     <Compile Include="Quanly\fQuanLyNhanVien.Designer.cs">
       <DependentUpon>fQuanLyNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\fThemCaLam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fThemCaLam.Designer.cs">
+      <DependentUpon>fThemCaLam.cs</DependentUpon>
     </Compile>
     <Compile Include="Quanly\fThemKM.cs">
       <SubType>Form</SubType>
@@ -192,6 +204,12 @@
     </Compile>
     <Compile Include="Quanly\fThongKeLinhKien.Designer.cs">
       <DependentUpon>fThongKeLinhKien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\LichLamViecUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Quanly\LichLamViecUC.Designer.cs">
+      <DependentUpon>LichLamViecUC.cs</DependentUpon>
     </Compile>
     <Compile Include="Quanly\UC_GiamGia.cs">
       <SubType>UserControl</SubType>
@@ -255,6 +273,9 @@
     <EmbeddedResource Include="Quanly\fKhuyenMai.resx">
       <DependentUpon>fKhuyenMai.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fLichLamViec.resx">
+      <DependentUpon>fLichLamViec.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fLinhKien.resx">
       <DependentUpon>fLinhKien.cs</DependentUpon>
     </EmbeddedResource>
@@ -263,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fQuanLyNhanVien.resx">
       <DependentUpon>fQuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fThemCaLam.resx">
+      <DependentUpon>fThemCaLam.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fThemKM.resx">
       <DependentUpon>fThemKM.cs</DependentUpon>
@@ -278,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fThongKeLinhKien.resx">
       <DependentUpon>fThongKeLinhKien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\LichLamViecUC.resx">
+      <DependentUpon>LichLamViecUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\UC_GiamGia.resx">
       <DependentUpon>UC_GiamGia.cs</DependentUpon>

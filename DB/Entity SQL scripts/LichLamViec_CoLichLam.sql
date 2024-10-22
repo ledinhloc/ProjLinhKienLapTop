@@ -1,15 +1,15 @@
 ﻿--LichLamViec(MaLichLamViec, NgayLam, MaCa)
 select * from LichLamViec
 
---them
+--them trong fLichLamViec  ***
 CREATE PROCEDURE sp_ThemLichLamViec
-    @MaLichLamViec INT,
-    @NgayLam DATE,
-    @MaCa INT
+    @NgayLam DATE
 AS
 BEGIN
-    INSERT INTO LichLamViec (MaLichLamViec, NgayLam, MaCa)
-    VALUES (@MaLichLamViec, @NgayLam, @MaCa);
+    -- Thêm tất cả các MaCa từ bảng CaLamViec vào LichLamViec với NgayLam đã cho
+    INSERT INTO LichLamViec (NgayLam, MaCa)
+    SELECT @NgayLam, MaCa
+    FROM CaLamViec;
 END;
 
 --sua
@@ -73,7 +73,30 @@ BEGIN
 END;
 
 GO
+
 --Func
+
+GO
+---Xem lich lam và thoi gian *
+CREATE FUNCTION dbo.fn_XemLichLamVaThoiGian (@ngayBD DATE, @ngayKT DATE)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        llv.MaLichLamViec,
+        llv.MaCa,
+        llv.NgayLam,
+        clv.TenCa,
+        clv.GioBatDau,
+        clv.GioKetThuc
+    FROM 
+        LichLamViec llv
+	INNER JOIN CaLamViec clv on clv.MaCa = llv.MaCa
+    WHERE llv.NgayLam BETWEEN @ngayBD AND @ngayKT
+);
+
+GO
 CREATE FUNCTION dbo.fn_XemCaLamViecCuaNhanVien (@MaNhanVien INT, @NgayDau DATE, @NgayCuoi DATE)
 RETURNS TABLE
 AS
@@ -97,10 +120,10 @@ RETURN
         AND LLV.NgayLam BETWEEN @NgayDau AND @NgayCuoi
 );
 SELECT * FROM dbo.fn_XemCaLamViecCuaNhanVien(1, '2024-01-01', '2024-7-1'); 
-DROP FUNCTION dbo.fn_DemNgayLamNgayNghi
+--DROP FUNCTION dbo.fn_DemNgayLamNgayNghi
 
 GO
---func dem ngay lam, ngay nghi cua nhan vien
+--func dem ngay lam, ngay nghi cua nhan vien 
 CREATE FUNCTION dbo.fn_DemCaLamCaNghi (@MaNhanVien INT, @NgayDau DATE, @NgayCuoi DATE)
 RETURNS TABLE
 AS
@@ -124,14 +147,31 @@ GO
 SELECT * FROM dbo.fn_DemNgayLamNgayNghi(1, '2024-01-01', '2024-11-1'); 
 
 
---
-CREATE FUNCTION dbo.fn_XemNhanVienTrongCaLam (@MaCa int, @ngay date)
+-- dung trong fthemca  **
+CREATE FUNCTION dbo.fn_XemNhanVienTrongLichLamViec (@MaLichLamViec int)
 RETURNS TABLE
 AS
 RETURN
 (
     SELECT 
-        nv.TenNV,
+        nv.MaNhanVien,
+        nv.TenNhanVien,
+		cll.DanhGia,
+		cll.TrangThai
+    FROM 
+        NhanVien nv
+	JOIN CoLichLam cll on nv.MaNhanVien = cll.MaNhanVien
+    WHERE 
+        cll.MaLichLamViec = @MaLichLamViec
+);
+
+CREATE FUNCTION dbo.fn_XemTatCaLichLam ()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        nv.TenNhanVien,
 		cll.DanhGia,
 		cll.TrangThai,
         clv.TenCa,
@@ -142,8 +182,6 @@ RETURN
 	JOIN CoLichLam cll on nv.MaNhanVien = cll.MaNhanVien
 	JOIN LichLamViec llv on cll.MaLichLamViec = llv.MaLichLamViec
 	JOIN CaLamViec clv on clv.MaCa = llv.MaCa
-    WHERE 
-        clv.MaCa = @MaCa AND llv.NgayLam = @ngay
 );
 
 SELECT * FROM dbo.fn_XemNhanVienTrongCaLam(1, '2024-10-01'); 

@@ -159,5 +159,10 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                     new SqlParameter("@SearchText", txtTim.Text)
             });
         }
+
+        private void fKhachHang_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
