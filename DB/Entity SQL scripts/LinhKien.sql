@@ -120,13 +120,3 @@ RETURN(
 )
 GO
 
-CREATE PROCEDURE sp_TimLinhKien
-    @searchText NVARCHAR(255)
-AS
-BEGIN
-    SET NOCOUNT ON;
-    SELECT * FROM LinhKien
-    WHERE TenLinhKien LIKE '%' + @searchText + '%'
-       OR MoTaChiTiet LIKE '%' + @searchText + '%';
-END
-GO

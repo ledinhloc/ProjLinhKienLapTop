@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,10 +28,13 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         private void fTaoDonHang_Load(object sender, EventArgs e)
         {
             LoadLoaiLinhKien();
-            dgv_DonHang.Columns.Add("MaLinhKien", "Mã Linh Kiện");
-            dgv_DonHang.Columns.Add("TenLinhKien", "Tên Linh Kiện");
-            dgv_DonHang.Columns.Add("GiaBan", "Giá Bán");
-            dgv_DonHang.Columns.Add("SoLuong", "Số Lượng");
+            //dgv_DonHang.Columns.Add("MaLinhKien", "Mã Linh Kiện");
+            //dgv_DonHang.Columns.Add("TenLinhKien", "Tên Linh Kiện");
+            //dgv_DonHang.Columns.Add("GiaBan", "Giá Bán");
+            //dgv_DonHang.Columns.Add("SoLuong", "Số Lượng");
+            dgv_DonHang.Columns[0].ReadOnly = true;
+            dgv_DonHang.Columns[1].ReadOnly = true;
+            dgv_DonHang.Columns[2].ReadOnly = true;
         }
 
         private void LoadLoaiLinhKien()
@@ -126,14 +131,27 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void UpdateDataGridView()
         {
-            dgv_DonHang.Rows.Clear(); 
+            dgv_DonHang.Rows.Clear();
+
+            // Thêm từng item vào DataGridView
             foreach (var item in donHangItems)
             {
                 dgv_DonHang.Rows.Add(item.MaLinhKien, item.TenLinhKien, item.GiaBan.ToString("N0") + " VND", item.SoLuong);
             }
+
+            // Tính tổng giá trị của các mặt hàng trong giỏ hàng
             decimal total = donHangItems.Sum(item => item.GiaBan * item.SoLuong);
-            lblTotal.Text = total.ToString("N0") + " VND";
-            lblAmountPaid.Text = (total - 0).ToString("N0") + " VND";
+            decimal discount = 0;
+            if(lblDiscount.Text != "-0VND")
+            {
+                string discountText = lblDiscount.Text.Replace("VND", "").Replace("-", "");
+                discount = decimal.Parse(discountText);
+            }
+
+            lblTotal.Text = total.ToString("N0") + "VND";
+            lblDiscount.Text = "-" + discount.ToString("N0") + " VND";
+            lblAmountPaid.Text = (total - discount).ToString("N0") + " VND";
+
         }
 
         private void btnCreateOrder_Click(object sender, EventArgs e)
@@ -141,12 +159,16 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             try
             {
                 DateTime ngayDatHang = DateTime.Now; 
-                int maKhachHang = 1; 
+                int maKhachHang = -1; 
                 int maNhanVien = 1;
                 int maGiamGia = -1;
                 if (!string.IsNullOrEmpty(txtMaGiamGia.Text) && lblDiscount.Text != "-0VND")
                 {
                     maGiamGia = int.Parse(txtMaGiamGia.Text); 
+                }
+                if (int.TryParse(lblMaKH.Text, out int IntmaKhachHang))
+                {
+                    maKhachHang = IntmaKhachHang;
                 }
 
                 string phuongThuc = rbTienMat.Checked ? rbTienMat.Text : rbChuyenKhoan.Text;
@@ -155,9 +177,8 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 SqlParameter[] parameters = new SqlParameter[]
                 {
                     new SqlParameter("@NgayDatHang", ngayDatHang),
-                    new SqlParameter("@MaKhachHang", maKhachHang),
+                    new SqlParameter("@MaKhachHang", maKhachHang == -1 ? (object)DBNull.Value : lblMaKH.Text),
                     new SqlParameter("@MaNhanVien", maNhanVien),
-                    // new SqlParameter("@MaGiamGia", maGiamGia == 1),
                     new SqlParameter("@MaGiamGia", maGiamGia == -1 ? (object)DBNull.Value : maGiamGia),
                     new SqlParameter("@TongGiaTri", tongGiaTri),
                     new SqlParameter("@PhuongThuc", phuongThuc)
@@ -181,7 +202,10 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                         
                     MessageBox.Show("Đơn hàng đã được thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     donHangItems.Clear(); 
-                    UpdateDataGridView(); 
+                    UpdateDataGridView();
+                    lblDiscount.Text = "-0VND";
+                    txtTimKhachHang.Text = string.Empty;
+                    txtMaGiamGia.Text = string.Empty;
                 }
                 else
                 {
@@ -205,10 +229,10 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                             new SqlParameter[] { new SqlParameter("@MaGiamGia", maGiamGia) });
                     MessageBox.Show(result, "Kết quả kiểm tra", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (result == "Mã giảm giá hợp lệ")
+                    if (result.Trim().Equals("Ma giam gia hop le"))
                     {
                         decimal giaTriDonHang;
-                        if (decimal.TryParse(lblTotal.Text, out giaTriDonHang))
+                        if (decimal.TryParse(lblTotal.Text.Replace("VND", "").Trim(), out giaTriDonHang))
                         {
                             SqlParameter[] parameters2 = new SqlParameter[]
                             {
@@ -217,18 +241,10 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                             };
 
                             decimal finalPrice = (decimal)provider.ExecuteScalar(CommandType.Text, "SELECT dbo.fn_CalculateFinalPrice(@GiaTriDonHang, @MaGiamGia)", parameters2);
-                            lblDiscount.Text = (giaTriDonHang - finalPrice).ToString();
-                            lblAmountPaid.Text = finalPrice.ToString();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Mã giảm giá không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            lblDiscount.Text = "-" + (giaTriDonHang - finalPrice).ToString("N0") + "VND";
+                            lblAmountPaid.Text = finalPrice.ToString("N0") + "VND";
                         }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Mã giảm giá không hợp lệ!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -250,18 +266,88 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 {
                     lblTenKhachHang.Text = rows.Rows[0]["TenKhachHang"].ToString();
                     lblSDT.Text = rows.Rows[0]["SDT"].ToString();
+                    lblMaKH.Text = rows.Rows[0]["MaKhachHang"].ToString();
                 }
                 else
                 {
                     MessageBox.Show("Không tìm thấy khách hàng! Vui lòng thêm mới", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    fKhachHang fKhachHang = new fKhachHang();
+                    fKhachHang.Show();
                     lblTenKhachHang.Text = "-";
                     lblSDT.Text = "-";
+                    lblMaKH.Text = "-";
                 }
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Khi thay đổi số lượng linh kiện
+        private void dgv_DonHang_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.RowIndex >= dgv_DonHang.Rows.Count ||
+                    e.ColumnIndex < 0 || e.ColumnIndex >= dgv_DonHang.Columns.Count)
+            {
+                return; 
+            }
+
+
+            if (e.ColumnIndex == 3)
+            {
+                int maLinhKien = Convert.ToInt32(dgv_DonHang.Rows[e.RowIndex].Cells[0].Value);
+                var item = donHangItems.FirstOrDefault(d => d.MaLinhKien == maLinhKien);
+
+                if (item != null)
+                {
+                    item.SoLuong = Convert.ToInt32(dgv_DonHang.Rows[e.RowIndex].Cells[3].Value);
+                }
+            }
+            UpdateDataGridView();
+        }
+
+        // Khi xóa linh kiện
+        private void dgv_DonHang_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            int maLinhKien = Convert.ToInt32(e.Row.Cells[0].Value);
+            var itemToRemove = donHangItems.FirstOrDefault(d => d.MaLinhKien == maLinhKien);
+
+            if (itemToRemove != null)
+            {
+                donHangItems.Remove(itemToRemove);
+            }
+            UpdateDataGridView();
+        }
+
+        // Tìm linh kiện theo từ khóa
+        private void btnTimLK_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            TabPage allTab = tabControl1.TabPages[5];
+            tabControl1.SelectedTab = allTab;
+            FlowLayoutPanel flowLayoutPanel = (FlowLayoutPanel)tabControl1.SelectedTab.Controls[0];
+            flowLayoutPanel.Controls.Clear();
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                DisplayLinhKien(null, allTab);
+                return;
+            }
+
+            DataTable linhKienSearch = provider.ExecuteReader(CommandType.StoredProcedure, "sp_TimKiemLinhKienTheoTuKhoa",
+                new SqlParameter[] { new SqlParameter("@TuKhoa", txtSearch.Text) });
+
+            foreach (DataRow row in linhKienSearch.Rows)
+            {
+                LinhKienUC linhKienUC = new LinhKienUC((int)row["MaLinhKien"], row["TenLinhKien"].ToString(), row["MoTaChiTiet"].ToString(),
+                    (decimal)row["GiaBan"], (decimal)row["GiaNhap"], (int)row["SoLuongTonKho"], (Image)ImageHelper.GetImageFromResources(row["HinhAnh"].ToString()));
+                linhKienUC.LinhKienClicked += LinhKienUC_Clicked;
+                flowLayoutPanel.Controls.Add(linhKienUC);
             }
         }
     }
