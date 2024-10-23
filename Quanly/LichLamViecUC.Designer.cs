@@ -33,7 +33,6 @@
             this.lblGioBD = new System.Windows.Forms.Label();
             this.lblGioKT = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblNhanVien = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblNgay
@@ -86,16 +85,6 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "->";
             // 
-            // lblNhanVien
-            // 
-            this.lblNhanVien.AutoSize = true;
-            this.lblNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNhanVien.Location = new System.Drawing.Point(524, 13);
-            this.lblNhanVien.Name = "lblNhanVien";
-            this.lblNhanVien.Size = new System.Drawing.Size(18, 20);
-            this.lblNhanVien.TabIndex = 4;
-            this.lblNhanVien.Text = "3";
-            // 
             // LichLamViecUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -105,11 +94,10 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblGioKT);
             this.Controls.Add(this.lblGioBD);
-            this.Controls.Add(this.lblNhanVien);
             this.Controls.Add(this.lblTenCa);
             this.Controls.Add(this.lblNgay);
             this.Name = "LichLamViecUC";
-            this.Size = new System.Drawing.Size(596, 46);
+            this.Size = new System.Drawing.Size(504, 46);
             this.Load += new System.EventHandler(this.LichLamViecUC_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LichLamViecUC_MouseClick);
             this.ResumeLayout(false);
@@ -124,6 +112,5 @@
         private System.Windows.Forms.Label lblGioBD;
         private System.Windows.Forms.Label lblGioKT;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblNhanVien;
     }
 }

@@ -122,10 +122,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 TimeSpan thoiGianKT = TimeSpan.Parse(selectedRow.Cells["GioKetThuc"].Value.ToString());
                 cboGioKT.SelectedItem = thoiGianKT.Hours.ToString();
                 cboPhutKT.SelectedItem = thoiGianKT.Minutes.ToString();
-                //cboNhanVien.SelectedValue = selectedRow.Cells["MaNhanVien"].Value.ToString();
-                //cboTrangThai.SelectedItem = selectedRow.Cells["TrangThai"].Value.ToString();
-                //txtDanhGia.Text = selectedRow.Cells["DanhGia"].Value.ToString();
-
             }
         }
     }

@@ -46,5 +46,23 @@ BEGIN
 	PRINT 'Da cap nhat Luong va TongNhan trong bang Luong'
 END;
 
-
+-- trigger kiem tra co lich lam viec bị trung khong (cung ngay, cung ca)
+CREATE TRIGGER TG_TrungLichLamViec
+ON dbo.LichLamViec
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    -- Kiểm tra trùng tên sản phẩm
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN dbo.LichLamViec llv ON  i.MaLichLamViec <> llv.MaLichLamViec 
+                       AND i.NgayLam = llv.NgayLam AND i.MaCa = llv.MaCa 
+    )
+    BEGIN
+        -- Nếu trùng, raise lỗi và rollback
+        RAISERROR ('Ca lam trong ngay nay da ton tai!', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END
 

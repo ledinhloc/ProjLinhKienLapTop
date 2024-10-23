@@ -71,11 +71,18 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         private void btnTao_Click(object sender, EventArgs e)
         {
-            SqlParameter[] sqlParameters = new SqlParameter[]
+            try
             {
+                SqlParameter[] sqlParameters = new SqlParameter[]
+                {
                 new SqlParameter("@NgayLam", dtpNgay.Value.ToString("yyyy-MM-dd")),
                 };
-            int a = dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemLichLamViec", sqlParameters);
+                int a = dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemLichLamViec", sqlParameters);                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Da co loi " + ex.Message);
+            }
 
             LoadDuLieu();
         }
