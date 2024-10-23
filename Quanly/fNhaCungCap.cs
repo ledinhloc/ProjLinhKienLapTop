@@ -21,7 +21,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         private void fNhaCungCap_Load(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM vw_XemNhaCungCap";
+            string query = "SELECT * FROM vw_ThongTinNhaCungCap";
             try
             {
 
