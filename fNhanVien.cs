@@ -34,17 +34,20 @@ namespace ProCuaHangLinhKienLaptop
 
         private void caLamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            fXemCaLam fXemCaLam = new fXemCaLam();
+            fXemCaLam.ShowDialog();
         }
 
         private void luongToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            fThongKeCuaNhanVien fThongKeCuaNhanVien = new fThongKeCuaNhanVien();
+            fThongKeCuaNhanVien.ShowDialog();
         }
 
         private void thongTinCaNhanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            fThongTinNhanVien fThongTinNhanVien = new fThongTinNhanVien();
+            fThongTinNhanVien .ShowDialog();
         }
 
         private void fNhanVien_Load(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProCuaHangLinhKienLaptop.Quanly;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,58 @@ namespace ProCuaHangLinhKienLaptop
         public fAdmin()
         {
             InitializeComponent();
+        }
+
+        private void sCOREToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addNewStudentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fLinhKien fLinhKien = new fLinhKien();
+            fLinhKien.ShowDialog();
+        }
+
+        private void NhaCungCapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fNhaCungCap fNhaCungCap = new fNhaCungCap();
+            fNhaCungCap.ShowDialog();
+        }
+
+        private void addScoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fQuanLyNhanVien fQuanlyNhanVien = new fQuanLyNhanVien();
+            fQuanlyNhanVien.ShowDialog();
+        }
+
+        private void caLamViecToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fCaLamViec fCaLamViec = new fCaLamViec();
+            fCaLamViec.ShowDialog();
+        }
+
+        private void lichLamViecToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fLichLamViec fLich = new fLichLamViec();
+            fLich.ShowDialog();
+        }
+
+        private void thongKeDonHangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fDonHang fDonHang = new fDonHang();
+            fDonHang.ShowDialog();
+        }
+
+        private void thongKeLinhKienToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fThongKeLinhKien fThongKeLinhKien = new fThongKeLinhKien();
+            fThongKeLinhKien.ShowDialog();
+        }
+
+        private void doanhThuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

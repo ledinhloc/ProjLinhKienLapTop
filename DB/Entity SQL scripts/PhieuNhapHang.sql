@@ -1,5 +1,4 @@
 ﻿-- Thêm Phiếu Nhập Hàng
-GO
 CREATE PROCEDURE sp_ThemPhieuNhapHang
     @NgayNhap DATE,
     @GiaNhap DECIMAL(15, 2),
