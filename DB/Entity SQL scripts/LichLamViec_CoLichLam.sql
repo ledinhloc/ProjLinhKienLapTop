@@ -1,5 +1,5 @@
-﻿--LichLamViec(MaLichLamViec, NgayLam, MaCa)
-GO
+﻿GO
+--LichLamViec(MaLichLamViec, NgayLam, MaCa)
 --them trong fLichLamViec  ***
 CREATE PROCEDURE sp_ThemLichLamViec
     @NgayLam DATE

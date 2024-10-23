@@ -1,6 +1,7 @@
 ﻿
 -- 1.	View
 -- - Xem toàn bộ thông tin linh kiện
+GO
 CREATE VIEW vw_ThongTinLinhKien AS
 SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
        llk.TenLoaiLinhKien, ncc.TenNhaCungCap

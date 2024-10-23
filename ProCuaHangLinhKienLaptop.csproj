@@ -133,6 +133,12 @@
     <Compile Include="Quanly\fCapNhatLinhKien.Designer.cs">
       <DependentUpon>fCapNhatLinhKien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quanly\fCapNhatLoaiLinhKien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fCapNhatLoaiLinhKien.Designer.cs">
+      <DependentUpon>fCapNhatLoaiLinhKien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quanly\fCapNhatNhaCungCap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,12 @@
     </Compile>
     <Compile Include="Quanly\fLinhKien.Designer.cs">
       <DependentUpon>fLinhKien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\fLoaiLinhKien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fLoaiLinhKien.Designer.cs">
+      <DependentUpon>fLoaiLinhKien.cs</DependentUpon>
     </Compile>
     <Compile Include="Quanly\fNhaCungCap.cs">
       <SubType>Form</SubType>
@@ -198,6 +210,12 @@
     </Compile>
     <Compile Include="Quanly\fThemLinhKien.Designer.cs">
       <DependentUpon>fThemLinhKien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quanly\fThemLoaiLinhKien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fThemLoaiLinhKien.Designer.cs">
+      <DependentUpon>fThemLoaiLinhKien.cs</DependentUpon>
     </Compile>
     <Compile Include="Quanly\fThemNhaCungCap.cs">
       <SubType>Form</SubType>
@@ -279,6 +297,9 @@
     <EmbeddedResource Include="Quanly\fCapNhatLinhKien.resx">
       <DependentUpon>fCapNhatLinhKien.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fCapNhatLoaiLinhKien.resx">
+      <DependentUpon>fCapNhatLoaiLinhKien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fCapNhatNhaCungCap.resx">
       <DependentUpon>fCapNhatNhaCungCap.cs</DependentUpon>
     </EmbeddedResource>
@@ -293,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fLinhKien.resx">
       <DependentUpon>fLinhKien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fLoaiLinhKien.resx">
+      <DependentUpon>fLoaiLinhKien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fNhaCungCap.resx">
       <DependentUpon>fNhaCungCap.cs</DependentUpon>
@@ -311,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fThemLinhKien.resx">
       <DependentUpon>fThemLinhKien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fThemLoaiLinhKien.resx">
+      <DependentUpon>fThemLoaiLinhKien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fThemNhaCungCap.resx">
       <DependentUpon>fThemNhaCungCap.cs</DependentUpon>

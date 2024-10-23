@@ -62,6 +62,22 @@ BEGIN
     RETURN
 END
 GO
+
+CREATE FUNCTION fn_TimNhanVien
+(
+    @MaNhanVien INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT *
+    FROM 
+        NhanVien
+    WHERE 
+        MaNhanVien = @MaNhanVien
+);
+GO
 ----  TEST
 ---- View
 --SELECT * FROM vw_NhanVienList;
@@ -91,4 +107,3 @@ GO
 --SELECT *
 --FROM sys.objects
 --WHERE name = 'fn_GetTotalEmployees' AND type = 'FN';
-GO
