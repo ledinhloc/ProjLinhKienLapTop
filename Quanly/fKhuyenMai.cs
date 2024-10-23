@@ -29,7 +29,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         {
             try
             {
-                string query = "SELECT MaGiamGia, TenGiamGia, NgayBatDau, NgayKetThuc, GiaTri FROM GiamGia";
+                string query = "SELECT * FROM vw_GiamGia";
                 DataTable dataTable = dataProvider.ExecuteReader(CommandType.Text, query);
                 dGV_GiamGia.DataSource = dataTable;
             }

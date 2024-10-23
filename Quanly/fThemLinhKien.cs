@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProCuaHangLinhKienLaptop.DB;
+using System.IO;
+
 namespace ProCuaHangLinhKienLaptop.Quanly
 {
     public partial class fThemLinhKien : Form
@@ -57,7 +59,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                     txtHinhAnh.Text = fullPath;
                 }
             }
-            }
+        }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -65,7 +67,30 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             {
                 string tenLinhKien = txtTenLinhKien.Text;
                 string moTa = txtMoTa.Text;
-                string hinhAnh = txtHinhAnh.Text;
+                // string hinhAnh = txtHinhAnh.Text;
+
+                // Lấy tên file hình ảnh
+                string fileName = Path.GetFileName(txtHinhAnh.Text);
+
+                // Lùi lên 2 cấp từ thư mục thực thi hiện tại để đến thư mục gốc của project
+                string projectPath = Directory.GetParent(Application.StartupPath).Parent.FullName;
+
+                // Tạo đường dẫn đến thư mục Resources trong project
+                string resourcesPath = Path.Combine(projectPath, "Resources");
+
+                // Kiểm tra nếu thư mục Resources không tồn tại thì tạo mới
+                if (!Directory.Exists(resourcesPath))
+                {
+                    Directory.CreateDirectory(resourcesPath);
+                }
+
+                // Tạo đường dẫn đầy đủ cho file đích
+                string destFilePath = Path.Combine(resourcesPath, fileName);
+
+                // Copy file hình ảnh vào thư mục Resources
+                File.Copy(txtHinhAnh.Text, destFilePath, true);
+
+
                 decimal giaBan = decimal.Parse(txtGiaBan.Text);
                 decimal giaNhap = decimal.Parse(txtGiaNhap.Text);
                 int soLuongTonKho = int.Parse(txtSoLuongTonKho.Text);
@@ -77,7 +102,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 {
                     new SqlParameter("@TenLinhKien", tenLinhKien),
                     new SqlParameter("@MoTaChiTiet", moTa),
-                    new SqlParameter("@HinhAnh", hinhAnh),
+                    new SqlParameter("@HinhAnh", fileName),
                     new SqlParameter("@GiaBan", giaBan),
                     new SqlParameter("@GiaNhap", giaNhap),
                     new SqlParameter("@SoLuongTonKho", soLuongTonKho),

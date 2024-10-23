@@ -1,8 +1,9 @@
-﻿CREATE VIEW vw_XemLinhKien as
-SELECT lk.MaLinhKien 'Mã Linh Kiện', lk.TenLinhKien 'Tên Linh Kiện', llk.TenLoaiLinhKien 'Loại Linh Kiện', lk.GiaBan 'Gía Bán', lk.SoLuongTonKho 'Số Lượng Tồn Kho' 
-FROM dbo.LinhKien lk
-join dbo.LoaiLinhKien llk
-on lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
+﻿CREATE VIEW vw_XemLinhKien 
+AS
+    SELECT lk.MaLinhKien 'Mã Linh Kiện', lk.TenLinhKien 'Tên Linh Kiện', llk.TenLoaiLinhKien 'Loại Linh Kiện', lk.GiaBan 'Gía Bán', lk.SoLuongTonKho 'Số Lượng Tồn Kho' 
+    FROM dbo.LinhKien lk
+    JOIN dbo.LoaiLinhKien llk
+    ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
 GO
 
 CREATE VIEW vw_ThongTinLinhKien AS
@@ -31,32 +32,32 @@ END;
 GO
 
 
-CREATE FUNCTION fn_DoanhThuTheoLinhKien(@MaLinhKien INT)
-RETURNS INT
-AS
-BEGIN
-    DECLARE @DoanhThu INT;
+-- CREATE FUNCTION fn_DoanhThuTheoLinhKien(@MaLinhKien INT)
+-- RETURNS INT
+-- AS
+-- BEGIN
+--     DECLARE @DoanhThu INT;
 
-    SELECT @DoanhThu = SUM(ISNULL(SoLuong, 0) * ISNULL(GiaBan, 0))
-    FROM ChiTietDonHang
-    WHERE MaLinhKien = @MaLinhKien;
+--     SELECT @DoanhThu = SUM(ISNULL(SoLuong, 0) * ISNULL(GiaBan, 0))
+--     FROM ChiTietDonHang
+--     WHERE MaLinhKien = @MaLinhKien;
 
-    RETURN ISNULL(@DoanhThu, 0);
-END;
+--     RETURN ISNULL(@DoanhThu, 0);
+-- END;
 GO
 
-CREATE FUNCTION fn_DoanhThuTheoLoaiLinhKien(@MaLoaiLinhKien INT)
-RETURNS INT
-AS
-BEGIN
-	DECLARE @DoanhThu INT;
-	SELECT @DoanhThu = SUM(C.SoLuong * C.GiaBan)
-	FROM ChiTietDonHang C
-	INNER JOIN LinhKien L
-	ON C.MaLinhKien = L.MaLinhKien
-	WHERE L.MaLoaiLinhKien = @MaLoaiLinhKien
-	RETURN ISNULL(@DoanhThu, 0);
-END;
+-- CREATE FUNCTION fn_DoanhThuTheoLoaiLinhKien(@MaLoaiLinhKien INT)
+-- RETURNS INT
+-- AS
+-- BEGIN
+-- 	DECLARE @DoanhThu INT;
+-- 	SELECT @DoanhThu = SUM(C.SoLuong * C.GiaBan)
+-- 	FROM ChiTietDonHang C
+-- 	INNER JOIN LinhKien L
+-- 	ON C.MaLinhKien = L.MaLinhKien
+-- 	WHERE L.MaLoaiLinhKien = @MaLoaiLinhKien
+-- 	RETURN ISNULL(@DoanhThu, 0);
+-- END;
 GO
 
 CREATE FUNCTION fn_ThongKeDoanhThuLinhKien()
@@ -80,29 +81,29 @@ RETURN
 
 GO
 
-CREATE FUNCTION fn_HTKTheoLinhKien(@MaLinhKien INT)
-RETURNS INT
-AS
-BEGIN
-	DECLARE @SL INT
-	SELECT @SL=SoLuongTonKho
-	FROM LinhKien
-	WHERE MaLinhKien=@MaLinhKien
-	RETURN ISNULL(@SL, 0);
-END
-GO
+-- CREATE FUNCTION fn_HTKTheoLinhKien(@MaLinhKien INT)
+-- RETURNS INT
+-- AS
+-- BEGIN
+-- 	DECLARE @SL INT
+-- 	SELECT @SL=SoLuongTonKho
+-- 	FROM LinhKien
+-- 	WHERE MaLinhKien=@MaLinhKien
+-- 	RETURN ISNULL(@SL, 0);
+-- END
+-- GO
 
-CREATE FUNCTION fn_HTKTheoLoaiLinhKien(@MaLoaiLinhKien INT)
-RETURNS INT
-AS
-BEGIN
-	DECLARE @SL INT
-	SELECT @SL=SUM(SoLuongTonKho)
-	FROM LinhKien
-	WHERE MaLoaiLinhKien = @MaLoaiLinhKien
-	RETURN ISNULL(@SL, 0);
-END
-GO
+-- CREATE FUNCTION fn_HTKTheoLoaiLinhKien(@MaLoaiLinhKien INT)
+-- RETURNS INT
+-- AS
+-- BEGIN
+-- 	DECLARE @SL INT
+-- 	SELECT @SL=SUM(SoLuongTonKho)
+-- 	FROM LinhKien
+-- 	WHERE MaLoaiLinhKien = @MaLoaiLinhKien
+-- 	RETURN ISNULL(@SL, 0);
+-- END
+-- GO
 
 CREATE FUNCTION fn_ThongKeHTKTheoLinhKien()
 RETURNS TABLE

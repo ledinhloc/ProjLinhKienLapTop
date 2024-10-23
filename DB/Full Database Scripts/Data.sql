@@ -62,7 +62,7 @@ INSERT INTO LinhKien (TenLinhKien, MoTaChiTiet, HinhAnh, GiaBan, GiaNhap, SoLuon
     ('Pin HP Pavilion', 'Pin cho dong laptop HP Pavilion voi thoi luong su dung 6 gio.', 'pin_hp_pavilion.jpg', 1500000, 1200000, 20, 2, 2),
     ('RAM 8GB DDR4 Kingston', 'RAM 8GB DDR4 cho laptop, thuong hieu Kingston.', 'ram_8gb_ddr4_kingston.jpg', 1000000, 800000, 30, 3, 3),
     ('CPU Intel Core i5', 'CPU Intel Core i5 the he thu 10 cho laptop.', 'cpu_intel_core_i5.jpg', 4500000, 4000000, 15, 4, 4),
-    ('SSD 256GB Samsung', 'SSD 256GB cho laptop, thuong hieu Samsung.', 'ssd_256gb_samsung.jpg', 1200000, 1000000, 25, 5, 5),
+    ('SSD 256GB Samsung', 'SSD 256GB cho laptop, thuong hieu Samsung.', 'ssd_256gb_samsung.png', 1200000, 1000000, 25, 5, 5),
     ('Bo Mach Asus VivoBook', 'Bo mach cho dong laptop Asus VivoBook.', 'bomach_asus_vivobook.jpg', 2700000, 2300000, 12, 1, 1),
     ('Pin Lenovo ThinkPad', 'Pin cho dong laptop Lenovo ThinkPad voi thoi luong su dung 8 gio.', 'pin_lenovo_thinkpad.jpg', 1800000, 1500000, 18, 2, 2),
     ('RAM 16GB DDR4 Corsair', 'RAM 16GB DDR4 cho laptop, thuong hieu Corsair.', 'ram_16gb_ddr4_corsair.jpg', 2000000, 1700000, 22, 3, 3),
