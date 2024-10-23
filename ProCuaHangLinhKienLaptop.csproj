@@ -121,6 +121,12 @@
     <Compile Include="Quanly\ChiTietDonHang.Designer.cs">
       <DependentUpon>ChiTietDonHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quanly\fCaLamViec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fCaLamViec.Designer.cs">
+      <DependentUpon>fCaLamViec.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quanly\fCapNhatLinhKien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\ChiTietDonHang.resx">
       <DependentUpon>ChiTietDonHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fCaLamViec.resx">
+      <DependentUpon>fCaLamViec.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fCapNhatLinhKien.resx">
       <DependentUpon>fCapNhatLinhKien.cs</DependentUpon>

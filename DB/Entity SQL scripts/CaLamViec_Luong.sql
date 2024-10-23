@@ -19,7 +19,7 @@ JOIN CaLamViec clv ON llv.MaCa = clv.MaCa
 WHERE cl.TrangThai = 'HoanThanh';
 
 
---view xem ca lam viec
+--view xem ca lam viec  *
 CREATE VIEW vw_XemCaLam
 AS
 SELECT *
@@ -27,19 +27,18 @@ FROM CaLamViec
 
 select * from vw_XemCaLam
 
---them
+--them trong fCaLamViec *
 CREATE PROCEDURE sp_ThemCaLamViec
-    @MaCa INT,
     @TenCa NVARCHAR(100),
     @GioBatDau TIME,
     @GioKetThuc TIME
 AS
 BEGIN
-    INSERT INTO CaLamViec (MaCa, TenCa, GioBatDau, GioKetThuc)
-    VALUES (@MaCa, @TenCa, @GioBatDau, @GioKetThuc);
+    INSERT INTO CaLamViec ( TenCa, GioBatDau, GioKetThuc)
+    VALUES ( @TenCa, @GioBatDau, @GioKetThuc);
 END
 
---sua
+--sua fCaLamViec *
 CREATE PROCEDURE sp_SuaCaLamViec
     @MaCa INT,
     @TenCa NVARCHAR(100),
