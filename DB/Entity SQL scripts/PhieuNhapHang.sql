@@ -59,3 +59,54 @@ BEGIN
     PRINT 'Xoa phieu nhap hang thanh cong.';
 END;
 GO
+-- Trigger cập nhật số lượng tồn kho khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang
+ON PhieuNhapHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho + inserted.SoLuong
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật giá nhập khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang_UpdatePrice
+ON PhieuNhapHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE LinhKien
+    SET GiaNhap = inserted.GiaNhap
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật số lượng tồn kho khi xóa phiếu nhập hàng
+CREATE TRIGGER trg_AfterDelete_PhieuNhapHang_UpdateStock
+ON PhieuNhapHang
+AFTER DELETE
+AS
+BEGIN
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho - deleted.SoLuong
+    FROM LinhKien
+    INNER JOIN deleted ON LinhKien.MaLinhKien = deleted.MaLinhKien;
+END;
+GO
+CREATE VIEW vw_DanhSachPhieuNhap AS
+SELECT 
+    p.MaPhieuNhap,
+    p.NgayNhap,
+    p.GiaNhap,
+    p.SoLuong,
+    l.TenLinhKien,
+    p.MaLinhKien
+FROM 
+    PhieuNhapHang p
+JOIN 
+    LinhKien l ON p.MaLinhKien = l.MaLinhKien;
+GO

@@ -40,7 +40,6 @@
             this.txtTuKhoa = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_NhanVien)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +62,7 @@
             this.btnThemNhanVien.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnThemNhanVien.Location = new System.Drawing.Point(930, 46);
             this.btnThemNhanVien.Name = "btnThemNhanVien";
-            this.btnThemNhanVien.Size = new System.Drawing.Size(143, 31);
+            this.btnThemNhanVien.Size = new System.Drawing.Size(157, 31);
             this.btnThemNhanVien.TabIndex = 19;
             this.btnThemNhanVien.Text = "Thêm Nhân Viên";
             this.btnThemNhanVien.UseVisualStyleBackColor = true;
@@ -105,7 +104,7 @@
             this.groupBox1.Controls.Add(this.btnXoaKhuyenMai);
             this.groupBox1.Controls.Add(this.btnThemNhanVien);
             this.groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(11, 122);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1101, 331);
@@ -189,13 +188,6 @@
             this.comboBox1.Size = new System.Drawing.Size(149, 24);
             this.comboBox1.TabIndex = 33;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(647, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(232, 22);
-            this.textBox1.TabIndex = 34;
-            // 
             // fQuanLyNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -203,7 +195,6 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.PowderBlue;
             this.ClientSize = new System.Drawing.Size(1162, 891);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTuKhoa);
@@ -240,6 +231,5 @@
         private System.Windows.Forms.TextBox txtTuKhoa;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
