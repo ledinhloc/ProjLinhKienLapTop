@@ -70,7 +70,19 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                txtHinhAnh.Text = openFileDialog.FileName;
+                string fullPath = openFileDialog.FileName;
+
+                int index = fullPath.IndexOf("Resources");
+
+                if (index != -1)
+                {
+                    string relativePath = fullPath.Substring(index);
+                    txtHinhAnh.Text = relativePath;
+                }
+                else
+                {
+                    txtHinhAnh.Text = fullPath;
+                }
             }
         }
 

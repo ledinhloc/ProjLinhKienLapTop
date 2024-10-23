@@ -40,9 +40,24 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                txtHinhAnh.Text = openFileDialog.FileName;
+                string fullPath = openFileDialog.FileName;
+
+                // Tìm vị trí của "resources" trong đường dẫn
+                int index = fullPath.IndexOf("Resources");
+
+                // Nếu tìm thấy, cắt chuỗi từ vị trí đó
+                if (index != -1)
+                {
+                    string relativePath = fullPath.Substring(index);
+                    txtHinhAnh.Text = relativePath;
+                }
+                else
+                {
+                    // Nếu không tìm thấy "resources", dùng đường dẫn đầy đủ
+                    txtHinhAnh.Text = fullPath;
+                }
             }
-        }
+            }
 
         private void btnThem_Click(object sender, EventArgs e)
         {

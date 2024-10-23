@@ -2,15 +2,8 @@
 {
     partial class fCapNhatNhaCungCap
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
@@ -41,81 +30,96 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(347, 308);
+            this.button1.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.button1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(389, 285);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 30);
             this.button1.TabIndex = 17;
             this.button1.Text = "Sửa";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(347, 222);
+            this.textBox4.BackColor = System.Drawing.Color.LightYellow;
+            this.textBox4.Location = new System.Drawing.Point(389, 224);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(186, 20);
-            this.textBox4.TabIndex = 16;
+            this.textBox4.Size = new System.Drawing.Size(271, 22);
+            this.textBox4.TabIndex = 18;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(347, 175);
+            this.textBox3.BackColor = System.Drawing.Color.LightYellow;
+            this.textBox3.Location = new System.Drawing.Point(389, 178);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(186, 20);
-            this.textBox3.TabIndex = 15;
+            this.textBox3.Size = new System.Drawing.Size(271, 22);
+            this.textBox3.TabIndex = 19;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(347, 136);
+            this.textBox2.BackColor = System.Drawing.Color.LightYellow;
+            this.textBox2.Location = new System.Drawing.Point(389, 136);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(186, 20);
-            this.textBox2.TabIndex = 14;
+            this.textBox2.Size = new System.Drawing.Size(271, 22);
+            this.textBox2.TabIndex = 20;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(347, 92);
+            this.textBox1.BackColor = System.Drawing.Color.LightYellow;
+            this.textBox1.Location = new System.Drawing.Point(389, 89);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 20);
-            this.textBox1.TabIndex = 13;
+            this.textBox1.Size = new System.Drawing.Size(271, 22);
+            this.textBox1.TabIndex = 21;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(275, 229);
+            this.label4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.Color.DarkViolet;
+            this.label4.Location = new System.Drawing.Point(208, 225);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
-            this.label4.TabIndex = 12;
+            this.label4.Size = new System.Drawing.Size(51, 19);
+            this.label4.TabIndex = 22;
             this.label4.Text = "Email";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(278, 182);
+            this.label3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.label3.ForeColor = System.Drawing.Color.DarkRed;
+            this.label3.Location = new System.Drawing.Point(208, 178);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "SDT";
+            this.label3.Size = new System.Drawing.Size(42, 19);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "SĐT";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(266, 136);
+            this.label2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label2.Location = new System.Drawing.Point(208, 139);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 10;
+            this.label2.Size = new System.Drawing.Size(65, 19);
+            this.label2.TabIndex = 24;
             this.label2.Text = "Địa Chỉ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.DarkBlue;
             this.label1.Location = new System.Drawing.Point(208, 92);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
-            this.label1.TabIndex = 9;
+            this.label1.Size = new System.Drawing.Size(157, 19);
+            this.label1.TabIndex = 25;
             this.label1.Text = "Tên Nhà Cung Cấp";
             // 
             // fCapNhatNhaCungCap
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
@@ -128,7 +132,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "fCapNhatNhaCungCap";
-            this.Text = "fCapNhatNhaCungCap";
+            this.Text = "Cập Nhật Nhà Cung Cấp";
             this.Load += new System.EventHandler(this.fCapNhatNhaCungCap_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
