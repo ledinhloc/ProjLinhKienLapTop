@@ -46,5 +46,10 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
             }
         }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
