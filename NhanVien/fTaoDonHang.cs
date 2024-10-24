@@ -230,7 +230,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                             new SqlParameter[] { new SqlParameter("@MaGiamGia", maGiamGia) });
                     MessageBox.Show(result, "Kết quả kiểm tra", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (result.Trim().Equals("Ma giam gia hop le"))
+                    if (result.Trim().Equals("Mã giảm giá hợp lệ"))
                     {
                         decimal giaTriDonHang;
                         if (decimal.TryParse(lblTotal.Text.Replace("VND", "").Trim(), out giaTriDonHang))

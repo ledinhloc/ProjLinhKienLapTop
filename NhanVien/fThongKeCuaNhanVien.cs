@@ -16,10 +16,12 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
     public partial class fThongKeCuaNhanVien : Form
     {
         public DataProvider provider = new DataProvider();
-        public fThongKeCuaNhanVien()
+        private string maNhanVien;
+        public fThongKeCuaNhanVien(string maNhanVien)
         {
             InitializeComponent();
 
+            this.maNhanVien = maNhanVien;
             //du lieu cbo
             for (int i = 1; i <= 12; i++)
             {
@@ -81,7 +83,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             // try van du lieu
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@MaNhanVien", 1),
+                new SqlParameter("@MaNhanVien", maNhanVien),
                 new SqlParameter("@NgayBD", ngayBD.ToString("yyyy-MM-dd")),
                 new SqlParameter("@NgayKT", ngayKT.ToString("yyyy-MM-dd")),
             };
@@ -155,7 +157,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             //truy van sql
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@MaNhanVien", 1),
+                new SqlParameter("@MaNhanVien", maNhanVien),
                 new SqlParameter("@NgayBD",ngayBD.ToString("yyyy-MM-dd")),
                 new SqlParameter("@NgayKT",ngayKT.ToString("yyyy-MM-dd"))
 

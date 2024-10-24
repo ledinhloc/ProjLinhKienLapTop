@@ -1,6 +1,6 @@
 --- View
 --- XEM lại
-CREATE VIEW vw_ThongTinNhaCungCap AS
+CREATE VIEW vw_XemNhaCungCap AS
 	SELECT * FROM NhaCungCap
 GO
 -- STORED PROCEDURE 
