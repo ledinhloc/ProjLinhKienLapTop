@@ -1,6 +1,5 @@
-﻿--LichLamViec(MaLichLamViec, NgayLam, MaCa)
-select * from LichLamViec
-
+﻿GO
+--LichLamViec(MaLichLamViec, NgayLam, MaCa)
 --them trong fLichLamViec  ***
 CREATE PROCEDURE sp_ThemLichLamViec
     @NgayLam DATE
@@ -11,28 +10,28 @@ BEGIN
     SELECT @NgayLam, MaCa
     FROM CaLamViec;
 END;
-
+GO
 --sua
-CREATE PROCEDURE sp_SuaLichLamViec
-    @MaLichLamViec INT,
-    @NgayLam DATE,
-    @MaCa INT
-AS
-BEGIN
-    UPDATE LichLamViec
-    SET NgayLam = @NgayLam,
-        MaCa = @MaCa
-    WHERE MaLichLamViec = @MaLichLamViec;
-END;
+-- CREATE PROCEDURE sp_SuaLichLamViec
+--     @MaLichLamViec INT,
+--     @NgayLam DATE,
+--     @MaCa INT
+-- AS
+-- BEGIN
+--     UPDATE LichLamViec
+--     SET NgayLam = @NgayLam,
+--         MaCa = @MaCa
+--     WHERE MaLichLamViec = @MaLichLamViec;
+-- END;
 
 --xoa
-CREATE PROCEDURE sp_XoaLichLamViec
-    @MaLichLamViec INT
-AS
-BEGIN
-    DELETE FROM LichLamViec
-    WHERE MaLichLamViec = @MaLichLamViec;
-END;
+-- CREATE PROCEDURE sp_XoaLichLamViec
+--     @MaLichLamViec INT
+-- AS
+-- BEGIN
+--     DELETE FROM LichLamViec
+--     WHERE MaLichLamViec = @MaLichLamViec;
+-- END;
 
 --CoLichLam(MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
 
@@ -47,7 +46,7 @@ BEGIN
     INSERT INTO CoLichLam (MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
     VALUES (@MaNhanVien, @MaLichLamViec, @DanhGia, @TrangThai);
 END;
-
+GO
 --sua
 CREATE PROCEDURE sp_SuaCoLichLam
     @MaNhanVien INT,
@@ -61,6 +60,7 @@ BEGIN
         TrangThai = @TrangThai
     WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
 END;
+GO
 
 --xoa
 CREATE PROCEDURE sp_XoaCoLichLam
@@ -97,6 +97,7 @@ RETURN
 );
 
 GO
+
 CREATE FUNCTION dbo.fn_XemCaLamViecCuaNhanVien (@MaNhanVien INT, @NgayDau DATE, @NgayCuoi DATE)
 RETURNS TABLE
 AS
@@ -119,9 +120,7 @@ RETURN
         CLL.MaNhanVien = @MaNhanVien
         AND LLV.NgayLam BETWEEN @NgayDau AND @NgayCuoi
 );
-SELECT * FROM dbo.fn_XemCaLamViecCuaNhanVien(1, '2024-01-01', '2024-7-1'); 
---DROP FUNCTION dbo.fn_DemNgayLamNgayNghi
-
+GO
 GO
 --func dem ngay lam, ngay nghi cua nhan vien 
 CREATE FUNCTION dbo.fn_DemCaLamCaNghi (@MaNhanVien INT, @NgayDau DATE, @NgayCuoi DATE)
@@ -144,9 +143,7 @@ RETURN
     GROUP BY YEAR(LLV.NgayLam), MONTH(LLV.NgayLam)
 )
 GO
-SELECT * FROM dbo.fn_DemNgayLamNgayNghi(1, '2024-01-01', '2024-11-1'); 
-
-
+GO
 -- dung trong fthemca  **
 CREATE FUNCTION dbo.fn_XemNhanVienTrongLichLamViec (@MaLichLamViec int)
 RETURNS TABLE
@@ -164,24 +161,23 @@ RETURN
     WHERE 
         cll.MaLichLamViec = @MaLichLamViec
 );
-
-CREATE FUNCTION dbo.fn_XemTatCaLichLam ()
-RETURNS TABLE
-AS
-RETURN
-(
-    SELECT 
-        nv.TenNhanVien,
-		cll.DanhGia,
-		cll.TrangThai,
-        clv.TenCa,
-        clv.GioBatDau,
-        clv.GioKetThuc
-    FROM 
-        NhanVien nv
-	JOIN CoLichLam cll on nv.MaNhanVien = cll.MaNhanVien
-	JOIN LichLamViec llv on cll.MaLichLamViec = llv.MaLichLamViec
-	JOIN CaLamViec clv on clv.MaCa = llv.MaCa
-);
-
-SELECT * FROM dbo.fn_XemNhanVienTrongCaLam(1, '2024-10-01'); 
+GO
+-- CREATE FUNCTION dbo.fn_XemTatCaLichLam ()
+-- RETURNS TABLE
+-- AS
+-- RETURN
+-- (
+--     SELECT 
+--         nv.TenNhanVien,
+-- 		cll.DanhGia,
+-- 		cll.TrangThai,
+--         clv.TenCa,
+--         clv.GioBatDau,
+--         clv.GioKetThuc
+--     FROM 
+--         NhanVien nv
+-- 	JOIN CoLichLam cll on nv.MaNhanVien = cll.MaNhanVien
+-- 	JOIN LichLamViec llv on cll.MaLichLamViec = llv.MaLichLamViec
+-- 	JOIN CaLamViec clv on clv.MaCa = llv.MaCa
+-- );
+GO

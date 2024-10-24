@@ -44,6 +44,7 @@
             this.lblNgay.Size = new System.Drawing.Size(93, 20);
             this.lblNgay.TabIndex = 4;
             this.lblNgay.Text = "2024-09-05";
+            this.lblNgay.Click += new System.EventHandler(this.LichLamViecUC_Click);
             // 
             // lblTenCa
             // 
@@ -54,6 +55,7 @@
             this.lblTenCa.Size = new System.Drawing.Size(71, 20);
             this.lblTenCa.TabIndex = 4;
             this.lblTenCa.Text = "Ca sáng";
+            this.lblTenCa.Click += new System.EventHandler(this.LichLamViecUC_Click);
             // 
             // lblGioBD
             // 
@@ -64,26 +66,29 @@
             this.lblGioBD.Size = new System.Drawing.Size(41, 20);
             this.lblGioBD.TabIndex = 4;
             this.lblGioBD.Text = "8:00";
+            this.lblGioBD.Click += new System.EventHandler(this.LichLamViecUC_Click);
             // 
             // lblGioKT
             // 
             this.lblGioKT.AutoSize = true;
             this.lblGioKT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGioKT.Location = new System.Drawing.Point(348, 13);
+            this.lblGioKT.Location = new System.Drawing.Point(375, 13);
             this.lblGioKT.Name = "lblGioKT";
             this.lblGioKT.Size = new System.Drawing.Size(50, 20);
             this.lblGioKT.TabIndex = 4;
             this.lblGioKT.Text = "12:00";
+            this.lblGioKT.Click += new System.EventHandler(this.LichLamViecUC_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(304, 13);
+            this.label4.Location = new System.Drawing.Point(331, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(25, 20);
             this.label4.TabIndex = 4;
             this.label4.Text = "->";
+            this.label4.Click += new System.EventHandler(this.LichLamViecUC_Click);
             // 
             // LichLamViecUC
             // 
@@ -99,7 +104,7 @@
             this.Name = "LichLamViecUC";
             this.Size = new System.Drawing.Size(504, 46);
             this.Load += new System.EventHandler(this.LichLamViecUC_Load);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LichLamViecUC_MouseClick);
+            this.Click += new System.EventHandler(this.LichLamViecUC_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 

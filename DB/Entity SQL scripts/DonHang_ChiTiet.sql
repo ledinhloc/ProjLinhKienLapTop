@@ -20,36 +20,7 @@ BEGIN
     OUTPUT inserted.MaDonHang 
     VALUES (@NgayDatHang, @MaKhachHang, @MaNhanVien, @MaGiamGia, @TongGiaTri, @PhuongThuc);
 END;
-GO
--- Xóa một record trong bảng DonHang
-CREATE PROCEDURE sp_XoaDonHang
-    @MaDonHang INT
-AS
-BEGIN
-    DELETE FROM DonHang
-    WHERE MaDonHang = @MaDonHang;
-END;
-GO
--- Sửa một record trong bảng DonHang
-CREATE PROCEDURE sp_SuaDonHang
-    @MaDonHang INT,
-    @NgayDatHang DATE,
-    @MaKhachHang INT,
-    @MaNhanVien INT,
-    @MaGiamGia INT,
-    @TongGiaTri DECIMAL(15, 2),
-    @PhuongThuc NVARCHAR(100)
-AS
-BEGIN
-    UPDATE DonHang
-    SET NgayDatHang = @NgayDatHang,
-        MaKhachHang = @MaKhachHang,
-        MaNhanVien = @MaNhanVien,
-        MaGiamGia = @MaGiamGia,
-        TongGiaTri = @TongGiaTri,
-        PhuongThuc = @PhuongThuc
-    WHERE MaDonHang = @MaDonHang;
-END;
+
 GO
 -- Lay Chi TIet Don Hang
 CREATE PROCEDURE sp_ChiTietDonHang

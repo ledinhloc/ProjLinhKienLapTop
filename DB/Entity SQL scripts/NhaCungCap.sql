@@ -1,7 +1,8 @@
 --- View
+--- XEM lại
 CREATE VIEW vw_ThongTinNhaCungCap AS
 	SELECT * FROM NhaCungCap
-
+GO
 -- STORED PROCEDURE 
 
 -- - Thêm nhà cung cấp
@@ -15,6 +16,7 @@ BEGIN
 	INSERT INTO NhaCungCap (TenNhaCungCap,DiaChi,SDT,Email)
 	VALUES (@TenNhaCungCap,@DiaChi,@SDT,@Email);
 END;
+GO
 
 -- - Sửa nhà cung cấp
 CREATE PROCEDURE sp_SuaNhaCungCap
@@ -32,6 +34,7 @@ BEGIN
 		Email = @Email
 	WHERE MaNhaCungCap = @MaNhaCungCap;
 END;
+GO
 
 -- - Xóa nhà cung cấp
 CREATE PROCEDURE sp_XoaNhaCungCap
@@ -40,7 +43,7 @@ AS
 BEGIN
 	DELETE FROM NhaCungCap WHERE MaNhaCungCap= @MaNhaCungCap;
 END;
-
+GO
 
 CREATE PROCEDURE sp_TimKiemNCCTheoID
     @MaNCC INT
@@ -49,3 +52,4 @@ BEGIN
     SELECT * FROM dbo.NhaCungCap
     WHERE MaNhaCungCap = @MaNCC;
 END;
+GO

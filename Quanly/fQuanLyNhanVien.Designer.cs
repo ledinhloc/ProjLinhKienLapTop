@@ -40,7 +40,6 @@
             this.txtTuKhoa = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_NhanVien)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -49,9 +48,10 @@
             // 
             this.btnXoaKhuyenMai.AutoSize = true;
             this.btnXoaKhuyenMai.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXoaKhuyenMai.Location = new System.Drawing.Point(930, 109);
+            this.btnXoaKhuyenMai.Location = new System.Drawing.Point(1046, 136);
+            this.btnXoaKhuyenMai.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnXoaKhuyenMai.Name = "btnXoaKhuyenMai";
-            this.btnXoaKhuyenMai.Size = new System.Drawing.Size(143, 31);
+            this.btnXoaKhuyenMai.Size = new System.Drawing.Size(187, 44);
             this.btnXoaKhuyenMai.TabIndex = 20;
             this.btnXoaKhuyenMai.Text = "Xóa Nhân Viên";
             this.btnXoaKhuyenMai.UseVisualStyleBackColor = true;
@@ -61,9 +61,14 @@
             // 
             this.btnThemNhanVien.AutoSize = true;
             this.btnThemNhanVien.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnThemNhanVien.Location = new System.Drawing.Point(930, 46);
+            this.btnThemNhanVien.Location = new System.Drawing.Point(1046, 58);
+            this.btnThemNhanVien.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnThemNhanVien.Name = "btnThemNhanVien";
-            this.btnThemNhanVien.Size = new System.Drawing.Size(143, 31);
+<<<<<<< HEAD
+            this.btnThemNhanVien.Size = new System.Drawing.Size(157, 31);
+=======
+            this.btnThemNhanVien.Size = new System.Drawing.Size(205, 44);
+>>>>>>> 1d603164d4b385973c41d3b05b0844871c3896b1
             this.btnThemNhanVien.TabIndex = 19;
             this.btnThemNhanVien.Text = "Thêm Nhân Viên";
             this.btnThemNhanVien.UseVisualStyleBackColor = true;
@@ -74,9 +79,9 @@
             this.label4.AutoEllipsis = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(407, 9);
+            this.label4.Location = new System.Drawing.Point(458, 11);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(256, 38);
+            this.label4.Size = new System.Drawing.Size(288, 48);
             this.label4.TabIndex = 17;
             this.label4.Text = "Quản Lý Nhân Viên";
             // 
@@ -88,14 +93,15 @@
             this.dGV_NhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGV_NhanVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV_NhanVien.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dGV_NhanVien.Location = new System.Drawing.Point(26, 26);
+            this.dGV_NhanVien.Location = new System.Drawing.Point(29, 32);
+            this.dGV_NhanVien.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dGV_NhanVien.Name = "dGV_NhanVien";
             this.dGV_NhanVien.ReadOnly = true;
             this.dGV_NhanVien.RowHeadersVisible = false;
             this.dGV_NhanVien.RowHeadersWidth = 51;
             this.dGV_NhanVien.RowTemplate.Height = 24;
             this.dGV_NhanVien.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGV_NhanVien.Size = new System.Drawing.Size(885, 289);
+            this.dGV_NhanVien.Size = new System.Drawing.Size(996, 361);
             this.dGV_NhanVien.TabIndex = 16;
             this.dGV_NhanVien.SelectionChanged += new System.EventHandler(this.dGV_NhanVien_SelectionChanged);
             // 
@@ -105,10 +111,17 @@
             this.groupBox1.Controls.Add(this.btnXoaKhuyenMai);
             this.groupBox1.Controls.Add(this.btnThemNhanVien);
             this.groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(11, 122);
+=======
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(12, 152);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+>>>>>>> 1d603164d4b385973c41d3b05b0844871c3896b1
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1101, 331);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(1239, 414);
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách nhân viên";
@@ -116,9 +129,10 @@
             // pn_Chua
             // 
             this.pn_Chua.AutoSize = true;
-            this.pn_Chua.Location = new System.Drawing.Point(37, 497);
+            this.pn_Chua.Location = new System.Drawing.Point(42, 621);
+            this.pn_Chua.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pn_Chua.Name = "pn_Chua";
-            this.pn_Chua.Size = new System.Drawing.Size(885, 367);
+            this.pn_Chua.Size = new System.Drawing.Size(996, 459);
             this.pn_Chua.TabIndex = 22;
             // 
             // label1
@@ -126,9 +140,9 @@
             this.label1.AutoEllipsis = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(395, 467);
+            this.label1.Location = new System.Drawing.Point(444, 584);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(166, 27);
+            this.label1.Size = new System.Drawing.Size(187, 34);
             this.label1.TabIndex = 12;
             this.label1.Text = "Thông tin chi tiết";
             // 
@@ -138,9 +152,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(758, 99);
+            this.label2.Location = new System.Drawing.Point(853, 124);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 20);
+            this.label2.Size = new System.Drawing.Size(179, 25);
             this.label2.TabIndex = 26;
             this.label2.Text = "Tổng Nhân Viên :";
             // 
@@ -151,17 +165,18 @@
             this.lblTongNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongNhanVien.ForeColor = System.Drawing.Color.Black;
             this.lblTongNhanVien.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.lblTongNhanVien.Location = new System.Drawing.Point(892, 96);
+            this.lblTongNhanVien.Location = new System.Drawing.Point(1004, 120);
             this.lblTongNhanVien.Name = "lblTongNhanVien";
-            this.lblTongNhanVien.Size = new System.Drawing.Size(30, 22);
+            this.lblTongNhanVien.Size = new System.Drawing.Size(36, 26);
             this.lblTongNhanVien.TabIndex = 27;
             this.lblTongNhanVien.Text = "10";
             // 
             // txtTuKhoa
             // 
-            this.txtTuKhoa.Location = new System.Drawing.Point(167, 52);
+            this.txtTuKhoa.Location = new System.Drawing.Point(188, 65);
+            this.txtTuKhoa.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTuKhoa.Name = "txtTuKhoa";
-            this.txtTuKhoa.Size = new System.Drawing.Size(232, 22);
+            this.txtTuKhoa.Size = new System.Drawing.Size(260, 26);
             this.txtTuKhoa.TabIndex = 30;
             this.txtTuKhoa.TextChanged += new System.EventHandler(this.txtTenNhanVien_TextChanged);
             // 
@@ -171,9 +186,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(33, 52);
+            this.label3.Location = new System.Drawing.Point(37, 65);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 20);
+            this.label3.Size = new System.Drawing.Size(152, 25);
             this.label3.TabIndex = 31;
             this.label3.Text = "Nhập từ khóa :";
             // 
@@ -184,26 +199,23 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Tìm theo tên",
             "Tìm theo email"});
-            this.comboBox1.Location = new System.Drawing.Point(412, 52);
+            this.comboBox1.Location = new System.Drawing.Point(464, 65);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(149, 24);
+            this.comboBox1.Size = new System.Drawing.Size(167, 28);
             this.comboBox1.TabIndex = 33;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(647, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(232, 22);
-            this.textBox1.TabIndex = 34;
             // 
             // fQuanLyNhanVien
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.PowderBlue;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1162, 891);
-            this.Controls.Add(this.textBox1);
+=======
+            this.ClientSize = new System.Drawing.Size(1307, 1050);
+>>>>>>> 1d603164d4b385973c41d3b05b0844871c3896b1
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTuKhoa);
@@ -214,6 +226,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label4);
             this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "fQuanLyNhanVien";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fQuanLyNhanVien";
@@ -240,6 +253,5 @@
         private System.Windows.Forms.TextBox txtTuKhoa;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }

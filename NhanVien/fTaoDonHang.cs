@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Policy;
@@ -362,21 +363,21 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
     {
         public static Image GetImageFromResources(string imageName)
         {
-            if (imageName.EndsWith(".jpg"))
-            {
-                imageName = imageName.Substring(0, imageName.Length - 4);
-            }
+            // Lùi lên 2 cấp từ thư mục thực thi hiện tại để đến thư mục gốc của project
+            string projectPath = Directory.GetParent(Application.StartupPath).Parent.FullName;
+            string resourcesPath = Path.Combine(projectPath, "Resources");
+            string imagePath = Path.Combine(resourcesPath, imageName);
 
-            object imageObject = Properties.Resources.ResourceManager.GetObject(imageName);
-
-            if (imageObject != null && imageObject is Image)
+            // Kiểm tra xem file có tồn tại không
+            if (File.Exists(imagePath))
             {
-                return (Image)imageObject;
+                return Image.FromFile(imagePath);
             }
             else
             {
-                throw new ArgumentException($"Hình ảnh '{imageName}' không tìm thấy trong resources.");
+                throw new ArgumentException($"Hình ảnh '{imageName}' không tìm thấy trong thư mục resources.");
             }
+
         }
     }
 }

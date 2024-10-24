@@ -1,13 +1,14 @@
 ﻿
 -- 1.	View
 -- - Xem toàn bộ thông tin linh kiện
+GO
 CREATE VIEW vw_ThongTinLinhKien AS
 SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
        llk.TenLoaiLinhKien, ncc.TenNhaCungCap
 FROM LinhKien lk
 JOIN LoaiLinhKien llk ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
 JOIN NhaCungCap ncc ON lk.MaNhaCungCap = ncc.MaNhaCungCap;
-
+GO
 -- Xem linh kiện sắp hết hàng
 -- SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
 -- 		llk.TenLoaiLinhKien, ncc.TenNhaCungCap
@@ -19,10 +20,7 @@ JOIN NhaCungCap ncc ON lk.MaNhaCungCap = ncc.MaNhaCungCap;
 -- Xem thông tin loại linh kiện
 CREATE VIEW vw_ThongTinLoaiLinhKien AS
 	SELECT * FROM LoaiLinhKien
-
--- Xem thông tin nhà cung cấp
-CREATE VIEW vw_ThongTinNhaCungCap AS
-	SELECT * FROM NhaCungCap
+GO
 
 -- Stored Procedure
 -- - Thêm linh kiện
@@ -40,6 +38,7 @@ BEGIN
     INSERT INTO LinhKien (TenLinhKien, MoTaChiTiet, HinhAnh, GiaBan, GiaNhap, SoLuongTonKho, MaLoaiLinhKien, MaNhaCungCap)
     VALUES (@TenLinhKien, @MoTaChiTiet, @HinhAnh, @GiaBan, @GiaNhap, @SoLuongTonKho, @MaLoaiLinhKien, @MaNhaCungCap);
 END;
+GO
 
 -- - Sửa linh kiện
 CREATE PROCEDURE sp_SuaLinhKien
@@ -65,6 +64,7 @@ BEGIN
 		MaNhaCungCap = @MaNhaCungCap
 	WHERE MaLinhKien = @MaLinhKien;
 END;
+GO
 
 -- - Xóa Linh kiện
 CREATE PROCEDURE sp_XoaLinhKien
@@ -73,38 +73,38 @@ AS
 BEGIN
     DELETE FROM LinhKien WHERE MaLinhKien = @MaLinhKien;
 END;
+GO
 
-
--- "LOAI LINH KIEN"
+-- "LOAI LINH KIEN" -------- CHUA TRIEN KHAI
 
 
 -- Thêm loại linh kiện
-CREATE PROCEDURE sp_ThemLoaiLinhKien
-	@TenLoaiLinhKien NVARCHAR(255)
-AS
-BEGIN
-	INSERT INTO LoaiLinhKien (TenLoaiLinhKien)
-	VALUES (@TenLoaiLinhKien)
-END;
+-- CREATE PROCEDURE sp_ThemLoaiLinhKien
+-- 	@TenLoaiLinhKien NVARCHAR(255)
+-- AS
+-- BEGIN
+-- 	INSERT INTO LoaiLinhKien (TenLoaiLinhKien)
+-- 	VALUES (@TenLoaiLinhKien)
+-- END;
 
--- Sửa loại linh kiện
-CREATE PROCEDURE sp_SuaLoaiLinhKien
-	@MaLoaiLinhKien INT,
-	@TenLoaiLinhKien NVARCHAR(255)
-AS
-BEGIN
-	UPDATE LoaiLinhKien
-	SET TenLoaiLinhKien = @TenLoaiLinhKien
-	WHERE MaLoaiLinhKien = @MaLoaiLinhKien
-END;
+-- -- Sửa loại linh kiện
+-- CREATE PROCEDURE sp_SuaLoaiLinhKien
+-- 	@MaLoaiLinhKien INT,
+-- 	@TenLoaiLinhKien NVARCHAR(255)
+-- AS
+-- BEGIN
+-- 	UPDATE LoaiLinhKien
+-- 	SET TenLoaiLinhKien = @TenLoaiLinhKien
+-- 	WHERE MaLoaiLinhKien = @MaLoaiLinhKien
+-- END;
 
--- - Xóa loại linh kiện
-CREATE PROCEDURE sp_XoaLoaiLinhKien
-	@MaLoaiLinhKien INT
-AS
-BEGIN
-	DELETE FROM LoaiLinhKien WHERE MaLoaiLinhKien= @MaLoaiLinhKien;
-END;
+-- -- - Xóa loại linh kiện
+-- CREATE PROCEDURE sp_XoaLoaiLinhKien
+-- 	@MaLoaiLinhKien INT
+-- AS
+-- BEGIN
+-- 	DELETE FROM LoaiLinhKien WHERE MaLoaiLinhKien= @MaLoaiLinhKien;
+-- END;
 
 -- Tìm kiếm
 CREATE PROCEDURE sp_TimKiemLinhKienTheoTuKhoa
@@ -116,16 +116,5 @@ BEGIN
     WHERE lk.TenLinhKien LIKE '%' + @TuKhoa + '%'
        OR lk.MoTaChiTiet LIKE '%' + @TuKhoa + '%';
 END;
+GO
 
--- - Tìm kiếm linh kiện theo giá
-CREATE PROCEDURE sp_TimKiemLinhKienTheoGia
-    @GiaMin DECIMAL(15, 2),
-    @GiaMax DECIMAL(15, 2)
-AS
-BEGIN
-    SELECT *
-    FROM vw_ThongTinLinhKien
-    WHERE GiaBan BETWEEN @GiaMin AND @GiaMax;
-END;
-
-EXEC sp_TimKiemLinhKienTheoGia @GiaMin = 0, @GiaMax = 10000000;

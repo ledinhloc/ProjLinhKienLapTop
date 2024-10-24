@@ -1,0 +1,220 @@
+
+-- Trigger để cập nhật số lượng tồn kho khi có đơn hàng mới
+CREATE TRIGGER trg_UpdateSoLuongTonKho
+ON ChiTietDonHang
+AFTER INSERT
+AS
+BEGIN
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        UPDATE LinhKien
+        SET SoLuongTonKho = SoLuongTonKho - inserted.SoLuong
+        FROM LinhKien
+        INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+
+        IF EXISTS (
+            SELECT 1
+            FROM LinhKien
+            WHERE SoLuongTonKho < 0
+        )
+        BEGIN
+            ROLLBACK TRANSACTION;
+            THROW 50000, 'Số lượng tồn kho không đủ!', 1;
+        END
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        DECLARE @ErrorSeverity INT;
+        DECLARE @ErrorState INT;
+
+        SELECT 
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+    END CATCH;
+END;
+GO
+
+-- Trigger thông báo khi số lượng tồn kho dưới 10
+CREATE TRIGGER trg_ThongBaoTonKho
+ON LinhKien
+AFTER UPDATE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM inserted
+        WHERE SoLuongTonKho < 10
+    )
+    BEGIN
+        DECLARE @Message NVARCHAR(MAX) = '';
+        SELECT @Message = STRING_AGG('Cảnh báo: Sắp hết linh kiện ' + CAST(MaLinhKien AS NVARCHAR(10)), '; ')
+        FROM inserted
+        WHERE SoLuongTonKho < 10;
+
+        PRINT @Message;
+    END
+END;
+GO
+
+-- Trigger kiểm tra tồn kho trước khi chèn chi tiết đơn hàng
+CREATE TRIGGER trg_KiemTraTonKho
+ON ChiTietDonHang
+INSTEAD OF INSERT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN LinhKien lk ON i.MaLinhKien = lk.MaLinhKien
+        WHERE i.SoLuong > lk.SoLuongTonKho
+    )
+    BEGIN
+        RAISERROR ('Không đủ số lượng tồn kho để đáp ứng đơn hàng.', 16, 1);
+    END
+    ELSE
+    BEGIN
+        INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan)
+        SELECT MaDonHang, MaLinhKien, SoLuong, GiaBan
+        FROM inserted;
+    END
+END;
+GO
+
+-- Trigger cập nhật lương khi có thay đổi trong lịch làm việc
+CREATE TRIGGER trg_CapNhatLuong
+ON CoLichLam
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    UPDATE Luong
+    SET 
+        Luong = LuongGio * (SELECT SUM(DATEDIFF(MINUTE, clv.GioBatDau, clv.GioKetThuc)) / 60.0
+                             FROM CoLichLam cl
+                             JOIN LichLamViec llv ON cl.MaLichLamViec = llv.MaLichLamViec
+                             JOIN CaLamViec clv ON llv.MaCa = clv.MaCa
+                             WHERE cl.MaNhanVien = inserted.MaNhanVien
+                             AND cl.TrangThai = 'HoanThanh'
+                             AND MONTH(llv.NgayLam) = MONTH(l.ThoiGian)
+                             AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian)),
+        
+        TongNhan = Luong + Thuong
+    FROM Luong l, inserted
+    WHERE l.MaNhanVien = (SELECT MaNhanVien FROM inserted);
+    
+    PRINT 'Đã cập nhật Lương và Tổng Nhận trong bảng Lương';
+END;
+GO
+
+-- Trigger cập nhật lương khi xóa lịch làm việc
+CREATE TRIGGER trg_CapNhatLuongKhiXoa
+ON CoLichLam
+AFTER DELETE
+AS
+BEGIN
+    UPDATE Luong
+    SET 
+        Luong = LuongGio * (SELECT SUM(DATEDIFF(MINUTE, clv.GioBatDau, clv.GioKetThuc)) / 60.0
+                             FROM CoLichLam cl
+                             JOIN LichLamViec llv ON cl.MaLichLamViec = llv.MaLichLamViec
+                             JOIN CaLamViec clv ON llv.MaCa = clv.MaCa
+                             WHERE cl.MaNhanVien = deleted.MaNhanVien
+                             AND cl.TrangThai = 'HoanThanh'
+                             AND MONTH(llv.NgayLam) = MONTH(l.ThoiGian)
+                             AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian)),
+        
+        TongNhan = Luong + Thuong
+    FROM Luong l, deleted
+    WHERE l.MaNhanVien = (SELECT MaNhanVien FROM deleted);
+    
+    PRINT 'Đã cập nhật Lương và Tổng Nhận trong bảng Lương';
+END;
+GO
+
+-- Trigger cập nhật số lượng tồn kho khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang
+ON PhieuNhapHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho + inserted.SoLuong
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật giá nhập khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang_UpdatePrice
+ON PhieuNhapHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE LinhKien
+    SET GiaNhap = inserted.GiaNhap
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật số lượng tồn kho khi xóa phiếu nhập hàng
+CREATE TRIGGER trg_AfterDelete_PhieuNhapHang_UpdateStock
+ON PhieuNhapHang
+AFTER DELETE
+AS
+BEGIN
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho - deleted.SoLuong
+    FROM LinhKien
+    INNER JOIN deleted ON LinhKien.MaLinhKien = deleted.MaLinhKien;
+END;
+GO
+
+-- Trigger kiểm tra sử dụng trước khi xóa loại linh kiện
+CREATE TRIGGER trg_BeforeDelete_LoaiLinhKien_CheckUsage
+ON LoaiLinhKien
+INSTEAD OF DELETE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1 
+        FROM LinhKien 
+        WHERE MaLoaiLinhKien IN (SELECT MaLoaiLinhKien FROM deleted)
+    )
+    BEGIN
+        RAISERROR('Không thể xóa loại linh kiện vì đã có linh kiện liên quan.', 16, 1);
+        ROLLBACK TRANSACTION; 
+    END
+    ELSE
+    BEGIN
+        DELETE FROM LoaiLinhKien
+        WHERE MaLoaiLinhKien IN (SELECT MaLoaiLinhKien FROM deleted);
+    END
+END;
+GO
+
+-- Trigger cập nhật tổng giá trị đơn hàng khi có chi tiết đơn hàng mới
+CREATE TRIGGER trg_AfterInsert_ChiTietDonHang_UpdateTotal
+ON ChiTietDonHang
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @total DECIMAL(15, 2);
+    DECLARE @MaDonHang INT;
+
+    SELECT @MaDonHang = MaDonHang FROM inserted;
+
+    SELECT @total = SUM(SoLuong * GiaBan)
+    FROM ChiTietDonHang
+    WHERE MaDonHang = @MaDonHang;
+
+    UPDATE DonHang
+    SET TongGiaTri = @total
+    WHERE MaDonHang = @MaDonHang;
+END;
+GO
