@@ -35,7 +35,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         }
         private void LoadData()
         {
-            DataTable linhKienTable = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM vw_XemNhaCungCap");
+            DataTable linhKienTable = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM vw_ThongTinNhaCungCap");
             dataGridView1.DataSource = linhKienTable;
         }
         private void button1_Click(object sender, EventArgs e)

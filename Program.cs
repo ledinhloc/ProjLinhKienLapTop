@@ -22,7 +22,7 @@ namespace ProCuaHangLinhKienLaptop
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fAdmin());
+            Application.Run(new fTaoDonHang(1));
         }
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();

@@ -31,10 +31,6 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         private void fTaoDonHang_Load(object sender, EventArgs e)
         {
             LoadLoaiLinhKien();
-            //dgv_DonHang.Columns.Add("MaLinhKien", "Mã Linh Kiện");
-            //dgv_DonHang.Columns.Add("TenLinhKien", "Tên Linh Kiện");
-            //dgv_DonHang.Columns.Add("GiaBan", "Giá Bán");
-            //dgv_DonHang.Columns.Add("SoLuong", "Số Lượng");
             dgv_DonHang.Columns[0].ReadOnly = true;
             dgv_DonHang.Columns[1].ReadOnly = true;
             dgv_DonHang.Columns[2].ReadOnly = true;
@@ -151,15 +147,15 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 discount = decimal.Parse(discountText);
             }
 
-            lblTotal.Text = total.ToString("N0") + "VND";
+            lblTotal.Text = total.ToString("N0") + " VND";
             lblDiscount.Text = "-" + discount.ToString("N0") + " VND";
             lblAmountPaid.Text = (total - discount).ToString("N0") + " VND";
         }
 
         private void btnCreateOrder_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 DateTime ngayDatHang = DateTime.Now; 
                 int maKhachHang = -1; 
                 int maGiamGia = -1;
@@ -173,8 +169,8 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 }
 
                 string phuongThuc = rbTienMat.Checked ? rbTienMat.Text : rbChuyenKhoan.Text;
-                decimal tongGiaTri = donHangItems.Sum(item => item.GiaBan * item.SoLuong);
-
+                string amountText = lblAmountPaid.Text.Replace("VND", "").Replace(",", "");
+                decimal tongGiaTri = Convert.ToDecimal(amountText);
 
                 SqlParameter[] parameters = new SqlParameter[]
                 {
@@ -213,11 +209,11 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 {
                     MessageBox.Show("Thêm đơn hàng thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void btnKiemTraKhuyenMai_Click(object sender, EventArgs e)
@@ -234,7 +230,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                     if (result.Trim().Equals("Mã giảm giá hợp lệ"))
                     {
                         decimal giaTriDonHang;
-                        if (decimal.TryParse(lblTotal.Text.Replace("VND", "").Trim(), out giaTriDonHang))
+                        if (decimal.TryParse(lblTotal.Text.Replace(" VND", "").Trim(), out giaTriDonHang))
                         {
                             SqlParameter[] parameters2 = new SqlParameter[]
                             {
@@ -243,8 +239,8 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                             };
 
                             decimal finalPrice = (decimal)provider.ExecuteScalar(CommandType.Text, "SELECT dbo.fn_CalculateFinalPrice(@GiaTriDonHang, @MaGiamGia)", parameters2);
-                            lblDiscount.Text = "-" + (giaTriDonHang - finalPrice).ToString("N0") + "VND";
-                            lblAmountPaid.Text = finalPrice.ToString("N0") + "VND";
+                            lblDiscount.Text = "-" + (giaTriDonHang - finalPrice).ToString("N0") + " VND";
+                            lblAmountPaid.Text = finalPrice.ToString("N0") + " VND";
                         }
                     }
                 }
@@ -324,14 +320,9 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         }
 
         // Tìm linh kiện theo từ khóa
-        private void btnTimLK_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            TabPage allTab = tabControl1.TabPages[5];
+            TabPage allTab = tabControl1.TabPages[tabControl1.TabPages.Count - 1];
             tabControl1.SelectedTab = allTab;
             FlowLayoutPanel flowLayoutPanel = (FlowLayoutPanel)tabControl1.SelectedTab.Controls[0];
             flowLayoutPanel.Controls.Clear();
