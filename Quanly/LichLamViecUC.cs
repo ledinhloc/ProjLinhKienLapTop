@@ -13,6 +13,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
     public partial class LichLamViecUC : UserControl
     {
         public int maLichLamViec;
+        public DateTime thang;
         public LichLamViecUC()
         {
             InitializeComponent();
@@ -27,6 +28,8 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             lblTenCa.Text = tenCa;
             lblGioBD.Text = gioBD;
             lblGioKT.Text = gioKT;
+
+            thang = DateTime.Parse(ngay);
         }
 
         private void LichLamViecUC_Load(object sender, EventArgs e)
@@ -34,9 +37,14 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         }
 
-        private void LichLamViecUC_MouseClick(object sender, MouseEventArgs e)
+        private void LichLamViec_Click(object sender, MouseEventArgs e)
         {
-            fThemCaLam fThemCa = new fThemCaLam(maLichLamViec);
+
+        }
+
+        private void LichLamViecUC_Click(object sender, EventArgs e)
+        {
+            fThemCaLam fThemCa = new fThemCaLam(maLichLamViec, thang);
             fThemCa.ShowDialog();
         }
     }

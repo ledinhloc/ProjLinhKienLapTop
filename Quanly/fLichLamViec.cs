@@ -66,7 +66,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         private void dtpNgay_ValueChanged(object sender, EventArgs e)
         {
             LoadDuLieu();
-            MessageBox.Show("sã");
+            
         }
 
         private void btnTao_Click(object sender, EventArgs e)

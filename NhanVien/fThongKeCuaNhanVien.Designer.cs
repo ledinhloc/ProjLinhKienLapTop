@@ -63,12 +63,14 @@
             // 
             // btnXem
             // 
+            this.btnXem.BackColor = System.Drawing.Color.MistyRose;
+            this.btnXem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnXem.Location = new System.Drawing.Point(359, 26);
             this.btnXem.Name = "btnXem";
             this.btnXem.Size = new System.Drawing.Size(138, 53);
             this.btnXem.TabIndex = 1;
             this.btnXem.Text = "Xem";
-            this.btnXem.UseVisualStyleBackColor = true;
+            this.btnXem.UseVisualStyleBackColor = false;
             this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
             // 
             // chartLuongThuong

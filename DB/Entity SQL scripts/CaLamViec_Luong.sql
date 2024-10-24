@@ -48,6 +48,20 @@ BEGIN
 END
 GO
 
+-- fThemCaLam 
+CREATE PROCEDURE sp_ThemLuong
+    @Luong DECIMAL(15, 2),
+    @LuongGio DECIMAL(15, 2),
+    @Thuong DECIMAL(15, 2),
+    @TongNhan DECIMAL(15, 2),
+    @ThoiGian DATE,
+    @SoCa INT,
+    @MaNhanVien INT
+AS
+BEGIN
+    INSERT INTO Luong ( Luong,LuongGio, Thuong,TongNhan, ThoiGian, SoCa, MaNhanVien)
+    VALUES ( @Luong,@LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
+END;
 --them
 -- CREATE PROCEDURE sp_ThemLuong
 --     @MaLuong INT,

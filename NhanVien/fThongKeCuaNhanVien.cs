@@ -160,7 +160,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 new SqlParameter("@NgayKT",ngayKT.ToString("yyyy-MM-dd"))
 
             };
-            DataTable table = provider.ExecuteReader(CommandType.Text, "Select * FROM fn_XemLuongTheoNhanVien(@MaNhanVien, @NgayBD, @NgayKT)", sqlParameters);
+            DataTable table = provider.ExecuteReader(CommandType.Text, "Select * FROM fn_XemLuongTheoNhanVien(@MaNhanVien, @NgayBD, @NgayKT) ORDER BY ThoiGian ", sqlParameters);
             double tongLuong = 0;
             double tongThuong = 0;
             
