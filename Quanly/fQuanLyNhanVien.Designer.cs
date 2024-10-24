@@ -64,11 +64,9 @@
             this.btnThemNhanVien.Location = new System.Drawing.Point(1046, 58);
             this.btnThemNhanVien.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnThemNhanVien.Name = "btnThemNhanVien";
-<<<<<<< HEAD
-            this.btnThemNhanVien.Size = new System.Drawing.Size(157, 31);
-=======
+
             this.btnThemNhanVien.Size = new System.Drawing.Size(205, 44);
->>>>>>> 1d603164d4b385973c41d3b05b0844871c3896b1
+
             this.btnThemNhanVien.TabIndex = 19;
             this.btnThemNhanVien.Text = "Thêm Nhân Viên";
             this.btnThemNhanVien.UseVisualStyleBackColor = true;
@@ -111,14 +109,10 @@
             this.groupBox1.Controls.Add(this.btnXoaKhuyenMai);
             this.groupBox1.Controls.Add(this.btnThemNhanVien);
             this.groupBox1.Cursor = System.Windows.Forms.Cursors.Default;
-<<<<<<< HEAD
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(11, 122);
-=======
+
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 152);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
->>>>>>> 1d603164d4b385973c41d3b05b0844871c3896b1
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Size = new System.Drawing.Size(1239, 414);
@@ -211,11 +205,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.PowderBlue;
-<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(1162, 891);
-=======
+
             this.ClientSize = new System.Drawing.Size(1307, 1050);
->>>>>>> 1d603164d4b385973c41d3b05b0844871c3896b1
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTuKhoa);
