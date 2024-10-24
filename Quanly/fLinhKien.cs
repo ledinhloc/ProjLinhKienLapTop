@@ -28,7 +28,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         private void fLinhKien_Load(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM vw_XemLinhKien";
+            string query = "SELECT * FROM vw_ThongTinLinhKien";
             try
             {
 
@@ -51,7 +51,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 // Lấy mã linh kiện từ hàng được chọn
-                string maLinhKien = dataGridView1.SelectedRows[0].Cells["Mã Linh Kiện"].Value.ToString();
+                string maLinhKien = dataGridView1.SelectedRows[0].Cells["MaLinhKien"].Value.ToString();
 
                 // Hỏi người dùng có chắc chắn muốn xóa không
                 DialogResult dialogResult = MessageBox.Show(
@@ -90,7 +90,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         }
         private void LoadData()
         {
-            DataTable linhKienTable = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM vw_XemLinhKien");
+            DataTable linhKienTable = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM vw_ThongTinLinhKien");
             dataGridView1.DataSource = linhKienTable;
         }
 
@@ -104,7 +104,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         private void button3_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0) {
-                int maLinhKien = (int)dataGridView1.SelectedRows[0].Cells["Mã Linh Kiện"].Value;
+                int maLinhKien = (int)dataGridView1.SelectedRows[0].Cells["MaLinhKien"].Value;
                 fCapNhatLinhKien formSua = new fCapNhatLinhKien(maLinhKien);
                 formSua.ShowDialog();
 
