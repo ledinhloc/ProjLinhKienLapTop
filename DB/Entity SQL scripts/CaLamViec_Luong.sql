@@ -66,18 +66,19 @@ END
 
 select * from NhanVien
 
---them
+-- fThemCaLam 
 CREATE PROCEDURE sp_ThemLuong
-    @MaLuong INT,
     @Luong DECIMAL(15, 2),
+    @LuongGio DECIMAL(15, 2),
     @Thuong DECIMAL(15, 2),
+    @TongNhan DECIMAL(15, 2),
     @ThoiGian DATE,
     @SoCa INT,
     @MaNhanVien INT
 AS
 BEGIN
-    INSERT INTO Luong (MaLuong, Luong, Thuong, ThoiGian, SoCa, MaNhanVien)
-    VALUES (@MaLuong, @Luong, @Thuong, @ThoiGian, @SoCa, @MaNhanVien);
+    INSERT INTO Luong ( Luong,LuongGio, Thuong,TongNhan, ThoiGian, SoCa, MaNhanVien)
+    VALUES ( @Luong,@LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
 END;
 
 --sua

@@ -16,10 +16,13 @@ namespace ProCuaHangLinhKienLaptop.Quanly
     {
         DataProvider dataProvider = new DataProvider();
         public int maLichLamViec;
-        public fThemCaLam(int ma)
+        public DateTime thoiGian;
+        public fThemCaLam(int ma,DateTime thang)
         {
             InitializeComponent();
+
             maLichLamViec = ma;
+            thoiGian = thang;
 
             DataTable data = dataProvider.ExecuteReader(CommandType.Text, "SELECT MaNhanVien, TenNhanVien FROM NhanVien");
 
@@ -52,7 +55,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 new SqlParameter("@MaLichLamViec", maLichLamViec),
                 new SqlParameter("@DanhGia", txtDanhGia.Text),
                 new SqlParameter("@TrangThai", cboTrangThai.SelectedItem)
-
             };
 
             try
@@ -60,6 +62,28 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemCoLichLam", sqlParameters);
                 fThemCaLam_Load(sender, e);
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("co loi" + ex.Message);
+            }
+
+            //them Luong trong tháng của nhân viên 
+            decimal luong = 0.00m;
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[]
+                {
+                new SqlParameter("@Luong", Decimal.Parse("0.00")),
+                new SqlParameter("@LuongGIo", Decimal.Parse("0.00")),
+                new SqlParameter("@Thuong", Decimal.Parse("0.00")),
+                new SqlParameter("@TongNhan", Decimal.Parse("0.00")),
+                new SqlParameter("@ThoiGian", this.thoiGian.ToString("yyyy-MM")+"-01"),
+                new SqlParameter("@SoCa", Convert.ToInt32("0")),
+                new SqlParameter("@MaNhanVien", cboNhanVien.SelectedValue),
+                };
+
+                dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemLuong", parameters);
             }
             catch (Exception ex)
             {
