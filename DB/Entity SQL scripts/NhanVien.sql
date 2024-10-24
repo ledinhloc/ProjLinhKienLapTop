@@ -18,7 +18,7 @@ BEGIN
     INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau, ChucVu)
     VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau, 'nv')
 END
-
+GO
 --sua thong tin nhan vien *
 CREATE PROCEDURE sp_SuaNhanVien
     @MaNhanVien INT,

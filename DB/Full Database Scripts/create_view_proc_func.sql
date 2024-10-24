@@ -48,7 +48,7 @@ BEGIN
 END
 GO
 
--- fThemCaLam 
+-- fThemCaLam
 CREATE PROCEDURE sp_ThemLuong
     @Luong DECIMAL(15, 2),
     @LuongGio DECIMAL(15, 2),
@@ -62,22 +62,7 @@ BEGIN
     INSERT INTO Luong ( Luong,LuongGio, Thuong,TongNhan, ThoiGian, SoCa, MaNhanVien)
     VALUES ( @Luong,@LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
 END;
-
 GO
---them
--- CREATE PROCEDURE sp_ThemLuong
---     @MaLuong INT,
---     @Luong DECIMAL(15, 2),
---     @Thuong DECIMAL(15, 2),
---     @ThoiGian DATE,
---     @SoCa INT,
---     @MaNhanVien INT
--- AS
--- BEGIN
---     INSERT INTO Luong (MaLuong, Luong, Thuong, ThoiGian, SoCa, MaNhanVien)
---     VALUES (@MaLuong, @Luong, @Thuong, @ThoiGian, @SoCa, @MaNhanVien);
--- END;
-
 --sua
 -- CREATE PROCEDURE sp_SuaLuong
 --     @MaLuong INT,
@@ -106,7 +91,7 @@ GO
 --     WHERE MaLuong = @MaLuong;
 -- END;
 
---Function
+--Function ****
 CREATE FUNCTION fn_XemLuongTheoNhanVien
 (
     @MaNhanVien INT,
@@ -392,7 +377,7 @@ GO
 
 --CoLichLam(MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
 
---them
+--them ***
 CREATE PROCEDURE sp_ThemCoLichLam
     @MaNhanVien INT,
     @MaLichLamViec INT,
@@ -419,7 +404,7 @@ BEGIN
 END;
 GO
 
---xoa
+--xoa ***
 CREATE PROCEDURE sp_XoaCoLichLam
     @MaNhanVien INT,
     @MaLichLamViec INT
@@ -434,8 +419,8 @@ GO
 --Func
 
 GO
----Xem lich lam và thoi gian *
-CREATE FUNCTION dbo.fn_XemLichLamVaThoiGian (@ngayBD DATE, @ngayKT DATE)
+---Xem lich lam trong ngay **
+CREATE FUNCTION dbo.fn_XemLichLamTrongNgay (@ngay DATE)
 RETURNS TABLE
 AS
 RETURN
@@ -450,7 +435,7 @@ RETURN
     FROM 
         LichLamViec llv
 	INNER JOIN CaLamViec clv on clv.MaCa = llv.MaCa
-    WHERE llv.NgayLam BETWEEN @ngayBD AND @ngayKT
+    WHERE llv.NgayLam = @ngay 
 );
 
 GO
@@ -661,13 +646,6 @@ RETURN(
 -- 1.	View
 -- - Xem toàn bộ thông tin linh kiện
 GO
-CREATE VIEW vw_ThongTinLinhKien AS
-SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
-       llk.TenLoaiLinhKien, ncc.TenNhaCungCap
-FROM LinhKien lk
-JOIN LoaiLinhKien llk ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
-JOIN NhaCungCap ncc ON lk.MaNhaCungCap = ncc.MaNhaCungCap;
-GO
 -- Xem linh kiện sắp hết hàng
 -- SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
 -- 		llk.TenLoaiLinhKien, ncc.TenNhaCungCap
@@ -789,7 +767,7 @@ BEGIN
 	FROM LoaiLinhKien
 	WHERE MaLoaiLinhKien = @MaLLK
 END
-
+GO
 
 
 
@@ -812,23 +790,15 @@ BEGIN
     VALUES (@TenGiamGia, @NgayBatDau, @NgayKetThuc, @GiaTri);
 END;
 GO
--- -- Update
--- CREATE PROCEDURE sp_SuaGiamGia
---     @MaGiamGia INT,
---     @TenGiamGia NVARCHAR(100),
---     @NgayBatDau DATE,
---     @NgayKetThuc DATE,
---     @GiaTri DECIMAL(5, 2)
--- AS
--- BEGIN
---     UPDATE dbo.GiamGia
---     SET TenGiamGia = @TenGiamGia,
---         NgayBatDau = @NgayBatDau,
---         NgayKetThuc = @NgayKetThuc,
---         GiaTri = @GiaTri
---     WHERE MaGiamGia = @MaGiamGia;
--- END;
--- GO
+CREATE PROCEDURE sp_XoaGiamGia
+    @MaGiamGia INT
+AS
+BEGIN
+    DELETE FROM GiamGia
+    WHERE MaGiamGia = @MaGiamGia;
+END;
+
+GO
 -- Lấy mã theo thời gian
 CREATE PROCEDURE sp_TimKiemMaGiamGiaTheoThoiGian
     @StartDate DATE,
@@ -994,12 +964,12 @@ GO
 
 
 --- View show tonaf bộ nhân viên
-CREATE VIEW vw_NhanVienList AS
-SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-FROM dbo.NhanVien
+        CREATE VIEW vw_NhanVienList AS
+        SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
+        FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
--- Thêm
+-- Thêm 
 CREATE PROCEDURE sp_ThemNhanVien
     @TenNhanVien NVARCHAR(100),
     @SDT NVARCHAR(15),
@@ -1012,49 +982,71 @@ BEGIN
     INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau, ChucVu)
     VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau, 'nv')
 END
+GO
+--sua thong tin nhan vien *
+CREATE PROCEDURE sp_SuaNhanVien
+    @MaNhanVien INT,
+    @TenNhanVien NVARCHAR(255),
+    @DiaChi NVARCHAR(255),
+    @SDT NVARCHAR(15),
+    @Email NVARCHAR(100),
+    @MatKhau NVARCHAR(100),
+    @NgaySinh DATE
+AS
+BEGIN
+    UPDATE NhanVien
+    SET
+        TenNhanVien = @TenNhanVien,
+        DiaChi = @DiaChi,
+        SDT = @SDT,
+        Email = @Email,
+        MatKhau = @MatKhau,
+        NgaySinh = @NgaySinh
+    WHERE MaNhanVien = @MaNhanVien;
+END;
 
 -----  Function ----- 
 GO
 -- Name
-CREATE FUNCTION fn_SearchNhanVienByName (@TenNhanVien NVARCHAR(100))
-RETURNS @NhanVienList TABLE (
-    MaNhanVien INT,
-    TenNhanVien NVARCHAR(100),
-    SDT NVARCHAR(15),
-    Email NVARCHAR(100),
-    NgaySinh DATE,
-    DiaChi NVARCHAR(255)
-)
-AS
-BEGIN
-    INSERT INTO @NhanVienList
-    SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-    FROM dbo.NhanVien
-    WHERE TenNhanVien LIKE '%' + @TenNhanVien + '%'
+    CREATE FUNCTION fn_SearchNhanVienByName (@TenNhanVien NVARCHAR(100))
+    RETURNS @NhanVienList TABLE (
+        MaNhanVien INT,
+        TenNhanVien NVARCHAR(100),
+        SDT NVARCHAR(15),
+        Email NVARCHAR(100),
+        NgaySinh DATE,
+        DiaChi NVARCHAR(255)
+    )
+    AS
+    BEGIN
+        INSERT INTO @NhanVienList
+        SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
+        FROM dbo.NhanVien
+        WHERE TenNhanVien LIKE '%' + @TenNhanVien + '%'
     
-    RETURN
-END
-GO
+        RETURN
+    END
+    GO
 
--- Email
-CREATE FUNCTION fn_SearchNhanVienByEmail (@Email NVARCHAR(100))
-RETURNS @NhanVienList TABLE (
-    MaNhanVien INT,
-    TenNhanVien NVARCHAR(100),
-    SDT NVARCHAR(15),
-    Email NVARCHAR(100),
-    NgaySinh DATE,
-    DiaChi NVARCHAR(255)
-)
-AS
-BEGIN
-    INSERT INTO @NhanVienList
-    SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-    FROM dbo.NhanVien
-    WHERE Email LIKE '%' + @Email + '%'
+    -- Email
+    CREATE FUNCTION fn_SearchNhanVienByEmail (@Email NVARCHAR(100))
+    RETURNS @NhanVienList TABLE (
+        MaNhanVien INT,
+        TenNhanVien NVARCHAR(100),
+        SDT NVARCHAR(15),
+        Email NVARCHAR(100),
+        NgaySinh DATE,
+        DiaChi NVARCHAR(255)
+    )
+    AS
+    BEGIN
+        INSERT INTO @NhanVienList
+        SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
+        FROM dbo.NhanVien
+        WHERE Email LIKE '%' + @Email + '%'
     
-    RETURN
-END
+        RETURN
+    END
 GO
 
 CREATE FUNCTION fn_TimNhanVien

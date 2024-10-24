@@ -62,7 +62,7 @@ BEGIN
     INSERT INTO Luong ( Luong,LuongGio, Thuong,TongNhan, ThoiGian, SoCa, MaNhanVien)
     VALUES ( @Luong,@LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
 END;
-
+GO
 --sua
 -- CREATE PROCEDURE sp_SuaLuong
 --     @MaLuong INT,

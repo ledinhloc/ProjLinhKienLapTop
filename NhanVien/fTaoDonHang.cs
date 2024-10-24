@@ -154,8 +154,8 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void btnCreateOrder_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 DateTime ngayDatHang = DateTime.Now; 
                 int maKhachHang = -1; 
                 int maGiamGia = -1;
@@ -204,16 +204,18 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                     lblDiscount.Text = "-0VND";
                     txtTimKhachHang.Text = string.Empty;
                     txtMaGiamGia.Text = string.Empty;
+                    TabPage allTab = tabControl1.TabPages[tabControl1.TabPages.Count - 1];
+                    DisplayLinhKien(null, allTab);
                 }
                 else
                 {
                     MessageBox.Show("Thêm đơn hàng thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnKiemTraKhuyenMai_Click(object sender, EventArgs e)
