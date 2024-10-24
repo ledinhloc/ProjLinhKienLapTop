@@ -23,7 +23,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         {
             try
             {
-                string query = "SELECT MaLinhKien, TenLinhKien FROM LinhKien";
+                string query = "SELECT MaLinhKien, TenLinhKien FROM vw_ThongTinLinhKien";
                 DataTable dataTable = dataProvider.ExecuteReader(CommandType.Text, query);
 
                 cbTenLinhKien.DataSource = dataTable;
@@ -93,6 +93,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 if (rowsAffected > 0)
                 {
                     MessageBox.Show("Thêm phiếu nhập hàng thành công.");
+                    LoadPhieuNhapHang();
                 }
                 else
                 {

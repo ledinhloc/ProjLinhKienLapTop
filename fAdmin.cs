@@ -30,12 +30,6 @@ namespace ProCuaHangLinhKienLaptop
             fLinhKien.ShowDialog();
         }
 
-        private void NhaCungCapToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            fNhaCungCap fNhaCungCap = new fNhaCungCap();
-            fNhaCungCap.ShowDialog();
-        }
-
         private void addScoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fQuanLyNhanVien fQuanlyNhanVien = new fQuanLyNhanVien();
@@ -87,6 +81,18 @@ namespace ProCuaHangLinhKienLaptop
         {
             fKhuyenMai f =new fKhuyenMai();
             f.ShowDialog();
+        }
+
+        private void nhaCungCaptoolStripMenuItem14_Click(object sender, EventArgs e)
+        {
+            fNhaCungCap fNhaCungCap = new fNhaCungCap();
+            fNhaCungCap.ShowDialog();
+        }
+
+        private void NhaCungCapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fNhapHang fNhapHang = new fNhapHang();
+            fNhapHang.ShowDialog(); 
         }
     }
 }
