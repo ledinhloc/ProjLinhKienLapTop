@@ -27,7 +27,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         {
             try
             {
-                // Lấy giá trị từ các điều khiển
                 string tenGiamGia = txtTenGiamGia.Text;
                 DateTime ngayBatDau = dtpNgayBatDau.Value;
                 DateTime ngayKetThuc = dtpNgayHetHan.Value;

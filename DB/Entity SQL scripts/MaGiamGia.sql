@@ -18,23 +18,15 @@ BEGIN
     VALUES (@TenGiamGia, @NgayBatDau, @NgayKetThuc, @GiaTri);
 END;
 GO
--- -- Update
--- CREATE PROCEDURE sp_SuaGiamGia
---     @MaGiamGia INT,
---     @TenGiamGia NVARCHAR(100),
---     @NgayBatDau DATE,
---     @NgayKetThuc DATE,
---     @GiaTri DECIMAL(5, 2)
--- AS
--- BEGIN
---     UPDATE dbo.GiamGia
---     SET TenGiamGia = @TenGiamGia,
---         NgayBatDau = @NgayBatDau,
---         NgayKetThuc = @NgayKetThuc,
---         GiaTri = @GiaTri
---     WHERE MaGiamGia = @MaGiamGia;
--- END;
--- GO
+CREATE PROCEDURE sp_XoaGiamGia
+    @MaGiamGia INT
+AS
+BEGIN
+    DELETE FROM GiamGia
+    WHERE MaGiamGia = @MaGiamGia;
+END;
+
+GO
 -- Lấy mã theo thời gian
 CREATE PROCEDURE sp_TimKiemMaGiamGiaTheoThoiGian
     @StartDate DATE,
