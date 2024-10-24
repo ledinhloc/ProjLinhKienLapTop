@@ -171,7 +171,7 @@ AS SELECT *
 FROM DonHang
 GO
 
--- Thủ tục thêm một record vào bảng DonHang
+-- Thá»§ tá»¥c thÃªm má»™t record vÃ o báº£ng DonHang
 CREATE PROCEDURE sp_ThemDonHang
     @NgayDatHang DATE,
     @MaKhachHang INT,
@@ -241,7 +241,7 @@ GO
 
 
 -- Stored Procedure ----------------------------------------------------
--- Thêm khách hàng:
+-- ThÃªm khÃ¡ch hÃ ng:
 CREATE PROCEDURE sp_ThemKhachHang
 	@TenKhachHang NVARCHAR(255),
 	@DiaChi NVARCHAR(255),
@@ -255,7 +255,7 @@ BEGIN
 END;
 GO
 
--- Sửa khách hàng
+-- Sá»­a khÃ¡ch hÃ ng
 CREATE PROCEDURE sp_SuaKhachHang
     @MaKhachHang INT,
     @TenKhachHang NVARCHAR(255),
@@ -276,7 +276,7 @@ END;
 GO
 
 
--- Xóa khách hàng
+-- XÃ³a khÃ¡ch hÃ ng
 CREATE PROCEDURE sp_XoaKhachHang
     @MaKhachHang INT
 AS
@@ -320,12 +320,12 @@ BEGIN
     END
     ELSE
     BEGIN
-        PRINT 'Tiêu chí tìm kiếm không hợp lệ.';
+        PRINT 'TiÃªu chÃ­ tÃ¬m kiáº¿m khÃ´ng há»£p lá»‡.';
     END
 END;
 GO
 ------ FUNCTION
--- Tính tổng số khách hàng
+-- TÃ­nh tá»•ng sá»‘ khÃ¡ch hÃ ng
 CREATE FUNCTION fn_TinhTongKhachHang()
 RETURNS INT
 AS
@@ -629,13 +629,7 @@ GO
 
 -- 1.	View
 -- - Xem toàn bộ thông tin linh kiện
-GO
-CREATE VIEW vw_ThongTinLinhKien AS
-SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
-       llk.TenLoaiLinhKien, ncc.TenNhaCungCap
-FROM LinhKien lk
-JOIN LoaiLinhKien llk ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
-JOIN NhaCungCap ncc ON lk.MaNhaCungCap = ncc.MaNhaCungCap;
+
 GO
 -- Xem linh kiện sắp hết hàng
 -- SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
@@ -748,6 +742,19 @@ GO
 
 
 
+USE [LinhkienLaptop]
+GO
+
+CREATE PROC sp_TimKiemLoaiLinhKienTheoID @MaLLK INT
+AS
+BEGIN
+	SELECT TenLoaiLinhKien
+	FROM LoaiLinhKien
+	WHERE MaLoaiLinhKien = @MaLLK
+END
+
+
+
 
 --- View
 CREATE VIEW vw_GiamGia
@@ -756,7 +763,7 @@ SELECT MaGiamGia, TenGiamGia, NgayBatDau, NgayKetThuc, GiaTri
 FROM dbo.GiamGia
 GO
 -- Stored Procedure
--- Tạo
+-- Táº¡o
 CREATE PROCEDURE sp_ThemGiamGia
     @TenGiamGia NVARCHAR(100),
     @NgayBatDau DATE,
@@ -785,7 +792,7 @@ GO
 --     WHERE MaGiamGia = @MaGiamGia;
 -- END;
 -- GO
--- Lấy mã theo thời gian
+-- Láº¥y mÃ£ theo thá»i gian
 CREATE PROCEDURE sp_TimKiemMaGiamGiaTheoThoiGian
     @StartDate DATE,
     @EndDate DATE
@@ -797,7 +804,7 @@ BEGIN
 END;
 GO
 ---- Function
--- Kiểm tra mã giảm giá hợp lệ
+-- Kiá»ƒm tra mÃ£ giáº£m giÃ¡ há»£p lá»‡
 CREATE FUNCTION fn_CheckGiamGiaHopLe (
     @MaGiamGia INT
 )
@@ -813,27 +820,27 @@ BEGIN
 
     IF @NgayBatDau IS NULL
     BEGIN
-        SET @Result = N'Mã giảm giá không tồn tại';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ khÃ´ng tá»“n táº¡i';
         RETURN @Result;
     END
 
     IF GETDATE() < @NgayBatDau
     BEGIN
-        SET @Result = N'Mã giảm giá chưa có hiệu lực';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ chÆ°a cÃ³ hiá»‡u lá»±c';
     END
     ELSE IF GETDATE() > @NgayKetThuc
     BEGIN
-        SET @Result = N'Mã giảm giá đã hết hạn';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ Ä‘Ã£ háº¿t háº¡n';
     END
     ELSE
     BEGIN
-        SET @Result = N'Mã giảm giá hợp lệ';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ há»£p lá»‡';
     END
 
     RETURN @Result;
 END;
 GO
--- Tính giá trị đơn sau khi giảm
+-- TÃ­nh giÃ¡ trá»‹ Ä‘Æ¡n sau khi giáº£m
 CREATE FUNCTION fn_CalculateFinalPrice (
     @GiaTriDonHang DECIMAL(10, 2),
     @MaGiamGia INT
@@ -863,18 +870,18 @@ END;
 GO
 
 ------   TEST       -------
--- Xem các mã giảm giá còn hiệu lực
+-- Xem cÃ¡c mÃ£ giáº£m giÃ¡ cÃ²n hiá»‡u lá»±c
 -- -- View
 -- SELECT * FROM vw_GiamGia;
 -- -- Stored procedure
 -- EXEC sp_InsertGiamGia 
---     @TenGiamGia = N'Giảm giá Valentine', 
+--     @TenGiamGia = N'Giáº£m giÃ¡ Valentine', 
 --     @NgayBatDau = '2024-02-10', 
 --     @NgayKetThuc = '2024-02-20', 
 --     @GiaTri = 10.00;
 -- EXEC sp_UpdateGiamGia 
 --     @MaGiamGia = 1, 
---     @TenGiamGia = N'Giảm giá Tết 20245', 
+--     @TenGiamGia = N'Giáº£m giÃ¡ Táº¿t 20245', 
 --     @NgayBatDau = '2024-01-01', 
 --     @NgayKetThuc = '2024-01-31', 
 --     @GiaTri = 12.00;
@@ -892,13 +899,13 @@ GO
 
 
 --- View
---- XEM lại
+--- XEM láº¡i
 CREATE VIEW vw_ThongTinNhaCungCap AS
 	SELECT * FROM NhaCungCap
 GO
 -- STORED PROCEDURE 
 
--- - Thêm nhà cung cấp
+-- - ThÃªm nhÃ  cung cáº¥p
 CREATE PROCEDURE sp_ThemNhaCungCap
 	@TenNhaCungCap NVARCHAR(255),
 	@DiaChi NVARCHAR(255),
@@ -911,7 +918,7 @@ BEGIN
 END;
 GO
 
--- - Sửa nhà cung cấp
+-- - Sá»­a nhÃ  cung cáº¥p
 CREATE PROCEDURE sp_SuaNhaCungCap
 	@MaNhaCungCap INT,
 	@TenNhaCungCap NVARCHAR(255),
@@ -929,7 +936,7 @@ BEGIN
 END;
 GO
 
--- - Xóa nhà cung cấp
+-- - XÃ³a nhÃ  cung cáº¥p
 CREATE PROCEDURE sp_XoaNhaCungCap
 	@MaNhaCungCap INT
 AS
@@ -949,13 +956,13 @@ GO
 
 
 
---- View show tonaf bộ nhân viên
+--- View show tonaf bá»™ nhÃ¢n viÃªn
 CREATE VIEW vw_NhanVienList AS
 SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
 FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
--- Thêm
+-- ThÃªm
 CREATE PROCEDURE sp_ThemNhanVien
     @TenNhanVien NVARCHAR(100),
     @SDT NVARCHAR(15),
@@ -1033,24 +1040,24 @@ GO
 --SELECT * FROM vw_NhanVienList;
 ---- Add
 --EXEC sp_AddNhanVien 
---    @TenNhanVien = N'Nguyễn Văn A',
+--    @TenNhanVien = N'Nguyá»…n VÄƒn A',
 --    @SDT = '0912345678',
 --    @Email = 'nguyenvana@example.com',
 --    @NgaySinh = '1990-01-15',
---    @DiaChi = N'Số 123, Đường ABC, Quận 1',
+--    @DiaChi = N'Sá»‘ 123, ÄÆ°á»ng ABC, Quáº­n 1',
 --    @MatKhau = N'matkhau1';
 ---- Update
 --EXEC sp_UpdateNhanVien 
 --    @MaNhanVien = 1,
---    @TenNhanVien = N'Trần Thị B',
+--    @TenNhanVien = N'Tráº§n Thá»‹ B',
 --    @SDT = '0987654321',
 --    @Email = 'tranthib@example.com',
 --    @NgaySinh = '1992-02-20',
---    @DiaChi = N'Số 456, Đường DEF, Quận 2';
+--    @DiaChi = N'Sá»‘ 456, ÄÆ°á»ng DEF, Quáº­n 2';
 ----- Funtion
 --USE Linhkiendientu;
 --SELECT dbo.fn_GetTotalEmployees() AS TotalEmployees;
---SELECT * FROM dbo.fn_SearchNhanVienByName(N'Nguyễn');
+--SELECT * FROM dbo.fn_SearchNhanVienByName(N'Nguyá»…n');
 --SELECT * FROM dbo.fn_FilterNhanVienByDateRange('1990-01-01', '2000-12-31');
 --SELECT * FROM dbo.fn_SearchNhanVienByEmail(N'tranthi');
 
@@ -1118,6 +1125,57 @@ BEGIN
     
     PRINT 'Xoa phieu nhap hang thanh cong.';
 END;
+GO
+-- Trigger cập nhật số lượng tồn kho khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang
+ON PhieuNhapHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho + inserted.SoLuong
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật giá nhập khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang_UpdatePrice
+ON PhieuNhapHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE LinhKien
+    SET GiaNhap = inserted.GiaNhap
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật số lượng tồn kho khi xóa phiếu nhập hàng
+CREATE TRIGGER trg_AfterDelete_PhieuNhapHang_UpdateStock
+ON PhieuNhapHang
+AFTER DELETE
+AS
+BEGIN
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho - deleted.SoLuong
+    FROM LinhKien
+    INNER JOIN deleted ON LinhKien.MaLinhKien = deleted.MaLinhKien;
+END;
+GO
+CREATE VIEW vw_DanhSachPhieuNhap AS
+SELECT 
+    p.MaPhieuNhap,
+    p.NgayNhap,
+    p.GiaNhap,
+    p.SoLuong,
+    l.TenLinhKien,
+    p.MaLinhKien
+FROM 
+    PhieuNhapHang p
+JOIN 
+    LinhKien l ON p.MaLinhKien = l.MaLinhKien;
 GO
 
 

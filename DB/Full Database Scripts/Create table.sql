@@ -107,7 +107,7 @@ CREATE TABLE Luong (
 	LuongGio DECIMAL(15, 2) CHECK (LuongGio >= 0),
     Thuong DECIMAL(15, 2) CHECK (Thuong >= 0),
 	TongNhan DECIMAL(15, 2),
-    ThoiGian DATE CHECK (ThoiGian <= GETDATE()),
+    ThoiGian DATE,
     SoCa INT CHECK (SoCa >= 0),
     MaNhanVien INT,
     FOREIGN KEY (MaNhanVien) REFERENCES NhanVien(MaNhanVien)
