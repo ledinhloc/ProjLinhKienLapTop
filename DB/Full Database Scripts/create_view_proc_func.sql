@@ -693,7 +693,37 @@ CREATE PROCEDURE sp_XoaLinhKien
 	@MaLinhKien INT
 AS
 BEGIN
-    DELETE FROM LinhKien WHERE MaLinhKien = @MaLinhKien;
+    BEGIN TRY
+        -- Bắt đầu transaction
+        BEGIN TRANSACTION;
+
+        -- Xóa linh kiện theo mã
+        DELETE FROM dbo.LinhKien 
+        WHERE MaLinhKien = @MaLinhKien;
+
+        -- Nếu xóa thành công, commit transaction
+        COMMIT TRANSACTION;
+
+        PRINT 'Xóa linh kiện thành công.';
+    END TRY
+    BEGIN CATCH
+        -- Rollback transaction nếu có lỗi
+        ROLLBACK TRANSACTION;
+
+        -- In thông báo lỗi chi tiết
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        DECLARE @ErrorSeverity INT;
+        DECLARE @ErrorState INT;
+
+        SELECT 
+            @ErrorMessage = ERROR_MESSAGE(),
+            @ErrorSeverity = ERROR_SEVERITY(),
+            @ErrorState = ERROR_STATE();
+
+        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
+
+        RETURN; -- Kết thúc thủ tục nếu có lỗi
+    END CATCH
 END;
 GO
 
