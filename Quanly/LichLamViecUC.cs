@@ -37,11 +37,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         }
 
-        private void LichLamViec_Click(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void LichLamViecUC_Click(object sender, EventArgs e)
         {
             fThemCaLam fThemCa = new fThemCaLam(maLichLamViec, thang);

@@ -38,38 +38,15 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         private void fThemCaLam_Load(object sender, EventArgs e)
         {
-
-
             dgvNhanVien.DataSource = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM fn_XemNhanVienTrongLichLamViec (@MaLichLamViec)", new SqlParameter("@MaLichLamViec", maLichLamViec));
             dgvNhanVien.Columns["MaNhanVien"].Visible = false;
-
-
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
 
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@MaNhanVien", cboNhanVien.SelectedValue),
-                new SqlParameter("@MaLichLamViec", maLichLamViec),
-                new SqlParameter("@DanhGia", txtDanhGia.Text),
-                new SqlParameter("@TrangThai", cboTrangThai.SelectedItem)
-            };
-
-            try
-            {
-                dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemCoLichLam", sqlParameters);
-                fThemCaLam_Load(sender, e);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("co loi" + ex.Message);
-            }
 
             //them Luong trong tháng của nhân viên 
-            decimal luong = 0.00m;
             try
             {
                 SqlParameter[] parameters = new SqlParameter[]
@@ -87,6 +64,26 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             }
             catch (Exception ex)
             {
+                MessageBox.Show("co loi 11111" + ex.Message);
+            }           
+
+            //them co lich lam
+            try
+            {
+                SqlParameter[] sqlParameters = new SqlParameter[]
+                  {
+                new SqlParameter("@MaNhanVien", cboNhanVien.SelectedValue),
+                new SqlParameter("@MaLichLamViec", maLichLamViec),
+                new SqlParameter("@DanhGia", txtDanhGia.Text),
+                new SqlParameter("@TrangThai", cboTrangThai.SelectedItem)
+                };
+
+                dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemCoLichLam", sqlParameters);
+                fThemCaLam_Load(sender, e);
+
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show("co loi" + ex.Message);
             }
         }
@@ -98,7 +95,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 new SqlParameter("@MaNhanVien", cboNhanVien.SelectedValue),
                 new SqlParameter("@MaLichLamViec", maLichLamViec),
                 new SqlParameter("@DanhGia", txtDanhGia.Text),
-                new SqlParameter("@TrangThai", cboTrangThai.SelectedItem)
+                new SqlParameter("@TrangThai", "HoanThanh")
                 };
 
             try
@@ -140,7 +137,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 cboNhanVien.SelectedValue = selectedRow.Cells["MaNhanVien"].Value.ToString();
                 cboTrangThai.SelectedItem = selectedRow.Cells["TrangThai"].Value.ToString();
                 txtDanhGia.Text = selectedRow.Cells["DanhGia"].Value.ToString();
-
             }
         }
     }

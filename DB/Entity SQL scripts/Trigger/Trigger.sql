@@ -13,8 +13,7 @@ BEGIN
                              WHERE cl.MaNhanVien = inserted.MaNhanVien
 							 AND cl.TrangThai = 'HoanThanh'
                              AND MONTH(llv.NgayLam) = MONTH(l.ThoiGian)
-                             AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian)),
-        
+                             AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian)),        
         -- Tính tổng nhận = Lương + Thưởng
         TongNhan = Luong + Thuong
     FROM Luong l, inserted
@@ -23,7 +22,7 @@ BEGIN
 END;
 
 --khi them hoac thay doi trang thai CoLichLam thi Cap Nhat lai
-ALTER TRIGGER trg_CapNhatSoCaTrongLuong
+CREATE TRIGGER trg_CapNhatSoCaTrongLuong
 ON CoLichLam
 AFTER INSERT, UPDATE
 AS
