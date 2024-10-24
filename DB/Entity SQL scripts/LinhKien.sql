@@ -1,11 +1,5 @@
 ﻿GO
-CREATE VIEW vw_XemLinhKien 
-AS
-    SELECT lk.MaLinhKien 'Mã Linh Kiện', lk.TenLinhKien 'Tên Linh Kiện', llk.TenLoaiLinhKien 'Loại Linh Kiện', lk.GiaBan 'Gía Bán', lk.SoLuongTonKho 'Số Lượng Tồn Kho' 
-    FROM dbo.LinhKien lk
-    JOIN dbo.LoaiLinhKien llk
-    ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
-GO
+
 
 GO
 CREATE VIEW vw_ThongTinLinhKien AS
