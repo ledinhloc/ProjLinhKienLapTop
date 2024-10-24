@@ -15,10 +15,11 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
     public partial class fThongTinNhanVien : Form
     {
         DataProvider dataProvider = new DataProvider();
-        int maNhanVien = 1;
-        public fThongTinNhanVien()
+        int maNhanVien;
+        public fThongTinNhanVien(int maNhanVien)
         {
             InitializeComponent();
+            this.maNhanVien = maNhanVien;
         }
 
         private void fThongTinNhanVien_Load(object sender, EventArgs e)

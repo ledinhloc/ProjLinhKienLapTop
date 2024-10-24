@@ -452,6 +452,7 @@
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "fTaoDonHang";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fTaoDonHang";
             this.Load += new System.EventHandler(this.fTaoDonHang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DonHang)).EndInit();

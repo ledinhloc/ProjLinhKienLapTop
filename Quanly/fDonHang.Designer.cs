@@ -34,8 +34,9 @@
             // 
             // dgvDonHang
             // 
+            this.dgvDonHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDonHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDonHang.Location = new System.Drawing.Point(30, 39);
+            this.dgvDonHang.Location = new System.Drawing.Point(12, 11);
             this.dgvDonHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvDonHang.Name = "dgvDonHang";
             this.dgvDonHang.RowHeadersWidth = 62;
@@ -48,10 +49,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1139, 586);
+            this.ClientSize = new System.Drawing.Size(1056, 497);
             this.Controls.Add(this.dgvDonHang);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "fDonHang";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fDonHang";
             this.Load += new System.EventHandler(this.fDonHang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDonHang)).EndInit();

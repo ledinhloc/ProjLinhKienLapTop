@@ -20,10 +20,12 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
     {
         DataProvider provider = new DataProvider();
         private List<DonHangItem> donHangItems = new List<DonHangItem>();
+        private int maNhanVien;
 
-        public fTaoDonHang()
+        public fTaoDonHang(int maNhanVien)
         {
             InitializeComponent();
+            this.maNhanVien = maNhanVien;
         }
 
         private void fTaoDonHang_Load(object sender, EventArgs e)
@@ -152,7 +154,6 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             lblTotal.Text = total.ToString("N0") + "VND";
             lblDiscount.Text = "-" + discount.ToString("N0") + " VND";
             lblAmountPaid.Text = (total - discount).ToString("N0") + " VND";
-
         }
 
         private void btnCreateOrder_Click(object sender, EventArgs e)
@@ -161,7 +162,6 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             {
                 DateTime ngayDatHang = DateTime.Now; 
                 int maKhachHang = -1; 
-                int maNhanVien = 1;
                 int maGiamGia = -1;
                 if (!string.IsNullOrEmpty(txtMaGiamGia.Text) && lblDiscount.Text != "-0VND")
                 {
@@ -173,7 +173,8 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 }
 
                 string phuongThuc = rbTienMat.Checked ? rbTienMat.Text : rbChuyenKhoan.Text;
-                decimal tongGiaTri = donHangItems.Sum(item => item.GiaBan * item.SoLuong); 
+                decimal tongGiaTri = donHangItems.Sum(item => item.GiaBan * item.SoLuong);
+
 
                 SqlParameter[] parameters = new SqlParameter[]
                 {

@@ -109,7 +109,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(85, 457);
+            this.label1.Location = new System.Drawing.Point(79, 458);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 20);
             this.label1.TabIndex = 3;
@@ -118,7 +118,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(85, 441);
+            this.label2.Location = new System.Drawing.Point(79, 442);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 20);
             this.label2.TabIndex = 3;
@@ -138,7 +138,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(85, 473);
+            this.label4.Location = new System.Drawing.Point(277, 441);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 20);
             this.label4.TabIndex = 3;
@@ -198,7 +198,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(85, 506);
+            this.label6.Location = new System.Drawing.Point(190, 492);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 20);
             this.label6.TabIndex = 3;
@@ -230,7 +230,7 @@
             this.lblTongThuong.AutoSize = true;
             this.lblTongThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongThuong.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTongThuong.Location = new System.Drawing.Point(174, 473);
+            this.lblTongThuong.Location = new System.Drawing.Point(340, 441);
             this.lblTongThuong.Name = "lblTongThuong";
             this.lblTongThuong.Size = new System.Drawing.Size(59, 20);
             this.lblTongThuong.TabIndex = 6;
@@ -252,7 +252,7 @@
             this.lblTongLuong.AutoSize = true;
             this.lblTongLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongLuong.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTongLuong.Location = new System.Drawing.Point(174, 441);
+            this.lblTongLuong.Location = new System.Drawing.Point(141, 442);
             this.lblTongLuong.Name = "lblTongLuong";
             this.lblTongLuong.Size = new System.Drawing.Size(59, 20);
             this.lblTongLuong.TabIndex = 6;
@@ -263,7 +263,7 @@
             this.lblTongLuongThuong.AutoSize = true;
             this.lblTongLuongThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongLuongThuong.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTongLuongThuong.Location = new System.Drawing.Point(174, 506);
+            this.lblTongLuongThuong.Location = new System.Drawing.Point(238, 492);
             this.lblTongLuongThuong.Name = "lblTongLuongThuong";
             this.lblTongLuongThuong.Size = new System.Drawing.Size(59, 20);
             this.lblTongLuongThuong.TabIndex = 6;

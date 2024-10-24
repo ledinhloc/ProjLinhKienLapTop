@@ -48,6 +48,20 @@ BEGIN
 END
 GO
 
+-- fThemCaLam 
+CREATE PROCEDURE sp_ThemLuong
+    @Luong DECIMAL(15, 2),
+    @LuongGio DECIMAL(15, 2),
+    @Thuong DECIMAL(15, 2),
+    @TongNhan DECIMAL(15, 2),
+    @ThoiGian DATE,
+    @SoCa INT,
+    @MaNhanVien INT
+AS
+BEGIN
+    INSERT INTO Luong ( Luong,LuongGio, Thuong,TongNhan, ThoiGian, SoCa, MaNhanVien)
+    VALUES ( @Luong,@LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
+END;
 --them
 -- CREATE PROCEDURE sp_ThemLuong
 --     @MaLuong INT,
@@ -625,11 +639,32 @@ RETURN
 )
 GO
 
+CREATE FUNCTION fn_ThongKeHTKTheoLinhKien()
+RETURNS TABLE
+RETURN (
+	SELECT TenLinhKien, dbo.fn_HTKTheoLinhKien(MaLinhKien) as SoLuong
+	FROM LinhKien
+)
+GO
+
+CREATE FUNCTION fn_ThongKeHTKTheoLoaiLinhKien()
+RETURNS TABLE
+RETURN(
+	SELECT TenLoaiLinhKien, dbo.fn_HTKTheoLoaiLinhKien(MaLoaiLinhKien) as SoLuong
+	FROM LoaiLinhKien
+)
+
 
 
 -- 1.	View
 -- - Xem toàn bộ thông tin linh kiện
-
+GO
+CREATE VIEW vw_ThongTinLinhKien AS
+SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
+       llk.TenLoaiLinhKien, ncc.TenNhaCungCap
+FROM LinhKien lk
+JOIN LoaiLinhKien llk ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
+JOIN NhaCungCap ncc ON lk.MaNhaCungCap = ncc.MaNhaCungCap;
 GO
 -- Xem linh kiện sắp hết hàng
 -- SELECT lk.MaLinhKien, lk.TenLinhKien, lk.MoTaChiTiet, lk.GiaBan, lk.GiaNhap, lk.SoLuongTonKho, 
@@ -693,37 +728,7 @@ CREATE PROCEDURE sp_XoaLinhKien
 	@MaLinhKien INT
 AS
 BEGIN
-    BEGIN TRY
-        -- Bắt đầu transaction
-        BEGIN TRANSACTION;
-
-        -- Xóa linh kiện theo mã
-        DELETE FROM dbo.LinhKien 
-        WHERE MaLinhKien = @MaLinhKien;
-
-        -- Nếu xóa thành công, commit transaction
-        COMMIT TRANSACTION;
-
-        PRINT 'Xóa linh kiện thành công.';
-    END TRY
-    BEGIN CATCH
-        -- Rollback transaction nếu có lỗi
-        ROLLBACK TRANSACTION;
-
-        -- In thông báo lỗi chi tiết
-        DECLARE @ErrorMessage NVARCHAR(4000);
-        DECLARE @ErrorSeverity INT;
-        DECLARE @ErrorState INT;
-
-        SELECT 
-            @ErrorMessage = ERROR_MESSAGE(),
-            @ErrorSeverity = ERROR_SEVERITY(),
-            @ErrorState = ERROR_STATE();
-
-        RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
-
-        RETURN; -- Kết thúc thủ tục nếu có lỗi
-    END CATCH
+    DELETE FROM LinhKien WHERE MaLinhKien = @MaLinhKien;
 END;
 GO
 
@@ -930,7 +935,7 @@ GO
 
 --- View
 --- XEM láº¡i
-CREATE VIEW vw_ThongTinNhaCungCap AS
+CREATE VIEW vw_XemNhaCungCap AS
 	SELECT * FROM NhaCungCap
 GO
 -- STORED PROCEDURE 

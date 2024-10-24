@@ -32,9 +32,13 @@
             this.sTUDENTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LinhKienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.rToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.staticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.editRemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cOURSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,10 +66,8 @@
             this.thongKeDonHangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thongKeLinhKienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doanhThuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editRemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.staticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.danhSáchKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +80,8 @@
             this.sTUDENTToolStripMenuItem,
             this.cOURSEToolStripMenuItem,
             this.sCOREToolStripMenuItem,
-            this.reSultToolStripMenuItem});
+            this.reSultToolStripMenuItem,
+            this.kháchHàngToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -125,20 +128,53 @@
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(356, 6);
             // 
+            // rToolStripMenuItem
+            // 
+            this.rToolStripMenuItem.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.rToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.rToolStripMenuItem.Name = "rToolStripMenuItem";
+            this.rToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
+            this.rToolStripMenuItem.Text = "Quản lý loại linh kiện";
+            this.rToolStripMenuItem.Click += new System.EventHandler(this.rToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(356, 6);
+            // 
+            // staticsToolStripMenuItem
+            // 
+            this.staticsToolStripMenuItem.BackColor = System.Drawing.Color.Firebrick;
+            this.staticsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.staticsToolStripMenuItem.Name = "staticsToolStripMenuItem";
+            this.staticsToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
+            this.staticsToolStripMenuItem.Text = "Statics";
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(356, 6);
             // 
+            // editRemoveToolStripMenuItem
+            // 
+            this.editRemoveToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.editRemoveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.editRemoveToolStripMenuItem.Name = "editRemoveToolStripMenuItem";
+            this.editRemoveToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
+            this.editRemoveToolStripMenuItem.Text = "Edit / Remove";
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(356, 6);
+            // 
+            // manageToolStripMenuItem
+            // 
+            this.manageToolStripMenuItem.BackColor = System.Drawing.Color.CadetBlue;
+            this.manageToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
+            this.manageToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
+            this.manageToolStripMenuItem.Text = "Manage Student Form";
             // 
             // toolStripMenuItem1
             // 
@@ -354,37 +390,20 @@
             this.doanhThuToolStripMenuItem.Text = "Doanh thu";
             this.doanhThuToolStripMenuItem.Click += new System.EventHandler(this.doanhThuToolStripMenuItem_Click);
             // 
-            // manageToolStripMenuItem
+            // kháchHàngToolStripMenuItem
             // 
-            this.manageToolStripMenuItem.BackColor = System.Drawing.Color.CadetBlue;
-            this.manageToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.manageToolStripMenuItem.Name = "manageToolStripMenuItem";
-            this.manageToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
-            this.manageToolStripMenuItem.Text = "Manage Student Form";
+            this.kháchHàngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.danhSáchKháchHàngToolStripMenuItem});
+            this.kháchHàngToolStripMenuItem.Name = "kháchHàngToolStripMenuItem";
+            this.kháchHàngToolStripMenuItem.Size = new System.Drawing.Size(160, 31);
+            this.kháchHàngToolStripMenuItem.Text = "Khách Hàng";
             // 
-            // editRemoveToolStripMenuItem
+            // danhSáchKháchHàngToolStripMenuItem
             // 
-            this.editRemoveToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.editRemoveToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.editRemoveToolStripMenuItem.Name = "editRemoveToolStripMenuItem";
-            this.editRemoveToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
-            this.editRemoveToolStripMenuItem.Text = "Edit / Remove";
-            // 
-            // staticsToolStripMenuItem
-            // 
-            this.staticsToolStripMenuItem.BackColor = System.Drawing.Color.Firebrick;
-            this.staticsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.staticsToolStripMenuItem.Name = "staticsToolStripMenuItem";
-            this.staticsToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
-            this.staticsToolStripMenuItem.Text = "Statics";
-            // 
-            // rToolStripMenuItem
-            // 
-            this.rToolStripMenuItem.BackColor = System.Drawing.Color.MediumTurquoise;
-            this.rToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.rToolStripMenuItem.Name = "rToolStripMenuItem";
-            this.rToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
-            this.rToolStripMenuItem.Text = "Students List";
+            this.danhSáchKháchHàngToolStripMenuItem.Name = "danhSáchKháchHàngToolStripMenuItem";
+            this.danhSáchKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(348, 32);
+            this.danhSáchKháchHàngToolStripMenuItem.Text = "Danh sách khách hàng";
+            this.danhSáchKháchHàngToolStripMenuItem.Click += new System.EventHandler(this.danhSáchKháchHàngToolStripMenuItem_Click);
             // 
             // fAdmin
             // 
@@ -443,5 +462,7 @@
         private System.Windows.Forms.ToolStripMenuItem staticsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editRemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kháchHàngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem danhSáchKháchHàngToolStripMenuItem;
     }
 }

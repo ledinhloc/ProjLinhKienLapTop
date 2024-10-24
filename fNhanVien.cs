@@ -23,7 +23,7 @@ namespace ProCuaHangLinhKienLaptop
 
         private void banHangToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fTaoDonHang fTaoDonHang = new fTaoDonHang();
+            fTaoDonHang fTaoDonHang = new fTaoDonHang(int.Parse(maNhanVien));
             fTaoDonHang.ShowDialog();
         }
 
@@ -47,7 +47,7 @@ namespace ProCuaHangLinhKienLaptop
 
         private void thongTinCaNhanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fThongTinNhanVien fThongTinNhanVien = new fThongTinNhanVien();
+            fThongTinNhanVien fThongTinNhanVien = new fThongTinNhanVien(int.Parse(maNhanVien));
             fThongTinNhanVien .ShowDialog();
         }
 

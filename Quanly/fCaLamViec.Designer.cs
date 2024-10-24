@@ -117,6 +117,7 @@
             // 
             // dgvCaLam
             // 
+            this.dgvCaLam.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCaLam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCaLam.Location = new System.Drawing.Point(52, 214);
             this.dgvCaLam.Name = "dgvCaLam";
