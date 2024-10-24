@@ -1,8 +1,8 @@
 
 --- View show tonaf bộ nhân viên
-CREATE VIEW vw_NhanVienList AS
-SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-FROM dbo.NhanVien
+        CREATE VIEW vw_NhanVienList AS
+        SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
+        FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
 -- Thêm 
@@ -44,45 +44,45 @@ END;
 -----  Function ----- 
 GO
 -- Name
-CREATE FUNCTION fn_SearchNhanVienByName (@TenNhanVien NVARCHAR(100))
-RETURNS @NhanVienList TABLE (
-    MaNhanVien INT,
-    TenNhanVien NVARCHAR(100),
-    SDT NVARCHAR(15),
-    Email NVARCHAR(100),
-    NgaySinh DATE,
-    DiaChi NVARCHAR(255)
-)
-AS
-BEGIN
-    INSERT INTO @NhanVienList
-    SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-    FROM dbo.NhanVien
-    WHERE TenNhanVien LIKE '%' + @TenNhanVien + '%'
+    CREATE FUNCTION fn_SearchNhanVienByName (@TenNhanVien NVARCHAR(100))
+    RETURNS @NhanVienList TABLE (
+        MaNhanVien INT,
+        TenNhanVien NVARCHAR(100),
+        SDT NVARCHAR(15),
+        Email NVARCHAR(100),
+        NgaySinh DATE,
+        DiaChi NVARCHAR(255)
+    )
+    AS
+    BEGIN
+        INSERT INTO @NhanVienList
+        SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
+        FROM dbo.NhanVien
+        WHERE TenNhanVien LIKE '%' + @TenNhanVien + '%'
     
-    RETURN
-END
-GO
+        RETURN
+    END
+    GO
 
--- Email
-CREATE FUNCTION fn_SearchNhanVienByEmail (@Email NVARCHAR(100))
-RETURNS @NhanVienList TABLE (
-    MaNhanVien INT,
-    TenNhanVien NVARCHAR(100),
-    SDT NVARCHAR(15),
-    Email NVARCHAR(100),
-    NgaySinh DATE,
-    DiaChi NVARCHAR(255)
-)
-AS
-BEGIN
-    INSERT INTO @NhanVienList
-    SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-    FROM dbo.NhanVien
-    WHERE Email LIKE '%' + @Email + '%'
+    -- Email
+    CREATE FUNCTION fn_SearchNhanVienByEmail (@Email NVARCHAR(100))
+    RETURNS @NhanVienList TABLE (
+        MaNhanVien INT,
+        TenNhanVien NVARCHAR(100),
+        SDT NVARCHAR(15),
+        Email NVARCHAR(100),
+        NgaySinh DATE,
+        DiaChi NVARCHAR(255)
+    )
+    AS
+    BEGIN
+        INSERT INTO @NhanVienList
+        SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
+        FROM dbo.NhanVien
+        WHERE Email LIKE '%' + @Email + '%'
     
-    RETURN
-END
+        RETURN
+    END
 GO
 
 CREATE FUNCTION fn_TimNhanVien

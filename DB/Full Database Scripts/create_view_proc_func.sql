@@ -187,7 +187,7 @@ AS SELECT *
 FROM DonHang
 GO
 
--- Thá»§ tá»¥c thÃªm má»™t record vÃ o báº£ng DonHang
+-- Thủ tục thêm một record vào bảng DonHang
 CREATE PROCEDURE sp_ThemDonHang
     @NgayDatHang DATE,
     @MaKhachHang INT,
@@ -257,7 +257,7 @@ GO
 
 
 -- Stored Procedure ----------------------------------------------------
--- ThÃªm khÃ¡ch hÃ ng:
+-- Thêm khách hàng:
 CREATE PROCEDURE sp_ThemKhachHang
 	@TenKhachHang NVARCHAR(255),
 	@DiaChi NVARCHAR(255),
@@ -271,7 +271,7 @@ BEGIN
 END;
 GO
 
--- Sá»­a khÃ¡ch hÃ ng
+-- Sửa khách hàng
 CREATE PROCEDURE sp_SuaKhachHang
     @MaKhachHang INT,
     @TenKhachHang NVARCHAR(255),
@@ -292,7 +292,7 @@ END;
 GO
 
 
--- XÃ³a khÃ¡ch hÃ ng
+-- Xóa khách hàng
 CREATE PROCEDURE sp_XoaKhachHang
     @MaKhachHang INT
 AS
@@ -336,12 +336,12 @@ BEGIN
     END
     ELSE
     BEGIN
-        PRINT 'TiÃªu chÃ­ tÃ¬m kiáº¿m khÃ´ng há»£p lá»‡.';
+        PRINT 'Tiêu chí tìm kiếm không hợp lệ.';
     END
 END;
 GO
 ------ FUNCTION
--- TÃ­nh tá»•ng sá»‘ khÃ¡ch hÃ ng
+-- Tính tổng số khách hàng
 CREATE FUNCTION fn_TinhTongKhachHang()
 RETURNS INT
 AS
@@ -800,7 +800,7 @@ SELECT MaGiamGia, TenGiamGia, NgayBatDau, NgayKetThuc, GiaTri
 FROM dbo.GiamGia
 GO
 -- Stored Procedure
--- Táº¡o
+-- Tạo
 CREATE PROCEDURE sp_ThemGiamGia
     @TenGiamGia NVARCHAR(100),
     @NgayBatDau DATE,
@@ -829,7 +829,7 @@ GO
 --     WHERE MaGiamGia = @MaGiamGia;
 -- END;
 -- GO
--- Láº¥y mÃ£ theo thá»i gian
+-- Lấy mã theo thời gian
 CREATE PROCEDURE sp_TimKiemMaGiamGiaTheoThoiGian
     @StartDate DATE,
     @EndDate DATE
@@ -841,7 +841,7 @@ BEGIN
 END;
 GO
 ---- Function
--- Kiá»ƒm tra mÃ£ giáº£m giÃ¡ há»£p lá»‡
+-- Kiểm tra mã giảm giá hợp lệ
 CREATE FUNCTION fn_CheckGiamGiaHopLe (
     @MaGiamGia INT
 )
@@ -857,27 +857,27 @@ BEGIN
 
     IF @NgayBatDau IS NULL
     BEGIN
-        SET @Result = N'MÃ£ giáº£m giÃ¡ khÃ´ng tá»“n táº¡i';
+        SET @Result = N'Mã giảm giá không tồn tại';
         RETURN @Result;
     END
 
     IF GETDATE() < @NgayBatDau
     BEGIN
-        SET @Result = N'MÃ£ giáº£m giÃ¡ chÆ°a cÃ³ hiá»‡u lá»±c';
+        SET @Result = N'Mã giảm giá chưa có hiệu lực';
     END
     ELSE IF GETDATE() > @NgayKetThuc
     BEGIN
-        SET @Result = N'MÃ£ giáº£m giÃ¡ Ä‘Ã£ háº¿t háº¡n';
+        SET @Result = N'Mã giảm giá đã hết hạn';
     END
     ELSE
     BEGIN
-        SET @Result = N'MÃ£ giáº£m giÃ¡ há»£p lá»‡';
+        SET @Result = N'Mã giảm giá hợp lệ';
     END
 
     RETURN @Result;
 END;
 GO
--- TÃ­nh giÃ¡ trá»‹ Ä‘Æ¡n sau khi giáº£m
+-- Tính giá trị đơn sau khi giảm
 CREATE FUNCTION fn_CalculateFinalPrice (
     @GiaTriDonHang DECIMAL(10, 2),
     @MaGiamGia INT
@@ -907,18 +907,18 @@ END;
 GO
 
 ------   TEST       -------
--- Xem cÃ¡c mÃ£ giáº£m giÃ¡ cÃ²n hiá»‡u lá»±c
+-- Xem các mã giảm giá còn hiệu lực
 -- -- View
 -- SELECT * FROM vw_GiamGia;
 -- -- Stored procedure
 -- EXEC sp_InsertGiamGia 
---     @TenGiamGia = N'Giáº£m giÃ¡ Valentine', 
+--     @TenGiamGia = N'Giảm giá Valentine', 
 --     @NgayBatDau = '2024-02-10', 
 --     @NgayKetThuc = '2024-02-20', 
 --     @GiaTri = 10.00;
 -- EXEC sp_UpdateGiamGia 
 --     @MaGiamGia = 1, 
---     @TenGiamGia = N'Giáº£m giÃ¡ Táº¿t 20245', 
+--     @TenGiamGia = N'Giảm giá Tết 20245', 
 --     @NgayBatDau = '2024-01-01', 
 --     @NgayKetThuc = '2024-01-31', 
 --     @GiaTri = 12.00;
@@ -936,13 +936,13 @@ GO
 
 
 --- View
---- XEM láº¡i
-CREATE VIEW vw_XemNhaCungCap AS
+--- XEM lại
+CREATE VIEW vw_ThongTinNhaCungCap AS
 	SELECT * FROM NhaCungCap
 GO
 -- STORED PROCEDURE 
 
--- - ThÃªm nhÃ  cung cáº¥p
+-- - Thêm nhà cung cấp
 CREATE PROCEDURE sp_ThemNhaCungCap
 	@TenNhaCungCap NVARCHAR(255),
 	@DiaChi NVARCHAR(255),
@@ -955,7 +955,7 @@ BEGIN
 END;
 GO
 
--- - Sá»­a nhÃ  cung cáº¥p
+-- - Sửa nhà cung cấp
 CREATE PROCEDURE sp_SuaNhaCungCap
 	@MaNhaCungCap INT,
 	@TenNhaCungCap NVARCHAR(255),
@@ -973,7 +973,7 @@ BEGIN
 END;
 GO
 
--- - XÃ³a nhÃ  cung cáº¥p
+-- - Xóa nhà cung cấp
 CREATE PROCEDURE sp_XoaNhaCungCap
 	@MaNhaCungCap INT
 AS
@@ -993,13 +993,13 @@ GO
 
 
 
---- View show tonaf bá»™ nhÃ¢n viÃªn
+--- View show tonaf bộ nhân viên
 CREATE VIEW vw_NhanVienList AS
 SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
 FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
--- ThÃªm
+-- Thêm
 CREATE PROCEDURE sp_ThemNhanVien
     @TenNhanVien NVARCHAR(100),
     @SDT NVARCHAR(15),
@@ -1077,24 +1077,24 @@ GO
 --SELECT * FROM vw_NhanVienList;
 ---- Add
 --EXEC sp_AddNhanVien 
---    @TenNhanVien = N'Nguyá»…n VÄƒn A',
+--    @TenNhanVien = N'Nguyễn Văn A',
 --    @SDT = '0912345678',
 --    @Email = 'nguyenvana@example.com',
 --    @NgaySinh = '1990-01-15',
---    @DiaChi = N'Sá»‘ 123, ÄÆ°á»ng ABC, Quáº­n 1',
+--    @DiaChi = N'Số 123, Đường ABC, Quận 1',
 --    @MatKhau = N'matkhau1';
 ---- Update
 --EXEC sp_UpdateNhanVien 
 --    @MaNhanVien = 1,
---    @TenNhanVien = N'Tráº§n Thá»‹ B',
+--    @TenNhanVien = N'Trần Thị B',
 --    @SDT = '0987654321',
 --    @Email = 'tranthib@example.com',
 --    @NgaySinh = '1992-02-20',
---    @DiaChi = N'Sá»‘ 456, ÄÆ°á»ng DEF, Quáº­n 2';
+--    @DiaChi = N'Số 456, Đường DEF, Quận 2';
 ----- Funtion
 --USE Linhkiendientu;
 --SELECT dbo.fn_GetTotalEmployees() AS TotalEmployees;
---SELECT * FROM dbo.fn_SearchNhanVienByName(N'Nguyá»…n');
+--SELECT * FROM dbo.fn_SearchNhanVienByName(N'Nguyễn');
 --SELECT * FROM dbo.fn_FilterNhanVienByDateRange('1990-01-01', '2000-12-31');
 --SELECT * FROM dbo.fn_SearchNhanVienByEmail(N'tranthi');
 

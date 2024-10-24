@@ -387,8 +387,11 @@
     <Content Include="DB\Entity SQL scripts\Trigger\Trigger.sql" />
     <Content Include="DB\Entity SQL scripts\Trigger\trigger_CheckInStockAndWarming %281%29.sql" />
     <Content Include="DB\Full Database Scripts\Create table.sql" />
+    <Content Include="DB\Full Database Scripts\create_view_proc_func.sql" />
     <Content Include="DB\Full Database Scripts\Data.sql" />
     <Content Include="DB\Full Database Scripts\Trg_v_func.sql" />
+    <Content Include="DB\Trigger\Khoa.sql" />
+    <Content Include="DB\Trigger\Nhân.sql" />
     <None Include="Resources\ssd_256gb_samsung.png" />
     <None Include="Resources\bomach_dell_inspiron.jpg" />
     <None Include="Resources\ssd_512gb_wd_black.jpg" />

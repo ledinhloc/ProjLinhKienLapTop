@@ -83,14 +83,10 @@ namespace ProCuaHangLinhKienLaptop
             f.ShowDialog();
         }
 
-        private void fAdmin_Load(object sender, EventArgs e)
+        private void chươngTrìnhGiảmGiáToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void printToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            fKhuyenMai f =new fKhuyenMai();
+            f.ShowDialog();
         }
     }
 }

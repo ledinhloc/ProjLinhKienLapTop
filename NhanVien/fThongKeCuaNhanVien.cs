@@ -251,5 +251,41 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             LoadChartLuongThuong(ngayBD, ngayKT);
             LoadChartCaLam(ngayBD, ngayKT);
         }
+
+        private void btnCapNhatThuong_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validate the new bonus value
+                if (!double.TryParse(txtThuong.Text, out double thuong) || thuong < 0)
+                {
+                    MessageBox.Show("Vui lòng nhập một giá trị thưởng hợp lệ.");
+                    return;
+                }
+
+                // SQL update query for bonus
+                SqlParameter[] sqlParameters = new SqlParameter[]
+                {
+            new SqlParameter("@MaNhanVien", maNhanVien),
+            new SqlParameter("@Thuong", thuong)
+                };
+
+                // Update the bonus value for the current employee (modify the query as needed)
+                provider.ExecuteNonQuery(CommandType.Text, "UPDATE Luong SET Thuong = @Thuong WHERE MaNhanVien = @MaNhanVien", sqlParameters);
+
+                MessageBox.Show("Cập nhật thưởng thành công!");
+
+                // Reload the data to refresh the chart and labels
+                DateTime ngayBD = Convert.ToDateTime(cboNamBD.Text + "-" + cboThangBD.Text + "-01");
+                DateTime ngayKT = Convert.ToDateTime(cboNamKT.Text + "-" + cboThangKT.Text + "-01");
+
+                LoadChartLuongThuong(ngayBD, ngayKT);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+            }
+        }
     }
 }

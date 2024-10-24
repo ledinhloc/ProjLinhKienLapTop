@@ -133,6 +133,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "fLoaiLinhKien";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản Lý Loại Linh Kiện";
             this.Load += new System.EventHandler(this.fLoaiLinhKien_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

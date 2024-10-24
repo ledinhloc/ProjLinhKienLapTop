@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btnXem = new System.Windows.Forms.Button();
             this.chartLuongThuong = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartCaLam = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -57,6 +57,8 @@
             this.btnThangHienTai = new System.Windows.Forms.Button();
             this.btnNamNay = new System.Windows.Forms.Button();
             this.btnThangTruoc = new System.Windows.Forms.Button();
+            this.btnCapNhatThuong = new System.Windows.Forms.Button();
+            this.txtThuong = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartLuongThuong)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartCaLam)).BeginInit();
             this.SuspendLayout();
@@ -75,32 +77,32 @@
             // 
             // chartLuongThuong
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartLuongThuong.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartLuongThuong.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chartLuongThuong.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartLuongThuong.Legends.Add(legend3);
             this.chartLuongThuong.Location = new System.Drawing.Point(44, 101);
             this.chartLuongThuong.Name = "chartLuongThuong";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartLuongThuong.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartLuongThuong.Series.Add(series3);
             this.chartLuongThuong.Size = new System.Drawing.Size(506, 325);
             this.chartLuongThuong.TabIndex = 2;
             this.chartLuongThuong.Text = "chart1";
             // 
             // chartCaLam
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartCaLam.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartCaLam.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chartCaLam.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartCaLam.Legends.Add(legend4);
             this.chartCaLam.Location = new System.Drawing.Point(575, 101);
             this.chartCaLam.Name = "chartCaLam";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartCaLam.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartCaLam.Series.Add(series4);
             this.chartCaLam.Size = new System.Drawing.Size(477, 325);
             this.chartCaLam.TabIndex = 2;
             this.chartCaLam.Text = "chart1";
@@ -138,7 +140,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(277, 441);
+            this.label4.Location = new System.Drawing.Point(79, 492);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(69, 20);
             this.label4.TabIndex = 3;
@@ -198,7 +200,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(190, 492);
+            this.label6.Location = new System.Drawing.Point(316, 467);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 20);
             this.label6.TabIndex = 3;
@@ -230,7 +232,7 @@
             this.lblTongThuong.AutoSize = true;
             this.lblTongThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongThuong.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTongThuong.Location = new System.Drawing.Point(340, 441);
+            this.lblTongThuong.Location = new System.Drawing.Point(154, 492);
             this.lblTongThuong.Name = "lblTongThuong";
             this.lblTongThuong.Size = new System.Drawing.Size(59, 20);
             this.lblTongThuong.TabIndex = 6;
@@ -252,7 +254,7 @@
             this.lblTongLuong.AutoSize = true;
             this.lblTongLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongLuong.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTongLuong.Location = new System.Drawing.Point(141, 442);
+            this.lblTongLuong.Location = new System.Drawing.Point(154, 442);
             this.lblTongLuong.Name = "lblTongLuong";
             this.lblTongLuong.Size = new System.Drawing.Size(59, 20);
             this.lblTongLuong.TabIndex = 6;
@@ -263,7 +265,7 @@
             this.lblTongLuongThuong.AutoSize = true;
             this.lblTongLuongThuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongLuongThuong.ForeColor = System.Drawing.Color.OrangeRed;
-            this.lblTongLuongThuong.Location = new System.Drawing.Point(238, 492);
+            this.lblTongLuongThuong.Location = new System.Drawing.Point(373, 467);
             this.lblTongLuongThuong.Name = "lblTongLuongThuong";
             this.lblTongLuongThuong.Size = new System.Drawing.Size(59, 20);
             this.lblTongLuongThuong.TabIndex = 6;
@@ -299,11 +301,32 @@
             this.btnThangTruoc.UseVisualStyleBackColor = true;
             this.btnThangTruoc.Click += new System.EventHandler(this.btnThangTruoc_Click);
             // 
+            // btnCapNhatThuong
+            // 
+            this.btnCapNhatThuong.BackColor = System.Drawing.Color.MistyRose;
+            this.btnCapNhatThuong.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCapNhatThuong.Location = new System.Drawing.Point(236, 521);
+            this.btnCapNhatThuong.Name = "btnCapNhatThuong";
+            this.btnCapNhatThuong.Size = new System.Drawing.Size(75, 29);
+            this.btnCapNhatThuong.TabIndex = 7;
+            this.btnCapNhatThuong.Text = "Cập nhật";
+            this.btnCapNhatThuong.UseVisualStyleBackColor = false;
+            this.btnCapNhatThuong.Click += new System.EventHandler(this.btnCapNhatThuong_Click);
+            // 
+            // txtThuong
+            // 
+            this.txtThuong.Location = new System.Drawing.Point(83, 528);
+            this.txtThuong.Name = "txtThuong";
+            this.txtThuong.Size = new System.Drawing.Size(132, 22);
+            this.txtThuong.TabIndex = 8;
+            // 
             // fThongKeCuaNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 547);
+            this.ClientSize = new System.Drawing.Size(1064, 562);
+            this.Controls.Add(this.txtThuong);
+            this.Controls.Add(this.btnCapNhatThuong);
             this.Controls.Add(this.lblCaNghi);
             this.Controls.Add(this.lblTongLuongThuong);
             this.Controls.Add(this.lblTongLuong);
@@ -362,5 +385,7 @@
         private System.Windows.Forms.Button btnThangHienTai;
         private System.Windows.Forms.Button btnNamNay;
         private System.Windows.Forms.Button btnThangTruoc;
+        private System.Windows.Forms.Button btnCapNhatThuong;
+        private System.Windows.Forms.TextBox txtThuong;
     }
 }

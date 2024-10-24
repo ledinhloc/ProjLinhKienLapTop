@@ -422,7 +422,6 @@
             this.btnTimLK.TabIndex = 40;
             this.btnTimLK.Text = "Tìm";
             this.btnTimLK.UseVisualStyleBackColor = true;
-            this.btnTimLK.Click += new System.EventHandler(this.btnTimLK_Click);
             // 
             // fTaoDonHang
             // 
