@@ -310,7 +310,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         }
 
         // Khi xóa linh kiện
-        private void dgv_DonHang_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        private void dgv_DonHang_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
         {
             int maLinhKien = Convert.ToInt32(e.Row.Cells[0].Value);
             var itemToRemove = donHangItems.FirstOrDefault(d => d.MaLinhKien == maLinhKien);
@@ -351,6 +351,8 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 flowLayoutPanel.Controls.Add(linhKienUC);
             }
         }
+
+
     }
     public class DonHangItem
     {
