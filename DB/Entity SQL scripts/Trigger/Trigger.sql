@@ -21,6 +21,7 @@ BEGIN
 	PRINT 'Da cap nhat Luong va TongNhan trong bang Luong'
 END;
 
+Go
 --khi them hoac thay doi trang thai CoLichLam thi Cap Nhat lai
 CREATE TRIGGER trg_CapNhatSoCaTrongLuong
 ON CoLichLam
@@ -66,7 +67,7 @@ BEGIN
     WHERE l.MaNhanVien = (SELECT MaNhanVien FROM deleted);
 	PRINT 'Da cap nhat Luong va TongNhan trong bang Luong'
 END;
-
+Go
 -- trigger kiem tra co lich lam viec bị trung khong (cung ngay, cung ca)
 CREATE TRIGGER TG_TrungLichLamViec
 ON dbo.LichLamViec
@@ -86,21 +87,56 @@ BEGIN
     END
 END
 
--- trigger khi them colichlam cho nhan vien se them neu da them thi khong them nua
-CREATE TRIGGER trg_KiemTraKhiThemLuong
-ON dbo.Luong
-AFTER INSERT, UPDATE
+
+Go
+-- Trigger cập nhật số lượng tồn kho khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang
+ON PhieuNhapHang
+AFTER INSERT
 AS
 BEGIN
-    IF EXISTS (
-        SELECT 1
-        FROM inserted i
-        JOIN dbo.Luong l ON  i.MaLuong <> l.MaLuong 
-                       AND i.MaNhanVien = l.MaNhanVien
-                       AND i.ThoiGian = l.ThoiGian
-    )
-    BEGIN
-        -- Nếu trùng rollback
-        ROLLBACK TRANSACTION;
-    END
-END
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho + inserted.SoLuong
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật giá nhập khi có phiếu nhập hàng mới
+CREATE TRIGGER trg_AfterInsert_PhieuNhapHang_UpdatePrice
+ON PhieuNhapHang
+AFTER INSERT
+AS
+BEGIN
+    UPDATE LinhKien
+    SET GiaNhap = inserted.GiaNhap
+    FROM LinhKien
+    INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
+END;
+GO
+
+-- Trigger cập nhật số lượng tồn kho khi xóa phiếu nhập hàng
+CREATE TRIGGER trg_AfterDelete_PhieuNhapHang_UpdateStock
+ON PhieuNhapHang
+AFTER DELETE
+AS
+BEGIN
+    UPDATE LinhKien
+    SET SoLuongTonKho = LinhKien.SoLuongTonKho - deleted.SoLuong
+    FROM LinhKien
+    INNER JOIN deleted ON LinhKien.MaLinhKien = deleted.MaLinhKien;
+END;
+GO
+CREATE VIEW vw_DanhSachPhieuNhap AS
+SELECT 
+    p.MaPhieuNhap,
+    p.NgayNhap,
+    p.GiaNhap,
+    p.SoLuong,
+    l.TenLinhKien,
+    p.MaLinhKien
+FROM 
+    PhieuNhapHang p
+JOIN 
+    LinhKien l ON p.MaLinhKien = l.MaLinhKien;
+GO

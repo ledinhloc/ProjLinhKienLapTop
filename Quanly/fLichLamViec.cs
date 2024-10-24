@@ -27,24 +27,12 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         }
         public void LoadDuLieu()
         {
-            DateTime ngay = dtpNgay.Value;
-            DateTime ngayKT = ngay.AddDays(3);
-
-
-
-            SqlParameter[] sqlParameters = new SqlParameter[]
-            {
-                new SqlParameter("@ngayBD", ngay.ToString("yyyy-MM-dd")),
-                new SqlParameter("@ngayKT", ngayKT.ToString("yyyy-MM-dd"))
-               };
-
             try
             {
-
-                DataTable data = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM fn_XemLichLamVaThoiGian(@ngayBD, @ngayKT)", sqlParameters);
+                DateTime ngay = dtpNgay.Value;
+                DataTable data = dataProvider.ExecuteReader(CommandType.Text, "SELECT * FROM fn_XemLichLamTrongNgay(@ngay)", new SqlParameter("@ngay", ngay.ToString("yyyy-MM-dd") ));
 
                 flpLichLam.Controls.Clear();
-
                 foreach (DataRow row in data.Rows)
                 {
                     int maLichLamViec = int.Parse(row["MaLichLamViec"].ToString());
@@ -61,8 +49,8 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             {
                 MessageBox.Show("Da co loi " + ex.Message);
             }
-
         }
+        
         private void dtpNgay_ValueChanged(object sender, EventArgs e)
         {
             LoadDuLieu();

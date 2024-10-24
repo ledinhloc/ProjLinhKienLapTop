@@ -5,7 +5,7 @@ SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
 FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
--- Thêm
+-- Thêm 
 CREATE PROCEDURE sp_ThemNhanVien
     @TenNhanVien NVARCHAR(100),
     @SDT NVARCHAR(15),
@@ -18,6 +18,28 @@ BEGIN
     INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau, ChucVu)
     VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau, 'nv')
 END
+
+--sua thong tin nhan vien *
+CREATE PROCEDURE sp_SuaNhanVien
+    @MaNhanVien INT,
+    @TenNhanVien NVARCHAR(255),
+    @DiaChi NVARCHAR(255),
+    @SDT NVARCHAR(15),
+    @Email NVARCHAR(100),
+    @MatKhau NVARCHAR(100),
+    @NgaySinh DATE
+AS
+BEGIN
+    UPDATE NhanVien
+    SET
+        TenNhanVien = @TenNhanVien,
+        DiaChi = @DiaChi,
+        SDT = @SDT,
+        Email = @Email,
+        MatKhau = @MatKhau,
+        NgaySinh = @NgaySinh
+    WHERE MaNhanVien = @MaNhanVien;
+END;
 
 -----  Function ----- 
 GO

@@ -35,7 +35,7 @@ GO
 
 --CoLichLam(MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
 
---them
+--them ***
 CREATE PROCEDURE sp_ThemCoLichLam
     @MaNhanVien INT,
     @MaLichLamViec INT,
@@ -62,7 +62,7 @@ BEGIN
 END;
 GO
 
---xoa
+--xoa ***
 CREATE PROCEDURE sp_XoaCoLichLam
     @MaNhanVien INT,
     @MaLichLamViec INT
@@ -77,8 +77,8 @@ GO
 --Func
 
 GO
----Xem lich lam và thoi gian *
-CREATE FUNCTION dbo.fn_XemLichLamVaThoiGian (@ngayBD DATE, @ngayKT DATE)
+---Xem lich lam trong ngay **
+CREATE FUNCTION dbo.fn_XemLichLamTrongNgay (@ngay DATE)
 RETURNS TABLE
 AS
 RETURN
@@ -93,7 +93,7 @@ RETURN
     FROM 
         LichLamViec llv
 	INNER JOIN CaLamViec clv on clv.MaCa = llv.MaCa
-    WHERE llv.NgayLam BETWEEN @ngayBD AND @ngayKT
+    WHERE llv.NgayLam = @ngay 
 );
 
 GO

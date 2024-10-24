@@ -33,11 +33,6 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             dtpNgay_ValueChanged(sender, e);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dtpNgay_ValueChanged(object sender, EventArgs e)
         {
             DateTime ngayDau = dtpNgay.Value;

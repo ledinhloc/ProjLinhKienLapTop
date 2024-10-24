@@ -98,3 +98,18 @@ RETURN
 	FROM LoaiLinhKien
 )
 GO
+
+CREATE FUNCTION fn_ThongKeHTKTheoLinhKien()
+RETURNS TABLE
+RETURN (
+	SELECT TenLinhKien, dbo.fn_HTKTheoLinhKien(MaLinhKien) as SoLuong
+	FROM LinhKien
+)
+GO
+
+CREATE FUNCTION fn_ThongKeHTKTheoLoaiLinhKien()
+RETURNS TABLE
+RETURN(
+	SELECT TenLoaiLinhKien, dbo.fn_HTKTheoLoaiLinhKien(MaLoaiLinhKien) as SoLuong
+	FROM LoaiLinhKien
+)

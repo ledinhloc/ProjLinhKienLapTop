@@ -18,6 +18,8 @@ namespace ProCuaHangLinhKienLaptop.Quanly
         public fCaLamViec()
         {
             InitializeComponent();
+
+            //them giao dien
             for (int i = 0;i <24; i++)
             {
                 cboGioBD.Items.Add(i.ToString());
@@ -54,7 +56,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             {
                 dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemCaLamViec", sqlParameters);
                 fCaLamViec_Load(sender, e);
-
             }
             catch (Exception ex)
             {
@@ -67,7 +68,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             string thoiGianBD = cboGioBD.SelectedItem + ":" + cboPhutBD.SelectedItem + ":00";
             string thoiGianKT = cboGioKT.SelectedItem + ":" + cboPhutKT.SelectedItem + ":00";
 
-            //MessageBox.Show(gioBD);
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@MaCa", txtMaCa.Text),

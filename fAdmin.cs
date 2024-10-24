@@ -1,4 +1,5 @@
-﻿using ProCuaHangLinhKienLaptop.Quanly;
+﻿using ProCuaHangLinhKienLaptop.NhanVien;
+using ProCuaHangLinhKienLaptop.Quanly;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,6 +69,28 @@ namespace ProCuaHangLinhKienLaptop
         private void doanhThuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void rToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fLoaiLinhKien f = new fLoaiLinhKien();
+            f.ShowDialog();
+        }
+
+        private void danhSáchKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fKhachHang f = new fKhachHang();
+            f.ShowDialog();
+        }
+
+        private void fAdmin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

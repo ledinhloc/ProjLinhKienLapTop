@@ -36,7 +36,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                     new SqlParameter("@EMAIL", Email)
                 };
                 dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, query, parameters);
-                MessageBox.Show("Thêm linh kiện thành công!");
+                MessageBox.Show("Thêm nhà cung cấp thành công!");
 
             }
             catch (Exception ex)

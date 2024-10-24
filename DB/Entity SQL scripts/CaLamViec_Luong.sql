@@ -48,7 +48,7 @@ BEGIN
 END
 GO
 
--- fThemCaLam 
+-- fThemCaLam
 CREATE PROCEDURE sp_ThemLuong
     @Luong DECIMAL(15, 2),
     @LuongGio DECIMAL(15, 2),
@@ -62,19 +62,6 @@ BEGIN
     INSERT INTO Luong ( Luong,LuongGio, Thuong,TongNhan, ThoiGian, SoCa, MaNhanVien)
     VALUES ( @Luong,@LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
 END;
---them
--- CREATE PROCEDURE sp_ThemLuong
---     @MaLuong INT,
---     @Luong DECIMAL(15, 2),
---     @Thuong DECIMAL(15, 2),
---     @ThoiGian DATE,
---     @SoCa INT,
---     @MaNhanVien INT
--- AS
--- BEGIN
---     INSERT INTO Luong (MaLuong, Luong, Thuong, ThoiGian, SoCa, MaNhanVien)
---     VALUES (@MaLuong, @Luong, @Thuong, @ThoiGian, @SoCa, @MaNhanVien);
--- END;
 
 --sua
 -- CREATE PROCEDURE sp_SuaLuong
@@ -104,7 +91,7 @@ END;
 --     WHERE MaLuong = @MaLuong;
 -- END;
 
---Function
+--Function ****
 CREATE FUNCTION fn_XemLuongTheoNhanVien
 (
     @MaNhanVien INT,

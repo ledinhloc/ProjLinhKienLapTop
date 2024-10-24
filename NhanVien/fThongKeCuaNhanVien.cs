@@ -16,34 +16,27 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
     public partial class fThongKeCuaNhanVien : Form
     {
         public DataProvider provider = new DataProvider();
-        public fThongKeCuaNhanVien()
+        private string maNhanVien;
+        public fThongKeCuaNhanVien(string maNhanVien)
         {
             InitializeComponent();
-
-            //du lieu cbo
+            this.maNhanVien = maNhanVien;
+            //du lieu cbo thang
             for (int i = 1; i <= 12; i++)
             {
-                cboThangBD.Items.Add(i.ToString("D2")); 
+                cboThangBD.Items.Add(i.ToString("D2"));
+                cboThangKT.Items.Add(i.ToString("D2"));
             }
-            cboThangBD.SelectedIndex = 0; 
-
+            cboThangBD.SelectedIndex = 0;
+            cboThangKT.SelectedIndex = 11;
+            //du lieu cbo nam
             int currentYear = DateTime.Now.Year;
             for (int i = currentYear - 5; i <= currentYear + 5; i++) 
             {
                 cboNamBD.Items.Add(i.ToString());
-            }
-            cboNamBD.SelectedItem = currentYear.ToString();
-
-            for (int i = 1; i <= 12; i++)
-            {
-                cboThangKT.Items.Add(i.ToString("D2")); 
-            }
-            cboThangKT.SelectedIndex = 11; 
-
-            for (int i = currentYear - 5; i <= currentYear + 5; i++) 
-            {
                 cboNamKT.Items.Add(i.ToString());
             }
+            cboNamBD.SelectedItem = currentYear.ToString();
             cboNamKT.SelectedItem = currentYear.ToString();
 
         }
@@ -81,7 +74,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             // try van du lieu
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@MaNhanVien", 1),
+                new SqlParameter("@MaNhanVien", maNhanVien),
                 new SqlParameter("@NgayBD", ngayBD.ToString("yyyy-MM-dd")),
                 new SqlParameter("@NgayKT", ngayKT.ToString("yyyy-MM-dd")),
             };
@@ -94,24 +87,18 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             foreach(DataRow row in table.Rows)
             {
                 string thoiGian = row["Thang"].ToString() + "-" + row["Nam"].ToString();
-
                 int caLam = Convert.ToInt32(row["HoanThanh"].ToString());
                 int caNghi = Convert.ToInt32(row["Chua"].ToString());
-
                 tongCaLam += caLam;
                 tongCaNghi += caNghi;
-
                 seriesCaLam.Points.AddXY(thoiGian, caLam);
                 seriesCaNghi.Points.AddXY(thoiGian, caNghi);
             }
-
             lblCaLam.Text = tongCaLam.ToString();
             lblCaNghi.Text = tongCaNghi.ToString();
-
             // Thêm các series vào biểu đồ
             chartCaLam.Series.Add(seriesCaLam);
             chartCaLam.Series.Add(seriesCaNghi);
-
             // Tùy chỉnh biểu đồ
             chartCaLam.ChartAreas["CaLamCaNghiArea"].AxisX.Title = "Tháng";
             chartCaLam.ChartAreas["CaLamCaNghiArea"].AxisY.Title = "Số Ca";
@@ -155,20 +142,17 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             //truy van sql
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@MaNhanVien", 1),
+                new SqlParameter("@MaNhanVien", maNhanVien),
                 new SqlParameter("@NgayBD",ngayBD.ToString("yyyy-MM-dd")),
                 new SqlParameter("@NgayKT",ngayKT.ToString("yyyy-MM-dd"))
-
             };
             DataTable table = provider.ExecuteReader(CommandType.Text, "Select * FROM fn_XemLuongTheoNhanVien(@MaNhanVien, @NgayBD, @NgayKT) ORDER BY ThoiGian ", sqlParameters);
             double tongLuong = 0;
-            double tongThuong = 0;
-            
+            double tongThuong = 0;            
             foreach (DataRow row in table.Rows)
             {
                 DateTime thangNam = DateTime.Parse(row["ThoiGian"].ToString());
                 string thangLuong = thangNam.ToString("MM-yy");
-
                 double luong = double.Parse(row["Luong"].ToString());
                 double thuong = double.Parse(row["Thuong"].ToString());
                 double tong = luong + thuong;
@@ -188,7 +172,6 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 // Thêm điểm vào series Thưởng và gán nhãn
                 seriesThuong.Points.AddXY(thangLuong, thuong);
                 seriesThuong.Points[seriesThuong.Points.Count - 1].Label = thuongFormatted;  
-
                 seriesTong.Points.AddXY(thangLuong, tong);
                 seriesTong.Points[seriesThuong.Points.Count - 1].Label = tongFormatted;
             }
@@ -207,7 +190,6 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             chartLuongThuong.ChartAreas["LuongThuongArea"].AxisY.Title = "Giá Trị (VND)";
             chartLuongThuong.ChartAreas["LuongThuongArea"].AxisX.LabelStyle.Angle = -45;
             chartLuongThuong.ChartAreas["LuongThuongArea"].AxisX.Interval = 1;
-
         }
 
         private void btnXem_Click(object sender, EventArgs e)

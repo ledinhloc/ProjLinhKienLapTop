@@ -15,10 +15,11 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
     public partial class fThongTinNhanVien : Form
     {
         DataProvider dataProvider = new DataProvider();
-        int maNhanVien = 1;
-        public fThongTinNhanVien()
+        int maNhanVien = 0;
+        public fThongTinNhanVien(int maNhanVien)
         {
             InitializeComponent();
+            this.maNhanVien = maNhanVien;
         }
 
         private void fThongTinNhanVien_Load(object sender, EventArgs e)
@@ -49,10 +50,9 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@MaNhanVien", maNhanVien),
+                new SqlParameter("@MaNhanVien", maNhanVien.ToString()),
                 new SqlParameter("@TenNhanVien", txtTen.Text),
                 new SqlParameter("@DiaChi", txtDiaChi.Text),
                 new SqlParameter("@SDT", txtSDT.Text),
@@ -63,24 +63,13 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
             try
             {
-                int kq = dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SuaNhanVien", sqlParameters);
-                if (kq > 0)
-                {
-                    MessageBox.Show(kq+"Đã sửa thành công", "Thông Báo");
-                }
-                else
-                {
-                    MessageBox.Show("Sửa thất bại", "Thông Báo");
-                }
+                dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SuaNhanVien", sqlParameters);
+                MessageBox.Show("Đã sửa thành công", "Thông Báo");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Đã có lỗi xảy ra: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
-
-
         }
 
         private void chkMatKhau_CheckedChanged(object sender, EventArgs e)

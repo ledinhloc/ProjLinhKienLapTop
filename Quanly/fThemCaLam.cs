@@ -42,15 +42,12 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             dgvNhanVien.Columns["MaNhanVien"].Visible = false;
         }
 
-        private void btnThem_Click(object sender, EventArgs e)
+        private void themLuongTrongfThemCaLam()
         {
-
-
-            //them Luong trong tháng của nhân viên 
             try
-            {
-                SqlParameter[] parameters = new SqlParameter[]
                 {
+                    SqlParameter[] parameters = new SqlParameter[]
+                    {
                 new SqlParameter("@Luong", Decimal.Parse("0.00")),
                 new SqlParameter("@LuongGIo", Decimal.Parse("0.00")),
                 new SqlParameter("@Thuong", Decimal.Parse("0.00")),
@@ -58,20 +55,35 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 new SqlParameter("@ThoiGian", this.thoiGian.ToString("yyyy-MM")+"-01"),
                 new SqlParameter("@SoCa", Convert.ToInt32("0")),
                 new SqlParameter("@MaNhanVien", cboNhanVien.SelectedValue),
-                };
+                    };
 
-                dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemLuong", parameters);
-            }
-            catch (Exception ex)
+                    dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemLuong", parameters);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("co loi " + ex.Message);
+                }
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            // kiem tra trong thang chua co lich lam thi them vao 
+            SqlParameter[] para = new SqlParameter[]
             {
-                MessageBox.Show("co loi 11111" + ex.Message);
-            }           
+                new SqlParameter("@ThoiGian", this.thoiGian.ToString("yyyy-MM")+"-01"),
+                new SqlParameter("@MaNhanVien", cboNhanVien.SelectedValue)
+            };
+            object data = dataProvider.ExecuteScalar(CommandType.Text, "SELECT Count(*) FROM Luong WHERE ThoiGian = @ThoiGian AND MaNhanVien = @MaNhanVien", para);           
+            if (data.ToString() == "0")
+            {
+                themLuongTrongfThemCaLam();
+            }
 
             //them co lich lam
             try
             {
                 SqlParameter[] sqlParameters = new SqlParameter[]
-                  {
+                {
                 new SqlParameter("@MaNhanVien", cboNhanVien.SelectedValue),
                 new SqlParameter("@MaLichLamViec", maLichLamViec),
                 new SqlParameter("@DanhGia", txtDanhGia.Text),
@@ -80,7 +92,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
                 dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemCoLichLam", sqlParameters);
                 fThemCaLam_Load(sender, e);
-
             }
             catch (Exception ex)
             {
@@ -97,7 +108,6 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 new SqlParameter("@DanhGia", txtDanhGia.Text),
                 new SqlParameter("@TrangThai", "HoanThanh")
                 };
-
             try
             {
                 dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_SuaCoLichLam", sqlParameters);

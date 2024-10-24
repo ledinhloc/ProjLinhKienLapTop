@@ -148,7 +148,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                     new SqlParameter("@MaGiamGia", maGiamGia)
                 };
                 object result = dataProvider.ExecuteScalar(CommandType.Text, query, parameters);
-
+                
                 lblKetQua.Text = result.ToString();
                 if (result.ToString() == "Mã giảm giá hợp lệ")
                 {

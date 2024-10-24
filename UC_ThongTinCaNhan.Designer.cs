@@ -40,6 +40,7 @@
             this.txtSDT = new System.Windows.Forms.TextBox();
             this.txtDiaChi = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.btnXoaThongKe = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -167,11 +168,24 @@
             this.txtEmail.TabIndex = 29;
             this.txtEmail.Text = "abcdefgh@123456.com";
             // 
+            // btnXoaThongKe
+            // 
+            this.btnXoaThongKe.AutoSize = true;
+            this.btnXoaThongKe.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXoaThongKe.Location = new System.Drawing.Point(377, 289);
+            this.btnXoaThongKe.Name = "btnXoaThongKe";
+            this.btnXoaThongKe.Size = new System.Drawing.Size(126, 35);
+            this.btnXoaThongKe.TabIndex = 30;
+            this.btnXoaThongKe.Text = "Thống kê";
+            this.btnXoaThongKe.UseVisualStyleBackColor = true;
+            this.btnXoaThongKe.Click += new System.EventHandler(this.btnXoaThongKe_Click);
+            // 
             // UC_ThongTinCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.btnXoaThongKe);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtDiaChi);
             this.Controls.Add(this.txtSDT);
@@ -185,7 +199,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UC_ThongTinCaNhan";
-            this.Size = new System.Drawing.Size(885, 303);
+            this.Size = new System.Drawing.Size(885, 347);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,5 +219,6 @@
         private System.Windows.Forms.TextBox txtSDT;
         private System.Windows.Forms.TextBox txtDiaChi;
         private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Button btnXoaThongKe;
     }
 }

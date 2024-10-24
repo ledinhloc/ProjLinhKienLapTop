@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProCuaHangLinhKienLaptop.NhanVien;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace ProCuaHangLinhKienLaptop
 {
     public partial class UC_ThongTinCaNhan : UserControl
     {
+        private string maNhanVien;
         public UC_ThongTinCaNhan()
         {
             InitializeComponent();
@@ -25,11 +27,18 @@ namespace ProCuaHangLinhKienLaptop
         {
             // Cập nhật các trường trên UserControl
             txtMaNhanVien.Text = manv.ToString();
+            this.maNhanVien = manv.ToString();
             txtTenNhanVien.Text = tennv;
             dtpNgaySinh.Value = ngaysinh;
             txtSDT.Text = sdt;
             txtEmail.Text = email;
             txtDiaChi.Text = diachi;
+        }
+
+        private void btnXoaThongKe_Click(object sender, EventArgs e)
+        {
+            fThongKeCuaNhanVien f = new fThongKeCuaNhanVien(maNhanVien);
+            f.ShowDialog();
         }
     }
 }
