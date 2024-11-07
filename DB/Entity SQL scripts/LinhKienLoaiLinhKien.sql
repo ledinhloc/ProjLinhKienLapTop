@@ -16,7 +16,7 @@ CREATE VIEW vw_ThongTinLoaiLinhKien AS
 GO
 
 -- Stored Procedure
--- - Thêm linh kiện
+-- Thêm linh kiện
 CREATE PROCEDURE sp_ThemLinhKien
     @TenLinhKien NVARCHAR(255),
     @MoTaChiTiet NVARCHAR(1000),
@@ -28,76 +28,136 @@ CREATE PROCEDURE sp_ThemLinhKien
     @MaNhaCungCap INT
 AS
 BEGIN
-    INSERT INTO LinhKien (TenLinhKien, MoTaChiTiet, HinhAnh, GiaBan, GiaNhap, SoLuongTonKho, MaLoaiLinhKien, MaNhaCungCap)
-    VALUES (@TenLinhKien, @MoTaChiTiet, @HinhAnh, @GiaBan, @GiaNhap, @SoLuongTonKho, @MaLoaiLinhKien, @MaNhaCungCap);
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO LinhKien (TenLinhKien, MoTaChiTiet, HinhAnh, GiaBan, GiaNhap, SoLuongTonKho, MaLoaiLinhKien, MaNhaCungCap)
+        VALUES (@TenLinhKien, @MoTaChiTiet, @HinhAnh, @GiaBan, @GiaNhap, @SoLuongTonKho, @MaLoaiLinhKien, @MaNhaCungCap);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm linh kiện.', 16, 1);
+    END CATCH
 END;
 GO
 
--- - Sửa linh kiện
+-- Sửa linh kiện
 CREATE PROCEDURE sp_SuaLinhKien
-	@MaLinhKien INT,
-	@TenLinhKien NVARCHAR(255),
+    @MaLinhKien INT,
+    @TenLinhKien NVARCHAR(255),
     @MoTaChiTiet NVARCHAR(1000),
     @HinhAnh NVARCHAR(255),
     @GiaBan DECIMAL(15, 2),
     @GiaNhap DECIMAL(15, 2),
     @SoLuongTonKho INT,
-	@MaLoaiLinhKien INT,
+    @MaLoaiLinhKien INT,
     @MaNhaCungCap INT
 AS
 BEGIN
-	UPDATE LinhKien
-	SET TenLinhKien = @TenLinhKien,
-		MoTaChiTiet = @MoTaChiTiet,
-		HinhAnh = @HinhAnh,
-		GiaBan = @GiaBan,
-		GiaNhap = @GiaNhap,
-		SoLuongTonKho = @SoLuongTonKho,
-		MaLoaiLinhKien = @MaLoaiLinhKien,
-		MaNhaCungCap = @MaNhaCungCap
-	WHERE MaLinhKien = @MaLinhKien;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        UPDATE LinhKien
+        SET TenLinhKien = @TenLinhKien,
+            MoTaChiTiet = @MoTaChiTiet,
+            HinhAnh = @HinhAnh,
+            GiaBan = @GiaBan,
+            GiaNhap = @GiaNhap,
+            SoLuongTonKho = @SoLuongTonKho,
+            MaLoaiLinhKien = @MaLoaiLinhKien,
+            MaNhaCungCap = @MaNhaCungCap
+        WHERE MaLinhKien = @MaLinhKien;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi sửa linh kiện.', 16, 1);
+    END CATCH
 END;
 GO
 
--- - Xóa Linh kiện
+-- Xóa linh kiện
 CREATE PROCEDURE sp_XoaLinhKien
-	@MaLinhKien INT
+    @MaLinhKien INT
 AS
 BEGIN
-    DELETE FROM LinhKien WHERE MaLinhKien = @MaLinhKien;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        DELETE FROM LinhKien
+        WHERE MaLinhKien = @MaLinhKien;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi xóa linh kiện.', 16, 1);
+    END CATCH
 END;
 GO
 
 -- "LOAI LINH KIEN" -------- CHUA TRIEN KHAI
-
-
 -- Thêm loại linh kiện
--- CREATE PROCEDURE sp_ThemLoaiLinhKien
--- 	@TenLoaiLinhKien NVARCHAR(255)
--- AS
--- BEGIN
--- 	INSERT INTO LoaiLinhKien (TenLoaiLinhKien)
--- 	VALUES (@TenLoaiLinhKien)
--- END;
+CREATE PROCEDURE sp_ThemLoaiLinhKien
+    @TenLoaiLinhKien NVARCHAR(255)
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
 
--- -- Sửa loại linh kiện
--- CREATE PROCEDURE sp_SuaLoaiLinhKien
--- 	@MaLoaiLinhKien INT,
--- 	@TenLoaiLinhKien NVARCHAR(255)
--- AS
--- BEGIN
--- 	UPDATE LoaiLinhKien
--- 	SET TenLoaiLinhKien = @TenLoaiLinhKien
--- 	WHERE MaLoaiLinhKien = @MaLoaiLinhKien
--- END;
+        INSERT INTO LoaiLinhKien (TenLoaiLinhKien)
+        VALUES (@TenLoaiLinhKien);
 
--- -- - Xóa loại linh kiện
--- CREATE PROCEDURE sp_XoaLoaiLinhKien
--- 	@MaLoaiLinhKien INT
--- AS
--- BEGIN
--- 	DELETE FROM LoaiLinhKien WHERE MaLoaiLinhKien= @MaLoaiLinhKien;
--- END;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm loại linh kiện.', 16, 1);
+    END CATCH
+END;
+
+-- Sửa loại linh kiện
+CREATE PROCEDURE sp_SuaLoaiLinhKien
+    @MaLoaiLinhKien INT,
+    @TenLoaiLinhKien NVARCHAR(255)
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        UPDATE LoaiLinhKien
+        SET TenLoaiLinhKien = @TenLoaiLinhKien
+        WHERE MaLoaiLinhKien = @MaLoaiLinhKien;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi sửa loại linh kiện.', 16, 1);
+    END CATCH
+END;
+
+-- Xóa loại linh kiện
+CREATE PROCEDURE sp_XoaLoaiLinhKien
+    @MaLoaiLinhKien INT
+AS
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        DELETE FROM LoaiLinhKien
+        WHERE MaLoaiLinhKien = @MaLoaiLinhKien;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi xóa loại linh kiện.', 16, 1);
+    END CATCH
+END;
 
 -- Tìm kiếm
 CREATE PROCEDURE sp_TimKiemLinhKienTheoTuKhoa

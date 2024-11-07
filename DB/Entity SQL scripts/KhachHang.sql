@@ -8,17 +8,26 @@ GO
 -- Stored Procedure ----------------------------------------------------
 -- Thêm khách hàng:
 CREATE PROCEDURE sp_ThemKhachHang
-	@TenKhachHang NVARCHAR(255),
-	@DiaChi NVARCHAR(255),
-	@SDT NVARCHAR(10),
-	@Email NVARCHAR(100),
-	@NgaySinh DATE
+    @TenKhachHang NVARCHAR(255),
+    @DiaChi NVARCHAR(255),
+    @SDT NVARCHAR(10),
+    @Email NVARCHAR(100),
+    @NgaySinh DATE
 AS
 BEGIN
-	INSERT INTO KhachHang (TenKhachHang, DiaChi, SDT, Email, NgaySinh)
-	VALUES (@TenKhachHang, @DiaChi, @SDT, @Email, @NgaySinh);
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO KhachHang (TenKhachHang, DiaChi, SDT, Email, NgaySinh)
+        VALUES (@TenKhachHang, @DiaChi, @SDT, @Email, @NgaySinh);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm khách hàng.', 16, 1);
+    END CATCH
 END;
-GO
 
 -- Sửa khách hàng
 CREATE PROCEDURE sp_SuaKhachHang
@@ -29,27 +38,44 @@ CREATE PROCEDURE sp_SuaKhachHang
     @Email NVARCHAR(100),
     @NgaySinh DATE
 AS
-BEGIN 
-    UPDATE KhachHang
-    SET TenKhachHang = @TenKhachHang,
-        DiaChi = @DiaChi,
-        SDT = @SDT,
-        Email = @Email,
-        NgaySinh = @NgaySinh
-    WHERE MaKhachHang = @MaKhachHang;
-END;
-GO
+BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION;
 
+        UPDATE KhachHang
+        SET TenKhachHang = @TenKhachHang,
+            DiaChi = @DiaChi,
+            SDT = @SDT,
+            Email = @Email,
+            NgaySinh = @NgaySinh
+        WHERE MaKhachHang = @MaKhachHang;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi sửa khách hàng.', 16, 1);
+    END CATCH
+END;
 
 -- Xóa khách hàng
 CREATE PROCEDURE sp_XoaKhachHang
     @MaKhachHang INT
 AS
 BEGIN
-    DELETE FROM KhachHang
-    WHERE MaKhachHang = @MaKhachHang;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        DELETE FROM KhachHang
+        WHERE MaKhachHang = @MaKhachHang;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi xóa khách hàng.', 16, 1);
+    END CATCH
 END;
-GO
 
 ---- STORED PROCEDURE
 CREATE PROCEDURE sp_TimKiemKhachHang
@@ -85,7 +111,7 @@ BEGIN
     END
     ELSE
     BEGIN
-        PRINT 'Tiêu chí tìm kiếm không hợp lệ.';
+        RAISERROR (N'Tiêu chí tìm kiếm không hợp lệ.', 16, 1);
     END
 END;
 GO

@@ -6,20 +6,25 @@ CREATE PROCEDURE sp_ThemPhieuNhapHang
     @MaLinhKien INT
 AS
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM LinhKien WHERE MaLinhKien = @MaLinhKien)
-    BEGIN
-        RAISERROR('LinhKien khong ton tai.', 16, 1);
-        RETURN;
-    END
-    
-    INSERT INTO PhieuNhapHang (NgayNhap, GiaNhap, SoLuong, MaLinhKien)
-    VALUES (@NgayNhap, @GiaNhap, @SoLuong, @MaLinhKien);
-       
-    PRINT 'Cap nhat kho phieu nhap hang thanh cong.';
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        INSERT INTO PhieuNhapHang (NgayNhap, GiaNhap, SoLuong, MaLinhKien)
+        VALUES (@NgayNhap, @GiaNhap, @SoLuong, @MaLinhKien);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm phiếu nhập hàng. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
+    END CATCH
 END;
 GO
--- Cập nhật
-CREATE PROCEDURE UpdatePhieuNhapHang
+
+-- Cập nhật phiếu nhập hàng
+CREATE PROCEDURE sp_SuaPhieuNhapHang
     @MaPhieuNhap INT,
     @NgayNhap DATE,
     @GiaNhap DECIMAL(15, 2),
@@ -27,35 +32,43 @@ CREATE PROCEDURE UpdatePhieuNhapHang
     @MaLinhKien INT
 AS
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM PhieuNhapHang WHERE MaPhieuNhap = @MaPhieuNhap)
-    BEGIN
-        RAISERROR('Phieu nhap hang khong ton tai.', 16, 1);
-        RETURN;
-    END
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        
+        UPDATE PhieuNhapHang
+        SET NgayNhap = @NgayNhap, GiaNhap = @GiaNhap, SoLuong = @SoLuong, MaLinhKien = @MaLinhKien
+        WHERE MaPhieuNhap = @MaPhieuNhap;
 
-    UPDATE PhieuNhapHang
-    SET NgayNhap = @NgayNhap, GiaNhap = @GiaNhap, SoLuong = @SoLuong, MaLinhKien = @MaLinhKien
-    WHERE MaPhieuNhap = @MaPhieuNhap;
-    
-    PRINT 'PhieuNhapHang cap nhat thanh cong.';
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi cập nhật phiếu nhập hàng. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
+    END CATCH
 END;
 GO
 
--- Xóa
+-- Xóa phiếu nhập hàng
 CREATE PROCEDURE DeletePhieuNhapHang
     @MaPhieuNhap INT
 AS
 BEGIN
-    IF NOT EXISTS (SELECT 1 FROM PhieuNhapHang WHERE MaPhieuNhap = @MaPhieuNhap)
-    BEGIN
-        RAISERROR('Phieu nhap hang khong ton tai.', 16, 1);
-        RETURN;
-    END
+    BEGIN TRY
+        BEGIN TRANSACTION;
+        -- Xóa phiếu nhập hàng
+        DELETE FROM PhieuNhapHang
+        WHERE MaPhieuNhap = @MaPhieuNhap;
 
-    DELETE FROM PhieuNhapHang
-    WHERE MaPhieuNhap = @MaPhieuNhap;
-    
-    PRINT 'Xoa phieu nhap hang thanh cong.';
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa phiếu nhập hàng. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
+    END CATCH
 END;
 GO
 -- Trigger cập nhật số lượng tồn kho khi có phiếu nhập hàng mới

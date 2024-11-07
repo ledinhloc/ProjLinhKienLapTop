@@ -7,6 +7,7 @@ FROM DonHang
 GO
 
 -- Thủ tục thêm một record vào bảng DonHang
+-- Tạo đơn hàng
 CREATE PROCEDURE sp_ThemDonHang
     @NgayDatHang DATE,
     @MaKhachHang INT,
@@ -16,9 +17,19 @@ CREATE PROCEDURE sp_ThemDonHang
     @PhuongThuc NVARCHAR(100)
 AS
 BEGIN
-    INSERT INTO DonHang (NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc)
-    OUTPUT inserted.MaDonHang 
-    VALUES (@NgayDatHang, @MaKhachHang, @MaNhanVien, @MaGiamGia, @TongGiaTri, @PhuongThuc);
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO DonHang (NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc)
+        OUTPUT inserted.MaDonHang 
+        VALUES (@NgayDatHang, @MaKhachHang, @MaNhanVien, @MaGiamGia, @TongGiaTri, @PhuongThuc);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm đơn hàng.', 16, 1);
+    END CATCH
 END;
 
 GO
@@ -53,16 +64,25 @@ END;
 GO
 
 --- CHITIETDONHANG
--- Them chi tiet don hang
+-- Thêm chi tiết đơn hàng
 CREATE PROCEDURE sp_ThemChiTietDonHang
     @MaDonHang INT,                          
-    @MaLinhKien INT,                        
-    @SoLuong INT,                           
+    @MaLinhKien INT,                         
+    @SoLuong INT,                            
     @GiaBan DECIMAL(15, 2)                   
 AS
 BEGIN
-    SET NOCOUNT ON;
-    INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan)
-    VALUES (@MaDonHang, @MaLinhKien, @SoLuong, @GiaBan);
-END
-GO
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        SET NOCOUNT ON;
+        INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan)
+        VALUES (@MaDonHang, @MaLinhKien, @SoLuong, @GiaBan);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm chi tiết đơn hàng.', 16, 1);
+    END CATCH
+END;

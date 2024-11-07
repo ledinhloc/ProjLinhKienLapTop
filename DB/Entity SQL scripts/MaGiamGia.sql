@@ -7,6 +7,7 @@ FROM dbo.GiamGia
 GO
 -- Stored Procedure
 -- Tạo
+-- Thêm giảm giá
 CREATE PROCEDURE sp_ThemGiamGia
     @TenGiamGia NVARCHAR(100),
     @NgayBatDau DATE,
@@ -14,17 +15,44 @@ CREATE PROCEDURE sp_ThemGiamGia
     @GiaTri DECIMAL(5, 2)
 AS
 BEGIN
-    INSERT INTO dbo.GiamGia (TenGiamGia, NgayBatDau, NgayKetThuc, GiaTri)
-    VALUES (@TenGiamGia, @NgayBatDau, @NgayKetThuc, @GiaTri);
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO dbo.GiamGia (TenGiamGia, NgayBatDau, NgayKetThuc, GiaTri)
+        VALUES (@TenGiamGia, @NgayBatDau, @NgayKetThuc, @GiaTri);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm mã giảm giá. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
+    END CATCH
 END;
 GO
+
+-- Xóa giảm giá
 CREATE PROCEDURE sp_XoaGiamGia
     @MaGiamGia INT
 AS
 BEGIN
-    DELETE FROM GiamGia
-    WHERE MaGiamGia = @MaGiamGia;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        DELETE FROM GiamGia
+        WHERE MaGiamGia = @MaGiamGia;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa mã giảm giá. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
+    END CATCH
 END;
+GO
 
 GO
 -- Lấy mã theo thời gian

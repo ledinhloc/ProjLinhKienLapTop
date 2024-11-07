@@ -9,20 +9,29 @@ AS
 SELECT *
 FROM CaLamViec
 GO
-
---them trong fCaLamViec *
+-- Thêm ca làm việc
 CREATE PROCEDURE sp_ThemCaLamViec
     @TenCa NVARCHAR(100),
     @GioBatDau TIME,
     @GioKetThuc TIME
 AS
 BEGIN
-    INSERT INTO CaLamViec ( TenCa, GioBatDau, GioKetThuc)
-    VALUES ( @TenCa, @GioBatDau, @GioKetThuc);
-END
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO CaLamViec (TenCa, GioBatDau, GioKetThuc)
+        VALUES (@TenCa, @GioBatDau, @GioKetThuc);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm ca làm việc.', 16, 1);
+    END CATCH
+END;
 GO
 
---sua fCaLamViec *
+-- Sửa ca làm việc
 CREATE PROCEDURE sp_SuaCaLamViec
     @MaCa INT,
     @TenCa NVARCHAR(100),
@@ -30,25 +39,45 @@ CREATE PROCEDURE sp_SuaCaLamViec
     @GioKetThuc TIME
 AS
 BEGIN
-    UPDATE CaLamViec
-    SET TenCa = @TenCa,
-        GioBatDau = @GioBatDau,
-        GioKetThuc = @GioKetThuc
-    WHERE MaCa = @MaCa;
-END
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        UPDATE CaLamViec
+        SET TenCa = @TenCa,
+            GioBatDau = @GioBatDau,
+            GioKetThuc = @GioKetThuc
+        WHERE MaCa = @MaCa;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi sửa ca làm việc.', 16, 1);
+    END CATCH
+END;
 GO
 
---xoa
+-- Xóa ca làm việc
 CREATE PROCEDURE sp_XoaCaLamViec 
-@MaCa INT
+    @MaCa INT
 AS
 BEGIN
-    DELETE FROM CaLamViec
-    WHERE MaCa = @MaCa;
-END
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        DELETE FROM CaLamViec
+        WHERE MaCa = @MaCa;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi xóa ca làm việc.', 16, 1);
+    END CATCH
+END;
 GO
 
--- fThemCaLam
+-- Thêm lương
 CREATE PROCEDURE sp_ThemLuong
     @Luong DECIMAL(15, 2),
     @LuongGio DECIMAL(15, 2),
@@ -59,8 +88,18 @@ CREATE PROCEDURE sp_ThemLuong
     @MaNhanVien INT
 AS
 BEGIN
-    INSERT INTO Luong ( Luong,LuongGio, Thuong,TongNhan, ThoiGian, SoCa, MaNhanVien)
-    VALUES ( @Luong,@LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO Luong (Luong, LuongGio, Thuong, TongNhan, ThoiGian, SoCa, MaNhanVien)
+        VALUES (@Luong, @LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm lương.', 16, 1);
+    END CATCH
 END;
 GO
 --sua

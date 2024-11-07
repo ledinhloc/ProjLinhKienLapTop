@@ -5,7 +5,7 @@
         FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
--- Thêm 
+-- Thêm nhân viên
 CREATE PROCEDURE sp_ThemNhanVien
     @TenNhanVien NVARCHAR(100),
     @SDT NVARCHAR(15),
@@ -15,11 +15,22 @@ CREATE PROCEDURE sp_ThemNhanVien
     @MatKhau NVARCHAR(100)
 AS
 BEGIN
-    INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau, ChucVu)
-    VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau, 'nv')
-END
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO dbo.NhanVien (TenNhanVien, SDT, Email, NgaySinh, DiaChi, MatKhau, ChucVu)
+        VALUES (@TenNhanVien, @SDT, @Email, @NgaySinh, @DiaChi, @MatKhau, 'nv');
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm nhân viên.', 16, 1);
+    END CATCH
+END;
 GO
---sua thong tin nhan vien *
+
+-- Sửa thông tin nhân viên
 CREATE PROCEDURE sp_SuaNhanVien
     @MaNhanVien INT,
     @TenNhanVien NVARCHAR(255),
@@ -30,16 +41,27 @@ CREATE PROCEDURE sp_SuaNhanVien
     @NgaySinh DATE
 AS
 BEGIN
-    UPDATE NhanVien
-    SET
-        TenNhanVien = @TenNhanVien,
-        DiaChi = @DiaChi,
-        SDT = @SDT,
-        Email = @Email,
-        MatKhau = @MatKhau,
-        NgaySinh = @NgaySinh
-    WHERE MaNhanVien = @MaNhanVien;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        UPDATE NhanVien
+        SET
+            TenNhanVien = @TenNhanVien,
+            DiaChi = @DiaChi,
+            SDT = @SDT,
+            Email = @Email,
+            MatKhau = @MatKhau,
+            NgaySinh = @NgaySinh
+        WHERE MaNhanVien = @MaNhanVien;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi sửa thông tin nhân viên.', 16, 1);
+    END CATCH
 END;
+GO
 
 -----  Function ----- 
 GO
