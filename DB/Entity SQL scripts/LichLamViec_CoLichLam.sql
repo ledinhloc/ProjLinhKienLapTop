@@ -5,37 +5,24 @@ CREATE PROCEDURE sp_ThemLichLamViec
     @NgayLam DATE
 AS
 BEGIN
-    -- Thêm tất cả các MaCa từ bảng CaLamViec vào LichLamViec với NgayLam đã cho
-    INSERT INTO LichLamViec (NgayLam, MaCa)
-    SELECT @NgayLam, MaCa
-    FROM CaLamViec;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        -- Thêm tất cả các MaCa từ bảng CaLamViec vào LichLamViec với NgayLam đã cho
+        INSERT INTO LichLamViec (NgayLam, MaCa)
+        SELECT @NgayLam, MaCa
+        FROM CaLamViec;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm lịch làm việc.', 16, 1);
+    END CATCH
 END;
+
 GO
---sua
--- CREATE PROCEDURE sp_SuaLichLamViec
---     @MaLichLamViec INT,
---     @NgayLam DATE,
---     @MaCa INT
--- AS
--- BEGIN
---     UPDATE LichLamViec
---     SET NgayLam = @NgayLam,
---         MaCa = @MaCa
---     WHERE MaLichLamViec = @MaLichLamViec;
--- END;
-
---xoa
--- CREATE PROCEDURE sp_XoaLichLamViec
---     @MaLichLamViec INT
--- AS
--- BEGIN
---     DELETE FROM LichLamViec
---     WHERE MaLichLamViec = @MaLichLamViec;
--- END;
-
---CoLichLam(MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
-
---them ***
+-- Thêm CoLichLam
 CREATE PROCEDURE sp_ThemCoLichLam
     @MaNhanVien INT,
     @MaLichLamViec INT,
@@ -43,11 +30,22 @@ CREATE PROCEDURE sp_ThemCoLichLam
     @TrangThai NVARCHAR(100)
 AS
 BEGIN
-    INSERT INTO CoLichLam (MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
-    VALUES (@MaNhanVien, @MaLichLamViec, @DanhGia, @TrangThai);
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO CoLichLam (MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
+        VALUES (@MaNhanVien, @MaLichLamViec, @DanhGia, @TrangThai);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi thêm CoLichLam.', 16, 1);
+    END CATCH
 END;
 GO
---sua
+
+-- Sửa CoLichLam
 CREATE PROCEDURE sp_SuaCoLichLam
     @MaNhanVien INT,
     @MaLichLamViec INT,
@@ -55,23 +53,42 @@ CREATE PROCEDURE sp_SuaCoLichLam
     @TrangThai NVARCHAR(100)
 AS
 BEGIN
-    UPDATE CoLichLam
-    SET DanhGia = @DanhGia,
-        TrangThai = @TrangThai
-    WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        UPDATE CoLichLam
+        SET DanhGia = @DanhGia,
+            TrangThai = @TrangThai
+        WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi sửa CoLichLam.', 16, 1);
+    END CATCH
 END;
 GO
 
---xoa ***
+-- Xóa CoLichLam
 CREATE PROCEDURE sp_XoaCoLichLam
     @MaNhanVien INT,
     @MaLichLamViec INT
 AS
 BEGIN
-    DELETE FROM CoLichLam
-    WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
-END;
+    BEGIN TRY
+        BEGIN TRANSACTION;
 
+        DELETE FROM CoLichLam
+        WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        RAISERROR (N'Đã xảy ra lỗi khi xóa CoLichLam.', 16, 1);
+    END CATCH
+END;
 GO
 
 --Func
