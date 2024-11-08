@@ -1502,3 +1502,31 @@ JOIN
 GO
 
 
+CREATE FUNCTION fn_TopLinhKien(@N INT)
+RETURNS TABLE
+AS
+RETURN (
+    SELECT lk.MaLinhKien, 
+           SUM(ct.SoLuong) AS SoLuong,  
+           ROW_NUMBER() OVER (ORDER BY SUM(ct.SoLuong) DESC) AS XepHang
+    FROM DonHang dh
+    JOIN ChiTietDonHang ct ON dh.MaDonHang = ct.MaDonHang
+    JOIN LinhKien lk ON lk.MaLinhKien = ct.MaLinhKien
+    WHERE dh.NgayDatHang >= DATEADD(DAY, @N*-1, GETDATE())
+    GROUP BY lk.MaLinhKien
+)
+
+GO
+
+CREATE PROC sp_ThongTinTopKLinhKien 
+	@K INT, @N INT
+AS
+BEGIN
+	SELECT TOP(@K)
+	tlk.XepHang, lk.TenLinhKien, llk.TenLoaiLinhKien, tlk.SoLuong
+	FROM LinhKien lk
+	JOIN fn_TopLinhKien(@N) tlk
+	ON lk.MaLinhKien = tlk.MaLinhKien
+	JOIN LoaiLinhKien llk
+	ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
+END
