@@ -1,8 +1,8 @@
 
 --- View show tonaf bộ nhân viên
-        CREATE VIEW vw_NhanVienList AS
-        SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
-        FROM dbo.NhanVien
+CREATE VIEW vw_NhanVienList AS
+SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
+FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
 -- Thêm nhân viên
@@ -25,7 +25,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm nhân viên.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm nhân viên. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
@@ -58,7 +60,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi sửa thông tin nhân viên.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa nhân viên. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO

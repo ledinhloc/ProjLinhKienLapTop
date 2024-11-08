@@ -1,4 +1,4 @@
-﻿GO
+﻿
 --LichLamViec(MaLichLamViec, NgayLam, MaCa)
 --them trong fLichLamViec  ***
 CREATE PROCEDURE sp_ThemLichLamViec
@@ -17,7 +17,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm lịch làm việc.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm lịch làm việc. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 
@@ -40,7 +42,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm CoLichLam.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
@@ -65,7 +69,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi sửa CoLichLam.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
@@ -86,14 +92,16 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi xóa CoLichLam.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);    
     END CATCH
 END;
 GO
 
 --Func
 
-GO
+
 ---Xem lich lam trong ngay **
 CREATE FUNCTION dbo.fn_XemLichLamTrongNgay (@ngay DATE)
 RETURNS TABLE
@@ -138,7 +146,7 @@ RETURN
         AND LLV.NgayLam BETWEEN @NgayDau AND @NgayCuoi
 );
 GO
-GO
+
 --func dem ngay lam, ngay nghi cua nhan vien 
 CREATE FUNCTION dbo.fn_DemCaLamCaNghi (@MaNhanVien INT, @NgayDau DATE, @NgayCuoi DATE)
 RETURNS TABLE
@@ -160,7 +168,7 @@ RETURN
     GROUP BY YEAR(LLV.NgayLam), MONTH(LLV.NgayLam)
 )
 GO
-GO
+
 -- dung trong fthemca  **
 CREATE FUNCTION dbo.fn_XemNhanVienTrongLichLamViec (@MaLichLamViec int)
 RETURNS TABLE
@@ -197,4 +205,4 @@ GO
 -- 	JOIN LichLamViec llv on cll.MaLichLamViec = llv.MaLichLamViec
 -- 	JOIN CaLamViec clv on clv.MaCa = llv.MaCa
 -- );
-GO
+-- GO

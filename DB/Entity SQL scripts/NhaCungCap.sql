@@ -22,7 +22,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm nhà cung cấp.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm nhà cung cấp. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
 GO
@@ -50,7 +52,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi sửa nhà cung cấp.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa nhà cung cấp. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
 GO
@@ -70,7 +74,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi xóa nhà cung cấp.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa nhà cung cấp. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
 GO

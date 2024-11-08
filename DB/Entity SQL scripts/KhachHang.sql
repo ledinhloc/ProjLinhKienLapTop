@@ -25,7 +25,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm khách hàng.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm khách hàng. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 
@@ -54,7 +56,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi sửa khách hàng.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa khách hàng. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 
@@ -73,7 +77,9 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi xóa khách hàng.', 16, 1);
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa khách hàng. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 

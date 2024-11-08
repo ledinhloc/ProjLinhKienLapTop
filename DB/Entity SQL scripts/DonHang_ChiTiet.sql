@@ -86,3 +86,4 @@ BEGIN
         RAISERROR (N'Đã xảy ra lỗi khi thêm chi tiết đơn hàng.', 16, 1);
     END CATCH
 END;
+GO
