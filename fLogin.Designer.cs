@@ -128,7 +128,8 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(203, 24);
             this.txtEmail.TabIndex = 1;
-            this.txtEmail.Text = "levanhoa@company.com";
+            this.txtEmail.Text = "tranthilan@company.com";
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // pictureBox1
             // 
@@ -158,7 +159,7 @@
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(226, 27);
             this.txtPass.TabIndex = 1;
-            this.txtPass.Text = "matkhau3";
+            this.txtPass.Text = "matkhau2";
             this.txtPass.UseWaitCursor = true;
             // 
             // pictureBox2

@@ -15,7 +15,7 @@ namespace ProCuaHangLinhKienLaptop
 {
     public partial class fLogin : Form
     {
-        DataProvider provider = new DataProvider();
+        
         public fLogin()
         {
             InitializeComponent();
@@ -28,12 +28,20 @@ namespace ProCuaHangLinhKienLaptop
 
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
+            
             string chucVu = "";
+            Program.Email = txtEmail.Text;
+            Program.MatKhau = txtPass.Text;
             if (rdbNhanVien.Checked)
+            {
                 chucVu = "nv";
+            }
             else
+            {
                 chucVu = "ql";
+            }
 
+            DataProvider provider = new DataProvider();
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("@email", txtEmail.Text),
@@ -46,7 +54,7 @@ namespace ProCuaHangLinhKienLaptop
             {
                 object kq = provider.ExecuteScalar(CommandType.Text, "SELECT MaNhanVien FROM NhanVien nv WHERE nv.Email = @email AND nv.MatKhau = @matKhau AND nv.ChucVu = @chucVu", sqlParameters);
                 maNhanVien = Convert.ToString(kq);
-                MessageBox.Show(maNhanVien);
+                //MessageBox.Show(maNhanVien);
             }
             catch (Exception ex)
             {
@@ -62,9 +70,10 @@ namespace ProCuaHangLinhKienLaptop
             }
             else
             {
-                
-            }
-            
+                fAdmin fAdmin = new fAdmin();
+                this.Hide();
+                fAdmin.ShowDialog();
+            }            
         }
 
         private void fLogin_Load(object sender, EventArgs e)
@@ -84,6 +93,11 @@ namespace ProCuaHangLinhKienLaptop
                 txtEmail.Text = "nguyenvantam@company.com";
                 txtPass.Text = "matkhau1";
             }
+        }
+
+        private void txtEmail_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

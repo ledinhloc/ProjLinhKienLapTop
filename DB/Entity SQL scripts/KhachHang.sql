@@ -31,6 +31,8 @@ BEGIN
     END CATCH
 END;
 
+GO
+
 -- Sửa khách hàng
 CREATE PROCEDURE sp_SuaKhachHang
     @MaKhachHang INT,
@@ -62,6 +64,9 @@ BEGIN
     END CATCH
 END;
 
+GO
+
+
 -- Xóa khách hàng
 CREATE PROCEDURE sp_XoaKhachHang
     @MaKhachHang INT
@@ -82,6 +87,8 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
+
+GO
 
 ---- STORED PROCEDURE
 CREATE PROCEDURE sp_TimKiemKhachHang
@@ -120,6 +127,7 @@ BEGIN
         RAISERROR (N'Tiêu chí tìm kiếm không hợp lệ.', 16, 1);
     END
 END;
+
 GO
 ------ FUNCTION
 -- Tính tổng số khách hàng

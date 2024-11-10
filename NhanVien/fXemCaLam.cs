@@ -35,8 +35,9 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void dtpNgay_ValueChanged(object sender, EventArgs e)
         {
-            DateTime ngayDau = dtpNgay.Value;
-            DateTime ngayCuoi = ngayDau.AddDays(4);
+            flpCaLam.Controls.Clear();
+           DateTime ngayDau = dtpNgay.Value;
+            DateTime ngayCuoi = ngayDau.AddDays(2);
 
             SqlParameter[] sqlParameters = new SqlParameter[]
             {

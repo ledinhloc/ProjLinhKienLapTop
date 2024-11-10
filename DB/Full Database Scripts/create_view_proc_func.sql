@@ -219,8 +219,8 @@ AS SELECT *
 FROM DonHang
 GO
 
--- Thủ tục thêm một record vào bảng DonHang
--- Tạo đơn hàng
+-- Thá»§ tá»¥c thÃªm má»™t record vÃ o báº£ng DonHang
+-- Táº¡o Ä‘Æ¡n hÃ ng
 CREATE PROCEDURE sp_ThemDonHang
     @NgayDatHang DATE,
     @MaKhachHang INT,
@@ -241,7 +241,7 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm đơn hàng.', 16, 1);
+        RAISERROR (N'ÄÃ£ xáº£y ra lá»—i khi thÃªm Ä‘Æ¡n hÃ ng.', 16, 1);
     END CATCH
 END;
 
@@ -277,7 +277,7 @@ END;
 GO
 
 --- CHITIETDONHANG
--- Thêm chi tiết đơn hàng
+-- ThÃªm chi tiáº¿t Ä‘Æ¡n hÃ ng
 CREATE PROCEDURE sp_ThemChiTietDonHang
     @MaDonHang INT,                          
     @MaLinhKien INT,                         
@@ -296,7 +296,7 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm chi tiết đơn hàng.', 16, 1);
+        RAISERROR (N'ÄÃ£ xáº£y ra lá»—i khi thÃªm chi tiáº¿t Ä‘Æ¡n hÃ ng.', 16, 1);
     END CATCH
 END;
 GO
@@ -310,7 +310,7 @@ GO
 
 
 -- Stored Procedure ----------------------------------------------------
--- Thêm khách hàng:
+-- ThÃªm khÃ¡ch hÃ ng:
 CREATE PROCEDURE sp_ThemKhachHang
     @TenKhachHang NVARCHAR(255),
     @DiaChi NVARCHAR(255),
@@ -330,12 +330,14 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm khách hàng. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi thÃªm khÃ¡ch hÃ ng. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 
--- Sửa khách hàng
+GO
+
+-- Sá»­a khÃ¡ch hÃ ng
 CREATE PROCEDURE sp_SuaKhachHang
     @MaKhachHang INT,
     @TenKhachHang NVARCHAR(255),
@@ -361,12 +363,15 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa khách hàng. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi sá»­a khÃ¡ch hÃ ng. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 
--- Xóa khách hàng
+GO
+
+
+-- XÃ³a khÃ¡ch hÃ ng
 CREATE PROCEDURE sp_XoaKhachHang
     @MaKhachHang INT
 AS
@@ -382,10 +387,12 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa khách hàng. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi xÃ³a khÃ¡ch hÃ ng. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
+
+GO
 
 ---- STORED PROCEDURE
 CREATE PROCEDURE sp_TimKiemKhachHang
@@ -421,12 +428,13 @@ BEGIN
     END
     ELSE
     BEGIN
-        RAISERROR (N'Tiêu chí tìm kiếm không hợp lệ.', 16, 1);
+        RAISERROR (N'TiÃªu chÃ­ tÃ¬m kiáº¿m khÃ´ng há»£p lá»‡.', 16, 1);
     END
 END;
+
 GO
 ------ FUNCTION
--- Tính tổng số khách hàng
+-- TÃ­nh tá»•ng sá»‘ khÃ¡ch hÃ ng
 CREATE FUNCTION fn_TinhTongKhachHang()
 RETURNS INT
 AS
@@ -890,6 +898,8 @@ BEGIN
     END CATCH
 END;
 
+GO
+
 -- Sửa loại linh kiện
 CREATE PROCEDURE sp_SuaLoaiLinhKien
     @MaLoaiLinhKien INT,
@@ -913,6 +923,8 @@ BEGIN
     END CATCH
 END;
 
+GO
+
 -- Xóa loại linh kiện
 CREATE PROCEDURE sp_XoaLoaiLinhKien
     @MaLoaiLinhKien INT
@@ -933,6 +945,8 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
+
+GO
 
 -- Tìm kiếm
 CREATE PROCEDURE sp_TimKiemLinhKienTheoTuKhoa
@@ -969,8 +983,8 @@ SELECT MaGiamGia, TenGiamGia, NgayBatDau, NgayKetThuc, GiaTri
 FROM dbo.GiamGia
 GO
 -- Stored Procedure
--- Tạo
--- Thêm giảm giá
+-- Táº¡o
+-- ThÃªm giáº£m giÃ¡
 CREATE PROCEDURE sp_ThemGiamGia
     @TenGiamGia NVARCHAR(100),
     @NgayBatDau DATE,
@@ -989,13 +1003,13 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm mã giảm giá. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi thÃªm mÃ£ giáº£m giÃ¡. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
 
--- Xóa giảm giá
+-- XÃ³a giáº£m giÃ¡
 CREATE PROCEDURE sp_XoaGiamGia
     @MaGiamGia INT
 AS
@@ -1011,14 +1025,14 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa mã giảm giá. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi xÃ³a mÃ£ giáº£m giÃ¡. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
 
 GO
--- Lấy mã theo thời gian
+-- Láº¥y mÃ£ theo thá»i gian
 CREATE PROCEDURE sp_TimKiemMaGiamGiaTheoThoiGian
     @StartDate DATE,
     @EndDate DATE
@@ -1030,7 +1044,7 @@ BEGIN
 END;
 GO
 ---- Function
--- Kiểm tra mã giảm giá hợp lệ
+-- Kiá»ƒm tra mÃ£ giáº£m giÃ¡ há»£p lá»‡
 CREATE FUNCTION fn_CheckGiamGiaHopLe (
     @MaGiamGia INT
 )
@@ -1046,27 +1060,27 @@ BEGIN
 
     IF @NgayBatDau IS NULL
     BEGIN
-        SET @Result = N'Mã giảm giá không tồn tại';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ khÃ´ng tá»“n táº¡i';
         RETURN @Result;
     END
 
     IF GETDATE() < @NgayBatDau
     BEGIN
-        SET @Result = N'Mã giảm giá chưa có hiệu lực';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ chÆ°a cÃ³ hiá»‡u lá»±c';
     END
     ELSE IF GETDATE() > @NgayKetThuc
     BEGIN
-        SET @Result = N'Mã giảm giá đã hết hạn';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ Ä‘Ã£ háº¿t háº¡n';
     END
     ELSE
     BEGIN
-        SET @Result = N'Mã giảm giá hợp lệ';
+        SET @Result = N'MÃ£ giáº£m giÃ¡ há»£p lá»‡';
     END
 
     RETURN @Result;
 END;
 GO
--- Tính giá trị đơn sau khi giảm
+-- TÃ­nh giÃ¡ trá»‹ Ä‘Æ¡n sau khi giáº£m
 CREATE FUNCTION fn_CalculateFinalPrice (
     @GiaTriDonHang DECIMAL(10, 2),
     @MaGiamGia INT
@@ -1096,18 +1110,18 @@ END;
 GO
 
 ------   TEST       -------
--- Xem các mã giảm giá còn hiệu lực
+-- Xem cÃ¡c mÃ£ giáº£m giÃ¡ cÃ²n hiá»‡u lá»±c
 -- -- View
 -- SELECT * FROM vw_GiamGia;
 -- -- Stored procedure
 -- EXEC sp_InsertGiamGia 
---     @TenGiamGia = N'Giảm giá Valentine', 
+--     @TenGiamGia = N'Giáº£m giÃ¡ Valentine', 
 --     @NgayBatDau = '2024-02-10', 
 --     @NgayKetThuc = '2024-02-20', 
 --     @GiaTri = 10.00;
 -- EXEC sp_UpdateGiamGia 
 --     @MaGiamGia = 1, 
---     @TenGiamGia = N'Giảm giá Tết 20245', 
+--     @TenGiamGia = N'Giáº£m giÃ¡ Táº¿t 20245', 
 --     @NgayBatDau = '2024-01-01', 
 --     @NgayKetThuc = '2024-01-31', 
 --     @GiaTri = 12.00;
@@ -1125,12 +1139,12 @@ GO
 
 
 --- View
---- XEM lại
+--- XEM láº¡i
 CREATE VIEW vw_ThongTinNhaCungCap AS
 	SELECT * FROM NhaCungCap
 GO
 -- STORED PROCEDURE 
--- Thêm nhà cung cấp
+-- ThÃªm nhÃ  cung cáº¥p
 CREATE PROCEDURE sp_ThemNhaCungCap
     @TenNhaCungCap NVARCHAR(255),
     @DiaChi NVARCHAR(255),
@@ -1149,13 +1163,13 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm nhà cung cấp. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi thÃªm nhÃ  cung cáº¥p. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
 GO
 
--- Sửa nhà cung cấp
+-- Sá»­a nhÃ  cung cáº¥p
 CREATE PROCEDURE sp_SuaNhaCungCap
     @MaNhaCungCap INT,
     @TenNhaCungCap NVARCHAR(255),
@@ -1179,13 +1193,13 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa nhà cung cấp. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi sá»­a nhÃ  cung cáº¥p. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
 GO
 
--- Xóa nhà cung cấp
+-- XÃ³a nhÃ  cung cáº¥p
 CREATE PROCEDURE sp_XoaNhaCungCap
     @MaNhaCungCap INT
 AS
@@ -1201,7 +1215,7 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa nhà cung cấp. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi xÃ³a nhÃ  cung cáº¥p. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
@@ -1218,13 +1232,13 @@ GO
 
 
 
---- View show tonaf bộ nhân viên
+--- View show tonaf bá»™ nhÃ¢n viÃªn
 CREATE VIEW vw_NhanVienList AS
 SELECT MaNhanVien, TenNhanVien, SDT, Email, NgaySinh, DiaChi
 FROM dbo.NhanVien
 GO
 ---    Stored Procedures  -----
--- Thêm nhân viên
+-- ThÃªm nhÃ¢n viÃªn
 CREATE PROCEDURE sp_ThemNhanVien
     @TenNhanVien NVARCHAR(100),
     @SDT NVARCHAR(15),
@@ -1245,13 +1259,13 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm nhân viên. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi thÃªm nhÃ¢n viÃªn. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
 GO
 
--- Sửa thông tin nhân viên
+-- Sá»­a thÃ´ng tin nhÃ¢n viÃªn
 CREATE PROCEDURE sp_SuaNhanVien
     @MaNhanVien INT,
     @TenNhanVien NVARCHAR(255),
@@ -1280,7 +1294,7 @@ BEGIN
     BEGIN CATCH
         ROLLBACK TRANSACTION;
         DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa nhân viên. Lỗi: ' + ERROR_MESSAGE();
+        SET @ErrorMessage = N'ÄÃ£ xáº£y ra lá»—i khi sá»­a nhÃ¢n viÃªn. Lá»—i: ' + ERROR_MESSAGE();
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
@@ -1350,24 +1364,24 @@ GO
 --SELECT * FROM vw_NhanVienList;
 ---- Add
 --EXEC sp_AddNhanVien 
---    @TenNhanVien = N'Nguyễn Văn A',
+--    @TenNhanVien = N'Nguyá»…n VÄƒn A',
 --    @SDT = '0912345678',
 --    @Email = 'nguyenvana@example.com',
 --    @NgaySinh = '1990-01-15',
---    @DiaChi = N'Số 123, Đường ABC, Quận 1',
+--    @DiaChi = N'Sá»‘ 123, ÄÆ°á»ng ABC, Quáº­n 1',
 --    @MatKhau = N'matkhau1';
 ---- Update
 --EXEC sp_UpdateNhanVien 
 --    @MaNhanVien = 1,
---    @TenNhanVien = N'Trần Thị B',
+--    @TenNhanVien = N'Tráº§n Thá»‹ B',
 --    @SDT = '0987654321',
 --    @Email = 'tranthib@example.com',
 --    @NgaySinh = '1992-02-20',
---    @DiaChi = N'Số 456, Đường DEF, Quận 2';
+--    @DiaChi = N'Sá»‘ 456, ÄÆ°á»ng DEF, Quáº­n 2';
 ----- Funtion
 --USE Linhkiendientu;
 --SELECT dbo.fn_GetTotalEmployees() AS TotalEmployees;
---SELECT * FROM dbo.fn_SearchNhanVienByName(N'Nguyễn');
+--SELECT * FROM dbo.fn_SearchNhanVienByName(N'Nguyá»…n');
 --SELECT * FROM dbo.fn_FilterNhanVienByDateRange('1990-01-01', '2000-12-31');
 --SELECT * FROM dbo.fn_SearchNhanVienByEmail(N'tranthi');
 
@@ -1502,31 +1516,3 @@ JOIN
 GO
 
 
-CREATE FUNCTION fn_TopLinhKien(@N INT)
-RETURNS TABLE
-AS
-RETURN (
-    SELECT lk.MaLinhKien, 
-           SUM(ct.SoLuong) AS SoLuong,  
-           ROW_NUMBER() OVER (ORDER BY SUM(ct.SoLuong) DESC) AS XepHang
-    FROM DonHang dh
-    JOIN ChiTietDonHang ct ON dh.MaDonHang = ct.MaDonHang
-    JOIN LinhKien lk ON lk.MaLinhKien = ct.MaLinhKien
-    WHERE dh.NgayDatHang >= DATEADD(DAY, @N*-1, GETDATE())
-    GROUP BY lk.MaLinhKien
-)
-
-GO
-
-CREATE PROC sp_ThongTinTopKLinhKien 
-	@K INT, @N INT
-AS
-BEGIN
-	SELECT TOP(@K)
-	tlk.XepHang, lk.TenLinhKien, llk.TenLoaiLinhKien, tlk.SoLuong
-	FROM LinhKien lk
-	JOIN fn_TopLinhKien(@N) tlk
-	ON lk.MaLinhKien = tlk.MaLinhKien
-	JOIN LoaiLinhKien llk
-	ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
-END

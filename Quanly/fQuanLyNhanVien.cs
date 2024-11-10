@@ -89,21 +89,23 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             {
                 int maNhanVien = Convert.ToInt32(dGV_NhanVien.CurrentRow.Cells["MaNhanVien"].Value);
 
+
                 DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
 
                 if (result == DialogResult.Yes)
                 {
                     try
                     {
 
-                        string query = "DELETE FROM NhanVien WHERE MaNhanVien = @MaNhanVien";
+                        //string query = "DELETE FROM NhanVien WHERE MaNhanVien = @MaNhanVien";
 
                         SqlParameter[] parameters = new SqlParameter[]
                         {
-                            new SqlParameter("@MaNhanVien", maNhanVien)
+                            new SqlParameter("@MaNV", maNhanVien)
                         };
 
-                        dataProvider.ExecuteNonQuery(CommandType.Text, query, parameters);
+                        dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "proc_XoaLoginNhanVien", parameters);
 
 
                         LoadData();
