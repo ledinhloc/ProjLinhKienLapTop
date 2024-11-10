@@ -32,7 +32,6 @@ BEGIN
 END;
 
 GO
-
 -- Sửa khách hàng
 CREATE PROCEDURE sp_SuaKhachHang
     @MaKhachHang INT,
@@ -88,8 +87,8 @@ BEGIN
     END CATCH
 END;
 
-GO
 
+GO
 ---- STORED PROCEDURE
 CREATE PROCEDURE sp_TimKiemKhachHang
     @SearchOption NVARCHAR(50), 

@@ -126,7 +126,7 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
-
+GO
 -- Sửa loại linh kiện
 CREATE PROCEDURE sp_SuaLoaiLinhKien
     @MaLoaiLinhKien INT,
@@ -149,7 +149,7 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
-
+GO
 -- Xóa loại linh kiện
 CREATE PROCEDURE sp_XoaLoaiLinhKien
     @MaLoaiLinhKien INT
@@ -170,7 +170,7 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);   
     END CATCH
 END;
-
+GO
 -- Tìm kiếm
 CREATE PROCEDURE sp_TimKiemLinhKienTheoTuKhoa
     @TuKhoa NVARCHAR(255)

@@ -168,6 +168,34 @@ RETURN
     GROUP BY YEAR(LLV.NgayLam), MONTH(LLV.NgayLam)
 )
 GO
+CREATE FUNCTION fn_DemCaLam (@start DATE, @end DATE, @MaNhanVien INT)
+RETURNS INT
+AS
+BEGIN
+    RETURN (
+        SELECT COUNT(*)
+        FROM CoLichLam CLL
+        JOIN LichLamViec LLV ON CLL.MaLichLamViec = LLV.MaLichLamViec
+        WHERE CLL.MaNhanVien = @MaNhanVien
+            AND LLV.NgayLam BETWEEN @start AND @end
+            AND TrangThai = 'HoanThanh'
+    );
+END;
+GO
+CREATE FUNCTION fn_DemCaNghi (@start DATE, @end DATE, @MaNhanVien INT)
+RETURNS INT
+AS
+BEGIN
+    RETURN (
+        SELECT COUNT(*)
+        FROM CoLichLam CLL
+        JOIN LichLamViec LLV ON CLL.MaLichLamViec = LLV.MaLichLamViec
+        WHERE CLL.MaNhanVien = @MaNhanVien
+            AND LLV.NgayLam BETWEEN @start AND @end
+            AND TrangThai = 'Chua'
+    );
+END;
+GO
 
 -- dung trong fthemca  **
 CREATE FUNCTION dbo.fn_XemNhanVienTrongLichLamViec (@MaLichLamViec int)

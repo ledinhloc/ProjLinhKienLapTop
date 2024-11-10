@@ -48,7 +48,7 @@ namespace ProCuaHangLinhKienLaptop
         private void thongTinCaNhanToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fThongTinNhanVien fThongTinNhanVien = new fThongTinNhanVien(int.Parse(maNhanVien));
-            fThongTinNhanVien .ShowDialog();
+            fThongTinNhanVien.ShowDialog();
         }
 
         private void fNhanVien_Load(object sender, EventArgs e)
