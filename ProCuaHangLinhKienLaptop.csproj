@@ -121,6 +121,12 @@
     <Compile Include="Quanly\ChiTietDonHang.Designer.cs">
       <DependentUpon>ChiTietDonHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quanly\DieuKienThuongUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Quanly\DieuKienThuongUC.Designer.cs">
+      <DependentUpon>DieuKienThuongUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quanly\fCaLamViec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -235,6 +241,12 @@
     <Compile Include="Quanly\fThongKeLinhKien.Designer.cs">
       <DependentUpon>fThongKeLinhKien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quanly\fTinhThuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fTinhThuong.Designer.cs">
+      <DependentUpon>fTinhThuong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quanly\LichLamViecUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -290,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\ChiTietDonHang.resx">
       <DependentUpon>ChiTietDonHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\DieuKienThuongUC.resx">
+      <DependentUpon>DieuKienThuongUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fCaLamViec.resx">
       <DependentUpon>fCaLamViec.cs</DependentUpon>
@@ -347,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fThongKeLinhKien.resx">
       <DependentUpon>fThongKeLinhKien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fTinhThuong.resx">
+      <DependentUpon>fTinhThuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\LichLamViecUC.resx">
       <DependentUpon>LichLamViecUC.cs</DependentUpon>
