@@ -23,18 +23,15 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         private void fTinhThuong_Load(object sender, EventArgs e)
         {
-            
+            cmbThang.SelectedIndex = 10;
+            cmbNam.SelectedIndex = 2;
+            dtpStartDate.Value = new DateTime(2024, 11, 1);
         }
 
         private void btnThemDK_Click(object sender, EventArgs e)
         {
             DieuKienThuongUC dieuKienThuongUC = new DieuKienThuongUC();
             flowLayoutPanel1.Controls.Add(dieuKienThuongUC);
-        }
-
-        private void LuuTamDieuKienVaoDB(string tenDk, string soSanh, decimal nguong, decimal thuong)
-        {
-            //dataProvider.ExecuteNonQuery("INSERT INTO")
         }
 
         private void btnTinhThuong_Click(object sender, EventArgs e)
@@ -88,6 +85,28 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             }
         }
 
+        private void btnApDung_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvThuongPreview.Rows)
+            {
+                if (row.Cells["MaNhanVien"].Value != null && Convert.ToDecimal(row.Cells["ResultGiaTriThuong"].Value) != 0)
+                {
+                    int maNhanVien = Convert.ToInt32(row.Cells["MaNhanVien"].Value);
+                    decimal thuong = Convert.ToDecimal(row.Cells["ResultGiaTriThuong"].Value);
+                    dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_CapNhatThuongTongNhan",
+                        new SqlParameter[]
+                        {
+                            new SqlParameter("@MaNhanVien", maNhanVien),
+                            new SqlParameter("@Thuong", thuong),
+                            new SqlParameter("@Thang", int.Parse(cmbThang.SelectedItem.ToString())),
+                            new SqlParameter("@Nam", int.Parse(cmbNam.SelectedItem.ToString())),
+                        });
+                }
+            }
+            this.Close();
+            fLuong fLuong = new fLuong();
+            fLuong.ShowDialog();
+        }
     }
 
 }

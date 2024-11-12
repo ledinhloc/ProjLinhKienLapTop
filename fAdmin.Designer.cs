@@ -1,4 +1,6 @@
-﻿namespace ProCuaHangLinhKienLaptop
+﻿using System.Windows.Forms;
+
+namespace ProCuaHangLinhKienLaptop
 {
     partial class fAdmin
     {
@@ -28,10 +30,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sTUDENTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LinhKienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +60,9 @@
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
             this.lichLamViecToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripSeparator();
+            this.tinhThuongStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripSeparator();
+            this.tinhLuongStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reSultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thongKeDonHangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thongKeLinhKienToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +70,6 @@
             this.danhSáchKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.giảmGiáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chươngTrìnhGiảmGiáToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -88,9 +94,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.tinhThuongStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -98,6 +103,7 @@
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -245,7 +251,8 @@
             this.lichLamViecToolStripMenuItem,
             this.toolStripMenuItem12,
             this.tinhThuongStripMenuItem,
-            this.toolStripMenuItem13});
+            this.toolStripMenuItem13,
+            this.tinhLuongStripMenuItem});
             this.sCOREToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sCOREToolStripMenuItem.Name = "sCOREToolStripMenuItem";
             this.sCOREToolStripMenuItem.Size = new System.Drawing.Size(165, 37);
@@ -293,10 +300,28 @@
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
             this.toolStripMenuItem12.Size = new System.Drawing.Size(358, 6);
             // 
+            // tinhThuongStripMenuItem
+            // 
+            this.tinhThuongStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tinhThuongStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.tinhThuongStripMenuItem.Name = "tinhThuongStripMenuItem";
+            this.tinhThuongStripMenuItem.Size = new System.Drawing.Size(361, 42);
+            this.tinhThuongStripMenuItem.Text = "Tính thưởng";
+            this.tinhThuongStripMenuItem.Click += new System.EventHandler(this.tinhThuongStripMenuItem_Click_1);
+            // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
             this.toolStripMenuItem13.Size = new System.Drawing.Size(358, 6);
+            // 
+            // tinhLuongStripMenuItem
+            // 
+            this.tinhLuongStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tinhLuongStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.tinhLuongStripMenuItem.Name = "tinhLuongStripMenuItem";
+            this.tinhLuongStripMenuItem.Size = new System.Drawing.Size(361, 42);
+            this.tinhLuongStripMenuItem.Text = "Lương";
+            this.tinhLuongStripMenuItem.Click += new System.EventHandler(this.tinhLuongStripMenuItem_Click);
             // 
             // reSultToolStripMenuItem
             // 
@@ -353,57 +378,53 @@
             this.chươngTrìnhGiảmGiáToolStripMenuItem.Text = "Chương trình giảm giá";
             this.chươngTrìnhGiảmGiáToolStripMenuItem.Click += new System.EventHandler(this.chươngTrìnhGiảmGiáToolStripMenuItem_Click);
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.IsTextAutoFit = false;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(814, 262);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
-            this.chart1.PaletteCustomColors = new System.Drawing.Color[] {
-        System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(160)))), ((int)(((byte)(139))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(188)))), ((int)(((byte)(0))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(88)))), ((int)(((byte)(127))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(220)))), ((int)(((byte)(225))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(83)))), ((int)(((byte)(255))))),
-        System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(153)))), ((int)(((byte)(254))))),
-        System.Drawing.Color.Empty};
-            series1.BackSecondaryColor = System.Drawing.Color.White;
-            series1.BorderColor = System.Drawing.Color.Silver;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            series1.LabelForeColor = System.Drawing.Color.White;
-            series1.Legend = "Legend1";
-            series1.Name = "Sales";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(409, 413);
-            this.chart1.TabIndex = 11;
-            this.chart1.Text = "chart1";
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(4);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 262);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.EnableHeadersVisualStyles = false;
+            this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
+            this.dataGridView1.Location = new System.Drawing.Point(43, 663);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(772, 413);
+            this.dataGridView1.RowTemplate.Height = 34;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(1168, 413);
             this.dataGridView1.TabIndex = 10;
             // 
             // panel2
@@ -649,21 +670,28 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(111, 26);
             this.dateTimePicker1.TabIndex = 1;
             // 
-            // tinhThuongStripMenuItem
+            // chart1
             // 
-            this.tinhThuongStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tinhThuongStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.tinhThuongStripMenuItem.Name = "tinhThuongStripMenuItem";
-            this.tinhThuongStripMenuItem.Size = new System.Drawing.Size(361, 42);
-            this.tinhThuongStripMenuItem.Text = "Tính thưởng";
-            this.tinhThuongStripMenuItem.Click += new System.EventHandler(this.tinhThuongStripMenuItem_Click);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(35, 249);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(1188, 423);
+            this.chart1.TabIndex = 11;
+            this.chart1.Text = "chart1";
             // 
             // fAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1246, 766);
+            this.ClientSize = new System.Drawing.Size(1246, 1050);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
@@ -676,7 +704,6 @@
             this.Load += new System.EventHandler(this.fAdmin_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -689,6 +716,7 @@
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -727,7 +755,6 @@
         private System.Windows.Forms.ToolStripMenuItem giảmGiáToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chươngTrìnhGiảmGiáToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nhaCungCaptoolStripMenuItem14;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
@@ -752,6 +779,8 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblChiPhi;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem tinhLuongStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tinhThuongStripMenuItem;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

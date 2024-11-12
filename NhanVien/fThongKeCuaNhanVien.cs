@@ -266,8 +266,8 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 // SQL update query for bonus
                 SqlParameter[] sqlParameters = new SqlParameter[]
                 {
-            new SqlParameter("@MaNhanVien", maNhanVien),
-            new SqlParameter("@Thuong", thuong)
+                    new SqlParameter("@MaNhanVien", maNhanVien),
+                    new SqlParameter("@Thuong", thuong)
                 };
 
                 // Update the bonus value for the current employee (modify the query as needed)

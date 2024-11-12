@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProCuaHangLinhKienLaptop.DB;
 using System.Data.SqlClient;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ProCuaHangLinhKienLaptop
 {
@@ -24,8 +25,8 @@ namespace ProCuaHangLinhKienLaptop
         private void fAdmin_Load(object sender, EventArgs e)
         {
             DateTime start = new DateTime(2024, 01, 01); 
-            DateTime end = new DateTime(2024, 12, 31); 
-
+            DateTime end = new DateTime(2024, 12, 31);
+            viewData(start, end);
 
         }
         private void okBtn_Click(object sender, EventArgs e)
@@ -79,8 +80,9 @@ namespace ProCuaHangLinhKienLaptop
                 new SqlParameter("@end", endDate)
             };
 
-            dataGridView1.DataSource = dataProvider.ExecuteReader(CommandType.StoredProcedure, "sp_ThongTinChiPhiTheoNgay", sqlParams);
-
+            DataTable data= dataProvider.ExecuteReader(CommandType.StoredProcedure, "sp_ThongTinChiPhiTheoNgay", sqlParams); ;
+            dataGridView1.DataSource = data;
+            VeBieuDo(startDate, endDate, data); 
             decimal soDonHang = GetDecimalValue("SELECT dbo.fn_TongSoDonHang(@start, @end)", sqlParams);
             decimal doanhThu = GetDecimalValue("SELECT dbo.fn_DoanhThu(@start, @end)", sqlParams);
             decimal chiPhi = GetDecimalValue("SELECT dbo.fn_ChiPhi(@start, @end)", sqlParams);
@@ -89,6 +91,37 @@ namespace ProCuaHangLinhKienLaptop
             lblChiPhi.Text = chiPhi.ToString("N0");
             lblLoiNhuan.Text = (doanhThu - chiPhi).ToString("N0");
         }
+        private void VeBieuDo(DateTime startDate, DateTime endDate, DataTable dataTable)
+        {
+            chart1.Series.Clear();
+
+            Series seriesDoanhThu = new Series("Doanh thu");
+            seriesDoanhThu.ChartType = SeriesChartType.Column;
+            seriesDoanhThu.Color = System.Drawing.Color.Blue;
+
+            Series seriesLoiNhuan = new Series("Lợi nhuận");
+            seriesLoiNhuan.ChartType = SeriesChartType.Line;
+            seriesLoiNhuan.Color = System.Drawing.Color.Green;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                DateTime ngay = Convert.ToDateTime(row["Ngay"]);
+                double doanhThu = Convert.ToDouble(row["TongDoanhThu"]);
+                double loiNhuan = Convert.ToDouble(row["LoiNhuan"]);
+
+                seriesDoanhThu.Points.AddXY(ngay.ToString("dd/MM/yyyy"), doanhThu);
+                seriesLoiNhuan.Points.AddXY(ngay.ToString("dd/MM/yyyy"), loiNhuan);
+            }
+
+            chart1.Series.Add(seriesDoanhThu);
+            chart1.Series.Add(seriesLoiNhuan);
+            chart1.ChartAreas[0].AxisX.Title = "Ngày";
+            chart1.ChartAreas[0].AxisY.Title = "Giá trị (VND)";
+            chart1.Titles.Clear();
+            chart1.Titles.Add("Biểu đồ Doanh thu và Lợi nhuận theo Ngày");
+
+        }
+
         // Sao chép parameter cũ thành một param mới giống hệt,
         // Do dataprovider cần param riêng cho mỗi lần thực thi, không dùng chung đư
         private SqlParameter[] CloneParameters(SqlParameter[] originalParameters)
@@ -170,11 +203,16 @@ namespace ProCuaHangLinhKienLaptop
             fNhapHang fNhapHang = new fNhapHang();
             fNhapHang.ShowDialog(); 
         }
+        private void tinhLuongStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fLuong fLuong = new fLuong();
+            fLuong.ShowDialog();    
+        }
 
-        private void tinhThuongStripMenuItem_Click(object sender, EventArgs e)
+        private void tinhThuongStripMenuItem_Click_1(object sender, EventArgs e)
         {
             fTinhThuong fTinhThuong = new fTinhThuong();
-            fTinhThuong.ShowDialog();   
+            fTinhThuong.ShowDialog();
         }
     }
 }
