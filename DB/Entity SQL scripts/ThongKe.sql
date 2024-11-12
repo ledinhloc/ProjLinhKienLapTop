@@ -55,6 +55,34 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION fn_TinhTongLuongTheoNgay
+(
+    @startDay DATE,
+    @endDay DATE
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        llv.NgayLam AS ngay, 
+        SUM((DATEDIFF(MINUTE, clv.GioBatDau, clv.GioKetThuc) / 60.0) * l.LuongGio) AS tongLuong
+    FROM 
+        CoLichLam cll
+        JOIN LichLamViec llv ON cll.MaLichLamViec = llv.MaLichLamViec
+        JOIN CaLamViec clv ON clv.MaCa = llv.MaCa
+        JOIN NhanVien nv ON nv.MaNhanVien = cll.MaNhanVien
+        JOIN Luong l ON l.MaNhanVien = nv.MaNhanVien 
+                     AND MONTH(l.ThoiGian) = MONTH(llv.NgayLam) 
+                     AND YEAR(l.ThoiGian) = YEAR(llv.NgayLam)
+    WHERE 
+        cll.TrangThai = 'HoanThanh'
+        AND llv.NgayLam BETWEEN @startDay AND @endDay
+    GROUP BY 
+        llv.NgayLam
+);
+GO
+
 CREATE PROCEDURE sp_ThongTinChiPhiTheoNgay
     @start DATE,
     @end DATE
@@ -65,8 +93,8 @@ BEGIN
         dh.NgayDatHang AS Ngay,
         COUNT(dh.MaDonHang) AS TongSoDonHang,
         SUM(dh.TongGiaTri) AS TongDoanhThu,
-		ISNULL(SUM(l.TongNhan), 0) AS Luong,
-		ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0) AS GiaVon,
+        ISNULL(l.TongNhan, 0) AS Luong,  
+        ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0) AS GiaVon,
         (
             ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
         ) AS TongChiPhi,
@@ -74,11 +102,14 @@ BEGIN
             SUM(dh.TongGiaTri) - (
                 ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
             )
-        ) AS LoiNhuan
+        ) AS LoiNhuan,
+        ISNULL(SUM(tl.tongLuong), 0) AS TongLuong
     FROM DonHang dh
     LEFT JOIN ChiTietDonHang ctdh ON dh.MaDonHang = ctdh.MaDonHang
     LEFT JOIN LinhKien lk ON ctdh.MaLinhKien = lk.MaLinhKien
     LEFT JOIN Luong l ON dh.NgayDatHang = l.ThoiGian
+    LEFT JOIN fn_TinhTongLuongTheoNgay(@start, @end) AS tl
+        ON dh.NgayDatHang = tl.ngay
     WHERE dh.NgayDatHang BETWEEN @start AND @end
     GROUP BY dh.NgayDatHang
     ORDER BY dh.NgayDatHang;

@@ -181,6 +181,12 @@
     <Compile Include="Quanly\fLoaiLinhKien.Designer.cs">
       <DependentUpon>fLoaiLinhKien.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quanly\fLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quanly\fLuong.Designer.cs">
+      <DependentUpon>fLuong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Quanly\fNhaCungCap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fLoaiLinhKien.resx">
       <DependentUpon>fLoaiLinhKien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quanly\fLuong.resx">
+      <DependentUpon>fLuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Quanly\fNhaCungCap.resx">
       <DependentUpon>fNhaCungCap.cs</DependentUpon>

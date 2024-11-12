@@ -110,25 +110,22 @@ BEGIN
     END CATCH
 END;
 GO
---sua
--- CREATE PROCEDURE sp_SuaLuong
---     @MaLuong INT,
---     @Luong DECIMAL(15, 2),
---     @Thuong DECIMAL(15, 2),
---     @ThoiGian DATE,
---     @SoCa INT,
---     @MaNhanVien INT
--- AS
--- BEGIN
--- 	UPDATE Luong
---     SET Luong = @Luong,
---         Thuong = @Thuong,
---         ThoiGian = @ThoiGian,
---         SoCa = @SoCa,
---         MaNhanVien = @MaNhanVien
---     WHERE MaLuong = @MaLuong;
--- END;
-
+-- Cập nhật thưởng -> Tổng nhận
+CREATE PROCEDURE sp_CapNhatThuongTongNhan
+    @MaNhanVien INT,
+    @Thuong DECIMAL(15, 2),
+    @Thang INT, 
+    @Nam INT    
+AS
+BEGIN
+    UPDATE Luong
+    SET Thuong = @Thuong,
+        TongNhan = Luong + @Thuong
+    WHERE MaNhanVien = @MaNhanVien
+        AND MONTH(ThoiGian) = @Thang   
+        AND YEAR(ThoiGian) = @Nam;    
+END;
+GO
 --xoa
 -- CREATE PROCEDURE sp_XoaLuong
 --     @MaLuong INT
@@ -175,29 +172,37 @@ GO
 
 
 --
--- CREATE FUNCTION dbo.fn_XemTatCaLuongTheoThangNam
--- (
---     @Thang INT, @Nam INT
--- )
--- RETURNS TABLE
--- AS
--- RETURN
--- (
---     SELECT 
---         l.MaLuong,
---         l.Luong,
---         l.Thuong,
---         l.ThoiGian,
---         l.SoCa,
---         nv.TenNV
---     FROM 
---         Luong l
---     JOIN 
---         NhanVien nv ON l.MaNhanVien = nv.MaNhanVien
---     WHERE 
---         MONTH(l.ThoiGian) = @Thang AND
---         YEAR(l.ThoiGian) = @Nam
--- );
+CREATE FUNCTION dbo.fn_XemTatCaLuongTheoThangNam
+(
+    @Thang INT, 
+    @Nam INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        l.MaLuong,
+        l.Luong,
+        l.Thuong,
+        FORMAT(l.ThoiGian, 'MM-yyyy') AS ThoiGian, -- Chỉ lấy tháng và năm
+        l.SoCa,
+        nv.TenNhanVien,
+        dbo.fn_DemCaNghi(
+            DATEFROMPARTS(@Nam, @Thang, 1),
+            EOMONTH(DATEFROMPARTS(@Nam, @Thang, 1)),
+            nv.MaNhanVien
+        ) AS CaNghi -- Adding Ca Nghỉ using the fn_DemCaNghi function
+    FROM 
+        Luong l
+    JOIN 
+        NhanVien nv ON l.MaNhanVien = nv.MaNhanVien
+    WHERE 
+        MONTH(l.ThoiGian) = @Thang AND
+        YEAR(l.ThoiGian) = @Nam
+);
+GO
+
 
 -- SELECT * FROM dbo.fn_XemTatCaLuongTheoThangNam(9, 2024);
 
