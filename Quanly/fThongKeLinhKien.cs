@@ -30,11 +30,12 @@ namespace ProCuaHangLinhKienLaptop.Quanly
             string query2 = "SELECT * FROM fn_ThongKeDoanhThuLinhKien()";
             string query3 = "SELECT * FROM fn_ThongKeHTKTheoLoaiLinhKien()";
             string query4 = "SELECT * FROM fn_ThongKeHTKTheoLinhKien()";
-            string query5 = "sp_ThongTinTopKLinhKien";
+            string query5 = "sp_ThongTinTopKLinhKienMD";
             SqlParameter[] parameters = new SqlParameter[]
             {
                             new SqlParameter("@K", 5),
-                            new SqlParameter("@N", 365)
+                            new SqlParameter("@StartDate", "2024-01-01"),
+                            new SqlParameter("@EndDate", "2024-12-31")
             };
             try
             {
