@@ -412,6 +412,7 @@
     <Content Include="DB\Full Database Scripts\trigger_phanQuyen.sql" />
     <Content Include="DB\Trigger\Dung.sql" />
     <Content Include="DB\Trigger\Khoa.sql" />
+    <Content Include="DB\Trigger\Loc.sql" />
     <Content Include="DB\Trigger\Nhân.sql" />
     <None Include="Resources\ssd_256gb_samsung.png" />
     <None Include="Resources\bomach_dell_inspiron.jpg" />

@@ -336,8 +336,7 @@ BEGIN
 END;
 
 GO
-
--- Sửa khách hàng
+-- Sá»­a khÃ¡ch hÃ ng
 CREATE PROCEDURE sp_SuaKhachHang
     @MaKhachHang INT,
     @TenKhachHang NVARCHAR(255),
@@ -367,8 +366,11 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
+
 GO
--- Xóa khách hàng
+
+
+-- XÃ³a khÃ¡ch hÃ ng
 CREATE PROCEDURE sp_XoaKhachHang
     @MaKhachHang INT
 AS
@@ -388,6 +390,8 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);
     END CATCH
 END;
+
+
 GO
 ---- STORED PROCEDURE
 CREATE PROCEDURE sp_TimKiemKhachHang
@@ -613,7 +617,7 @@ RETURN
     GROUP BY YEAR(LLV.NgayLam), MONTH(LLV.NgayLam)
 )
 GO
-CREATE FUNCTION dbo.fn_DemCaLam (@start DATE, @end DATE, @MaNhanVien INT)
+CREATE FUNCTION fn_DemCaLam (@start DATE, @end DATE, @MaNhanVien INT)
 RETURNS INT
 AS
 BEGIN
@@ -627,7 +631,7 @@ BEGIN
     );
 END;
 GO
-CREATE FUNCTION dbo.fn_DemCaNghi (@start DATE, @end DATE, @MaNhanVien INT)
+CREATE FUNCTION fn_DemCaNghi (@start DATE, @end DATE, @MaNhanVien INT)
 RETURNS INT
 AS
 BEGIN
@@ -1408,6 +1412,7 @@ GO
 
 
 -- Thêm Phiếu Nhập Hàng
+GO
 CREATE PROCEDURE sp_ThemPhieuNhapHang
     @NgayNhap DATE,
     @GiaNhap DECIMAL(15, 2),
@@ -1670,22 +1675,22 @@ BEGIN
         ResultGiaTriThuong DECIMAL(18, 2)
     );
 
-    -- Khởi tạo lại @Thuong cho mỗi nhân viên
+    -- Khá»Ÿi táº¡o láº¡i @Thuong cho má»—i nhÃ¢n viÃªn
     SET @Thuong = 0;
 
-    -- Cursor duyệt qua từng nhân viên
+    -- Cursor duyá»‡t qua tá»«ng nhÃ¢n viÃªn
     DECLARE nhanvien_cursor CURSOR FOR
         SELECT MaNhanVien, TenNhanVien FROM NhanVien;
 
     OPEN nhanvien_cursor;
     FETCH NEXT FROM nhanvien_cursor INTO @MaNhanVien, @TenNhanVien;
 
-    -- Vòng lặp duyệt qua từng nhân viên
+    -- VÃ²ng láº·p duyá»‡t qua tá»«ng nhÃ¢n viÃªn
     WHILE @@FETCH_STATUS = 0
     BEGIN
         SET @Thuong = 0;
 
-        -- Cursor duyệt qua các điều kiện
+        -- Cursor duyá»‡t qua cÃ¡c Ä‘iá»u kiá»‡n
         DECLARE dieukien_cursor CURSOR FOR
             SELECT Id, TenFunction, ThamSo, Nguong, SoSanh, GiaTriThuong
             FROM DieuKienThuong;
@@ -1693,10 +1698,10 @@ BEGIN
         OPEN dieukien_cursor;
         FETCH NEXT FROM dieukien_cursor INTO @Id, @TenFunction, @ThamSo, @Nguong, @SoSanh, @GiaTriThuong;
 
-        -- Vòng lặp duyệt qua từng điều kiện
+        -- VÃ²ng láº·p duyá»‡t qua tá»«ng Ä‘iá»u kiá»‡n
         WHILE @@FETCH_STATUS = 0
         BEGIN
-            -- Kiểm tra xem có cần tham số MaNhanVien hay không
+            -- Kiá»ƒm tra xem cÃ³ cáº§n tham sá»‘ MaNhanVien hay khÃ´ng
             IF CHARINDEX('MaNhanVien', @ThamSo) > 0
             BEGIN
                 SET @SQL = 'SELECT @GiaTriThucTe = dbo.' + @TenFunction + '(@start, @end, @MaNhanVien)';
@@ -1719,10 +1724,10 @@ BEGIN
                     @GiaTriThucTe = @GiaTriThucTe OUTPUT;
             END
 
-            -- Debug: In giá trị GiaTriThucTe
+            -- Debug: In giÃ¡ trá»‹ GiaTriThucTe
             PRINT 'GiaTriThucTe: ' + CAST(@GiaTriThucTe AS NVARCHAR(100));
 
-            -- Kiểm tra điều kiện và tính toán thưởng nếu điều kiện thoả mãn
+            -- Kiá»ƒm tra Ä‘iá»u kiá»‡n vÃ  tÃ­nh toÃ¡n thÆ°á»Ÿng náº¿u Ä‘iá»u kiá»‡n thoáº£ mÃ£n
             IF (@SoSanh = '<' AND @GiaTriThucTe < @Nguong) OR
                (@SoSanh = '>' AND @GiaTriThucTe > @Nguong) OR
                (@SoSanh = '>=' AND @GiaTriThucTe >= @Nguong) OR
@@ -1732,73 +1737,30 @@ BEGIN
                 SET @Thuong = @GiaTriThuong + @Thuong;
             END
 
-            -- Lấy điều kiện tiếp theo
+            -- Láº¥y Ä‘iá»u kiá»‡n tiáº¿p theo
             FETCH NEXT FROM dieukien_cursor INTO @Id, @TenFunction, @ThamSo, @Nguong, @SoSanh, @GiaTriThuong;
         END
 
-        -- Đóng và giải phóng con trỏ dieukien_cursor
+        -- ÄÃ³ng vÃ  giáº£i phÃ³ng con trá» dieukien_cursor
         CLOSE dieukien_cursor;
         DEALLOCATE dieukien_cursor;
 
-        -- Insert kết quả vào bảng tạm
+        -- Insert káº¿t quáº£ vÃ o báº£ng táº¡m
         INSERT INTO @Result (MaNhanVien, TenNhanVien, ResultGiaTriThuong)
         VALUES (@MaNhanVien, @TenNhanVien, @Thuong);
 
-        -- Lấy nhân viên tiếp theo
+        -- Láº¥y nhÃ¢n viÃªn tiáº¿p theo
         FETCH NEXT FROM nhanvien_cursor INTO @MaNhanVien, @TenNhanVien;
     END
 
-    -- Đóng và giải phóng con trỏ nhanvien_cursor
+    -- ÄÃ³ng vÃ  giáº£i phÃ³ng con trá» nhanvien_cursor
     CLOSE nhanvien_cursor;
     DEALLOCATE nhanvien_cursor;
 
-    -- Hiển thị kết quả
+    -- Hiá»ƒn thá»‹ káº¿t quáº£
     SELECT * FROM @Result;
     RETURN;
 END;
 GO
 
-CREATE FUNCTION fn_TopLinhKienMD(@StartDate DATE, @EndDate DATE)
-RETURNS TABLE
-AS
-RETURN (
-    SELECT 
-        lk.MaLinhKien, 
-        SUM(ct.SoLuong * ct.GiaBan) AS DoanhThu,
-        AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) AS TrungBinhDoanhThuLoai,
-        CASE 
-            WHEN SUM(ct.SoLuong * ct.GiaBan) > AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) 
-            THEN 'High' 
-            ELSE 'Low' 
-        END AS MucDoanhThu,
-        ROW_NUMBER() OVER (ORDER BY SUM(ct.SoLuong * ct.GiaBan) DESC) AS XepHang
-    FROM DonHang dh
-    JOIN ChiTietDonHang ct ON dh.MaDonHang = ct.MaDonHang
-    JOIN LinhKien lk ON lk.MaLinhKien = ct.MaLinhKien
-    WHERE dh.NgayDatHang BETWEEN @StartDate AND @EndDate
-    GROUP BY lk.MaLinhKien, lk.MaLoaiLinhKien
-)
-
-GO
-
-CREATE PROC sp_ThongTinTopKLinhKienMD
-    @K INT, 
-    @StartDate DATE, 
-    @EndDate DATE
-AS
-BEGIN
-    SELECT TOP(@K)
-        tlk.XepHang, 
-        lk.TenLinhKien, 
-        llk.TenLoaiLinhKien, 
-        tlk.DoanhThu, 
-        tlk.TrungBinhDoanhThuLoai,
-        tlk.MucDoanhThu
-    FROM LinhKien lk
-    JOIN fn_TopLinhKienMD(@StartDate, @EndDate) tlk
-    ON lk.MaLinhKien = tlk.MaLinhKien
-    JOIN LoaiLinhKien llk
-    ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
-    ORDER BY tlk.XepHang
-END
 

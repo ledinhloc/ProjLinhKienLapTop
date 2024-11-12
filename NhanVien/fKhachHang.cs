@@ -105,7 +105,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Program.Email + "--" + Program.MatKhau);
+            //MessageBox.Show(Program.Email + "--" + Program.MatKhau);
             if (txtID.Text == "")
             {
                 MessageBox.Show("Vui lòng chọn khách hàng để xóa", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

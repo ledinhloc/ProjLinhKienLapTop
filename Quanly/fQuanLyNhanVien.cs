@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProCuaHangLinhKienLaptop.NhanVien;
 
 namespace ProCuaHangLinhKienLaptop.Quanly
 {
@@ -105,13 +106,16 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                             new SqlParameter("@MaNV", maNhanVien)
                         };
 
-                        dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "proc_XoaLoginNhanVien", parameters);
+                        dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "proc_XoaNhanVien", parameters);
 
 
                         LoadData();
                         MessageBox.Show("Xóa nhân viên thành công!");
                     }
                     catch (Exception ex)
+
+
+
                     {
                         MessageBox.Show("Error deleting employee: " + ex.Message);
                     }
@@ -164,6 +168,21 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
             // Đưa dữ liệu vào DataGridView
             dGV_NhanVien.DataSource = datagrid;
+        }
+
+        private void btnSuaNV_Click(object sender, EventArgs e)
+        {
+            if (dGV_NhanVien.CurrentRow != null) // Kiểm tra có hàng được chọn
+            {
+                int maNhanVien = Convert.ToInt32(dGV_NhanVien.CurrentRow.Cells["MaNhanVien"].Value);
+                fThongTinNhanVien fThongTinNV = new fThongTinNhanVien(maNhanVien);
+                fThongTinNV.ShowDialog();
+                LoadData();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một nhân viên để sửa.");
+            }
         }
     }
 }

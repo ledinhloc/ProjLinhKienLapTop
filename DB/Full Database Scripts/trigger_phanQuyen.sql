@@ -23,7 +23,7 @@ END
 
 GO
 --procedure  xoa nhan vien
-CREATE PROCEDURE [dbo].[proc_XoaLoginNhanVien]
+CREATE PROCEDURE [dbo].[proc_XoaNhanVien]
  @MaNV nvarchar(100)
 AS
 BEGIN
@@ -50,6 +50,33 @@ BEGIN
 	 COMMIT TRANSACTION;
 END
 
+--cap nhat login khi sua nhan vien
+ALTER TRIGGER [dbo].[trg_SuaLogin] ON [dbo].[NhanVien]
+AFTER UPDATE
+AS
+BEGIN
+	DECLARE @emailMoi nvarchar(150);
+	DECLARE @matKhauMoi nvarchar(150);
+	DECLARE @emailCu nvarchar(150);
+	DeCLARE @matKhauCu nvarchar(100);
+
+	SELECT @emailMoi = i.Email, @matKhauMoi = i.MatKhau
+
+
+
+	FROM inserted i 
+
+	SELECT @emailCu = d.Email, @matKhauCu= d.MatKhau
+	FROM deleted d
+
+	-- Kiểm tra nếu email và mật khẩu nếu thay đổi
+    IF (@emailMoi != @emailCu OR @matKhauMoi != @matKhauCu)
+    BEGIN
+        EXEC('ALTER LOGIN [' + @emailCu + '] WITH NAME = [' + @emailMoi + ']');
+		EXEC('ALTER LOGIN [' + @emailMoi + '] WITH PASSWORD = ''' + @matKhauMoi + '''');
+		EXEC('ALTER USER [' + @emailCu + '] WITH NAME = [' + @emailMoi + ']');
+    END	
+END
 
 
 

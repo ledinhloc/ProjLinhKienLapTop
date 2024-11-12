@@ -40,6 +40,7 @@
             this.txtTuKhoa = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnSuaNV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_NhanVien)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +101,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSuaNV);
             this.groupBox1.Controls.Add(this.dGV_NhanVien);
             this.groupBox1.Controls.Add(this.btnXoaKhuyenMai);
             this.groupBox1.Controls.Add(this.btnThemNhanVien);
@@ -188,6 +190,18 @@
             this.comboBox1.Size = new System.Drawing.Size(149, 24);
             this.comboBox1.TabIndex = 33;
             // 
+            // btnSuaNV
+            // 
+            this.btnSuaNV.AutoSize = true;
+            this.btnSuaNV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSuaNV.Location = new System.Drawing.Point(930, 168);
+            this.btnSuaNV.Name = "btnSuaNV";
+            this.btnSuaNV.Size = new System.Drawing.Size(166, 35);
+            this.btnSuaNV.TabIndex = 21;
+            this.btnSuaNV.Text = "Sửa nhân viên";
+            this.btnSuaNV.UseVisualStyleBackColor = true;
+            this.btnSuaNV.Click += new System.EventHandler(this.btnSuaNV_Click);
+            // 
             // fQuanLyNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -231,5 +245,6 @@
         private System.Windows.Forms.TextBox txtTuKhoa;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnSuaNV;
     }
 }

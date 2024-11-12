@@ -107,3 +107,48 @@ RETURN(
 	SELECT TenLoaiLinhKien, dbo.fn_HTKTheoLoaiLinhKien(MaLoaiLinhKien) as SoLuong
 	FROM LoaiLinhKien
 )
+
+GO
+CREATE FUNCTION fn_TopLinhKienMD(@StartDate DATE, @EndDate DATE)
+RETURNS TABLE
+AS
+RETURN (
+    SELECT 
+        lk.MaLinhKien, 
+        SUM(ct.SoLuong * ct.GiaBan) AS DoanhThu,
+        AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) AS TrungBinhDoanhThuLoai,
+        CASE 
+            WHEN SUM(ct.SoLuong * ct.GiaBan) > AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) 
+            THEN 'High' 
+            ELSE 'Low' 
+        END AS MucDoanhThu,
+        ROW_NUMBER() OVER (ORDER BY SUM(ct.SoLuong * ct.GiaBan) DESC) AS XepHang
+    FROM DonHang dh
+    JOIN ChiTietDonHang ct ON dh.MaDonHang = ct.MaDonHang
+    JOIN LinhKien lk ON lk.MaLinhKien = ct.MaLinhKien
+    WHERE dh.NgayDatHang BETWEEN @StartDate AND @EndDate
+    GROUP BY lk.MaLinhKien, lk.MaLoaiLinhKien
+)
+
+GO
+
+CREATE PROC sp_ThongTinTopKLinhKienMD
+    @K INT, 
+    @StartDate DATE, 
+    @EndDate DATE
+AS
+BEGIN
+    SELECT TOP(@K)
+        tlk.XepHang, 
+        lk.TenLinhKien, 
+        llk.TenLoaiLinhKien, 
+        tlk.DoanhThu, 
+        tlk.TrungBinhDoanhThuLoai,
+        tlk.MucDoanhThu
+    FROM LinhKien lk
+    JOIN fn_TopLinhKienMD(@StartDate, @EndDate) tlk
+    ON lk.MaLinhKien = tlk.MaLinhKien
+    JOIN LoaiLinhKien llk
+    ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
+    ORDER BY tlk.XepHang
+END
