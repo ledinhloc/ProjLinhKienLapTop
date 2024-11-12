@@ -110,25 +110,22 @@ BEGIN
     END CATCH
 END;
 GO
---sua
--- CREATE PROCEDURE sp_SuaLuong
---     @MaLuong INT,
---     @Luong DECIMAL(15, 2),
---     @Thuong DECIMAL(15, 2),
---     @ThoiGian DATE,
---     @SoCa INT,
---     @MaNhanVien INT
--- AS
--- BEGIN
--- 	UPDATE Luong
---     SET Luong = @Luong,
---         Thuong = @Thuong,
---         ThoiGian = @ThoiGian,
---         SoCa = @SoCa,
---         MaNhanVien = @MaNhanVien
---     WHERE MaLuong = @MaLuong;
--- END;
-
+-- Cập nhật thưởng -> Tổng nhận
+CREATE PROCEDURE sp_CapNhatThuongTongNhan
+    @MaNhanVien INT,
+    @Thuong DECIMAL(15, 2),
+    @Thang INT, 
+    @Nam INT    
+AS
+BEGIN
+    UPDATE Luong
+    SET Thuong = @Thuong,
+        TongNhan = Luong + @Thuong
+    WHERE MaNhanVien = @MaNhanVien
+        AND MONTH(ThoiGian) = @Thang   
+        AND YEAR(ThoiGian) = @Nam;    
+END;
+GO
 --xoa
 -- CREATE PROCEDURE sp_XoaLuong
 --     @MaLuong INT
@@ -175,29 +172,37 @@ GO
 
 
 --
--- CREATE FUNCTION dbo.fn_XemTatCaLuongTheoThangNam
--- (
---     @Thang INT, @Nam INT
--- )
--- RETURNS TABLE
--- AS
--- RETURN
--- (
---     SELECT 
---         l.MaLuong,
---         l.Luong,
---         l.Thuong,
---         l.ThoiGian,
---         l.SoCa,
---         nv.TenNV
---     FROM 
---         Luong l
---     JOIN 
---         NhanVien nv ON l.MaNhanVien = nv.MaNhanVien
---     WHERE 
---         MONTH(l.ThoiGian) = @Thang AND
---         YEAR(l.ThoiGian) = @Nam
--- );
+CREATE FUNCTION dbo.fn_XemTatCaLuongTheoThangNam
+(
+    @Thang INT, 
+    @Nam INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        l.MaLuong,
+        l.Luong,
+        l.Thuong,
+        FORMAT(l.ThoiGian, 'MM-yyyy') AS ThoiGian, -- Chỉ lấy tháng và năm
+        l.SoCa,
+        nv.TenNhanVien,
+        dbo.fn_DemCaNghi(
+            DATEFROMPARTS(@Nam, @Thang, 1),
+            EOMONTH(DATEFROMPARTS(@Nam, @Thang, 1)),
+            nv.MaNhanVien
+        ) AS CaNghi -- Adding Ca Nghỉ using the fn_DemCaNghi function
+    FROM 
+        Luong l
+    JOIN 
+        NhanVien nv ON l.MaNhanVien = nv.MaNhanVien
+    WHERE 
+        MONTH(l.ThoiGian) = @Thang AND
+        YEAR(l.ThoiGian) = @Nam
+);
+GO
+
 
 -- SELECT * FROM dbo.fn_XemTatCaLuongTheoThangNam(9, 2024);
 
@@ -794,6 +799,51 @@ RETURN(
 	SELECT TenLoaiLinhKien, dbo.fn_HTKTheoLoaiLinhKien(MaLoaiLinhKien) as SoLuong
 	FROM LoaiLinhKien
 )
+
+GO
+CREATE FUNCTION fn_TopLinhKienMD(@StartDate DATE, @EndDate DATE)
+RETURNS TABLE
+AS
+RETURN (
+    SELECT 
+        lk.MaLinhKien, 
+        SUM(ct.SoLuong * ct.GiaBan) AS DoanhThu,
+        AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) AS TrungBinhDoanhThuLoai,
+        CASE 
+            WHEN SUM(ct.SoLuong * ct.GiaBan) > AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) 
+            THEN 'High' 
+            ELSE 'Low' 
+        END AS MucDoanhThu,
+        ROW_NUMBER() OVER (ORDER BY SUM(ct.SoLuong * ct.GiaBan) DESC) AS XepHang
+    FROM DonHang dh
+    JOIN ChiTietDonHang ct ON dh.MaDonHang = ct.MaDonHang
+    JOIN LinhKien lk ON lk.MaLinhKien = ct.MaLinhKien
+    WHERE dh.NgayDatHang BETWEEN @StartDate AND @EndDate
+    GROUP BY lk.MaLinhKien, lk.MaLoaiLinhKien
+)
+
+GO
+
+CREATE PROC sp_ThongTinTopKLinhKienMD
+    @K INT, 
+    @StartDate DATE, 
+    @EndDate DATE
+AS
+BEGIN
+    SELECT TOP(@K)
+        tlk.XepHang, 
+        lk.TenLinhKien, 
+        llk.TenLoaiLinhKien, 
+        tlk.DoanhThu, 
+        tlk.TrungBinhDoanhThuLoai,
+        tlk.MucDoanhThu
+    FROM LinhKien lk
+    JOIN fn_TopLinhKienMD(@StartDate, @EndDate) tlk
+    ON lk.MaLinhKien = tlk.MaLinhKien
+    JOIN LoaiLinhKien llk
+    ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
+    ORDER BY tlk.XepHang
+END
 
 
 
@@ -1595,6 +1645,34 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION fn_TinhTongLuongTheoNgay
+(
+    @startDay DATE,
+    @endDay DATE
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        llv.NgayLam AS ngay, 
+        SUM((DATEDIFF(MINUTE, clv.GioBatDau, clv.GioKetThuc) / 60.0) * l.LuongGio) AS tongLuong
+    FROM 
+        CoLichLam cll
+        JOIN LichLamViec llv ON cll.MaLichLamViec = llv.MaLichLamViec
+        JOIN CaLamViec clv ON clv.MaCa = llv.MaCa
+        JOIN NhanVien nv ON nv.MaNhanVien = cll.MaNhanVien
+        JOIN Luong l ON l.MaNhanVien = nv.MaNhanVien 
+                     AND MONTH(l.ThoiGian) = MONTH(llv.NgayLam) 
+                     AND YEAR(l.ThoiGian) = YEAR(llv.NgayLam)
+    WHERE 
+        cll.TrangThai = 'HoanThanh'
+        AND llv.NgayLam BETWEEN @startDay AND @endDay
+    GROUP BY 
+        llv.NgayLam
+);
+GO
+
 CREATE PROCEDURE sp_ThongTinChiPhiTheoNgay
     @start DATE,
     @end DATE
@@ -1605,8 +1683,8 @@ BEGIN
         dh.NgayDatHang AS Ngay,
         COUNT(dh.MaDonHang) AS TongSoDonHang,
         SUM(dh.TongGiaTri) AS TongDoanhThu,
-		ISNULL(SUM(l.TongNhan), 0) AS Luong,
-		ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0) AS GiaVon,
+        ISNULL(l.TongNhan, 0) AS Luong,  
+        ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0) AS GiaVon,
         (
             ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
         ) AS TongChiPhi,
@@ -1614,11 +1692,14 @@ BEGIN
             SUM(dh.TongGiaTri) - (
                 ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
             )
-        ) AS LoiNhuan
+        ) AS LoiNhuan,
+        ISNULL(SUM(tl.tongLuong), 0) AS TongLuong
     FROM DonHang dh
     LEFT JOIN ChiTietDonHang ctdh ON dh.MaDonHang = ctdh.MaDonHang
     LEFT JOIN LinhKien lk ON ctdh.MaLinhKien = lk.MaLinhKien
     LEFT JOIN Luong l ON dh.NgayDatHang = l.ThoiGian
+    LEFT JOIN fn_TinhTongLuongTheoNgay(@start, @end) AS tl
+        ON dh.NgayDatHang = tl.ngay
     WHERE dh.NgayDatHang BETWEEN @start AND @end
     GROUP BY dh.NgayDatHang
     ORDER BY dh.NgayDatHang;
