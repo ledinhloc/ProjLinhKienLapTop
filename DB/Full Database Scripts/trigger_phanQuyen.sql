@@ -49,9 +49,10 @@ BEGIN
 	END CATCH
 	 COMMIT TRANSACTION;
 END
+GO
 
 --cap nhat login khi sua nhan vien
-ALTER TRIGGER [dbo].[trg_SuaLogin] ON [dbo].[NhanVien]
+CREATE TRIGGER [dbo].[trg_SuaLogin] ON [dbo].[NhanVien]
 AFTER UPDATE
 AS
 BEGIN

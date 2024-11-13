@@ -82,39 +82,43 @@ RETURN
         llv.NgayLam
 );
 GO
-
 CREATE PROCEDURE sp_ThongTinChiPhiTheoNgay
     @start DATE,
     @end DATE
 AS
 BEGIN
     SET NOCOUNT ON;
+
     SELECT 
         dh.NgayDatHang AS Ngay,
-        COUNT(dh.MaDonHang) AS TongSoDonHang,
+        COUNT(DISTINCT dh.MaDonHang) AS TongSoDonHang,
         SUM(dh.TongGiaTri) AS TongDoanhThu,
-        ISNULL(l.TongNhan, 0) AS Luong,  
+        ISNULL(SUM(l.TongNhan), 0) AS Luong,
         ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0) AS GiaVon,
         (
             ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
         ) AS TongChiPhi,
-        ( 
+        (
             SUM(dh.TongGiaTri) - (
                 ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
             )
         ) AS LoiNhuan,
-        ISNULL(SUM(tl.tongLuong), 0) AS TongLuong
+        ISNULL(tl.TongLuong, 0) AS TongLuong
     FROM DonHang dh
     LEFT JOIN ChiTietDonHang ctdh ON dh.MaDonHang = ctdh.MaDonHang
     LEFT JOIN LinhKien lk ON ctdh.MaLinhKien = lk.MaLinhKien
     LEFT JOIN Luong l ON dh.NgayDatHang = l.ThoiGian
-    LEFT JOIN fn_TinhTongLuongTheoNgay(@start, @end) AS tl
-        ON dh.NgayDatHang = tl.ngay
+    LEFT JOIN (
+        SELECT ngay, SUM(tongLuong) AS TongLuong
+        FROM fn_TinhTongLuongTheoNgay(@start, @end)
+        GROUP BY ngay
+    ) AS tl ON dh.NgayDatHang = tl.ngay
     WHERE dh.NgayDatHang BETWEEN @start AND @end
-    GROUP BY dh.NgayDatHang
+    GROUP BY dh.NgayDatHang, tl.TongLuong
     ORDER BY dh.NgayDatHang;
 END;
 GO
+
 
 CREATE PROCEDURE sp_TaoTableTamDieuKienThuong
 AS

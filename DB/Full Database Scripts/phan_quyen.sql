@@ -3,7 +3,7 @@
 GO
 -- cấp quyền cho role
 GRANT SELECT ON NhaCungCap TO NhanVienRole;
-GRANT SELECT, UPDATE ON KhachHang TO NhanVienRole;
+GRANT SELECT, INSERT ON KhachHang TO NhanVienRole;
 GRANT SELECT ON NhanVien TO NhanVienRole;
 GRANT SELECT ON LoaiLinhKien TO NhanVienRole;
 GRANT SELECT ON LinhKien TO NhanVienRole;--aa
