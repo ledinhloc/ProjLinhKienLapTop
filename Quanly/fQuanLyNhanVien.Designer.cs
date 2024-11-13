@@ -33,6 +33,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dGV_NhanVien = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSuaNV = new System.Windows.Forms.Button();
             this.pn_Chua = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,7 +41,6 @@
             this.txtTuKhoa = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.btnSuaNV = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_NhanVien)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +113,18 @@
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách nhân viên";
+            // 
+            // btnSuaNV
+            // 
+            this.btnSuaNV.AutoSize = true;
+            this.btnSuaNV.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSuaNV.Location = new System.Drawing.Point(930, 168);
+            this.btnSuaNV.Name = "btnSuaNV";
+            this.btnSuaNV.Size = new System.Drawing.Size(166, 35);
+            this.btnSuaNV.TabIndex = 21;
+            this.btnSuaNV.Text = "Sửa nhân viên";
+            this.btnSuaNV.UseVisualStyleBackColor = true;
+            this.btnSuaNV.Click += new System.EventHandler(this.btnSuaNV_Click);
             // 
             // pn_Chua
             // 
@@ -190,24 +202,12 @@
             this.comboBox1.Size = new System.Drawing.Size(149, 24);
             this.comboBox1.TabIndex = 33;
             // 
-            // btnSuaNV
-            // 
-            this.btnSuaNV.AutoSize = true;
-            this.btnSuaNV.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSuaNV.Location = new System.Drawing.Point(930, 168);
-            this.btnSuaNV.Name = "btnSuaNV";
-            this.btnSuaNV.Size = new System.Drawing.Size(166, 35);
-            this.btnSuaNV.TabIndex = 21;
-            this.btnSuaNV.Text = "Sửa nhân viên";
-            this.btnSuaNV.UseVisualStyleBackColor = true;
-            this.btnSuaNV.Click += new System.EventHandler(this.btnSuaNV_Click);
-            // 
             // fQuanLyNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.PowderBlue;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1162, 840);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
