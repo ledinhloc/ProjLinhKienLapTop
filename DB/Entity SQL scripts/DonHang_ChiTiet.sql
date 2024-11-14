@@ -66,24 +66,16 @@ GO
 --- CHITIETDONHANG
 -- Thêm chi tiết đơn hàng
 CREATE PROCEDURE sp_ThemChiTietDonHang
-    @MaDonHang INT,                          
-    @MaLinhKien INT,                         
-    @SoLuong INT,                            
-    @GiaBan DECIMAL(15, 2)                   
+    @MaDonHang INT,
+    @MaLinhKien INT,
+    @SoLuong INT,
+    @GiaBan DECIMAL(15, 2)
 AS
 BEGIN
-    BEGIN TRY
-        BEGIN TRANSACTION;
-
-        SET NOCOUNT ON;
-        INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan)
-        VALUES (@MaDonHang, @MaLinhKien, @SoLuong, @GiaBan);
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        RAISERROR (N'Đã xảy ra lỗi khi thêm chi tiết đơn hàng.', 16, 1);
-    END CATCH
+    SET NOCOUNT ON;
+    INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan)
+    VALUES (@MaDonHang, @MaLinhKien, @SoLuong, @GiaBan);
 END;
+GO
+
 GO

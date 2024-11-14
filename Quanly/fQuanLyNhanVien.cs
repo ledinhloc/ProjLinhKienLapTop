@@ -137,29 +137,38 @@ namespace ProCuaHangLinhKienLaptop.Quanly
 
         private void txtTenNhanVien_TextChanged(object sender, EventArgs e)
         {
-            string searchValue = txtTuKhoa.Text.Trim();
-            DataTable datagrid;
-            if (comboBox1.SelectedItem.ToString() == "Tìm theo email")
+            try
             {
-                datagrid = dataProvider.ExecuteReader(CommandType.Text,
-                    "SELECT * FROM dbo.fn_SearchNhanVienByEmail(@Email)",
-                    new SqlParameter("@Email", searchValue));
+                string searchValue = txtTuKhoa.Text.Trim();
+                DataTable datagrid;
+                if (comboBox1.SelectedItem.ToString() == "Tìm theo email")
+                {
+                    datagrid = dataProvider.ExecuteReader(CommandType.Text,
+                        "SELECT * FROM dbo.fn_SearchNhanVienByEmail(@Email)",
+                        new SqlParameter("@Email", searchValue));
+                }
+                else if (comboBox1.SelectedItem.ToString() == "Tìm theo tên")
+                {
+                    // Gọi hàm tìm kiếm theo Tên
+                    datagrid = dataProvider.ExecuteReader(CommandType.Text,
+                        "SELECT * FROM dbo.fn_SearchNhanVienByName(@TenNhanVien)",
+                        new SqlParameter("@TenNhanVien", searchValue));
+                }
+                else
+                {
+                    // Nếu không có lựa chọn nào
+                    return;
+                }
+
+                // Đưa dữ liệu vào DataGridView
+                dGV_NhanVien.DataSource = datagrid;
             }
-            else if (comboBox1.SelectedItem.ToString() == "Tìm theo tên")
+            catch(Exception ex)
             {
-                // Gọi hàm tìm kiếm theo Tên
-                datagrid = dataProvider.ExecuteReader(CommandType.Text,
-                    "SELECT * FROM dbo.fn_SearchNhanVienByName(@TenNhanVien)",
-                    new SqlParameter("@TenNhanVien", searchValue));
-            }
-            else
-            {
-                // Nếu không có lựa chọn nào
-                return;
+                MessageBox.Show("Da co loi khi tim " + ex.Message);
             }
 
-            // Đưa dữ liệu vào DataGridView
-            dGV_NhanVien.DataSource = datagrid;
+            
         }
 
         private void btnSuaNV_Click(object sender, EventArgs e)

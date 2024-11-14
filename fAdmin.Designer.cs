@@ -86,7 +86,6 @@ namespace ProCuaHangLinhKienLaptop
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.yearBtn = new System.Windows.Forms.Button();
-            this.fileBtn = new System.Windows.Forms.Button();
             this.monthBtn = new System.Windows.Forms.Button();
             this.weekBtn = new System.Windows.Forms.Button();
             this.todayBtn = new System.Windows.Forms.Button();
@@ -110,7 +109,6 @@ namespace ProCuaHangLinhKienLaptop
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.White;
             this.menuStrip1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sTUDENTToolStripMenuItem,
@@ -121,7 +119,8 @@ namespace ProCuaHangLinhKienLaptop
             this.giảmGiáToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1246, 41);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1108, 35);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -140,7 +139,7 @@ namespace ProCuaHangLinhKienLaptop
             this.sTUDENTToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.sTUDENTToolStripMenuItem.Name = "sTUDENTToolStripMenuItem";
             this.sTUDENTToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.sTUDENTToolStripMenuItem.Size = new System.Drawing.Size(152, 37);
+            this.sTUDENTToolStripMenuItem.Size = new System.Drawing.Size(127, 31);
             this.sTUDENTToolStripMenuItem.Text = "Linh Kiện";
             this.sTUDENTToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
@@ -150,7 +149,7 @@ namespace ProCuaHangLinhKienLaptop
             this.LinhKienToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.LinhKienToolStripMenuItem.Name = "LinhKienToolStripMenuItem";
             this.LinhKienToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.LinhKienToolStripMenuItem.Size = new System.Drawing.Size(431, 42);
+            this.LinhKienToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
             this.LinhKienToolStripMenuItem.Text = "Quản lý linh kiện";
             this.LinhKienToolStripMenuItem.Click += new System.EventHandler(this.addNewStudentToolStripMenuItem_Click);
             // 
@@ -158,36 +157,36 @@ namespace ProCuaHangLinhKienLaptop
             // 
             this.toolStripMenuItem5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(428, 6);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(356, 6);
             // 
             // rToolStripMenuItem
             // 
             this.rToolStripMenuItem.BackColor = System.Drawing.Color.MediumTurquoise;
             this.rToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.rToolStripMenuItem.Name = "rToolStripMenuItem";
-            this.rToolStripMenuItem.Size = new System.Drawing.Size(431, 42);
+            this.rToolStripMenuItem.Size = new System.Drawing.Size(359, 32);
             this.rToolStripMenuItem.Text = "Quản lý loại linh kiện";
             this.rToolStripMenuItem.Click += new System.EventHandler(this.rToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(428, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(356, 6);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(428, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(356, 6);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(428, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(356, 6);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(428, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(356, 6);
             // 
             // cOURSEToolStripMenuItem
             // 
@@ -200,7 +199,7 @@ namespace ProCuaHangLinhKienLaptop
             this.toolStripMenuItem6});
             this.cOURSEToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cOURSEToolStripMenuItem.Name = "cOURSEToolStripMenuItem";
-            this.cOURSEToolStripMenuItem.Size = new System.Drawing.Size(222, 37);
+            this.cOURSEToolStripMenuItem.Size = new System.Drawing.Size(187, 31);
             this.cOURSEToolStripMenuItem.Text = "Nhà Cung Cấp";
             // 
             // nhaCungCaptoolStripMenuItem14
@@ -208,38 +207,38 @@ namespace ProCuaHangLinhKienLaptop
             this.nhaCungCaptoolStripMenuItem14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.nhaCungCaptoolStripMenuItem14.ForeColor = System.Drawing.Color.White;
             this.nhaCungCaptoolStripMenuItem14.Name = "nhaCungCaptoolStripMenuItem14";
-            this.nhaCungCaptoolStripMenuItem14.Size = new System.Drawing.Size(401, 42);
+            this.nhaCungCaptoolStripMenuItem14.Size = new System.Drawing.Size(338, 32);
             this.nhaCungCaptoolStripMenuItem14.Text = "Quản lý nhà cung cấp";
             this.nhaCungCaptoolStripMenuItem14.Click += new System.EventHandler(this.nhaCungCaptoolStripMenuItem14_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(398, 6);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(335, 6);
             // 
             // NhaCungCapToolStripMenuItem
             // 
             this.NhaCungCapToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.NhaCungCapToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.NhaCungCapToolStripMenuItem.Name = "NhaCungCapToolStripMenuItem";
-            this.NhaCungCapToolStripMenuItem.Size = new System.Drawing.Size(401, 42);
+            this.NhaCungCapToolStripMenuItem.Size = new System.Drawing.Size(338, 32);
             this.NhaCungCapToolStripMenuItem.Text = "Quản lý nhập hàng";
             this.NhaCungCapToolStripMenuItem.Click += new System.EventHandler(this.NhaCungCapToolStripMenuItem_Click);
             // 
             // nhapHangtoolStripMenuItem8
             // 
             this.nhapHangtoolStripMenuItem8.Name = "nhapHangtoolStripMenuItem8";
-            this.nhapHangtoolStripMenuItem8.Size = new System.Drawing.Size(398, 6);
+            this.nhapHangtoolStripMenuItem8.Size = new System.Drawing.Size(335, 6);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(398, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(335, 6);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(398, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(335, 6);
             // 
             // sCOREToolStripMenuItem
             // 
@@ -255,7 +254,7 @@ namespace ProCuaHangLinhKienLaptop
             this.tinhLuongStripMenuItem});
             this.sCOREToolStripMenuItem.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sCOREToolStripMenuItem.Name = "sCOREToolStripMenuItem";
-            this.sCOREToolStripMenuItem.Size = new System.Drawing.Size(165, 37);
+            this.sCOREToolStripMenuItem.Size = new System.Drawing.Size(138, 31);
             this.sCOREToolStripMenuItem.Text = "Nhân Viên";
             // 
             // addScoreToolStripMenuItem
@@ -263,63 +262,63 @@ namespace ProCuaHangLinhKienLaptop
             this.addScoreToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.addScoreToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.addScoreToolStripMenuItem.Name = "addScoreToolStripMenuItem";
-            this.addScoreToolStripMenuItem.Size = new System.Drawing.Size(361, 42);
+            this.addScoreToolStripMenuItem.Size = new System.Drawing.Size(302, 32);
             this.addScoreToolStripMenuItem.Text = "Quản lý Nhân Viên";
             this.addScoreToolStripMenuItem.Click += new System.EventHandler(this.addScoreToolStripMenuItem_Click);
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(358, 6);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(299, 6);
             // 
             // caLamViecToolStripMenuItem
             // 
             this.caLamViecToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.caLamViecToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.caLamViecToolStripMenuItem.Name = "caLamViecToolStripMenuItem";
-            this.caLamViecToolStripMenuItem.Size = new System.Drawing.Size(361, 42);
+            this.caLamViecToolStripMenuItem.Size = new System.Drawing.Size(302, 32);
             this.caLamViecToolStripMenuItem.Text = "Ca Làm";
             this.caLamViecToolStripMenuItem.Click += new System.EventHandler(this.caLamViecToolStripMenuItem_Click);
             // 
             // toolStripMenuItem11
             // 
             this.toolStripMenuItem11.Name = "toolStripMenuItem11";
-            this.toolStripMenuItem11.Size = new System.Drawing.Size(358, 6);
+            this.toolStripMenuItem11.Size = new System.Drawing.Size(299, 6);
             // 
             // lichLamViecToolStripMenuItem
             // 
             this.lichLamViecToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lichLamViecToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.lichLamViecToolStripMenuItem.Name = "lichLamViecToolStripMenuItem";
-            this.lichLamViecToolStripMenuItem.Size = new System.Drawing.Size(361, 42);
+            this.lichLamViecToolStripMenuItem.Size = new System.Drawing.Size(302, 32);
             this.lichLamViecToolStripMenuItem.Text = "Lịch làm việc";
             this.lichLamViecToolStripMenuItem.Click += new System.EventHandler(this.lichLamViecToolStripMenuItem_Click);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(358, 6);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(299, 6);
             // 
             // tinhThuongStripMenuItem
             // 
             this.tinhThuongStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tinhThuongStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.tinhThuongStripMenuItem.Name = "tinhThuongStripMenuItem";
-            this.tinhThuongStripMenuItem.Size = new System.Drawing.Size(361, 42);
+            this.tinhThuongStripMenuItem.Size = new System.Drawing.Size(302, 32);
             this.tinhThuongStripMenuItem.Text = "Tính thưởng";
             this.tinhThuongStripMenuItem.Click += new System.EventHandler(this.tinhThuongStripMenuItem_Click_1);
             // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(358, 6);
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(299, 6);
             // 
             // tinhLuongStripMenuItem
             // 
             this.tinhLuongStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tinhLuongStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.tinhLuongStripMenuItem.Name = "tinhLuongStripMenuItem";
-            this.tinhLuongStripMenuItem.Size = new System.Drawing.Size(361, 42);
+            this.tinhLuongStripMenuItem.Size = new System.Drawing.Size(302, 32);
             this.tinhLuongStripMenuItem.Text = "Lương";
             this.tinhLuongStripMenuItem.Click += new System.EventHandler(this.tinhLuongStripMenuItem_Click);
             // 
@@ -329,14 +328,14 @@ namespace ProCuaHangLinhKienLaptop
             this.thongKeDonHangToolStripMenuItem,
             this.thongKeLinhKienToolStripMenuItem});
             this.reSultToolStripMenuItem.Name = "reSultToolStripMenuItem";
-            this.reSultToolStripMenuItem.Size = new System.Drawing.Size(157, 37);
+            this.reSultToolStripMenuItem.Size = new System.Drawing.Size(131, 31);
             this.reSultToolStripMenuItem.Text = "Thống Kê";
             // 
             // thongKeDonHangToolStripMenuItem
             // 
             this.thongKeDonHangToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.thongKeDonHangToolStripMenuItem.Name = "thongKeDonHangToolStripMenuItem";
-            this.thongKeDonHangToolStripMenuItem.Size = new System.Drawing.Size(248, 42);
+            this.thongKeDonHangToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
             this.thongKeDonHangToolStripMenuItem.Text = "Đơn hàng";
             this.thongKeDonHangToolStripMenuItem.Click += new System.EventHandler(this.thongKeDonHangToolStripMenuItem_Click);
             // 
@@ -344,7 +343,7 @@ namespace ProCuaHangLinhKienLaptop
             // 
             this.thongKeLinhKienToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.thongKeLinhKienToolStripMenuItem.Name = "thongKeLinhKienToolStripMenuItem";
-            this.thongKeLinhKienToolStripMenuItem.Size = new System.Drawing.Size(248, 42);
+            this.thongKeLinhKienToolStripMenuItem.Size = new System.Drawing.Size(207, 32);
             this.thongKeLinhKienToolStripMenuItem.Text = "Linh kiện";
             this.thongKeLinhKienToolStripMenuItem.Click += new System.EventHandler(this.thongKeLinhKienToolStripMenuItem_Click);
             // 
@@ -353,13 +352,13 @@ namespace ProCuaHangLinhKienLaptop
             this.kháchHàngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.danhSáchKháchHàngToolStripMenuItem});
             this.kháchHàngToolStripMenuItem.Name = "kháchHàngToolStripMenuItem";
-            this.kháchHàngToolStripMenuItem.Size = new System.Drawing.Size(190, 37);
+            this.kháchHàngToolStripMenuItem.Size = new System.Drawing.Size(160, 31);
             this.kháchHàngToolStripMenuItem.Text = "Khách Hàng";
             // 
             // danhSáchKháchHàngToolStripMenuItem
             // 
             this.danhSáchKháchHàngToolStripMenuItem.Name = "danhSáchKháchHàngToolStripMenuItem";
-            this.danhSáchKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(416, 42);
+            this.danhSáchKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(348, 32);
             this.danhSáchKháchHàngToolStripMenuItem.Text = "Danh sách khách hàng";
             this.danhSáchKháchHàngToolStripMenuItem.Click += new System.EventHandler(this.danhSáchKháchHàngToolStripMenuItem_Click);
             // 
@@ -368,13 +367,13 @@ namespace ProCuaHangLinhKienLaptop
             this.giảmGiáToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.chươngTrìnhGiảmGiáToolStripMenuItem});
             this.giảmGiáToolStripMenuItem.Name = "giảmGiáToolStripMenuItem";
-            this.giảmGiáToolStripMenuItem.Size = new System.Drawing.Size(156, 37);
+            this.giảmGiáToolStripMenuItem.Size = new System.Drawing.Size(127, 31);
             this.giảmGiáToolStripMenuItem.Text = "Giảm Giá";
             // 
             // chươngTrìnhGiảmGiáToolStripMenuItem
             // 
             this.chươngTrìnhGiảmGiáToolStripMenuItem.Name = "chươngTrìnhGiảmGiáToolStripMenuItem";
-            this.chươngTrìnhGiảmGiáToolStripMenuItem.Size = new System.Drawing.Size(413, 42);
+            this.chươngTrìnhGiảmGiáToolStripMenuItem.Size = new System.Drawing.Size(343, 32);
             this.chươngTrìnhGiảmGiáToolStripMenuItem.Text = "Chương trình giảm giá";
             this.chươngTrìnhGiảmGiáToolStripMenuItem.Click += new System.EventHandler(this.chươngTrìnhGiảmGiáToolStripMenuItem_Click);
             // 
@@ -409,7 +408,8 @@ namespace ProCuaHangLinhKienLaptop
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            this.dataGridView1.Location = new System.Drawing.Point(43, 663);
+            this.dataGridView1.Location = new System.Drawing.Point(38, 530);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -424,7 +424,7 @@ namespace ProCuaHangLinhKienLaptop
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 34;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1168, 413);
+            this.dataGridView1.Size = new System.Drawing.Size(1038, 330);
             this.dataGridView1.TabIndex = 10;
             // 
             // panel2
@@ -433,9 +433,10 @@ namespace ProCuaHangLinhKienLaptop
             this.panel2.Controls.Add(this.panel6);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(12, 108);
+            this.panel2.Location = new System.Drawing.Point(11, 86);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1234, 123);
+            this.panel2.Size = new System.Drawing.Size(1097, 98);
             this.panel2.TabIndex = 9;
             // 
             // panel5
@@ -443,9 +444,10 @@ namespace ProCuaHangLinhKienLaptop
             this.panel5.BackColor = System.Drawing.Color.LightGray;
             this.panel5.Controls.Add(this.lblLoiNhuan);
             this.panel5.Controls.Add(this.label7);
-            this.panel5.Location = new System.Drawing.Point(882, 2);
+            this.panel5.Location = new System.Drawing.Point(784, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(329, 114);
+            this.panel5.Size = new System.Drawing.Size(292, 91);
             this.panel5.TabIndex = 0;
             // 
             // lblLoiNhuan
@@ -453,9 +455,9 @@ namespace ProCuaHangLinhKienLaptop
             this.lblLoiNhuan.AutoSize = true;
             this.lblLoiNhuan.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.lblLoiNhuan.ForeColor = System.Drawing.Color.Black;
-            this.lblLoiNhuan.Location = new System.Drawing.Point(121, 51);
+            this.lblLoiNhuan.Location = new System.Drawing.Point(108, 41);
             this.lblLoiNhuan.Name = "lblLoiNhuan";
-            this.lblLoiNhuan.Size = new System.Drawing.Size(120, 41);
+            this.lblLoiNhuan.Size = new System.Drawing.Size(99, 35);
             this.lblLoiNhuan.TabIndex = 1;
             this.lblLoiNhuan.Text = "100000";
             // 
@@ -463,9 +465,9 @@ namespace ProCuaHangLinhKienLaptop
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.label7.Location = new System.Drawing.Point(132, 14);
+            this.label7.Location = new System.Drawing.Point(117, 11);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(98, 25);
+            this.label7.Size = new System.Drawing.Size(82, 20);
             this.label7.TabIndex = 1;
             this.label7.Text = "Lợi nhuận";
             // 
@@ -474,9 +476,10 @@ namespace ProCuaHangLinhKienLaptop
             this.panel6.BackColor = System.Drawing.Color.LightGray;
             this.panel6.Controls.Add(this.lblChiPhi);
             this.panel6.Controls.Add(this.label4);
-            this.panel6.Location = new System.Drawing.Point(540, 3);
+            this.panel6.Location = new System.Drawing.Point(480, 2);
+            this.panel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(331, 114);
+            this.panel6.Size = new System.Drawing.Size(294, 91);
             this.panel6.TabIndex = 0;
             // 
             // lblChiPhi
@@ -484,9 +487,9 @@ namespace ProCuaHangLinhKienLaptop
             this.lblChiPhi.AutoSize = true;
             this.lblChiPhi.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.lblChiPhi.ForeColor = System.Drawing.Color.Black;
-            this.lblChiPhi.Location = new System.Drawing.Point(99, 51);
+            this.lblChiPhi.Location = new System.Drawing.Point(88, 41);
             this.lblChiPhi.Name = "lblChiPhi";
-            this.lblChiPhi.Size = new System.Drawing.Size(120, 41);
+            this.lblChiPhi.Size = new System.Drawing.Size(99, 35);
             this.lblChiPhi.TabIndex = 1;
             this.lblChiPhi.Text = "100000";
             // 
@@ -494,9 +497,9 @@ namespace ProCuaHangLinhKienLaptop
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.label4.Location = new System.Drawing.Point(120, 11);
+            this.label4.Location = new System.Drawing.Point(107, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 25);
+            this.label4.Size = new System.Drawing.Size(61, 20);
             this.label4.TabIndex = 1;
             this.label4.Text = "Chi phí";
             // 
@@ -505,9 +508,10 @@ namespace ProCuaHangLinhKienLaptop
             this.panel4.BackColor = System.Drawing.Color.LightGray;
             this.panel4.Controls.Add(this.lblDoanhThu);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(196, 3);
+            this.panel4.Location = new System.Drawing.Point(174, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(331, 114);
+            this.panel4.Size = new System.Drawing.Size(294, 91);
             this.panel4.TabIndex = 0;
             // 
             // lblDoanhThu
@@ -515,9 +519,9 @@ namespace ProCuaHangLinhKienLaptop
             this.lblDoanhThu.AutoSize = true;
             this.lblDoanhThu.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.lblDoanhThu.ForeColor = System.Drawing.Color.Black;
-            this.lblDoanhThu.Location = new System.Drawing.Point(99, 51);
+            this.lblDoanhThu.Location = new System.Drawing.Point(88, 41);
             this.lblDoanhThu.Name = "lblDoanhThu";
-            this.lblDoanhThu.Size = new System.Drawing.Size(120, 41);
+            this.lblDoanhThu.Size = new System.Drawing.Size(99, 35);
             this.lblDoanhThu.TabIndex = 1;
             this.lblDoanhThu.Text = "100000";
             // 
@@ -525,9 +529,9 @@ namespace ProCuaHangLinhKienLaptop
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.label5.Location = new System.Drawing.Point(106, 11);
+            this.label5.Location = new System.Drawing.Point(94, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 25);
+            this.label5.Size = new System.Drawing.Size(86, 20);
             this.label5.TabIndex = 1;
             this.label5.Text = "Doanh thu";
             // 
@@ -536,9 +540,10 @@ namespace ProCuaHangLinhKienLaptop
             this.panel3.BackColor = System.Drawing.Color.LightGray;
             this.panel3.Controls.Add(this.lblSoDonHang);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Location = new System.Drawing.Point(3, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(179, 114);
+            this.panel3.Size = new System.Drawing.Size(159, 91);
             this.panel3.TabIndex = 0;
             // 
             // lblSoDonHang
@@ -546,9 +551,9 @@ namespace ProCuaHangLinhKienLaptop
             this.lblSoDonHang.AutoSize = true;
             this.lblSoDonHang.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.lblSoDonHang.ForeColor = System.Drawing.Color.Black;
-            this.lblSoDonHang.Location = new System.Drawing.Point(21, 50);
+            this.lblSoDonHang.Location = new System.Drawing.Point(19, 40);
             this.lblSoDonHang.Name = "lblSoDonHang";
-            this.lblSoDonHang.Size = new System.Drawing.Size(120, 41);
+            this.lblSoDonHang.Size = new System.Drawing.Size(99, 35);
             this.lblSoDonHang.TabIndex = 1;
             this.lblSoDonHang.Text = "100000";
             // 
@@ -556,9 +561,9 @@ namespace ProCuaHangLinhKienLaptop
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            this.label2.Location = new System.Drawing.Point(4, 11);
+            this.label2.Location = new System.Drawing.Point(4, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(171, 25);
+            this.label2.Size = new System.Drawing.Size(142, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Tổng số đơn hàng";
             // 
@@ -567,7 +572,6 @@ namespace ProCuaHangLinhKienLaptop
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.yearBtn);
-            this.panel1.Controls.Add(this.fileBtn);
             this.panel1.Controls.Add(this.monthBtn);
             this.panel1.Controls.Add(this.weekBtn);
             this.panel1.Controls.Add(this.todayBtn);
@@ -575,37 +579,30 @@ namespace ProCuaHangLinhKienLaptop
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.dateTimePicker2);
             this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Location = new System.Drawing.Point(12, 44);
+            this.panel1.Location = new System.Drawing.Point(11, 35);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1234, 50);
+            this.panel1.Size = new System.Drawing.Size(1097, 40);
             this.panel1.TabIndex = 8;
             // 
             // yearBtn
             // 
-            this.yearBtn.Location = new System.Drawing.Point(899, 5);
+            this.yearBtn.Location = new System.Drawing.Point(799, 4);
+            this.yearBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.yearBtn.Name = "yearBtn";
-            this.yearBtn.Size = new System.Drawing.Size(117, 41);
+            this.yearBtn.Size = new System.Drawing.Size(104, 33);
             this.yearBtn.TabIndex = 3;
             this.yearBtn.Text = "This year";
             this.yearBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.yearBtn.UseVisualStyleBackColor = true;
             this.yearBtn.Click += new System.EventHandler(this.yearBtn_Click);
             // 
-            // fileBtn
-            // 
-            this.fileBtn.Location = new System.Drawing.Point(1094, 6);
-            this.fileBtn.Name = "fileBtn";
-            this.fileBtn.Size = new System.Drawing.Size(117, 38);
-            this.fileBtn.TabIndex = 2;
-            this.fileBtn.Text = "Export to File";
-            this.fileBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.fileBtn.UseVisualStyleBackColor = true;
-            // 
             // monthBtn
             // 
-            this.monthBtn.Location = new System.Drawing.Point(776, 5);
+            this.monthBtn.Location = new System.Drawing.Point(690, 4);
+            this.monthBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.monthBtn.Name = "monthBtn";
-            this.monthBtn.Size = new System.Drawing.Size(117, 41);
+            this.monthBtn.Size = new System.Drawing.Size(104, 33);
             this.monthBtn.TabIndex = 2;
             this.monthBtn.Text = "This month";
             this.monthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -614,9 +611,10 @@ namespace ProCuaHangLinhKienLaptop
             // 
             // weekBtn
             // 
-            this.weekBtn.Location = new System.Drawing.Point(639, 5);
+            this.weekBtn.Location = new System.Drawing.Point(568, 4);
+            this.weekBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.weekBtn.Name = "weekBtn";
-            this.weekBtn.Size = new System.Drawing.Size(117, 41);
+            this.weekBtn.Size = new System.Drawing.Size(104, 33);
             this.weekBtn.TabIndex = 2;
             this.weekBtn.Text = "Last 7 days";
             this.weekBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -625,9 +623,10 @@ namespace ProCuaHangLinhKienLaptop
             // 
             // todayBtn
             // 
-            this.todayBtn.Location = new System.Drawing.Point(543, 5);
+            this.todayBtn.Location = new System.Drawing.Point(483, 4);
+            this.todayBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.todayBtn.Name = "todayBtn";
-            this.todayBtn.Size = new System.Drawing.Size(75, 41);
+            this.todayBtn.Size = new System.Drawing.Size(67, 33);
             this.todayBtn.TabIndex = 2;
             this.todayBtn.Text = "Today";
             this.todayBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -636,9 +635,10 @@ namespace ProCuaHangLinhKienLaptop
             // 
             // okBtn
             // 
-            this.okBtn.Location = new System.Drawing.Point(384, 6);
+            this.okBtn.Location = new System.Drawing.Point(341, 5);
+            this.okBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okBtn.Name = "okBtn";
-            this.okBtn.Size = new System.Drawing.Size(75, 38);
+            this.okBtn.Size = new System.Drawing.Size(67, 30);
             this.okBtn.TabIndex = 2;
             this.okBtn.Text = "OK";
             this.okBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -648,26 +648,28 @@ namespace ProCuaHangLinhKienLaptop
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 14);
+            this.label1.Location = new System.Drawing.Point(16, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 20);
+            this.label1.Size = new System.Drawing.Size(45, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Admin";
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(251, 14);
+            this.dateTimePicker2.Location = new System.Drawing.Point(223, 11);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(111, 26);
+            this.dateTimePicker2.Size = new System.Drawing.Size(99, 22);
             this.dateTimePicker2.TabIndex = 1;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(105, 14);
+            this.dateTimePicker1.Location = new System.Drawing.Point(93, 11);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(111, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(99, 22);
             this.dateTimePicker1.TabIndex = 1;
             // 
             // chart1
@@ -676,22 +678,23 @@ namespace ProCuaHangLinhKienLaptop
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(35, 249);
+            this.chart1.Location = new System.Drawing.Point(31, 199);
+            this.chart1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(1188, 423);
+            this.chart1.Size = new System.Drawing.Size(1056, 338);
             this.chart1.TabIndex = 11;
             this.chart1.Text = "chart1";
             // 
             // fAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1246, 1050);
+            this.ClientSize = new System.Drawing.Size(1108, 840);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel2);
@@ -768,7 +771,6 @@ namespace ProCuaHangLinhKienLaptop
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button yearBtn;
-        private System.Windows.Forms.Button fileBtn;
         private System.Windows.Forms.Button monthBtn;
         private System.Windows.Forms.Button weekBtn;
         private System.Windows.Forms.Button todayBtn;
