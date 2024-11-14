@@ -31,20 +31,12 @@ BEGIN
     BEGIN TRANSACTION;
 
     BEGIN TRY
+        -- Cập nhật số lượng tồn kho sau khi chèn chi tiết đơn hàng
         UPDATE LinhKien
         SET SoLuongTonKho = SoLuongTonKho - inserted.SoLuong
         FROM LinhKien
         INNER JOIN inserted ON LinhKien.MaLinhKien = inserted.MaLinhKien;
 
-        IF EXISTS (
-            SELECT 1
-            FROM LinhKien
-            WHERE SoLuongTonKho < 0
-        )
-        BEGIN
-            ROLLBACK TRANSACTION;
-            THROW 50000, 'Số lượng tồn kho không đủ!', 1;
-        END
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
@@ -61,4 +53,5 @@ BEGIN
         RAISERROR (@ErrorMessage, @ErrorSeverity, @ErrorState);
     END CATCH;
 END;
+
 GO
