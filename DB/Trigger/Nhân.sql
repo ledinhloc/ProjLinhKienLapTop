@@ -44,6 +44,8 @@ BEGIN
     END
 END;
 
+GO
+
 CREATE TRIGGER [dbo].[trg_after_delete_linh_kien]
 ON [dbo].[LinhKien]
 AFTER DELETE
