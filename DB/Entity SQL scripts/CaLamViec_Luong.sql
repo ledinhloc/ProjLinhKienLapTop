@@ -94,8 +94,20 @@ CREATE PROCEDURE sp_ThemLuong
     @MaNhanVien INT
 AS
 BEGIN
-    INSERT INTO Luong (Luong, LuongGio, Thuong, TongNhan, ThoiGian, SoCa, MaNhanVien)
-    VALUES (@Luong, @LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
+    BEGIN TRY
+        BEGIN TRANSACTION;
+
+        INSERT INTO Luong (Luong, LuongGio, Thuong, TongNhan, ThoiGian, SoCa, MaNhanVien)
+        VALUES (@Luong, @LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm lương. Lỗi: ' + ERROR_MESSAGE();
+        RAISERROR(@ErrorMessage, 16, 1);
+    END CATCH
 END;
 GO
 -- Cập nhật thưởng -> Tổng nhận
