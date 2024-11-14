@@ -172,6 +172,20 @@ GO
 
 
 --
+CREATE FUNCTION dbo.fn_DemCaNghi (@start DATE, @end DATE, @MaNhanVien INT)
+RETURNS INT
+AS
+BEGIN
+    RETURN (
+        SELECT COUNT(*)
+        FROM CoLichLam CLL
+        JOIN LichLamViec LLV ON CLL.MaLichLamViec = LLV.MaLichLamViec
+        WHERE CLL.MaNhanVien = @MaNhanVien
+            AND LLV.NgayLam BETWEEN @start AND @end
+            AND TrangThai = 'Chua'
+    );
+END;
+GO
 CREATE FUNCTION dbo.fn_XemTatCaLuongTheoThangNam
 (
     @Thang INT, 
@@ -192,7 +206,7 @@ RETURN
             DATEFROMPARTS(@Nam, @Thang, 1),
             EOMONTH(DATEFROMPARTS(@Nam, @Thang, 1)),
             nv.MaNhanVien
-        ) AS CaNghi -- Adding Ca Nghỉ using the fn_DemCaNghi function
+        ) AS CaNghi 
     FROM 
         Luong l
     JOIN 

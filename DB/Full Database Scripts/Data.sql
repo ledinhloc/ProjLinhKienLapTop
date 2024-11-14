@@ -98,51 +98,73 @@ VALUES
     ('Le Giang Sinh', '2024-12-20', '2024-12-26', 35.00);
 GO
 
-INSERT INTO DonHang (NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc) 
-VALUES 
-    ('2024-01-12', 1, 1, 1, 850000, 'Chuyen Khoan'),
-    ('2024-02-14', 2, 2, 2, 2400000, 'Tien Mat'),
-    ('2024-03-20', 3, 3, 3, 1200000, 'Chuyen Khoan'),
-    ('2024-04-10', 4, 4, 4, 3000000, 'Tien Mat'),
-    ('2024-05-05', 5, 5, 5, 2100000, 'Chuyen Khoan'),
-    ('2024-06-18', 6, 6, 6, 2760000, 'Tien Mat'),
-    ('2024-07-22', 7, 7, 7, 1500000, 'Chuyen Khoan'),
-    ('2024-08-08', 8, 8, 8, 1840000, 'Tien Mat'),
-    ('2024-09-15', 9, 9, 9, 4500000, 'Chuyen Khoan'),
-    ('2024-10-05', 10, 10, 10, 2100000, 'Tien Mat');
-GO
+--- DonHang và ChiTietDonHang auto generate ----
+DECLARE @startDate DATE = '2024-09-01';
+DECLARE @endDate DATE = '2024-11-13';
+DECLARE @maKhachHang INT;
+DECLARE @ordersPerDay INT;
 
-INSERT INTO DonHang (NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc) 
-VALUES 
-    ('2024-01-20', 1, 2, 3, 5000000, 'Tien Mat'),
-    ('2024-02-25', 3, 4, 5, 8000000, 'Chuyen Khoan'),
-    ('2024-03-30', 5, 6, 7, 3500000, 'Tien Mat'),
-    ('2024-04-15', 7, 8, 9, 9000000, 'Chuyen Khoan'),
-    ('2024-05-05', 2, 1, 4, 4500000, 'Tien Mat');
-GO
+SET @maKhachHang = 1;
 
-INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan) 
-VALUES 
-    (1, 1, 2, 2500000),
-    (2, 2, 1, 1500000),
-    (3, 3, 4, 1000000),
-    (4, 4, 1, 4500000),
-    (5, 5, 1, 1200000),
-    (6, 6, 3, 2700000),
-    (7, 7, 2, 1800000),
-    (8, 8, 2, 2000000),
-    (9, 9, 1, 5000000),
-    (10, 10, 1, 2000000),
-	(11, 1, 2, 2500000), 
-    (11, 2, 1, 1500000), 
-    (12, 3, 2, 1000000), 
-    (12, 4, 1, 4500000), 
-    (13, 5, 1, 1200000), 
-    (13, 6, 2, 2700000), 
-    (14, 7, 1, 1800000), 
-    (14, 8, 1, 2000000), 
-    (15, 9, 1, 5000000), 
-    (15, 10, 1, 2000000);
+WHILE @startDate <= @endDate
+BEGIN
+    SET @ordersPerDay = ABS(CHECKSUM(NEWID())) % 15 + 1; -- Số đơn hàng ngẫu nhiên từ 10 đến 50 đơn hàng mỗi ngày
+
+    WHILE @ordersPerDay > 0
+    BEGIN
+        -- Lấy một MaNhanVien ngẫu nhiên từ bảng NhanVien
+        DECLARE @randomMaNhanVien INT;
+        SELECT TOP 1 @randomMaNhanVien = MaNhanVien FROM NhanVien ORDER BY NEWID();
+
+        -- Lấy một MaGiamGia NULL
+        DECLARE @randomMaGiamGia INT = NULL;
+
+        -- Chèn dữ liệu vào bảng DonHang
+        INSERT INTO DonHang (NgayDatHang, MaKhachHang, MaNhanVien, MaGiamGia, TongGiaTri, PhuongThuc)
+        VALUES 
+        (@startDate, @maKhachHang, @randomMaNhanVien, @randomMaGiamGia, 5, 'Tiền mặt');
+
+        DECLARE @newMaDonHang INT = SCOPE_IDENTITY(); -- Lấy ID của đơn hàng vừa được chèn
+
+        -- Tạo các mục trong ChiTietDonHang cho đơn hàng mới
+        DECLARE @itemsPerOrder INT = ABS(CHECKSUM(NEWID())) % 4 + 1; -- Số lượng mặt hàng ngẫu nhiên từ 1 đến 4 cho mỗi đơn hàng
+        DECLARE @counter INT = 1;
+
+        WHILE @counter <= @itemsPerOrder
+        BEGIN
+            DECLARE @MaLinhKien INT;
+            DECLARE @GiaBan DECIMAL(15, 2);
+            DECLARE @SoLuong INT = ABS(CHECKSUM(NEWID())) % 3 + 1; -- Số lượng ngẫu nhiên từ 1 đến 3
+
+            -- Lấy ngẫu nhiên một LinhKien từ bảng LinhKien
+            SELECT TOP 1 @MaLinhKien = MaLinhKien, @GiaBan = GiaBan FROM LinhKien ORDER BY NEWID();
+
+            -- Kiểm tra nếu mặt hàng chưa tồn tại trong ChiTietDonHang cho đơn hàng này
+            IF NOT EXISTS (SELECT 1 FROM ChiTietDonHang WHERE MaDonHang = @newMaDonHang AND MaLinhKien = @MaLinhKien)
+            BEGIN
+                INSERT INTO ChiTietDonHang (MaDonHang, MaLinhKien, SoLuong, GiaBan)
+                VALUES 
+                (@newMaDonHang, @MaLinhKien, @SoLuong, @GiaBan);
+            END;
+
+            SET @counter = @counter + 1;
+        END;
+
+        -- Cập nhật TongGiaTri cho đơn hàng
+        UPDATE DonHang
+        SET TongGiaTri = (
+            SELECT SUM(ct.SoLuong * ct.GiaBan)
+            FROM ChiTietDonHang ct
+            WHERE ct.MaDonHang = DonHang.MaDonHang
+        )
+        WHERE MaDonHang = @newMaDonHang;
+
+        SET @maKhachHang = @maKhachHang % 6 + 1; -- Tạo dữ liệu khách hàng ngẫu nhiên từ MaKhachHang 1-5
+        SET @ordersPerDay = @ordersPerDay - 1;
+    END;
+
+    SET @startDate = DATEADD(DAY, 1, @startDate); -- Tăng ngày lên một ngày
+END;
 GO
 
 INSERT INTO CaLamViec (TenCa, GioBatDau, GioKetThuc)
@@ -150,130 +172,81 @@ VALUES ( N'Ca Sáng', '08:00', '12:00'),
 		( N'Ca Chiều', '13:00', '17:00'),
 		( N'Ca Tối', '18:00', '22:00');
 GO
+-- Tạo dữ liệu cho bảng LichLamViec
+DECLARE @startDate DATE = '2024-09-01';
+DECLARE @endDate DATE = '2024-11-13';
+WHILE @startDate <= @endDate
+BEGIN
+    -- Lặp qua 3 ca làm việc trong một ngày
+    DECLARE @shiftCount INT = 3;
+    DECLARE @shiftCounter INT = 1;
+    
+    WHILE @shiftCounter <= @shiftCount
+    BEGIN
+        -- Lấy MaCa từ bảng CaLamViec theo thứ tự
+        DECLARE @maCa INT;
+        SELECT @maCa = MaCa FROM (
+            SELECT MaCa, ROW_NUMBER() OVER (ORDER BY MaCa) AS RowNum
+            FROM CaLamViec
+        ) AS CaShift
+        WHERE RowNum = @shiftCounter;
 
-INSERT INTO LichLamViec (NgayLam, MaCa) 
-VALUES 
-    ('2024-01-01', 1),
-    ('2024-01-01', 2),
-    ('2024-01-01', 3),
-    ('2024-01-02', 1),
-    ('2024-01-02', 2),
-    ('2024-01-02', 3),
-    ('2024-01-03', 1),
-    ('2024-01-03', 2),
-    ('2024-01-03', 3),
-    ('2024-01-04', 1);
+        -- Chèn dữ liệu vào LichLamViec cho ngày hiện tại và ca hiện tại nếu chưa tồn tại
+        IF NOT EXISTS (SELECT 1 FROM LichLamViec WHERE NgayLam = @startDate AND MaCa = @maCa)
+        BEGIN
+            INSERT INTO LichLamViec (NgayLam, MaCa)
+            VALUES (@startDate, @maCa);
+        END
 
-GO
-INSERT INTO LichLamViec (NgayLam, MaCa) 
-VALUES 
-    ('2024-09-25', 1),
-    ('2024-09-25', 2),
-    ('2024-09-25', 3),
-    ('2024-09-26', 1),
-    ('2024-09-26', 2),
-    ('2024-09-26', 3),
-    ('2024-09-27', 1),
-    ('2024-09-27', 2),
-    ('2024-09-27', 3),
-    ('2024-09-28', 1),
-    ('2024-09-28', 2),
-    ('2024-09-28', 3),
-    ('2024-09-29', 1),
-    ('2024-09-29', 2),
-    ('2024-09-29', 3),
-    ('2024-09-30', 1),
-    ('2024-09-30', 2),
-    ('2024-09-30', 3),
-    ('2024-10-01', 1),
-    ('2024-10-01', 2),
-    ('2024-10-01', 3),
-	('2024-10-02', 1),
-    ('2024-10-02', 2),
-    ('2024-10-02', 3),
-    ('2024-10-03', 1),
-    ('2024-10-03', 2),
-    ('2024-10-03', 3),
-    ('2024-10-04', 1),
-    ('2024-10-04', 2),
-    ('2024-10-04', 3),
-    ('2024-10-05', 1),
-    ('2024-10-05', 2),
-    ('2024-10-05', 3),
-    ('2024-10-06', 1),
-    ('2024-10-06', 2),
-    ('2024-10-06', 3),
-    ('2024-10-07', 1),
-    ('2024-10-07', 2),
-    ('2024-10-07', 3),
-    ('2024-10-08', 1),
-    ('2024-10-08', 2),
-    ('2024-10-08', 3);
+        SET @shiftCounter = @shiftCounter + 1;
+    END
+
+    SET @startDate = DATEADD(DAY, 1, @startDate); -- Tăng ngày lên một ngày
+END
+
+-- Tạo dữ liệu cho bảng CoLichLam
+DECLARE @maLichLamViec INT;
+
+DECLARE lich_cursor CURSOR FOR 
+SELECT MaLichLamViec FROM LichLamViec;
+
+OPEN lich_cursor;
+FETCH NEXT FROM lich_cursor INTO @maLichLamViec;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    -- Số lượng nhân viên ngẫu nhiên từ 1 đến 3 cho mỗi lịch làm việc
+    DECLARE @employeesPerShift INT = ABS(CHECKSUM(NEWID())) % 3 + 1;
+    DECLARE @counter INT = 1;
+
+    WHILE @counter <= @employeesPerShift
+    BEGIN
+        -- Thiết lập trạng thái và đánh giá
+        DECLARE @randomTrangThai NVARCHAR(100) = N'HoanThanh';
+        DECLARE @danhGia NVARCHAR(255) = N'Tot';
+
+        -- Lấy MaNhanVien ngẫu nhiên từ bảng NhanVien
+        DECLARE @maNhanVien INT;
+        SELECT TOP 1 @maNhanVien = MaNhanVien FROM NhanVien ORDER BY NEWID();
+
+        -- Kiểm tra nếu nhân viên chưa có lịch làm việc cho MaLichLamViec này
+        IF NOT EXISTS (SELECT 1 FROM CoLichLam WHERE MaNhanVien = @maNhanVien AND MaLichLamViec = @maLichLamViec)
+        BEGIN
+            INSERT INTO CoLichLam (MaNhanVien, MaLichLamViec, DanhGia, TrangThai)
+            VALUES 
+            (@maNhanVien, @maLichLamViec, @danhGia, @randomTrangThai);
+        END;
+
+        SET @counter = @counter + 1;
+    END;
+
+    FETCH NEXT FROM lich_cursor INTO @maLichLamViec;
+END;
+
+CLOSE lich_cursor;
+DEALLOCATE lich_cursor;
 GO
 
-INSERT INTO CoLichLam (MaNhanVien, MaLichLamViec, DanhGia, TrangThai) 
-VALUES 
-    (1, 1, 'Rất tốt', 'HoanThanh'),
-    (2, 1, 'Tốt', 'HoanThanh'),
-    (3, 2, 'Khá', 'Chua'),
-    (4, 2, 'Tốt', 'HoanThanh'),
-    (5, 3, 'Rất tốt', 'HoanThanh'),
-    (6, 3, 'Khá', 'Chua'),
-    (7, 4, 'Tốt', 'HoanThanh'),
-    (8, 4, 'Rất tốt', 'HoanThanh'),
-    (9, 5, 'Khá', 'Chua'),
-    (10, 5, 'Tốt', 'HoanThanh'),
-    (1, 6, 'Rất tốt', 'HoanThanh'),
-    (2, 6, 'Khá', 'Chua'),
-    (3, 7, 'Tốt', 'HoanThanh'),
-    (4, 7, 'Rất tốt', 'HoanThanh'),
-    (5, 8, 'Khá', 'Chua'),
-    (6, 8, 'Tốt', 'HoanThanh'),
-    (7, 9, 'Rất tốt', 'HoanThanh'),
-    (8, 9, 'Khá', 'Chua'),
-    (9, 10, 'Tốt', 'HoanThanh'),
-    (10, 10, 'Rất tốt', 'HoanThanh'),
-	(1, 11, 'Rất tốt', 'HoanThanh'),
-    (2, 11, 'Tốt', 'HoanThanh'),
-    (3, 12, 'Khá', 'Chua'),
-    (4, 12, 'Tốt', 'HoanThanh'),
-    (5, 13, 'Rất tốt', 'HoanThanh'),
-    (6, 13, 'Khá', 'Chua'),
-    (7, 14, 'Tốt', 'HoanThanh'),
-    (8, 14, 'Rất tốt', 'HoanThanh'),
-    (9, 15, 'Khá', 'Chua'),
-    (10, 15, 'Tốt', 'HoanThanh'),
-    (1, 16, 'Rất tốt', 'HoanThanh'),
-    (2, 16, 'Khá', 'Chua'),
-    (3, 17, 'Tốt', 'HoanThanh'),
-    (4, 17, 'Rất tốt', 'HoanThanh'),
-    (5, 18, 'Khá', 'Chua'),
-    (6, 18, 'Tốt', 'HoanThanh'),
-    (7, 19, 'Rất tốt', 'HoanThanh'),
-    (8, 19, 'Khá', 'Chua'),
-    (9, 20, 'Tốt', 'HoanThanh'),
-    (10, 20, 'Rất tốt', 'HoanThanh'),
-    (1, 21, 'Rất tốt', 'HoanThanh'),
-    (2, 21, 'Tốt', 'HoanThanh'),
-    (3, 22, 'Khá', 'Chua'),
-    (4, 22, 'Tốt', 'HoanThanh'),
-    (5, 23, 'Rất tốt', 'HoanThanh'),
-    (6, 23, 'Khá', 'Chua'),
-    (7, 24, 'Tốt', 'HoanThanh'),
-    (8, 24, 'Rất tốt', 'HoanThanh'),
-    (9, 25, 'Khá', 'Chua'),
-    (10, 25, 'Tốt', 'HoanThanh'),
-    (1, 26, 'Rất tốt', 'HoanThanh'),
-    (2, 26, 'Khá', 'Chua'),
-    (3, 27, 'Tốt', 'HoanThanh'),
-    (4, 27, 'Rất tốt', 'HoanThanh'),
-    (5, 28, 'Khá', 'Chua'),
-    (6, 28, 'Tốt', 'HoanThanh'),
-    (7, 29, 'Rất tốt', 'HoanThanh'),
-    (8, 29, 'Khá', 'Chua'),
-    (9, 30, 'Tốt', 'HoanThanh'),
-    (10, 30, 'Rất tốt', 'HoanThanh');
-GO
 
 INSERT INTO Luong (Luong, LuongGio, Thuong, TongNhan, ThoiGian, SoCa, MaNhanVien) 
 VALUES 
