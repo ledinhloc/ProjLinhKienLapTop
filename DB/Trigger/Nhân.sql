@@ -65,7 +65,7 @@ BEGIN
     END TRY
     BEGIN CATCH
         ROLLBACK TRANSACTION;
-        RAISERROR('Không thể xóa linh kiện', 16, 1);
+        RAISERROR('Không thể xóa linh kiện vì đã tồn tại trong đơn hàng', 16, 1);
     END CATCH;
 END;
 
