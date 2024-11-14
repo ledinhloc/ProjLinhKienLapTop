@@ -98,24 +98,16 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 {
                     try
                     {
-
-                        //string query = "DELETE FROM NhanVien WHERE MaNhanVien = @MaNhanVien";
-
                         SqlParameter[] parameters = new SqlParameter[]
                         {
                             new SqlParameter("@MaNV", maNhanVien)
                         };
 
                         dataProvider.ExecuteNonQuery(CommandType.StoredProcedure, "proc_XoaNhanVien", parameters);
-
-
                         LoadData();
                         MessageBox.Show("Xóa nhân viên thành công!");
                     }
                     catch (Exception ex)
-
-
-
                     {
                         MessageBox.Show("Error deleting employee: " + ex.Message);
                     }

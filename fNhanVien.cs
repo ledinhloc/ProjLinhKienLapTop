@@ -35,7 +35,7 @@ namespace ProCuaHangLinhKienLaptop
 
         private void caLamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fXemCaLam fXemCaLam = new fXemCaLam();
+            fXemCaLam fXemCaLam = new fXemCaLam(maNhanVien);
             fXemCaLam.ShowDialog();
         }
 

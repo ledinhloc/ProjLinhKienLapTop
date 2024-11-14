@@ -24,8 +24,8 @@ BEGIN
                              AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian)) ),        
         -- Tính tổng nhận = Lương + Thưởng
 
-        TongNhan = @LuongMoi + Thuong,
-		Luong = @LuongMoi
+        TongNhan = ISNULL(@LuongMoi, 0) + Thuong,
+		Luong = ISNULL(@LuongMoi, 0)
     FROM Luong l, inserted
     WHERE l.MaNhanVien = inserted.MaNhanVien
 		AND MONTH(l.ThoiGian) = MONTH(@Ngay) AND YEAR(l.ThoiGian) = YEAR(@Ngay);
@@ -57,31 +57,51 @@ BEGIN
                              AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian))),        
         -- Tính tổng nhận = Lương + Thưởng
 
-        TongNhan = @LuongMoi + Thuong,
-		Luong = @LuongMoi
+        TongNhan = ISNULL(@LuongMoi, 0) + Thuong,
+		Luong = ISNULL(@LuongMoi, 0)
     FROM Luong l, deleted
     WHERE l.MaNhanVien = deleted.MaNhanVien
 		AND MONTH(l.ThoiGian) = MONTH(@Ngay) AND YEAR(l.ThoiGian) = YEAR(@Ngay);
 END;
 
 GO
---sau khi inset, update CoLichLam thi tinh lai SoCa trong bang luong
+--sau khi inset, update, delete CoLichLam thi tinh lai SoCa trong bang luong
 CREATE TRIGGER trg_CapNhatSoCaTrongLuong
 ON CoLichLam
-AFTER INSERT, UPDATE
+AFTER INSERT, UPDATE, DELETE
 AS
 BEGIN
-    UPDATE l
-    SET 
-        SoCa = (SELECT COUNT(*)
-                FROM CoLichLam cll
-                JOIN LichLamViec llv ON cll.MaLichLamViec = llv.MaLichLamViec
-                WHERE cll.MaNhanVien = i.MaNhanVien
-                AND cll.TrangThai = 'HoanThanh'
-                AND MONTH(llv.NgayLam) = MONTH(l.ThoiGian)
-                AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian))
-    FROM Luong l
-    JOIN inserted i ON l.MaNhanVien = i.MaNhanVien;
+    -- Cập nhật SoCa khi có thao tác INSERT hoặc UPDATE
+    IF EXISTS (SELECT 1 FROM inserted)
+    BEGIN
+        UPDATE l
+        SET 
+            SoCa = (SELECT COUNT(*)
+                    FROM CoLichLam cll
+                    JOIN LichLamViec llv ON cll.MaLichLamViec = llv.MaLichLamViec
+                    WHERE cll.MaNhanVien = i.MaNhanVien
+                    AND cll.TrangThai = 'HoanThanh'
+                    AND MONTH(llv.NgayLam) = MONTH(l.ThoiGian)
+                    AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian))
+        FROM Luong l
+        JOIN inserted i ON l.MaNhanVien = i.MaNhanVien;
+    END
+
+    -- Cập nhật SoCa khi có thao tác DELETE
+    IF EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        UPDATE l
+        SET 
+            SoCa = (SELECT COUNT(*)
+                    FROM CoLichLam cll
+                    JOIN LichLamViec llv ON cll.MaLichLamViec = llv.MaLichLamViec
+                    WHERE cll.MaNhanVien = d.MaNhanVien
+                    AND cll.TrangThai = 'HoanThanh'
+                    AND MONTH(llv.NgayLam) = MONTH(l.ThoiGian)
+                    AND YEAR(llv.NgayLam) = YEAR(l.ThoiGian))
+        FROM Luong l
+        JOIN deleted d ON l.MaNhanVien = d.MaNhanVien;
+    END
 END;
 
 GO

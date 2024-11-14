@@ -16,10 +16,17 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
     public partial class fXemCaLam : Form
     {
         DataProvider provider = new DataProvider();
+        String maNhanVien = "";
         public fXemCaLam()
         {
             InitializeComponent();
            
+        }
+        public fXemCaLam(String maNhanVien)
+        {
+            InitializeComponent();
+            this.maNhanVien=maNhanVien;
+
         }
 
         private void flpCaLam_Paint(object sender, PaintEventArgs e)
@@ -37,11 +44,11 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         {
             flpCaLam.Controls.Clear();
            DateTime ngayDau = dtpNgay.Value;
-            DateTime ngayCuoi = ngayDau.AddDays(2);
+            DateTime ngayCuoi = ngayDau.AddDays(1);
 
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
-                new SqlParameter("@MaNhanVien", 1),
+                new SqlParameter("@MaNhanVien", maNhanVien),
                 new SqlParameter("@NgayDau", ngayDau.ToString("yyyy-MM-dd")),
                 new SqlParameter("@NgayCuoi", ngayCuoi.ToString("yyyy-MM-dd"))
 
