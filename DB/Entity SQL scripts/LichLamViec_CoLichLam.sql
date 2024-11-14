@@ -57,22 +57,10 @@ CREATE PROCEDURE sp_SuaCoLichLam
     @TrangThai NVARCHAR(100)
 AS
 BEGIN
-    BEGIN TRY
-        BEGIN TRANSACTION;
-
-        UPDATE CoLichLam
-        SET DanhGia = @DanhGia,
-            TrangThai = @TrangThai
-        WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa. Lỗi: ' + ERROR_MESSAGE();
-        RAISERROR(@ErrorMessage, 16, 1);
-    END CATCH
+    UPDATE CoLichLam
+    SET DanhGia = @DanhGia,
+        TrangThai = @TrangThai
+    WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
 END;
 GO
 
@@ -82,20 +70,8 @@ CREATE PROCEDURE sp_XoaCoLichLam
     @MaLichLamViec INT
 AS
 BEGIN
-    BEGIN TRY
-        BEGIN TRANSACTION;
-
-        DELETE FROM CoLichLam
-        WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa. Lỗi: ' + ERROR_MESSAGE();
-        RAISERROR(@ErrorMessage, 16, 1);    
-    END CATCH
+    DELETE FROM CoLichLam
+    WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
 END;
 GO
 

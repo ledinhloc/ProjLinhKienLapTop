@@ -38,7 +38,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void LoadLoaiLinhKien()
         {
-            DataTable loaiLinhKienTable = provider.ExecuteReader( CommandType.Text, "SELECT * FROM vw_ThongTinLoaiLinhKien");
+            DataTable loaiLinhKienTable = provider.ExecuteReader(CommandType.Text, "SELECT * FROM vw_ThongTinLoaiLinhKien");
 
             foreach (DataRow row in loaiLinhKienTable.Rows)
             {
@@ -99,7 +99,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
             foreach (DataRow row in linhKienTable.Rows)
             {
-                LinhKienUC linhKienUC = new LinhKienUC((int)row["MaLinhKien"], row["TenLinhKien"].ToString(), row["MoTaChiTiet"].ToString(), 
+                LinhKienUC linhKienUC = new LinhKienUC((int)row["MaLinhKien"], row["TenLinhKien"].ToString(), row["MoTaChiTiet"].ToString(),
                     (decimal)row["GiaBan"], (decimal)row["GiaNhap"], (int)row["SoLuongTonKho"], (Image)ImageHelper.GetImageFromResources(row["HinhAnh"].ToString()));
                 linhKienUC.LinhKienClicked += LinhKienUC_Clicked;
                 flowLayoutPanel.Controls.Add(linhKienUC);
@@ -117,7 +117,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                     MaLinhKien = linhKienUC.MaLinhKien,
                     TenLinhKien = linhKienUC.TenLinhKien,
                     GiaBan = linhKienUC.GiaBan,
-                    SoLuong = 1 
+                    SoLuong = 1
                 };
 
                 var existingItem = donHangItems.FirstOrDefault(item => item.MaLinhKien == donHangItem.MaLinhKien);
@@ -141,7 +141,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
             // Tính tổng giá trị của các mặt hàng trong giỏ hàng
             decimal total = donHangItems.Sum(item => item.GiaBan * item.SoLuong);
             decimal discount = 0;
-            if(lblDiscount.Text != "-0VND")
+            if (lblDiscount.Text != "-0VND")
             {
                 string discountText = lblDiscount.Text.Replace("VND", "").Replace("-", "");
                 discount = decimal.Parse(discountText);
@@ -156,12 +156,12 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
         {
             try
             {
-                DateTime ngayDatHang = DateTime.Now; 
-                int maKhachHang = -1; 
+                DateTime ngayDatHang = DateTime.Now;
+                int maKhachHang = -1;
                 int maGiamGia = -1;
                 if (!string.IsNullOrEmpty(txtMaGiamGia.Text) && lblDiscount.Text != "-0VND")
                 {
-                    maGiamGia = int.Parse(txtMaGiamGia.Text); 
+                    maGiamGia = int.Parse(txtMaGiamGia.Text);
                 }
                 if (int.TryParse(lblMaKH.Text, out int IntmaKhachHang))
                 {
@@ -203,9 +203,9 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                         };
                         provider.ExecuteNonQuery(CommandType.StoredProcedure, "sp_ThemChiTietDonHang", parameters2);
                     }
-                        
+
                     MessageBox.Show("Đơn hàng đã được thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    donHangItems.Clear(); 
+                    donHangItems.Clear();
                     UpdateDataGridView();
                     lblDiscount.Text = "-0VND";
                     txtTimKhachHang.Text = string.Empty;
@@ -223,6 +223,7 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                 MessageBox.Show("Đã xảy ra lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+    
 
         private void btnKiemTraKhuyenMai_Click(object sender, EventArgs e)
         {

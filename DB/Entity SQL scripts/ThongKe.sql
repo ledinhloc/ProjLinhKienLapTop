@@ -101,7 +101,6 @@ RETURN
         llv.NgayLam
 );
 GO
-
 CREATE PROCEDURE sp_ThongTinChiPhiTheoNgay
     @start DATE,
     @end DATE
@@ -109,8 +108,10 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
+
     SELECT 
         dh.NgayDatHang AS Ngay,
+        COUNT(DISTINCT dh.MaDonHang) AS TongSoDonHang,
         COUNT(DISTINCT dh.MaDonHang) AS TongSoDonHang,
         SUM(dh.TongGiaTri) AS TongDoanhThu,
         ISNULL(tl.TongLuong, 0) AS TongLuong,
@@ -138,6 +139,7 @@ BEGIN
     ORDER BY dh.NgayDatHang;
 END;
 GO
+
 
 CREATE PROCEDURE sp_TaoTableTamDieuKienThuong
 AS

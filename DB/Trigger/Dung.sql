@@ -23,6 +23,7 @@ EXEC msdb.dbo.sysmail_add_profileaccount_sp
     @profile_name = 'GuiMail',                     -- Tên profile vừa tạo
     @account_name = 'TienDung',                     -- Tên account vừa tạo
     @sequence_number = 1;                             -- Thứ tự ưu tiên của account (1 là ưu tiên nhất)
+                                                       -- Nếu tài khoản có @sequence_number thấp nhất thành công: Email sẽ được gửi từ tài khoản này, và các tài khoản còn lại sẽ không được sử dụng.
 
 EXEC msdb.dbo.sysmail_add_principalprofile_sp
     @profile_name = 'GuiMail', 

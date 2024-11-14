@@ -411,6 +411,7 @@
     <Content Include="DB\Entity SQL scripts\NhaCungCap.sql" />
     <Content Include="DB\Entity SQL scripts\NhanVien.sql" />
     <Content Include="DB\Entity SQL scripts\PhieuNhapHang.sql" />
+    <Content Include="DB\Entity SQL scripts\ThongKe.sql" />
     <Content Include="DB\Entity SQL scripts\Trigger\Trigger.sql" />
     <Content Include="DB\Entity SQL scripts\Trigger\trigger_CheckInStockAndWarming %281%29.sql" />
     <Content Include="DB\Full Database Scripts\Create table.sql" />

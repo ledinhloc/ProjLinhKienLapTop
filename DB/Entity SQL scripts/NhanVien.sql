@@ -126,6 +126,35 @@ RETURN
         MaNhanVien = @MaNhanVien
 );
 GO
+--procedure  xoa nhan vien
+CREATE PROCEDURE [dbo].[proc_XoaNhanVien]
+ @MaNV nvarchar(100)
+AS
+BEGIN
+	DECLARE @email varchar(15);
+	SELECT @email= Email FROM NhanVien WHERE MaNhanVien=@maNV
+	DECLARE @sql varchar(100)
+	
+	 BEGIN TRANSACTION;
+	 BEGIN TRY
+		SET @sql = 'DROP USER ['+ @email +']'
+		exec (@sql)
+		--
+		SET @sql = 'DROP LOGIN ['+ @email +']'
+		exec (@sql)
+	DELETE FROM NhanVien WHERE MaNhanVien=@maNV;
+	END TRY
+	BEGIN CATCH
+		DECLARE @err NVARCHAR(MAX)
+		SELECT @err = N'Lỗi khi xoa ' + ERROR_MESSAGE()
+		RAISERROR(@err, 16, 1)
+		ROLLBACK TRANSACTION;
+		
+	END CATCH
+	 COMMIT TRANSACTION;
+END
+GO
+
 ----  TEST
 ---- View
 --SELECT * FROM vw_NhanVienList;

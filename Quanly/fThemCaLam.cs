@@ -49,7 +49,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                     SqlParameter[] parameters = new SqlParameter[]
                     {
                 new SqlParameter("@Luong", Decimal.Parse("0.00")),
-                new SqlParameter("@LuongGIo", Decimal.Parse("0.00")),
+                new SqlParameter("@LuongGIo", Decimal.Parse("25000.00")),
                 new SqlParameter("@Thuong", Decimal.Parse("0.00")),
                 new SqlParameter("@TongNhan", Decimal.Parse("0.00")),
                 new SqlParameter("@ThoiGian", this.thoiGian.ToString("yyyy-MM")+"-01"),

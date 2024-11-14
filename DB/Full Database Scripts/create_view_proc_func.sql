@@ -94,41 +94,26 @@ CREATE PROCEDURE sp_ThemLuong
     @MaNhanVien INT
 AS
 BEGIN
-    BEGIN TRY
-        BEGIN TRANSACTION;
-
-        INSERT INTO Luong (Luong, LuongGio, Thuong, TongNhan, ThoiGian, SoCa, MaNhanVien)
-        VALUES (@Luong, @LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi thêm lương. Lỗi: ' + ERROR_MESSAGE();
-        RAISERROR(@ErrorMessage, 16, 1);
-    END CATCH
+    INSERT INTO Luong (Luong, LuongGio, Thuong, TongNhan, ThoiGian, SoCa, MaNhanVien)
+    VALUES (@Luong, @LuongGio, @Thuong, @TongNhan, @ThoiGian, @SoCa, @MaNhanVien);
 END;
 GO
---sua
--- CREATE PROCEDURE sp_SuaLuong
---     @MaLuong INT,
---     @Luong DECIMAL(15, 2),
---     @Thuong DECIMAL(15, 2),
---     @ThoiGian DATE,
---     @SoCa INT,
---     @MaNhanVien INT
--- AS
--- BEGIN
--- 	UPDATE Luong
---     SET Luong = @Luong,
---         Thuong = @Thuong,
---         ThoiGian = @ThoiGian,
---         SoCa = @SoCa,
---         MaNhanVien = @MaNhanVien
---     WHERE MaLuong = @MaLuong;
--- END;
-
+-- Cập nhật thưởng -> Tổng nhận
+CREATE PROCEDURE sp_CapNhatThuongTongNhan
+    @MaNhanVien INT,
+    @Thuong DECIMAL(15, 2),
+    @Thang INT, 
+    @Nam INT    
+AS
+BEGIN
+    UPDATE Luong
+    SET Thuong = @Thuong,
+        TongNhan = Luong + @Thuong
+    WHERE MaNhanVien = @MaNhanVien
+        AND MONTH(ThoiGian) = @Thang   
+        AND YEAR(ThoiGian) = @Nam;    
+END;
+GO
 --xoa
 -- CREATE PROCEDURE sp_XoaLuong
 --     @MaLuong INT
@@ -175,29 +160,37 @@ GO
 
 
 --
--- CREATE FUNCTION dbo.fn_XemTatCaLuongTheoThangNam
--- (
---     @Thang INT, @Nam INT
--- )
--- RETURNS TABLE
--- AS
--- RETURN
--- (
---     SELECT 
---         l.MaLuong,
---         l.Luong,
---         l.Thuong,
---         l.ThoiGian,
---         l.SoCa,
---         nv.TenNV
---     FROM 
---         Luong l
---     JOIN 
---         NhanVien nv ON l.MaNhanVien = nv.MaNhanVien
---     WHERE 
---         MONTH(l.ThoiGian) = @Thang AND
---         YEAR(l.ThoiGian) = @Nam
--- );
+CREATE FUNCTION dbo.fn_XemTatCaLuongTheoThangNam
+(
+    @Thang INT, 
+    @Nam INT
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        l.MaLuong,
+        l.Luong,
+        l.Thuong,
+        FORMAT(l.ThoiGian, 'MM-yyyy') AS ThoiGian, -- Chỉ lấy tháng và năm
+        l.SoCa,
+        nv.TenNhanVien,
+        dbo.fn_DemCaNghi(
+            DATEFROMPARTS(@Nam, @Thang, 1),
+            EOMONTH(DATEFROMPARTS(@Nam, @Thang, 1)),
+            nv.MaNhanVien
+        ) AS CaNghi -- Adding Ca Nghỉ using the fn_DemCaNghi function
+    FROM 
+        Luong l
+    JOIN 
+        NhanVien nv ON l.MaNhanVien = nv.MaNhanVien
+    WHERE 
+        MONTH(l.ThoiGian) = @Thang AND
+        YEAR(l.ThoiGian) = @Nam
+);
+GO
+
 
 -- SELECT * FROM dbo.fn_XemTatCaLuongTheoThangNam(9, 2024);
 
@@ -506,22 +499,10 @@ CREATE PROCEDURE sp_SuaCoLichLam
     @TrangThai NVARCHAR(100)
 AS
 BEGIN
-    BEGIN TRY
-        BEGIN TRANSACTION;
-
-        UPDATE CoLichLam
-        SET DanhGia = @DanhGia,
-            TrangThai = @TrangThai
-        WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi sửa. Lỗi: ' + ERROR_MESSAGE();
-        RAISERROR(@ErrorMessage, 16, 1);
-    END CATCH
+    UPDATE CoLichLam
+    SET DanhGia = @DanhGia,
+        TrangThai = @TrangThai
+    WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
 END;
 GO
 
@@ -531,20 +512,8 @@ CREATE PROCEDURE sp_XoaCoLichLam
     @MaLichLamViec INT
 AS
 BEGIN
-    BEGIN TRY
-        BEGIN TRANSACTION;
-
-        DELETE FROM CoLichLam
-        WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
-
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        DECLARE @ErrorMessage NVARCHAR(4000);
-        SET @ErrorMessage = N'Đã xảy ra lỗi khi xóa. Lỗi: ' + ERROR_MESSAGE();
-        RAISERROR(@ErrorMessage, 16, 1);    
-    END CATCH
+    DELETE FROM CoLichLam
+    WHERE MaNhanVien = @MaNhanVien AND MaLichLamViec = @MaLichLamViec;
 END;
 GO
 
@@ -794,6 +763,51 @@ RETURN(
 	SELECT TenLoaiLinhKien, dbo.fn_HTKTheoLoaiLinhKien(MaLoaiLinhKien) as SoLuong
 	FROM LoaiLinhKien
 )
+
+GO
+CREATE FUNCTION fn_TopLinhKienMD(@StartDate DATE, @EndDate DATE)
+RETURNS TABLE
+AS
+RETURN (
+    SELECT 
+        lk.MaLinhKien, 
+        SUM(ct.SoLuong * ct.GiaBan) AS DoanhThu,
+        AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) AS TrungBinhDoanhThuLoai,
+        CASE 
+            WHEN SUM(ct.SoLuong * ct.GiaBan) > AVG(SUM(ct.SoLuong * ct.GiaBan)) OVER (PARTITION BY lk.MaLoaiLinhKien) 
+            THEN 'High' 
+            ELSE 'Low' 
+        END AS MucDoanhThu,
+        ROW_NUMBER() OVER (ORDER BY SUM(ct.SoLuong * ct.GiaBan) DESC) AS XepHang
+    FROM DonHang dh
+    JOIN ChiTietDonHang ct ON dh.MaDonHang = ct.MaDonHang
+    JOIN LinhKien lk ON lk.MaLinhKien = ct.MaLinhKien
+    WHERE dh.NgayDatHang BETWEEN @StartDate AND @EndDate
+    GROUP BY lk.MaLinhKien, lk.MaLoaiLinhKien
+)
+
+GO
+
+CREATE PROC sp_ThongTinTopKLinhKienMD
+    @K INT, 
+    @StartDate DATE, 
+    @EndDate DATE
+AS
+BEGIN
+    SELECT TOP(@K)
+        tlk.XepHang, 
+        lk.TenLinhKien, 
+        llk.TenLoaiLinhKien, 
+        tlk.DoanhThu, 
+        tlk.TrungBinhDoanhThuLoai,
+        tlk.MucDoanhThu
+    FROM LinhKien lk
+    JOIN fn_TopLinhKienMD(@StartDate, @EndDate) tlk
+    ON lk.MaLinhKien = tlk.MaLinhKien
+    JOIN LoaiLinhKien llk
+    ON lk.MaLoaiLinhKien = llk.MaLoaiLinhKien
+    ORDER BY tlk.XepHang
+END
 
 
 
@@ -1380,6 +1394,35 @@ RETURN
         MaNhanVien = @MaNhanVien
 );
 GO
+--procedure  xoa nhan vien
+CREATE PROCEDURE [dbo].[proc_XoaNhanVien]
+ @MaNV nvarchar(100)
+AS
+BEGIN
+	DECLARE @email varchar(15);
+	SELECT @email= Email FROM NhanVien WHERE MaNhanVien=@maNV
+	DECLARE @sql varchar(100)
+	
+	 BEGIN TRANSACTION;
+	 BEGIN TRY
+		SET @sql = 'DROP USER ['+ @email +']'
+		exec (@sql)
+		--
+		SET @sql = 'DROP LOGIN ['+ @email +']'
+		exec (@sql)
+	DELETE FROM NhanVien WHERE MaNhanVien=@maNV;
+	END TRY
+	BEGIN CATCH
+		DECLARE @err NVARCHAR(MAX)
+		SELECT @err = N'Lá»—i khi xoa ' + ERROR_MESSAGE()
+		RAISERROR(@err, 16, 1)
+		ROLLBACK TRANSACTION;
+		
+	END CATCH
+	 COMMIT TRANSACTION;
+END
+GO
+
 ----  TEST
 ---- View
 --SELECT * FROM vw_NhanVienList;
@@ -1595,35 +1638,70 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION fn_TinhTongLuongTheoNgay
+(
+    @startDay DATE,
+    @endDay DATE
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        llv.NgayLam AS ngay, 
+        SUM((DATEDIFF(MINUTE, clv.GioBatDau, clv.GioKetThuc) / 60.0) * l.LuongGio) AS tongLuong
+    FROM 
+        CoLichLam cll
+        JOIN LichLamViec llv ON cll.MaLichLamViec = llv.MaLichLamViec
+        JOIN CaLamViec clv ON clv.MaCa = llv.MaCa
+        JOIN NhanVien nv ON nv.MaNhanVien = cll.MaNhanVien
+        JOIN Luong l ON l.MaNhanVien = nv.MaNhanVien 
+                     AND MONTH(l.ThoiGian) = MONTH(llv.NgayLam) 
+                     AND YEAR(l.ThoiGian) = YEAR(llv.NgayLam)
+    WHERE 
+        cll.TrangThai = 'HoanThanh'
+        AND llv.NgayLam BETWEEN @startDay AND @endDay
+    GROUP BY 
+        llv.NgayLam
+);
+GO
 CREATE PROCEDURE sp_ThongTinChiPhiTheoNgay
     @start DATE,
     @end DATE
 AS
 BEGIN
     SET NOCOUNT ON;
+
     SELECT 
         dh.NgayDatHang AS Ngay,
-        COUNT(dh.MaDonHang) AS TongSoDonHang,
+        COUNT(DISTINCT dh.MaDonHang) AS TongSoDonHang,
         SUM(dh.TongGiaTri) AS TongDoanhThu,
-		ISNULL(SUM(l.TongNhan), 0) AS Luong,
-		ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0) AS GiaVon,
+        ISNULL(SUM(l.TongNhan), 0) AS Luong,
+        ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0) AS GiaVon,
         (
             ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
         ) AS TongChiPhi,
-        ( 
+        (
             SUM(dh.TongGiaTri) - (
                 ISNULL(SUM(l.TongNhan), 0) + ISNULL(SUM(ctdh.SoLuong * lk.GiaNhap), 0)
             )
-        ) AS LoiNhuan
+        ) AS LoiNhuan,
+        ISNULL(tl.TongLuong, 0) AS TongLuong
     FROM DonHang dh
     LEFT JOIN ChiTietDonHang ctdh ON dh.MaDonHang = ctdh.MaDonHang
     LEFT JOIN LinhKien lk ON ctdh.MaLinhKien = lk.MaLinhKien
     LEFT JOIN Luong l ON dh.NgayDatHang = l.ThoiGian
+    LEFT JOIN (
+        SELECT ngay, SUM(tongLuong) AS TongLuong
+        FROM fn_TinhTongLuongTheoNgay(@start, @end)
+        GROUP BY ngay
+    ) AS tl ON dh.NgayDatHang = tl.ngay
     WHERE dh.NgayDatHang BETWEEN @start AND @end
-    GROUP BY dh.NgayDatHang
+    GROUP BY dh.NgayDatHang, tl.TongLuong
     ORDER BY dh.NgayDatHang;
 END;
 GO
+
 
 CREATE PROCEDURE sp_TaoTableTamDieuKienThuong
 AS
