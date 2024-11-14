@@ -149,16 +149,22 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
 
         private void txtTim_TextChanged(object sender, EventArgs e)
         {
-            if (txtTim.Text == "")
+            try
             {
-                updateDgvKhachHang();
-                return;
-            }
+                if (txtTim.Text == "")
+                {
+                    updateDgvKhachHang();
+                    return;
+                }
 
-            dgvKhachHang.DataSource = dataProvider.ExecuteReader(CommandType.StoredProcedure, "sp_TimKiemKhachHang", new SqlParameter[] {
+                dgvKhachHang.DataSource = dataProvider.ExecuteReader(CommandType.StoredProcedure, "sp_TimKiemKhachHang", new SqlParameter[] {
                     new SqlParameter("@SearchOption", cboSearchOptions.SelectedItem),
                     new SqlParameter("@SearchText", txtTim.Text)
-            });
+                });
+            }
+            catch(Exception ex) {
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message);
+            }
         }
 
         private void fKhachHang_Load(object sender, EventArgs e)

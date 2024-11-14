@@ -49,6 +49,7 @@ namespace ProCuaHangLinhKienLaptop.Quanly
                 new Item { Ten = "Tổng đơn hàng", TenFunction = "fn_TongSoDonHang", ThamSo = "start, end" },
                 new Item { Ten = "Doanh Thu", TenFunction = "fn_DoanhThu", ThamSo = "start, end" },
                 new Item { Ten = "Chi phí", TenFunction = "fn_ChiPhi", ThamSo = "start, end" },
+                new Item { Ten = "Tổng lợi nhuận", TenFunction = "fn_TongLoiNhuan", ThamSo = "start, end" },
                 new Item { Ten = "Số ca làm", TenFunction = "fn_DemCaLam", ThamSo = "start, end, MaNhanVien" },
                 new Item { Ten = "Số ca nghỉ", TenFunction = "fn_DemCaNghi", ThamSo = "start, end, MaNhanVien" },
             };

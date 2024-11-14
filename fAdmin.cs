@@ -79,17 +79,18 @@ namespace ProCuaHangLinhKienLaptop
                 new SqlParameter("@start", startDate),
                 new SqlParameter("@end", endDate)
             };
-
+            
             DataTable data= dataProvider.ExecuteReader(CommandType.StoredProcedure, "sp_ThongTinChiPhiTheoNgay", sqlParams); ;
             dataGridView1.DataSource = data;
             VeBieuDo(startDate, endDate, data); 
             decimal soDonHang = GetDecimalValue("SELECT dbo.fn_TongSoDonHang(@start, @end)", sqlParams);
             decimal doanhThu = GetDecimalValue("SELECT dbo.fn_DoanhThu(@start, @end)", sqlParams);
             decimal chiPhi = GetDecimalValue("SELECT dbo.fn_ChiPhi(@start, @end)", sqlParams);
+            decimal loiNhuan = GetDecimalValue("SELECT dbo.fn_TongLoiNhuan(@start, @end)", sqlParams);
             lblSoDonHang.Text = soDonHang.ToString("N0");
             lblDoanhThu.Text = doanhThu.ToString("N0");
             lblChiPhi.Text = chiPhi.ToString("N0");
-            lblLoiNhuan.Text = (doanhThu - chiPhi).ToString("N0");
+            lblLoiNhuan.Text = loiNhuan.ToString("N0");
         }
         private void VeBieuDo(DateTime startDate, DateTime endDate, DataTable dataTable)
         {
@@ -123,7 +124,7 @@ namespace ProCuaHangLinhKienLaptop
         }
 
         // Sao chép parameter cũ thành một param mới giống hệt,
-        // Do dataprovider cần param riêng cho mỗi lần thực thi, không dùng chung đư
+        // Do dataprovider cần param riêng cho mỗi lần thực thi, không dùng chung đươc
         private SqlParameter[] CloneParameters(SqlParameter[] originalParameters)
         {
             SqlParameter[] clonedParameters = new SqlParameter[originalParameters.Length];

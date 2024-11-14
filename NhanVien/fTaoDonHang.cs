@@ -182,7 +182,13 @@ namespace ProCuaHangLinhKienLaptop.NhanVien
                     new SqlParameter("@PhuongThuc", phuongThuc)
                 };
 
-                int maDonHang = (int)provider.ExecuteScalar(CommandType.StoredProcedure, "sp_ThemDonHang", parameters);
+                object result = provider.ExecuteScalar(CommandType.StoredProcedure, "sp_ThemDonHang", parameters);
+                if (result == null || result == DBNull.Value)
+                {
+                    MessageBox.Show("Đơn hàng không được để trống!");
+                    return;
+                }
+                int maDonHang = (int)result;
 
                 if (maDonHang > 0)
                 {

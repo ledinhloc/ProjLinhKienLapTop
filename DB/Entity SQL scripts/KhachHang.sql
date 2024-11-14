@@ -121,10 +121,6 @@ BEGIN
         SELECT * FROM KhachHang
         WHERE Email LIKE '%' + @SearchText + '%';
     END
-    ELSE
-    BEGIN
-        RAISERROR (N'Tiêu chí tìm kiếm không hợp lệ.', 16, 1);
-    END
 END;
 
 GO
